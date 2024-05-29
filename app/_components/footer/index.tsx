@@ -1,5 +1,5 @@
-import Heading from "@/components/typography/heading";
-import Paragraph from "@/components/typography/paragraph";
+import Heading from "@/_components/typography/heading";
+import Paragraph from "@/_components/typography/paragraph";
 
 export default function SectionFooter() {
   return (
@@ -20,13 +20,10 @@ export default function SectionFooter() {
               albert.antonio@gmail.com
             </Heading>
           </div>
-          <div className="flex flex-col gap-4 text-center">
-            <Paragraph variant="p2">teste</Paragraph>
-            <Paragraph variant="p2">teste</Paragraph>
-            <Paragraph variant="p2">teste</Paragraph>
-            <Paragraph variant="p2">teste</Paragraph>
-            <Paragraph variant="p2">teste</Paragraph>
-            <Paragraph variant="p2">teste</Paragraph>
+          <div className="flex flex-col gap-4 text-center cursor-pointer">
+            <Paragraph>Linkedin</Paragraph>
+            <Paragraph>Instagram</Paragraph>
+            <Paragraph>Whatsapp</Paragraph>
           </div>
         </div>
         <div className="flex justify-center">

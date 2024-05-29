@@ -1,7 +1,10 @@
-import Navigation from "@/components/navigation";
-import Footer from "@/components/footer";
+import Navigation from "@/_components/navigation";
+import Footer from "@/_components/footer";
 
-export default function Template({ children }: { children: React.ReactNode }) {
+type Props = {
+  children: React.ReactNode;
+};
+export default function RootTemplate({ children }: Props) {
   return (
     <main className="container mx-auto px-6 max-w-screen-lg">
       <Navigation />
