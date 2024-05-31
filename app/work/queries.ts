@@ -1,5 +1,12 @@
 import contentful from "@/_services/contentful";
-import { WorkContent, WorkContentCollection } from "./types";
+import {
+  ContentfulContentWork,
+  ContentfulWorkContent,
+  LocalContentWork,
+  WorkContent,
+  WorkContentCollection,
+  WorkContentItem,
+} from "./types";
 
 const { gql, client } = contentful();
 
@@ -21,7 +28,9 @@ export async function getWorkContentCollection(): Promise<WorkContentCollection>
   return await client.request(query);
 }
 
-export async function getWorkContent(contentID: string): Promise<WorkContent> {
+export async function getWorkContent(
+  contentID: string,
+): Promise<LocalContentWork> {
   const query = gql`
     query WorkContent($workContentId: String!) {
       workContent(id: $workContentId) {
@@ -34,7 +43,40 @@ export async function getWorkContent(contentID: string): Promise<WorkContent> {
       }
     }
   `;
-  return await client.request(query, { workContentId: contentID });
+  const body = { workContentId: contentID };
+  const res: WorkContent = await client.request(query, body);
+
+  const { workContent } = res;
+
+  const result: LocalContentWork = {
+    ...workContent,
+    content: workContent.content.json.content,
+  };
+
+  console.log(result);
+
+  // setTitle(workContent.title);
+  // setSubTitle(workContent.createdAt);
+  // setContent(workContent.content.json.content);
+
+  return result;
+}
+
+export async function getAssetsById(assetID: string) {
+  const query = gql`
+    query Asset($assetId: String!) {
+      asset(id: $assetId) {
+        sys {
+          id
+        }
+        title
+        url
+        width
+        height
+      }
+    }
+  `;
+  return await client.request(query, { assetId: assetID });
 }
 
 /***-

@@ -47,11 +47,20 @@ export type WorkContentData = {
   json: WorkContentJson;
 };
 
-export interface WorkContent {
-  workContent: {
-    title: string;
-    createdAt: string;
-    type: string;
-    content: WorkContentData;
-  };
+export interface LocalContentWork {
+  title: string;
+  createdAt: string;
+  type: string;
+  content: WorkContentItem[];
+}
+
+export interface ContentfulContentWork {
+  title: string;
+  createdAt: string;
+  type: string;
+  content: WorkContentData;
+}
+
+export interface ContentfulWorkContentResponse {
+  workContent: ContentfulContentWork;
 }
