@@ -1,20 +1,24 @@
-"use client";
-import Heading from "@/_components/typography/heading";
-import { getWorkContentCollection } from "./queries";
-import { WorkContentCollectionItem } from "./types";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import Subtitle from "@/_components/typography/subtitle";
+"use client"
+import Heading from "@/_components/typography/heading"
+import { getWorkContentCollection } from "./queries"
+import {
+  ContentfulWorkCollection,
+  ContentfulWorkItem,
+} from "./types/ContentfulWorkCollection"
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import Subtitle from "@/_components/typography/subtitle"
 
 export default function WorkPage() {
-  const [works, setWorks] = useState<WorkContentCollectionItem[]>([]);
+  const [works, setWorks] = useState<ContentfulWorkItem[]>([])
 
   useEffect(() => {
     getWorkContentCollection().then((data) => {
-      const { items } = data.workContentCollection;
-      setWorks(items);
-    });
-  }, []);
+      const { workContentCollection } = data
+      const { items } = workContentCollection
+      setWorks(items)
+    })
+  }, [])
 
   return (
     <section className="work">
@@ -41,5 +45,5 @@ export default function WorkPage() {
         ))}
       </div>
     </section>
-  );
+  )
 }

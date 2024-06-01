@@ -1,44 +1,72 @@
-"use client";
-import { useRouter } from "next/navigation";
-import { ReactNode, useEffect, useState } from "react";
+"use client"
+import { useRouter } from "next/navigation"
+import { ReactNode, useEffect, useState } from "react"
 
-import Heading from "@/_components/typography/heading";
-import Subtitle from "@/_components/typography/subtitle";
+import Heading from "@/_components/typography/heading"
+import Subtitle from "@/_components/typography/subtitle"
 
-import { getWorkContent } from "../queries";
-import { WorkContentItem } from "../types";
+import { getWorkContent } from "../queries"
 
-import Paragraph from "@/_components/typography/paragraph";
-import { MoveLeft } from "lucide-react";
+import { MoveLeft } from "lucide-react"
+import {
+  ContentfulWorkContentData,
+  ContentfulWorkContentDataImages,
+} from "../types/ContentfulWork"
+import Image from "next/image"
 
-type BuildComponentsType = {
-  type: string;
-  value: string;
-};
-
-export function BuildComponents({ type, value }: BuildComponentsType) {
+type RenderCustomComponents = {
+  type: string
+  data: any
+}
+export function RenderContentfulData({ type, data }: RenderCustomComponents) {
+  if (type === "embedded-asset-block") {
+    const { url, title, width, height } = data
+    return (
+      <Image
+        src={url}
+        alt={title}
+        width={width}
+        height={height}
+        className="mb-6 sm:mb-10"
+      />
+    )
+  }
+  const { value } = data
   const components: { [type: string]: ReactNode } = {
     "heading-3": <h3 className="text-lg mb-3 sm:text-xl sm:mb-4">{value}</h3>,
     paragraph: <p className="text-base mb-6 sm:text-lg sm:mb-10">{value}</p>,
-  };
-  return components[type];
+  }
+  return components[type]
 }
 
 export default function Page({ params }: { params: { id: string } }) {
-  const [title, setTitle] = useState<string>();
-  const [subtitle, setSubTitle] = useState<string>();
-  const [content, setContent] = useState<WorkContentItem[]>();
+  const [title, setTitle] = useState<string>()
+  const [subtitle, setSubtitle] = useState<string>()
+  const [content, setContent] = useState<ContentfulWorkContentData[]>([])
+  const [images, setImages] = useState<ContentfulWorkContentDataImages[]>([])
+  const router = useRouter()
 
-  const router = useRouter();
+  const groupContent = () => {
+    return content.map((item) => {
+      const { nodeType, data } = item
+      if (nodeType === "embedded-asset-block") {
+        const img = images.find((i) => i.sys.id === data.target.sys.id)
+        return { ...item, content: [img] }
+      }
+      return item
+    })
+  }
 
   useEffect(() => {
-    getWorkContent(params.id).then((data) => {
-      const { title, createdAt, content } = data;
-      setTitle(title);
-      setSubTitle(createdAt);
-      setContent(content);
-    });
-  }, [params.id]);
+    const content = async () => {
+      const { workContent } = await getWorkContent(params.id)
+      setTitle(workContent.title)
+      setSubtitle(workContent.createdAt)
+      setContent(workContent.content.json.content)
+      setImages(workContent.content.links.assets.block)
+    }
+    content()
+  }, [params.id])
 
   return (
     <section className="mb-20 sm:mb-[140px]">
@@ -56,14 +84,16 @@ export default function Page({ params }: { params: { id: string } }) {
         <Subtitle className="text-base sm:text-lg">{subtitle}</Subtitle>
       </div>
       <div className="">
-        {content?.map(({ nodeType, content }, index) => {
+        {groupContent().map((item, index) => {
           return (
-            <div key={index}>
-              <BuildComponents type={nodeType} value={content[0]?.value} />
-            </div>
-          );
+            <RenderContentfulData
+              key={index}
+              type={item.nodeType}
+              data={item.content[0]}
+            />
+          )
         })}
       </div>
     </section>
-  );
+  )
 }

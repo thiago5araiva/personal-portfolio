@@ -1,16 +1,11 @@
-import contentful from "@/_services/contentful";
-import {
-  ContentfulContentWork,
-  ContentfulWorkContent,
-  LocalContentWork,
-  WorkContent,
-  WorkContentCollection,
-  WorkContentItem,
-} from "./types";
+import contentful from "@/_services/contentful/"
+import { ContentfulWorkCollection } from "./types/ContentfulWorkCollection"
+import { ContentfulWorkContent } from "./types/ContentfulWork"
+import { ContentfulAsset } from "@/_services/contentful/types/contentfulAssets"
 
-const { gql, client } = contentful();
+const { gql, client } = contentful()
 
-export async function getWorkContentCollection(): Promise<WorkContentCollection> {
+export async function getWorkContentCollection(): Promise<ContentfulWorkCollection> {
   const query = gql`
     query WorkContentCollection {
       workContentCollection {
@@ -24,13 +19,12 @@ export async function getWorkContentCollection(): Promise<WorkContentCollection>
         }
       }
     }
-  `;
-  return await client.request(query);
+  `
+  return await client.request(query)
 }
-
 export async function getWorkContent(
-  contentID: string,
-): Promise<LocalContentWork> {
+  contentID: string
+): Promise<ContentfulWorkContent> {
   const query = gql`
     query WorkContent($workContentId: String!) {
       workContent(id: $workContentId) {
@@ -39,30 +33,28 @@ export async function getWorkContent(
         type
         content {
           json
+          links {
+            assets {
+              block {
+                height
+                width
+                url
+                title
+                sys {
+                  id
+                }
+              }
+            }
+          }
         }
       }
     }
-  `;
-  const body = { workContentId: contentID };
-  const res: WorkContent = await client.request(query, body);
-
-  const { workContent } = res;
-
-  const result: LocalContentWork = {
-    ...workContent,
-    content: workContent.content.json.content,
-  };
-
-  console.log(result);
-
-  // setTitle(workContent.title);
-  // setSubTitle(workContent.createdAt);
-  // setContent(workContent.content.json.content);
-
-  return result;
+  `
+  const body = { workContentId: contentID }
+  return await client.request(query, body)
 }
 
-export async function getAssetsById(assetID: string) {
+export async function getAssetsById(assetID: string): Promise<ContentfulAsset> {
   const query = gql`
     query Asset($assetId: String!) {
       asset(id: $assetId) {
@@ -75,23 +67,7 @@ export async function getAssetsById(assetID: string) {
         height
       }
     }
-  `;
-  return await client.request(query, { assetId: assetID });
+  `
+  const body = { assetId: assetID }
+  return await client.request(query, body)
 }
-
-/***-
-
-content-nodes
-
-- remover todo conteudo que nao tiver value nele
-- [imagens] : "nodeType": "embedded-asset-block"
-  "data": {
-    "target": {
-      "sys": {
-      "id": "6BiGtXXEnpoPDceigUZlcz",
-      "type": "Link",
-      "linkType": "Asset"
-      }
-    }
-  }
--***/

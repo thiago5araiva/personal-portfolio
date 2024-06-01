@@ -40,7 +40,7 @@ export default function HomePage() {
           <InfiniteScroll>
             <Image alt="teste" src={evernote} />
             <Image alt="teste" src={evernote} />
-            <Image alt="teste" src={evernote} />
+            <Image alt="teste" src={evernote} /> 
             <Image alt="teste" src={evernote} />
             <Image alt="teste" src={evernote} />
             <Image alt="teste" src={evernote} />
