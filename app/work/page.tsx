@@ -1,32 +1,32 @@
-"use client"
-import Heading from "@/_components/typography/heading"
-import { getWorkContentCollection } from "./queries"
+"use client";
+import Heading from "@/_components/typography/heading";
+import { getWorkContentCollection } from "./queries";
 import {
   ContentfulWorkCollection,
   ContentfulWorkItem,
-} from "./types/ContentfulWorkCollection"
-import { useEffect, useState } from "react"
-import Link from "next/link"
-import Subtitle from "@/_components/typography/subtitle"
+} from "./types/ContentfulWorkCollection";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Subtitle from "@/_components/typography/subtitle";
 
 export default function WorkPage() {
-  const [works, setWorks] = useState<ContentfulWorkItem[]>([])
+  const [works, setWorks] = useState<ContentfulWorkItem[]>([]);
 
   useEffect(() => {
     getWorkContentCollection().then((data) => {
-      const { workContentCollection } = data
-      const { items } = workContentCollection
-      setWorks(items)
-    })
-  }, [])
+      const { workContentCollection } = data;
+      const { items } = workContentCollection;
+      setWorks(items);
+    });
+  }, []);
 
   return (
     <section className="work">
       <div className="mb-12 sm:mb-20">
-        <Heading type="h2" className="text-2xl mb-3">
+        <Heading type="h2" className="text-2xl mb-3 sm:text-4xl text-font-high">
           My Works
         </Heading>
-        <Subtitle className="text-base">
+        <Subtitle className="text-base text-font-medium sm:text-xl">
           Get Inspired by My Portfolio of Fresh and Innovative Design Projects
         </Subtitle>
       </div>
@@ -36,7 +36,7 @@ export default function WorkPage() {
             <div className="pb-6 sm:pb-10 border-b border-border-primary">
               <Heading
                 type="h2"
-                className="text-2xl leading-normal sm:text-4xl sm:leading-normal"
+                className="text-2xl text-font-medium leading-normal sm:text-4xl sm:leading-normal"
               >
                 {title}
               </Heading>
@@ -45,5 +45,5 @@ export default function WorkPage() {
         ))}
       </div>
     </section>
-  )
+  );
 }

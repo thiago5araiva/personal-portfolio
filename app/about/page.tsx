@@ -21,16 +21,19 @@ export default function AboutPage() {
   return (
     <section className="about ">
       <div className="mb-6 sm:mb-10">
-        <Heading type="h2" className="text-2xl sm:text-4xl mb-3 sm:mb-4">
+        <Heading
+          type="h2"
+          className="text-2xl text-font-high sm:text-4xl mb-3 sm:mb-4"
+        >
           More Story About Me
         </Heading>
-        <Subtitle className="text-base sm:text-xl">
+        <Subtitle className="text-base text-font-medium sm:text-xl">
           Explore the chapters of my life, both inside and outside the design
           world.
         </Subtitle>
       </div>
       <div className="grid gap-6 sm:gap-10">
-        <Paragraph className="text-xl font-semibold leading-normal sm:text-2xl sm:leading-normal">
+        <Paragraph className="text-xl text-font-medium font-semibold leading-normal sm:text-2xl sm:leading-normal">
           Hello, Albert Antonio, a seasoned Director of Design with a decade of
           experience in the dynamic design landscape, based in Indonesia. My
           passion for creating captivating visuals and intuitive user
@@ -38,7 +41,7 @@ export default function AboutPage() {
           world.
         </Paragraph>
         <Image src={photo} alt={"me"} width={1040} height={480} />
-        <Paragraph className="text-base sm:text-xl">
+        <Paragraph className="text-base text-font-medium sm:text-lg">
           My 10-year journey in design has been marked by innovation,
           collaboration, and a dedication to delivering design solutions that
           resonate with users. I believe that the fusion of my interests in
@@ -47,10 +50,10 @@ export default function AboutPage() {
           experiences.
         </Paragraph>
         <div className="grid gap-3 sm:gap-4">
-          <Heading className="text-lg font-semibold sm:text-xl">
+          <Heading className="text-lg text-font-high font-semibold sm:text-xl">
             A Gamer at Heart
           </Heading>
-          <Paragraph className="text-base">
+          <Paragraph className="text-base text-font-medium">
             Beyond the design board, you'll often find me immersed in the world
             of gaming. As an avid gamer, I appreciate the artistry and
             craftsmanship that goes into creating interactive digital worlds.
@@ -59,7 +62,7 @@ export default function AboutPage() {
           </Paragraph>
         </div>
         <div className="grid gap-3 sm:gap-4">
-          <Heading className="text-lg font-semibold sm:text-xl">
+          <Heading className="text-lg text-font-high font-semibold sm:text-xl">
             Football Enthusiast
           </Heading>
           <Paragraph className="text-base">
@@ -71,7 +74,7 @@ export default function AboutPage() {
           </Paragraph>
         </div>
         <div className="grid gap-3 sm:gap-4">
-          <Heading className="text-lg font-semibold sm:text-xl">
+          <Heading className="text-lg text-font-high font-semibold sm:text-xl">
             Writing as a Creative Outlet
           </Heading>
           <Paragraph className="text-base">
@@ -92,7 +95,10 @@ export default function AboutPage() {
         </div>
         <div className="more my-20 sm:my-[140px]">
           <div className="mb-3 sm:mb-10">
-            <Heading type="h6" className="text-xl font-semibold sm:text-2xl">
+            <Heading
+              type="h6"
+              className="text-xl text-font-high font-semibold sm:text-2xl"
+            >
               Some of my galleries ...
             </Heading>
           </div>

@@ -17,14 +17,14 @@ export default function HomePage() {
           <div className="mb-4 sm:mb-6 ">
             <Heading
               type="h1"
-              className="leading-normal sm:text-6xl sm:leading-normal"
+              className="text-font-low leading-normal sm:text-6xl sm:leading-normal"
             >
               Shaping Imagination into Design Reality Visual Marvels by Albert
               Antonio
             </Heading>
           </div>
           <div className="mb-10 sm:mb-16">
-            <Subtitle className="leading-normal sm:text-xl">
+            <Subtitle className="text-font-medium leading-normal sm:text-xl">
               A Director Design based on Indonesia, with 10+ years of
               experience.
             </Subtitle>
@@ -40,7 +40,7 @@ export default function HomePage() {
           <InfiniteScroll>
             <Image alt="teste" src={evernote} />
             <Image alt="teste" src={evernote} />
-            <Image alt="teste" src={evernote} /> 
+            <Image alt="teste" src={evernote} />
             <Image alt="teste" src={evernote} />
             <Image alt="teste" src={evernote} />
             <Image alt="teste" src={evernote} />
@@ -49,7 +49,7 @@ export default function HomePage() {
       </div>
       <section>
         <div className="mb-6 sm:mb-10">
-          <Heading type="h2" className="text-2xl font-semibold">
+          <Heading type="h2" className="text-2xl text-font-high font-semibold">
             Works
           </Heading>
         </div>
@@ -57,7 +57,7 @@ export default function HomePage() {
           <div className="pb-6 sm:pb-10 border-b border-border-primary">
             <Heading
               type="h2"
-              className="text-2xl leading-normal sm:text-4xl sm:leading-normal"
+              className="text-2xl text-font-high leading-normal sm:text-4xl sm:leading-normal"
             >
               Increase Conversion Rate for Checkout Process
             </Heading>
@@ -82,25 +82,28 @@ export default function HomePage() {
       </section>
       <section className="my-20 sm:my-[140px]">
         <div className="mb-6">
-          <Heading type="h6" className="text-xl font-semibold sm:text-2xl">
+          <Heading
+            type="h6"
+            className="text-xl text-font-medium font-semibold sm:text-2xl"
+          >
             I could help you with...
           </Heading>
         </div>
         <div className="mb-6 grid gap-6 sm:gap-10 sm:mb-10 lg:grid-cols-2 lg:gap-[120px]">
           <div>
-            <Subtitle className="text-base mb-3 sm:text-lg">
+            <Subtitle className="text-base text-font-high mb-3 sm:text-lg">
               Digital Product Design
             </Subtitle>
-            <Paragraph className="text-base sm:text-lg">
+            <Paragraph className="text-base text-font-medium sm:text-lg">
               Digital product design enhances user experience through intuitive,
               visually appealing interfaces, ensuring project success.
             </Paragraph>
           </div>
           <div>
-            <Subtitle className="text-base mb-3 sm:text-lg">
+            <Subtitle className="text-base text-font-high mb-3 sm:text-lg">
               Design System
             </Subtitle>
-            <Paragraph className="text-base sm:text-lg">
+            <Paragraph className="text-base text-font-medium sm:text-lg">
               Standardized design elements, such as typography, colors, and
               components, that ensure consistency and efficiency in your
               project.

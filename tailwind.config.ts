@@ -10,8 +10,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        title: "Questrial ,sans-serif",
-        text: "Trykker, serif",
+        title: "Overpass ,sans-serif",
+        text: "Alegreya Sans, sans-serif",
       },
       colors: {
         "primary-default": "#001514",

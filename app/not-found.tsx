@@ -9,10 +9,10 @@ export default function NotFoundPage() {
     <section className="not-found">
       <div className="flex flex-col items-center my-36">
         <div className="max-w-[480px]	 mb-10">
-          <Heading className="text-3xl font-semibold text-center mb-6 sm:text-6xl">
+          <Heading className="text-3xl text-font-high font-semibold text-center mb-6 sm:text-6xl">
             Oops ~ Contents Ran Away
           </Heading>
-          <Paragraph className="text-lg text-center sm:text-xl">
+          <Paragraph className="text-lg text-font-high text-center sm:text-xl">
             Don’t panic! I can help you to ...
           </Paragraph>
         </div>

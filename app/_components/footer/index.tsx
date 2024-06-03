@@ -9,21 +9,21 @@ export default function SectionFooter() {
           <div className="mb-10 lg:mb-0">
             <Heading
               type="h5"
-              className="text-2xl text-center lg:text-2xl lg:text-left font-bold mb-4"
+              className="text-2xl text-center text-font-high lg:text-2xl lg:text-left font-bold mb-4"
             >
               Let’s connect and make something great
             </Heading>
             <Heading
               type="h5"
-              className="text-xl text-center lg:text-2xl lg:text-left font-bold text-font-low"
+              className="text-xl text-center text-font-low lg:text-2xl lg:text-left font-bold"
             >
               albert.antonio@gmail.com
             </Heading>
           </div>
           <div className="flex flex-col gap-4 text-center cursor-pointer">
-            <Paragraph>Linkedin</Paragraph>
-            <Paragraph>Instagram</Paragraph>
-            <Paragraph>Whatsapp</Paragraph>
+            <Paragraph className="text-base text-font-low">Linkedin</Paragraph>
+            <Paragraph className="text-base text-font-low">Instagram</Paragraph>
+            <Paragraph className="text-base text-font-low">Whatsapp</Paragraph>
           </div>
         </div>
         <div className="flex justify-center">

@@ -1,6 +1,6 @@
 import contentful from "@/_services/contentful/"
 import { ContentfulWorkCollection } from "./types/ContentfulWorkCollection"
-import { ContentfulWorkContent } from "./types/ContentfulWork"
+import { ContentfulWorkContent } from "../_store/work/types"
 import { ContentfulAsset } from "@/_services/contentful/types/contentfulAssets"
 
 const { gql, client } = contentful()
@@ -24,7 +24,7 @@ export async function getWorkContentCollection(): Promise<ContentfulWorkCollecti
 }
 export async function getWorkContent(
   contentID: string
-): Promise<ContentfulWorkContent> {
+): Promise<{ workContent: ContentfulWorkContent }> {
   const query = gql`
     query WorkContent($workContentId: String!) {
       workContent(id: $workContentId) {
