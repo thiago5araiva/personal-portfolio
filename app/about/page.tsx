@@ -54,11 +54,11 @@ export default function AboutPage() {
             A Gamer at Heart
           </Heading>
           <Paragraph className="text-base text-font-medium">
-            Beyond the design board, you'll often find me immersed in the world
-            of gaming. As an avid gamer, I appreciate the artistry and
-            craftsmanship that goes into creating interactive digital worlds.
-            It's a passion that fuels my creativity and keeps me inspired to
-            push the boundaries of design.
+            Beyond the design board, you will often find me immersed in the
+            world of gaming. As an avid gamer, I appreciate the artistry and
+            craftsmanship that goes into creating interactive digital worlds. It
+            is a passion that fuels my creativity and keeps me inspired to push
+            the boundaries of design.
           </Paragraph>
         </div>
         <div className="grid gap-3 sm:gap-4">
@@ -66,11 +66,11 @@ export default function AboutPage() {
             Football Enthusiast
           </Heading>
           <Paragraph className="text-base">
-            Football is not just a sport; it's a source of endless inspiration.
-            I've always been fascinated by the teamwork, strategy, and
+            Football is not just a sport; it is a source of endless inspiration.
+            I have always been fascinated by the teamwork, strategy, and
             dedication that football embodies. Much like design, football
             requires a blend of creativity and precision to achieve success, and
-            I've found valuable lessons in the beautiful game.
+            I ha ve found valuable lessons in the beautiful game.
           </Paragraph>
         </div>
         <div className="grid gap-3 sm:gap-4">
@@ -78,8 +78,8 @@ export default function AboutPage() {
             Writing as a Creative Outlet
           </Heading>
           <Paragraph className="text-base">
-            When I'm not designing or gaming, I often turn to writing as a
-            creative outlet. Whether it's crafting compelling narratives or
+            When I am not designing or gaming, I often turn to writing as a
+            creative outlet. Whether it is crafting compelling narratives or
             sharing insights on design trends, writing allows me to explore new
             ideas and communicate my passion for design to a wider audience.
           </Paragraph>
@@ -87,7 +87,7 @@ export default function AboutPage() {
         <div className="flex justify-center">
           <Button
             className="flex items-center gap-3 rounded-full border border-font-high "
-            variant="outline"
+            variant="ghost"
           >
             Download CV
             <Download className="w-4 h-4" />

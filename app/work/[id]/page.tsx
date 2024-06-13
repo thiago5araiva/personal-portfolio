@@ -13,13 +13,14 @@ import {
   ContentfulWorkContentDataImages,
 } from "../../_store/work/types";
 import Image from "next/image";
+import Link from "next/link";
 
 type RenderCustomComponents = {
   type: string;
   data: any;
 };
 
-export function RenderContentfulData({ type, data }: RenderCustomComponents) {
+function RenderContentfulData({ type, data }: RenderCustomComponents) {
   const { value, url, title, width, height } = data;
   const components: { [type: string]: ReactNode } = {
     "heading-3": (
@@ -50,7 +51,6 @@ export default function Page({ params }: { params: { id: string } }) {
   const [subtitle, setSubtitle] = useState<string>();
   const [content, setContent] = useState<ContentfulWorkContentData[]>([]);
   const [images, setImages] = useState<ContentfulWorkContentDataImages[]>([]);
-  const router = useRouter();
 
   const groupContent = () => {
     return content.map((item) => {
@@ -76,13 +76,10 @@ export default function Page({ params }: { params: { id: string } }) {
 
   return (
     <section className="mb-20 sm:mb-[140px]">
-      <div
-        onClick={() => router.back()}
-        className="flex gap-6 mb-6 sm:mb-10 cursor-pointer"
-      >
+      <Link href={`/work`} className="flex gap-6 mb-6 sm:mb-10 cursor-pointer">
         <MoveLeft />
         <span>All works</span>
-      </div>
+      </Link>
       <div className="mb-6 sm:mb-10">
         <Heading type="h2" className="text-xl mb-3 sm:text-4xl sm:mb-4">
           {title}

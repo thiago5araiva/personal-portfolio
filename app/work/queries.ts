@@ -1,5 +1,5 @@
 import contentful from "@/_services/contentful/"
-import { ContentfulWorkCollection } from "./types/ContentfulWorkCollection"
+import { ContentfulWorkCollection } from "../_services/contentful/types/ContentfulWorkCollection"
 import { ContentfulWorkContent } from "../_store/work/types"
 import { ContentfulAsset } from "@/_services/contentful/types/contentfulAssets"
 

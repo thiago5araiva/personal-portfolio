@@ -1,15 +1,35 @@
-import Image from "next/image";
-import Heading from "@/_components/typography/heading";
-import Subtitle from "@/_components/typography/subtitle";
-import InfiniteScroll from "@/_components/scroll";
-import { Button } from "@/_components/ui/button";
+"use client"
+import { Suspense, useEffect } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { useQuery } from "@tanstack/react-query"
 
-import { MoveUpRight } from "lucide-react";
+import InfiniteScroll from "@/_components/scroll"
+import Heading from "@/_components/typography/heading"
+import Paragraph from "@/_components/typography/paragraph"
+import Subtitle from "@/_components/typography/subtitle"
+import { Button } from "@/_components/ui/button"
 
-import evernote from "@/_assets/images/company-logo.svg";
-import Paragraph from "@/_components/typography/paragraph";
+import { getWorkContentCollection } from "@/_services/contentful/workContent"
+import useWorkStore from "@/_store/work"
+
+import evernote from "@/_assets/images/company-logo.svg"
+import { MoveUpRight } from "lucide-react"
 
 export default function HomePage() {
+  const { workCollection, setWorkCollectionState } = useWorkStore()
+
+  const workCollectionParams = { limit: 3, order: "createdAt_DESC" }
+  const { data: workCollectionData } = useQuery({
+    queryKey: ["workCollection", workCollectionParams],
+    queryFn: () => getWorkContentCollection({ ...workCollectionParams }),
+  })
+
+  useEffect(() => {
+    if (!workCollection) return
+    setWorkCollectionState(workCollectionData?.workContentCollection.items)
+  }, [workCollectionData])
+
   return (
     <section className="my-16 sm:my-[121px]">
       <div className="my-16 sm:my-[121px]">
@@ -30,9 +50,9 @@ export default function HomePage() {
             </Subtitle>
           </div>
           <div className="">
-            <Button className="rounded-full px-10 bg-primary-default text-background-primary hover:bg-primary-hover">
-              Get in touch
-              <MoveUpRight className="ml-3" />
+            <Button>
+              <span className="mx-2">Get in touch</span>
+              <MoveUpRight />
             </Button>
           </div>
         </div>
@@ -54,30 +74,23 @@ export default function HomePage() {
           </Heading>
         </div>
         <div className="grid gap-10">
-          <div className="pb-6 sm:pb-10 border-b border-border-primary">
-            <Heading
-              type="h2"
-              className="text-2xl text-font-high leading-normal sm:text-4xl sm:leading-normal"
-            >
-              Increase Conversion Rate for Checkout Process
-            </Heading>
-          </div>
-          <div className="pb-6 sm:pb-10 border-b border-border-primary">
-            <Heading
-              type="h2"
-              className="text-2xl leading-normal sm:text-4xl sm:leading-normal"
-            >
-              Digital Wallet Revolution: Reimagining Payments with PayZen{" "}
-            </Heading>
-          </div>
-          <div className="pb-6 sm:pb-10 border-b border-border-primary">
-            <Heading
-              type="h2"
-              className="text-2xl leading-normal sm:text-4xl sm:leading-normal"
-            >
-              Elevating Fitness Journeys: A UX Transformation for FitLife
-            </Heading>
-          </div>
+          {workCollection?.map(({ sys, title }) => {
+            return (
+              <Link key={sys.id} href={`/work/${sys.id}`}>
+                <div
+                  className="pb-6 sm:pb-10 border-b border-border-primary"
+                  key={sys.id}
+                >
+                  <Heading
+                    type="h2"
+                    className="text-2xl text-font-high leading-normal sm:text-4xl sm:leading-normal"
+                  >
+                    {title}
+                  </Heading>
+                </div>
+              </Link>
+            )
+          })}
         </div>
       </section>
       <section className="my-20 sm:my-[140px]">
@@ -111,7 +124,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="flex justify-center">
-          <Button className="rounded-full px-10 border border-primary-default text-primary-default hover:bg-primary-hover">
+          <Button variant="secondary">
             Hire me
             <MoveUpRight className="ml-3" />
           </Button>
@@ -132,5 +145,5 @@ export default function HomePage() {
         </InfiniteScroll>
       </div>
     </section>
-  );
+  )
 }

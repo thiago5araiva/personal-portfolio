@@ -1,15 +1,21 @@
-import Navigation from "@/_components/navigation";
-import Footer from "@/_components/footer";
+"use client"
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
+import Footer from "@/_components/footer"
+import Navigation from "@/_components/navigation"
 
 type Props = {
-  children: React.ReactNode;
-};
+  children: React.ReactNode
+}
+const queryClient = new QueryClient()
+
 export default function RootTemplate({ children }: Props) {
   return (
     <main className="container mx-auto px-6 max-w-screen-lg">
-      <Navigation />
-      {children}
-      <Footer />
+      <QueryClientProvider client={queryClient}>
+        <Navigation />
+        {children}
+        <Footer />
+      </QueryClientProvider>
     </main>
-  );
+  )
 }

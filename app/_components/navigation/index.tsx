@@ -1,24 +1,24 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { twMerge as merge } from "tailwind-merge"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { twMerge as merge } from "tailwind-merge";
 
-import Drawer from "./Drawer"
+import Drawer from "./Drawer";
 
 const routes = [
   { label: "Home", value: "/" },
   { label: "Works", value: "/work" },
   { label: "About", value: "/about" },
-]
+];
 
 const styles = {
   base: "text-xl font-bold hover:text-primary-hover",
   inactive: "text-low font-light ",
-}
+};
 
 export default function NavigationComponent() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <nav className="py-5 mb-16 sm-20">
@@ -51,8 +51,6 @@ export default function NavigationComponent() {
         </Link>
         <div className="hidden lg:flex gap-10">
           {routes?.map((route, index) => {
-            console.log("pathname", pathname)
-            console.log("route", route.value)
             return (
               <Link
                 key={index}
@@ -60,12 +58,12 @@ export default function NavigationComponent() {
                 className={merge(
                   `${styles.base} ${
                     pathname !== route.value && styles.inactive
-                  }`
+                  }`,
                 )}
               >
                 {route.label}
               </Link>
-            )
+            );
           })}
         </div>
         <div className="lg:hidden">
@@ -73,5 +71,5 @@ export default function NavigationComponent() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

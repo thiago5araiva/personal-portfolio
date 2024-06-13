@@ -65,7 +65,7 @@ export default function DrawerComponent({ routes }: Props) {
           </div>
           <DrawerFooter>
             <DrawerClose asChild>
-              <Button variant="outline">Close</Button>
+              <Button variant="ghost">Close</Button>
             </DrawerClose>
           </DrawerFooter>
         </div>

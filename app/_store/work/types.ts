@@ -4,7 +4,6 @@ export type ContentfulWorkItem = {
     publishedAt: string
   }
   title: string
-  type: string
 }
 
 export interface ContentfulWorkCollection {
