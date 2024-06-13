@@ -1,34 +1,34 @@
-"use client"
-import { Suspense, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { useQuery } from "@tanstack/react-query"
+"use client";
+import { Suspense, useEffect } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
 
-import InfiniteScroll from "@/_components/scroll"
-import Heading from "@/_components/typography/heading"
-import Paragraph from "@/_components/typography/paragraph"
-import Subtitle from "@/_components/typography/subtitle"
-import { Button } from "@/_components/ui/button"
+import InfiniteScroll from "@/_components/scroll";
+import Heading from "@/_components/typography/heading";
+import Paragraph from "@/_components/typography/paragraph";
+import Subtitle from "@/_components/typography/subtitle";
+import { Button } from "@/_components/ui/button";
 
-import { getWorkContentCollection } from "@/_services/contentful/workContent"
-import useWorkStore from "@/_store/work"
+import { getWorkContentCollection } from "@/_services/contentful/workContent";
+import useWorkStore from "@/_store/work";
 
-import evernote from "@/_assets/images/company-logo.svg"
-import { MoveUpRight } from "lucide-react"
+import evernote from "@/_assets/images/company-logo.svg";
+import { MoveUpRight } from "lucide-react";
 
 export default function HomePage() {
-  const { workCollection, setWorkCollectionState } = useWorkStore()
+  const { workCollection, setWorkCollectionState } = useWorkStore();
 
-  const workCollectionParams = { limit: 3, order: "createdAt_DESC" }
+  const workCollectionParams = { limit: 3, order: "createdAt_DESC" };
   const { data: workCollectionData } = useQuery({
     queryKey: ["workCollection", workCollectionParams],
     queryFn: () => getWorkContentCollection({ ...workCollectionParams }),
-  })
+  });
 
   useEffect(() => {
-    if (!workCollection) return
-    setWorkCollectionState(workCollectionData?.workContentCollection.items)
-  }, [workCollectionData])
+    if (workCollection) return;
+    setWorkCollectionState(workCollectionData?.workContentCollection.items);
+  }, [workCollectionData]);
 
   return (
     <section className="my-16 sm:my-[121px]">
@@ -89,7 +89,7 @@ export default function HomePage() {
                   </Heading>
                 </div>
               </Link>
-            )
+            );
           })}
         </div>
       </section>
@@ -145,5 +145,5 @@ export default function HomePage() {
         </InfiniteScroll>
       </div>
     </section>
-  )
+  );
 }

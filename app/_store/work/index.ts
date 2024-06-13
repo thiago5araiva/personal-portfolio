@@ -1,10 +1,10 @@
-import { create } from "zustand"
-import { devtools, persist } from "zustand/middleware"
-import { ContentfulWorkCollection, ContentfulWorkItem } from "./types"
+import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
+import { ContentfulWorkCollection, ContentfulWorkItem } from "./types";
 
 interface Store {
-  workCollection: ContentfulWorkItem[] | undefined
-  setWorkCollectionState: (data?: ContentfulWorkItem[]) => void
+  workCollection: ContentfulWorkItem[] | undefined;
+  setWorkCollectionState: (data?: ContentfulWorkItem[]) => void;
 }
 
 const useWorkStore = create<Store>()(
@@ -13,11 +13,12 @@ const useWorkStore = create<Store>()(
       (set) => ({
         workCollection: undefined,
         setWorkCollectionState: (data) => {
-          set((state) => ({ ...state, workCollection: data }))
+          console.log("inside-store", data);
+          set((state) => ({ ...state, workCollection: data }));
         },
       }),
-      { name: "set-state" }
-    )
-  )
-)
-export default useWorkStore
+      { name: "set-state" },
+    ),
+  ),
+);
+export default useWorkStore;
