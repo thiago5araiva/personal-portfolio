@@ -1,12 +1,14 @@
-"use client"
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
-import Footer from "@/_components/footer"
-import Navigation from "@/_components/navigation"
+"use client";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Footer from "@/_components/footer";
+import Navigation from "@/_components/navigation";
+import { Suspense } from "react";
+import Loading from "./_components/laoding";
 
 type Props = {
-  children: React.ReactNode
-}
-const queryClient = new QueryClient()
+  children: React.ReactNode;
+};
+const queryClient = new QueryClient();
 
 export default function RootTemplate({ children }: Props) {
   return (
@@ -17,5 +19,5 @@ export default function RootTemplate({ children }: Props) {
         <Footer />
       </QueryClientProvider>
     </main>
-  )
+  );
 }

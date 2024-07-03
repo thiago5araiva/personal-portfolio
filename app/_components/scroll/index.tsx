@@ -1,18 +1,25 @@
 import { ReactElement } from "react";
-import "./styles.css";
 import { twMerge } from "tailwind-merge";
+import Image from "next/image";
+import "./styles.css";
+import { AssetsCollection } from "@/home/types";
+
 type Props = {
-  children: ReactElement[];
+  content?: AssetsCollection[];
   direction?: "left" | "right";
+  width: number;
+  height: number;
 };
 export default function InfiniteScrollComponent({
-  children,
+  content = [],
   direction = "left",
+  width = 90,
+  height = 90,
 }: Props) {
-  const length = children.length;
+  const length = content.length;
   return (
     <div className="wrapper">
-      {children.map((item, index) => {
+      {content.map((item, index) => {
         const count = index + 1;
         const animation = `calc(30s / ${length} * (${length} - ${count}) * -1)`;
         return (
@@ -21,7 +28,13 @@ export default function InfiniteScrollComponent({
             style={{ animationDelay: animation }}
             key={index}
           >
-            {item}
+            <Image
+              draggable={false}
+              alt={item.title}
+              src={item.url}
+              width={width}
+              height={height}
+            />
           </div>
         );
       })}

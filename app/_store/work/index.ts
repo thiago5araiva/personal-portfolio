@@ -1,24 +1,29 @@
-import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
-import { ContentfulWorkCollection, ContentfulWorkItem } from "./types";
+import { create } from "zustand"
+import { devtools, persist } from "zustand/middleware"
+import { ContentfulWorkCollection, ContentfulWorkItem } from "./types"
 
 interface Store {
-  workCollection: ContentfulWorkItem[] | undefined;
-  setWorkCollectionState: (data?: ContentfulWorkItem[]) => void;
+  workCollection: ContentfulWorkItem[] | undefined
 }
 
-const useWorkStore = create<Store>()(
+interface Actions {
+  setWorkCollection: (data?: ContentfulWorkItem[]) => void
+  getWorkCollection: () => ContentfulWorkItem[] | undefined
+}
+
+const initialState: Store = {
+  workCollection: undefined,
+}
+const useWorkStore = create<Store & Actions>()(
   devtools(
     persist(
-      (set) => ({
-        workCollection: undefined,
-        setWorkCollectionState: (data) => {
-          console.log("inside-store", data);
-          set((state) => ({ ...state, workCollection: data }));
-        },
+      (set, get) => ({
+        ...initialState,
+        setWorkCollection: (d) => set((s) => ({ ...s, workCollection: d })),
+        getWorkCollection: () => get().workCollection,
       }),
-      { name: "set-state" },
-    ),
-  ),
-);
-export default useWorkStore;
+      { name: "work-collection" }
+    )
+  )
+)
+export default useWorkStore
