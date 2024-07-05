@@ -1,35 +1,31 @@
-"use client";
-import { Suspense, useEffect, useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
+"use client"
+import { useEffect } from "react"
+import { useQuery } from "@tanstack/react-query"
+import Link from "next/link"
 
-import InfiniteScroll from "@/_components/scroll";
-import Heading from "@/_components/typography/heading";
-import Paragraph from "@/_components/typography/paragraph";
-import Subtitle from "@/_components/typography/subtitle";
-import { Button } from "@/_components/ui/button";
+import InfiniteScroll from "@/_components/scroll"
+import Heading from "@/_components/typography/heading"
+import Paragraph from "@/_components/typography/paragraph"
+import Subtitle from "@/_components/typography/subtitle"
+import { Button } from "@/_components/ui/button"
 
-import evernote from "@/_assets/images/company-logo.svg";
-import { MoveUpRight } from "lucide-react";
-import { getPageHomeContent } from "./service";
-import { PageHomeType } from "./types";
-import Loading from "@/_components/laoding";
+import Loading from "@/_components/laoding"
+import { MoveUpRight } from "lucide-react"
+import { getPageHomeContent } from "./service"
 
 export default function HomePage() {
   const getHomeContentResponse = useQuery({
     queryKey: ["homeContent"],
     queryFn: getPageHomeContent,
-  });
+  })
 
-  const content = getHomeContentResponse.data?.pageHome;
-
-  if (getHomeContentResponse.isLoading) return <Loading />;
-
+  if (getHomeContentResponse.isLoading) return <Loading />
+  const content = getHomeContentResponse.data?.pageHome
+  console.log(content)
   return (
     <section className="my-16 sm:my-[121px]">
       <div className="my-16 sm:my-[121px]">
-        <div className="mb-20 sm:mb-[140px] max-w-[823px]">
+        <div className="mb-20 sm:mb-[140px] max-w-[860px]">
           <div className="mb-4 sm:mb-6 ">
             <Heading
               type="h1"
@@ -50,11 +46,10 @@ export default function HomePage() {
             </Button>
           </div>
         </div>
-        <InfiniteScroll
-          content={content?.sectionHero.assetsCollection.items}
-          width={150}
-          height={150}
-        />
+        <div>
+          <small className="font-bold">trusted by:</small>
+          <InfiniteScroll data={content?.sectionHero.assetsCollection.items} />
+        </div>
       </div>
       <section>
         <div className="mb-6 sm:mb-10">
@@ -79,8 +74,8 @@ export default function HomePage() {
                     </Heading>
                   </div>
                 </Link>
-              );
-            },
+              )
+            }
           )}
         </div>
       </section>
@@ -104,7 +99,7 @@ export default function HomePage() {
                   {item.description}
                 </Paragraph>
               </div>
-            ),
+            )
           )}
         </div>
         <div className="flex justify-center">
@@ -116,17 +111,13 @@ export default function HomePage() {
       </section>
       <div className="my-20 sm:my-[121px]">
         <InfiniteScroll
-          width={90}
-          height={90}
-          content={content?.sectionService.assetsCollection.items.slice(0, 6)}
+          data={content?.sectionService.assetsCollection.items.slice(0, 6)}
         />
         <InfiniteScroll
-          width={90}
-          height={90}
           direction="right"
-          content={content?.sectionService.assetsCollection.items.slice(6, 12)}
+          data={content?.sectionService.assetsCollection.items.slice(6, 12)}
         />
       </div>
     </section>
-  );
+  )
 }

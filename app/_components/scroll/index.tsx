@@ -1,30 +1,24 @@
-import { ReactElement } from "react";
-import { twMerge } from "tailwind-merge";
-import Image from "next/image";
-import "./styles.css";
-import { AssetsCollection } from "@/home/types";
+import { AssetsCollection } from "@/home/types"
+import Image from "next/image"
+import { twMerge } from "tailwind-merge"
+
+import "./styles.css"
 
 type Props = {
-  content?: AssetsCollection[];
-  direction?: "left" | "right";
-  width: number;
-  height: number;
-};
-export default function InfiniteScrollComponent({
-  content = [],
-  direction = "left",
-  width = 90,
-  height = 90,
-}: Props) {
-  const length = content.length;
+  data?: AssetsCollection[]
+  direction?: "left" | "right"
+}
+export default function InfiniteScrollComponent({ data, direction }: Props) {
+  const content = data || []
+  const length = data?.length
   return (
     <div className="wrapper">
-      {content.map((item, index) => {
-        const count = index + 1;
-        const animation = `calc(30s / ${length} * (${length} - ${count}) * -1)`;
+      {content?.map((item, index) => {
+        const count = index + 1
+        const animation = `calc(30s / ${length} * (${length} - ${count}) * -1)`
         return (
           <div
-            className={twMerge(`item`, direction)}
+            className={twMerge(`item`, direction || "left")}
             style={{ animationDelay: animation }}
             key={index}
           >
@@ -32,12 +26,12 @@ export default function InfiniteScrollComponent({
               draggable={false}
               alt={item.title}
               src={item.url}
-              width={width}
-              height={height}
+              width={210}
+              height={90}
             />
           </div>
-        );
+        )
       })}
     </div>
-  );
+  )
 }

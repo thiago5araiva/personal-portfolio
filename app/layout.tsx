@@ -21,9 +21,7 @@ type Props = Readonly<{
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <body className={cn("bg-background-secondary", fontSans.variable)}>
-        {children}
-      </body>
+      <body className={cn("", fontSans.variable)}>{children}</body>
     </html>
   )
 }

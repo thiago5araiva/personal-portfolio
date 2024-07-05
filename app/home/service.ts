@@ -1,9 +1,9 @@
-import contentful from "@/_services/contentful";
-import { PageHomeType } from "./types";
+import contentful from "@/_services/contentful"
+import { PageHomeType } from "./types"
 
-const { client, gql } = contentful();
+const { client, gql } = contentful()
 
-const pageHomeId = "5T4EdbAY29aKcTgCLHwt24";
+const pageHomeId = "5T4EdbAY29aKcTgCLHwt24"
 
 export async function getPageHomeContent(): Promise<PageHomeType> {
   const query = gql`
@@ -17,8 +17,10 @@ export async function getPageHomeContent(): Promise<PageHomeType> {
           cta
           assetsCollection {
             items {
-              title
               url
+              title
+              width
+              height
             }
           }
         }
@@ -48,11 +50,13 @@ export async function getPageHomeContent(): Promise<PageHomeType> {
             items {
               title
               url
+              width
+              height
             }
           }
         }
       }
     }
-  `;
-  return await client.request(query, { pageHomeId });
+  `
+  return await client.request(query, { pageHomeId })
 }

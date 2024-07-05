@@ -1,6 +1,6 @@
 import { create } from "zustand"
 import { devtools, persist } from "zustand/middleware"
-import { Actions, Store } from "./types"
+import { Store } from "./types"
 
 const initialState: Store = {
   title: "",
@@ -10,7 +10,7 @@ const initialState: Store = {
     items: [],
   },
 }
-const useStore = create<Store & Actions>()(
+const useStore = create<Store>()(
   devtools(
     persist(
       (set, get) => ({
