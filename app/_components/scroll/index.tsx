@@ -1,12 +1,12 @@
-import { AssetsCollection } from "@/home/types"
-import Image from "next/image"
-import { twMerge } from "tailwind-merge"
+import { AssetsCollection } from '@/home/types'
+import Image from 'next/image'
+import { twMerge } from 'tailwind-merge'
 
-import "./styles.css"
+import './styles.css'
 
 type Props = {
   data?: AssetsCollection[]
-  direction?: "left" | "right"
+  direction?: 'left' | 'right'
 }
 export default function InfiniteScrollComponent({ data, direction }: Props) {
   const content = data || []
@@ -18,17 +18,16 @@ export default function InfiniteScrollComponent({ data, direction }: Props) {
         const animation = `calc(30s / ${length} * (${length} - ${count}) * -1)`
         return (
           <div
-            className={twMerge(`item`, direction || "left")}
+            className={twMerge(`item`, direction || 'left')}
             style={{ animationDelay: animation }}
-            key={index}
-          >
+            key={index}>
             <Image
               draggable={false}
               alt={item.title}
               src={item.url}
-              width={190}
-              height={90}
-              objectFit="contain"
+              width={`${item.width}`}
+              height={`${item.height}`}
+              priority
             />
           </div>
         )
