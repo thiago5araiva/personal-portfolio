@@ -47,7 +47,7 @@ export default function HomePage() {
           </div>
         </div>
         <div>
-          <small className="font-bold">trusted by:</small>
+          <small className="font-bold ">trusted by:</small>
           <InfiniteScroll data={content?.sectionHero.assetsCollection.items} />
         </div>
       </div>
@@ -111,11 +111,8 @@ export default function HomePage() {
       </section>
       <div className="my-20 sm:my-[121px]">
         <InfiniteScroll
-          data={content?.sectionService.assetsCollection.items.slice(0, 6)}
-        />
-        <InfiniteScroll
+          data={content?.sectionService.assetsCollection.items}
           direction="right"
-          data={content?.sectionService.assetsCollection.items.slice(6, 12)}
         />
       </div>
     </section>

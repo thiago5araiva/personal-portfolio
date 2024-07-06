@@ -9,13 +9,13 @@
 
 @keyframes scrollLeft {
   to {
-    left: -200px;
+    left: -190px;
   }
 }
 
 @keyframes scrollRight {
   to {
-    right: -200px;
+    right: -190px;
   }
 }
 .item {
@@ -23,7 +23,7 @@
   align-items: center;
   justify-content: center;
   height: 90px;
-  width: 210px;
+  width: 190px;
   position: absolute;
   animation-name: scrollLeft;
   animation-duration: 30s;

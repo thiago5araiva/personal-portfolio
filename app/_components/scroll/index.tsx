@@ -26,8 +26,9 @@ export default function InfiniteScrollComponent({ data, direction }: Props) {
               draggable={false}
               alt={item.title}
               src={item.url}
-              width={210}
+              width={190}
               height={90}
+              objectFit="contain"
             />
           </div>
         )
