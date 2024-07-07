@@ -41,10 +41,10 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="flex justify-between items-end">
-          <span>
+        <div className="flex justify-between items-end cursor-pointer">
+          <small>
             © Copyright {year} {content?.copyright}
-          </span>
+          </small>
           <div className="flex flex-col">
             <div className="flex gap-3 items-end mb-1 justify-end text-green-500">
               <BatteryCharging />
@@ -52,7 +52,7 @@ export default function Footer() {
             </div>
             <div className="flex gap-3">
               {content?.poweredBy?.map((item, index) => (
-                <small key={index} className="cursor-pointer">
+                <small key={index} className="text-font-low">
                   {item}
                 </small>
               ))}
