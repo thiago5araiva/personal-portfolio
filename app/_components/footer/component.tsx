@@ -3,6 +3,7 @@ import { getGlobalFooter } from './actions'
 import { useQuery } from '@tanstack/react-query'
 import Heading from '@/_components/typography/heading'
 import Link from 'next/link'
+import { BatteryCharging } from 'lucide-react'
 
 export default function Footer() {
   const getGlobalFooterResponse = useQuery({
@@ -40,10 +41,23 @@ export default function Footer() {
             ))}
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-between items-end">
           <span>
             © Copyright {year} {content?.copyright}
           </span>
+          <div className="flex flex-col">
+            <div className="flex gap-3 items-end mb-1 justify-end text-green-500">
+              <BatteryCharging />
+              <small className="text-right font-bold">Powered by</small>
+            </div>
+            <div className="flex gap-3">
+              {content?.poweredBy?.map((item, index) => (
+                <small key={index} className="cursor-pointer">
+                  {item}
+                </small>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </footer>

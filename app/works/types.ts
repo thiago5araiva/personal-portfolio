@@ -5,7 +5,9 @@ export type PageWorkType = {
     subtitle: string
     contentCollection: {
       items: Array<{
-        _id: string
+        sys: {
+          id: string
+        }
         title: string
         createdAt: string
         type: string

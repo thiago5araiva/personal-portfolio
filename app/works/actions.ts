@@ -9,14 +9,14 @@ export async function getPageWorkContent(): Promise<PageWorkType> {
   const query = gql`
     query PageWork($pageWorkId: String!) {
       pageWork(id: $pageWorkId) {
-        _id
         title
         subtitle
         contentCollection {
           items {
-            _id
+            sys {
+              id
+            }
             title
-            createdAt
             type
           }
         }

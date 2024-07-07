@@ -1,14 +1,20 @@
 import type { Metadata } from 'next'
-import { Overpass as FontSans } from 'next/font/google'
+import { Alegreya, Overpass } from 'next/font/google'
 
 import { cn } from '@/_lib/utils'
 
 import './globals.css'
-import { Toaster } from './_components/ui/toaster'
-const fontSans = FontSans({
+
+const overpass = Overpass({
   subsets: ['latin'],
-  variable: '--font-serif',
-  weight: '400',
+  variable: '--font-overpass',
+  display: 'swap',
+})
+
+const alegreya = Alegreya({
+  subsets: ['latin'],
+  variable: '--font-alegreya',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -22,7 +28,9 @@ type Props = Readonly<{
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <body className={cn('', fontSans.variable)}>{children}</body>
+      <body className={cn('', overpass.variable, alegreya.variable)}>
+        {children}
+      </body>
     </html>
   )
 }

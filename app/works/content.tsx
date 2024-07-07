@@ -1,11 +1,11 @@
 'use client'
-import Heading from '@/_components/typography/heading'
-import Subtitle from '@/_components/typography/subtitle'
-import { useQuery } from '@tanstack/react-query'
 import Link from 'next/link'
-import { getPageWorkContent } from './actions'
-import Loading from '@/_components/laoding'
+import { useQuery } from '@tanstack/react-query'
+
+import Heading from '@/_components/typography/heading'
 import Header from './components/header'
+import { getPageWorkContent } from './actions'
+import Loading from '@/_components/loading'
 
 export default function WorksPage() {
   const getWorksContentResponse = useQuery({
@@ -13,14 +13,15 @@ export default function WorksPage() {
     queryFn: getPageWorkContent,
   })
 
+  if (getWorksContentResponse.isLoading) return <Loading />
   const content = getWorksContentResponse.data?.pageWork
 
   return (
     <section className="work">
       <Header title={content?.title} subtitle={content?.subtitle} />
       <div className="mt-12 mb-20 sm:mt-20 sm:mb-[140px] grid gap-10">
-        {content?.contentCollection?.items.map(({ _id, title }) => (
-          <Link key={_id} href={`/works/${_id}`}>
+        {content?.contentCollection?.items.map(({ sys, title }) => (
+          <Link key={sys.id} href={`/works/${sys.id}`}>
             <div className="pb-6 sm:pb-10 border-b border-border-primary">
               <Heading
                 type="h2"

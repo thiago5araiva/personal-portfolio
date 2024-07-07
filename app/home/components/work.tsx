@@ -1,6 +1,6 @@
 import Heading from '@/_components/typography/heading'
 import Link from 'next/link'
-import { SectionWorkType } from './types'
+import { SectionWorkType } from '../types'
 
 type Props = {
   title?: string

@@ -1,17 +1,20 @@
-import { createElement, ReactNode } from "react";
-import { twMerge } from "tailwind-merge";
+import { createElement, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 type Props = {
-  className?: string;
-  children: ReactNode;
-};
+  className?: string
+  children: ReactNode
+}
 
 export default function SubtitleComponent({ className, children }: Props) {
   return createElement(
-    "h6",
+    'h6',
     {
-      className: twMerge("font-title  text-font-medium leading-normal", className),
+      className: twMerge(
+        'font-text text-font-medium leading-normal',
+        className
+      ),
     },
-    children,
-  );
+    children
+  )
 }
