@@ -1,9 +1,7 @@
-import contentful from "@/_services/contentful"
-import { PageHomeType } from "./types"
+import { client, gql } from '@/_services/contentful'
+import { PageHomeType } from './types'
 
-const { client, gql } = contentful()
-
-const pageHomeId = "5T4EdbAY29aKcTgCLHwt24"
+const pageHomeId = '5T4EdbAY29aKcTgCLHwt24'
 
 export async function getPageHomeContent(): Promise<PageHomeType> {
   const query = gql`

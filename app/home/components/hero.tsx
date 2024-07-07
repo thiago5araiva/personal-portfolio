@@ -12,7 +12,7 @@ import {
 } from '@/_components/ui/dialog'
 import { Mail, MoveUpRight, Smartphone } from 'lucide-react'
 import Link from 'next/link'
-import { AssetsCollection } from './types'
+import { AssetsCollection } from '../types'
 type Props = {
   title?: string
   description?: string

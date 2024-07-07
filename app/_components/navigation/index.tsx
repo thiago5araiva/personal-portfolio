@@ -8,7 +8,7 @@ import Drawer from './Drawer'
 
 const routes = [
   { label: 'Home', value: '/' },
-  { label: 'Works', value: '/work' },
+  { label: 'Works', value: '/works' },
   { label: 'About', value: '/about' },
 ]
 

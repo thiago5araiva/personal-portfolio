@@ -1,21 +1,18 @@
 'use client'
-
 import { useQuery } from '@tanstack/react-query'
 
-import Loading from '@/_components/laoding'
-import Hero from './hero'
-import Services from './services'
-import Work from './work'
+import Hero from './components/hero'
+import Services from './components/services'
+import Work from './components/work'
 
 import { getPageHomeContent } from './actions'
 
 export default function HomePage() {
   const getHomeContentResponse = useQuery({
-    queryKey: ['homeContent'],
+    queryKey: ['pageHome'],
     queryFn: getPageHomeContent,
   })
 
-  if (getHomeContentResponse.isLoading) return <Loading />
   const content = getHomeContentResponse.data?.pageHome
 
   return (
