@@ -1,7 +1,10 @@
-import InfiniteScroll from '@/_components/scroll'
-import Heading from '@/_components/typography/heading'
-import Subtitle from '@/_components/typography/subtitle'
-import { Button } from '@/_components/ui/button'
+import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const DynamicInfiniteScroll = dynamic(() => import('@/_components/scroll'))
+const DynamicHeading = dynamic(() => import('@/_components/typography/heading'))
+const DynamicSub = dynamic(() => import('@/_components/typography/subtitle'))
+
 import {
   Dialog,
   DialogContent,
@@ -10,30 +13,32 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/_components/ui/dialog'
+import { Button } from '@/_components/ui/button'
 import { Mail, MoveUpRight, Smartphone } from 'lucide-react'
-import Link from 'next/link'
 import { AssetsCollection } from '../types'
+
 type Props = {
   title?: string
   description?: string
   cta?: string
   images?: AssetsCollection[]
 }
+
 export default function HomeHero({ title, description, cta, images }: Props) {
   return (
     <div className="my-16 sm:my-[121px]">
       <div className="mb-20 sm:mb-[140px] max-w-[860px]">
         <div className="mb-4 sm:mb-6 ">
-          <Heading
+          <DynamicHeading
             type="h1"
             className="text-font-low leading-normal sm:text-6xl sm:leading-normal">
             {title}
-          </Heading>
+          </DynamicHeading>
         </div>
         <div className="mb-10 sm:mb-16">
-          <Subtitle className="text-font-medium leading-normal sm:text-xl">
+          <DynamicSub className="text-font-medium leading-normal sm:text-xl">
             {description}
-          </Subtitle>
+          </DynamicSub>
         </div>
         <div>
           <Dialog>
@@ -72,7 +77,7 @@ export default function HomeHero({ title, description, cta, images }: Props) {
       </div>
       <div>
         <small className="font-bold ">trusted by:</small>
-        <InfiniteScroll data={images} />
+        <DynamicInfiniteScroll data={images} />
       </div>
     </div>
   )

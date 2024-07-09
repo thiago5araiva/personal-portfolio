@@ -1,37 +1,89 @@
-import { AssetsCollection } from '@/home/types'
 import Image from 'next/image'
 import { twMerge } from 'tailwind-merge'
+import styled, { keyframes } from 'styled-components'
+import React, { Fragment, memo, useMemo } from 'react'
+import { ImageProps, $ItemProps, Props } from './types'
 
-import './styles.css'
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  position: relative;
+  height: 90px;
+  overflow: hidden;
+`
 
-type Props = {
-  data?: AssetsCollection[]
-  direction?: 'left' | 'right'
-}
-export default function InfiniteScrollComponent({ data, direction }: Props) {
-  const content = data || []
-  const length = data?.length
+const scrollLeft = keyframes`
+  to {
+    left: -190px;
+  }
+`
+const scrollRight = keyframes`
+  to {
+    right: -190px;
+  }
+`
+
+const Item = styled.div<$ItemProps>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  width: 190px;
+  position: absolute;
+  animation-duration: 30s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  ${({ $length, $count }) =>
+    `animation-delay: calc(30s / ${$length} * (${$length} - ${
+      $count + 1
+    }) * -1);`}
+`
+const Left = styled(Item)`
+  left: max(calc(210px * ${({ $length }) => $length} * 1.8), 100%);
+  animation-name: ${scrollLeft};
+`
+const Right = styled(Item)`
+  animation-name: ${scrollRight};
+  ${({ $length }) =>
+    `right: max(calc(210px * ${$length} * 1.8),calc(100% + 200px));`}
+`
+
+export function InfiniteScrollImage({ props }: ImageProps) {
   return (
-    <div className="wrapper">
-      {content?.map((item, index) => {
-        const count = index + 1
-        const animation = `calc(30s / ${length} * (${length} - ${count}) * -1)`
+    <Image
+      draggable={false}
+      alt={props.title}
+      src={props.url}
+      width={`${props.width}`}
+      height={`${props.height}`}
+      priority
+    />
+  )
+}
+
+export default function InfiniteScrollComponent(props: Props) {
+  const data = props.data ? props.data : []
+  const direction = props.direction ? props.direction : 'left'
+
+  return (
+    <Wrapper>
+      {data?.map(({ title, url, width, height }, index) => {
         return (
-          <div
-            className={twMerge(`item`, direction || 'left')}
-            style={{ animationDelay: animation }}
-            key={index}>
-            <Image
-              draggable={false}
-              alt={item.title}
-              src={item.url}
-              width={`${item.width}`}
-              height={`${item.height}`}
-              priority
-            />
-          </div>
+          <Fragment key={index}>
+            {direction === 'left' && (
+              <Left $length={data.length} $count={index + 1}>
+                <InfiniteScrollImage props={{ title, url, width, height }} />
+              </Left>
+            )}
+            {direction === 'right' && (
+              <Right $length={data.length} $count={index + 1}>
+                <InfiniteScrollImage props={{ title, url, width, height }} />
+              </Right>
+            )}
+          </Fragment>
         )
       })}
-    </div>
+    </Wrapper>
   )
 }

@@ -29,9 +29,9 @@ type Props = Readonly<{
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <head>
+      <Head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
-      </head>
+      </Head>
       <body className={cn('', overpass.variable, alegreya.variable)}>
         {children}
       </body>
