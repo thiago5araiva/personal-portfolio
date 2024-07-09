@@ -1,9 +1,5 @@
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
-
-const DynamicInfiniteScroll = dynamic(() => import('@/_components/scroll'))
-const DynamicHeading = dynamic(() => import('@/_components/typography/heading'))
-const DynamicSub = dynamic(() => import('@/_components/typography/subtitle'))
+import { Heading, InfiniteScroll, Subtitle } from '@/_components/'
 
 import {
   Dialog,
@@ -29,16 +25,16 @@ export default function HomeHero({ title, description, cta, images }: Props) {
     <div className="my-16 sm:my-[121px]">
       <div className="mb-20 sm:mb-[140px] max-w-[860px]">
         <div className="mb-4 sm:mb-6 ">
-          <DynamicHeading
+          <Heading
             type="h1"
             className="text-font-low leading-normal sm:text-6xl sm:leading-normal">
             {title}
-          </DynamicHeading>
+          </Heading>
         </div>
         <div className="mb-10 sm:mb-16">
-          <DynamicSub className="text-font-medium leading-normal sm:text-xl">
+          <Subtitle className="text-font-medium leading-normal sm:text-xl">
             {description}
-          </DynamicSub>
+          </Subtitle>
         </div>
         <div>
           <Dialog>
@@ -77,7 +73,7 @@ export default function HomeHero({ title, description, cta, images }: Props) {
       </div>
       <div>
         <small className="font-bold ">trusted by:</small>
-        <DynamicInfiniteScroll data={images} />
+        <InfiniteScroll data={images} />
       </div>
     </div>
   )

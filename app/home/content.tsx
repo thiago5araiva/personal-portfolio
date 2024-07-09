@@ -1,21 +1,23 @@
-'use client'
-import { useQuery } from '@tanstack/react-query'
+"use client";
+import dynamic from "next/dynamic";
+import { useQuery } from "@tanstack/react-query";
 
-import Hero from './components/hero'
-import Services from './components/services'
-import Work from './components/work'
+import { Loading } from "@/_components/";
 
-import Loading from '@/_components/loading'
-import { getPageHomeContent } from './actions'
+const Hero = dynamic(() => import("./components/hero"));
+const Services = dynamic(() => import("./components/services"));
+const Work = dynamic(() => import("./components/work"));
+
+import { getPageHomeContent } from "./actions";
 
 export default function HomePage() {
   const { data: getHomeContentResponse, isLoading } = useQuery({
-    queryKey: ['pageHome'],
+    queryKey: ["pageHome"],
     queryFn: getPageHomeContent,
-  })
+  });
 
-  if (isLoading) <Loading />
-  const content = getHomeContentResponse?.pageHome
+  if (isLoading) <Loading />;
+  const content = getHomeContentResponse?.pageHome;
 
   return (
     <section className="my-16 sm:my-[121px]">
@@ -35,5 +37,5 @@ export default function HomePage() {
         images={content?.sectionService.assetsCollection}
       />
     </section>
-  )
+  );
 }

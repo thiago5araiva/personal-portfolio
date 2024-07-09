@@ -1,0 +1,11 @@
+@keyframes scrollLeft {
+  to {
+    left: -190px;
+  }
+}
+
+@keyframes scrollRight {
+  to {
+    right: -190px;
+  }
+}

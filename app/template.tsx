@@ -1,13 +1,11 @@
-import Footer from '@/_components/footer'
-import Navigation from '@/_components/navigation'
-import Providers from '@/_services/providers'
-import { ReactNode } from 'react'
-import Loading from './_components/loading'
-import useGlobalStore from './_store/global'
+import { ReactNode } from "react";
+import { Footer, Navigation } from "@/_components/";
+
+import Providers from "@/_services/providers";
 
 type Props = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 
 export default async function RootTemplate({ children }: Props) {
   return (
@@ -18,5 +16,5 @@ export default async function RootTemplate({ children }: Props) {
         <Footer />
       </main>
     </Providers>
-  )
+  );
 }

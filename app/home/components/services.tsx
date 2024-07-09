@@ -35,7 +35,7 @@ export default function HomeService({ title, content, images }: Props) {
         ))}
       </div>
       <div className="my-20 sm:my-[121px]">
-        <InfiniteScroll data={images?.items} direction="right" />
+        <InfiniteScroll data={images?.items} />
       </div>
     </section>
   )
