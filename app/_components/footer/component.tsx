@@ -20,12 +20,12 @@ export default function Footer() {
         <div className="lg:flex justify-between">
           <div className="mb-10 lg:mb-0">
             <Heading
-              type="h5"
+              type="h3"
               className="text-2xl text-center text-font-high lg:text-2xl lg:text-left font-bold mb-4">
               {content?.text}
             </Heading>
             <Heading
-              type="h5"
+              type="h3"
               className="text-xl text-center text-font-low lg:text-2xl lg:text-left font-bold">
               {content?.email}
             </Heading>
@@ -46,7 +46,7 @@ export default function Footer() {
             © Copyright {year} {content?.copyright}
           </small>
           <div className="flex flex-col">
-            <div className="flex gap-3 items-end mb-1 justify-end text-green-500">
+            <div className="flex gap-3 items-end mb-1 justify-end text-font-low">
               <BatteryCharging />
               <small className="text-right font-bold">Powered by</small>
             </div>

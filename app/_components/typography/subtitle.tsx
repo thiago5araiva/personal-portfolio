@@ -8,7 +8,7 @@ type Props = {
 
 export default function SubtitleComponent({ className, children }: Props) {
   return createElement(
-    'h6',
+    'h3',
     {
       className: twMerge(
         'font-text text-font-medium leading-normal',

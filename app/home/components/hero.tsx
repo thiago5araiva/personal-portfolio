@@ -32,9 +32,11 @@ export default function HomeHero({ title, description, cta, images }: Props) {
           </Heading>
         </div>
         <div className="mb-10 sm:mb-16">
-          <Subtitle className="text-font-medium leading-normal sm:text-xl">
+          <Heading
+            type="h2"
+            className="text-font-medium leading-normal sm:text-xl">
             {description}
-          </Subtitle>
+          </Heading>
         </div>
         <div>
           <Dialog>

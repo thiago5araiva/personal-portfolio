@@ -17,7 +17,7 @@ export default function HomeService({ title, content, images }: Props) {
     <section className="my-20 sm:my-[140px]">
       <div className="mb-6">
         <Heading
-          type="h6"
+          type="h3"
           className="text-xl text-font-medium font-semibold sm:text-2xl">
           {title}
         </Heading>
@@ -35,7 +35,7 @@ export default function HomeService({ title, content, images }: Props) {
         ))}
       </div>
       <div className="my-20 sm:my-[121px]">
-        <InfiniteScroll data={images?.items} />
+        <InfiniteScroll data={images?.items} right />
       </div>
     </section>
   )

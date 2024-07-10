@@ -1,9 +1,7 @@
 'use client'
 import Image from 'next/image'
-import { keyframes } from 'styled-components'
 import './styles.css'
 import { Props } from './types'
-import { useRef } from 'react'
 
 type StyleProps = { [key: string]: string | number | boolean | undefined }
 
