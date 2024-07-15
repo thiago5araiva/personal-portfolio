@@ -1,5 +1,5 @@
-import { createElement, ReactNode } from "react"
-import { twMerge } from "tailwind-merge"
+import { createElement, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
 type Props = {
   className?: string
@@ -8,9 +8,11 @@ type Props = {
 
 export default function ParagraphComponent({ className, children }: Props) {
   return createElement(
-    "p",
+    'p',
     {
-      className: twMerge(`${className} leading-normal`),
+      className: twMerge(
+        `${className} text-base text-font-medium sm:text-lg leading-normal`
+      ),
     },
     children
   )

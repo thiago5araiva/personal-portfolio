@@ -9,7 +9,10 @@ import InfiniteScroll from '@/_components/scroll'
 type Props = {
   title?: string
   content?: SectionServiceType['contentCollection']
-  images?: SectionServiceType['assetsCollection']
+  images?: {
+    frontend?: SectionServiceType['frontStackCollection']
+    backend?: SectionServiceType['backendStackCollection']
+  }
 }
 
 export default function HomeService({ title, content, images }: Props) {
@@ -35,7 +38,8 @@ export default function HomeService({ title, content, images }: Props) {
         ))}
       </div>
       <div className="my-20 sm:my-[121px]">
-        <InfiniteScroll data={images?.items} right />
+        <InfiniteScroll data={images?.backend?.items} right />
+        <InfiniteScroll data={images?.frontend?.items} />
       </div>
     </section>
   )

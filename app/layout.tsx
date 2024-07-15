@@ -5,6 +5,7 @@ import { cn } from '@/_lib/utils'
 
 import './globals.css'
 import Head from 'next/head'
+import Script from 'next/script'
 
 const overpass = Overpass({
   subsets: ['latin'],
@@ -29,9 +30,6 @@ type Props = Readonly<{
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </Head>
       <body className={cn('', overpass.variable, alegreya.variable)}>
         {children}
       </body>
