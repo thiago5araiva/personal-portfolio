@@ -2,10 +2,8 @@ import type { Metadata } from 'next'
 import { Alegreya, Overpass } from 'next/font/google'
 
 import { cn } from '@/_lib/utils'
-
+import PosthogProvider from '@/_providers/posthogProvider'
 import './globals.css'
-import Head from 'next/head'
-import Script from 'next/script'
 
 const overpass = Overpass({
   subsets: ['latin'],
@@ -26,13 +24,14 @@ export const metadata: Metadata = {
 type Props = Readonly<{
   children: React.ReactNode
 }>
-
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <body className={cn('', overpass.variable, alegreya.variable)}>
-        {children}
-      </body>
+      <PosthogProvider>
+        <body className={cn('', overpass.variable, alegreya.variable)}>
+          {children}
+        </body>
+      </PosthogProvider>
     </html>
   )
 }

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Footer, Navigation } from '@/_components/'
 
-import Providers from '@/_services/providers'
+import QueryProvider from '@/_providers/queryProvider'
 import Head from 'next/head'
 
 type Props = {
@@ -10,15 +10,12 @@ type Props = {
 
 export default async function RootTemplate({ children }: Props) {
   return (
-    <Providers>
-      <Head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-      </Head>
+    <QueryProvider>
       <main className="container mx-auto px-6 max-w-screen-lg">
         <Navigation />
         {children}
         <Footer />
       </main>
-    </Providers>
+    </QueryProvider>
   )
 }

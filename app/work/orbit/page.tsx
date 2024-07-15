@@ -1,21 +1,11 @@
 'use client'
-import { useEffect, useRef } from 'react'
-import p5 from 'p5'
-import { setup } from './setup'
+import dynamic from 'next/dynamic'
+
 import Heading from '@/_components/typography/heading'
 import Paragraph from '@/_components/typography/paragraph'
-import posthog from 'posthog-js'
+const P5Comp = dynamic(() => import('./content'), { ssr: false })
 
-export default function SandSimulation() {
-  const ref = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    if (!ref.current) return
-    if (typeof window !== 'undefined') {
-      const instance = new p5(setup, ref.current)
-      return () => instance.remove()
-    }
-  }, [])
-
+export default function OrbitSimulation() {
   return (
     <section className="orbit flex flex-col gap-6 md:gap-10 my-16 sm:my-[121px]">
       <Heading type="h3">
@@ -55,13 +45,7 @@ export default function SandSimulation() {
         O exemplo acima é uma simulação criada com algumas linhas de código, o
         usuário pode clicar e arrastar o mouse para interagir com a simulação.
       </Paragraph>
-      <div
-        className="flex justify-center w-full"
-        id="sand-simulation"
-        ref={ref}
-      />
+      <P5Comp />
     </section>
   )
 }
-
-posthog.capture('test-event', { property: 'test' })
