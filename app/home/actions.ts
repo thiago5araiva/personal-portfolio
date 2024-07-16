@@ -44,7 +44,15 @@ export async function getPageHomeContent(): Promise<PageHomeType> {
               description
             }
           }
-          assetsCollection {
+          backendStackCollection {
+            items {
+              title
+              url
+              width
+              height
+            }
+          }
+          frontStackCollection {
             items {
               title
               url

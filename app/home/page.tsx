@@ -1,4 +1,4 @@
-import getQueryClient from '@/_services/getQueryClient'
+import getQueryClient from '@/_providers/getQueryClient'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getPageHomeContent } from './actions'
 import Home from './content'

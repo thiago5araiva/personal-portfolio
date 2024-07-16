@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { Heading, InfiniteScroll, Subtitle } from '@/_components/'
+import Link from "next/link";
+import { Heading, InfiniteScroll, Subtitle } from "@/_components/";
 
 import {
   Dialog,
@@ -8,17 +8,17 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/_components/ui/dialog'
-import { Button } from '@/_components/ui/button'
-import { Mail, MoveUpRight, Smartphone } from 'lucide-react'
-import { AssetsCollection } from '../types'
+} from "@/_components/ui/dialog";
+import { Button } from "@/_components/ui/button";
+import { Mail, MoveUpRight, Smartphone } from "lucide-react";
+import { AssetsCollection } from "./types";
 
 type Props = {
-  title?: string
-  description?: string
-  cta?: string
-  images?: AssetsCollection[]
-}
+  title?: string;
+  description?: string;
+  cta?: string;
+  images?: AssetsCollection[];
+};
 
 export default function HomeHero({ title, description, cta, images }: Props) {
   return (
@@ -27,14 +27,16 @@ export default function HomeHero({ title, description, cta, images }: Props) {
         <div className="mb-4 sm:mb-6 ">
           <Heading
             type="h1"
-            className="text-font-low leading-normal sm:text-6xl sm:leading-normal">
+            className="text-font-low leading-normal sm:text-6xl sm:leading-normal"
+          >
             {title}
           </Heading>
         </div>
         <div className="mb-10 sm:mb-16">
           <Heading
             type="h2"
-            className="text-font-medium leading-normal sm:text-xl">
+            className="text-font-medium leading-normal sm:text-xl"
+          >
             {description}
           </Heading>
         </div>
@@ -58,9 +60,10 @@ export default function HomeHero({ title, description, cta, images }: Props) {
               </DialogHeader>
               <div className="grid gap-3">
                 <Link
-                  href={'https://wa.me/5562993248451'}
+                  href={"https://wa.me/5562993248451"}
                   target="blank"
-                  className="flex items-center gap-3 hover:underline">
+                  className="flex items-center gap-3 hover:underline"
+                >
                   <Smartphone className=" w-4" />
                   <span>+55 62 993248451</span>
                 </Link>
@@ -78,5 +81,5 @@ export default function HomeHero({ title, description, cta, images }: Props) {
         <InfiniteScroll data={images} />
       </div>
     </div>
-  )
+  );
 }

@@ -47,7 +47,10 @@ export type SectionWorkType = {
 export type SectionServiceType = {
   _id: string
   title: string
-  assetsCollection: {
+  backendStackCollection: {
+    items: AssetsCollection[]
+  }
+  frontStackCollection: {
     items: AssetsCollection[]
   }
   contentCollection: {
