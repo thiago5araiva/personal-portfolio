@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 
 import Heading from '@/_components/typography/heading'
 import Paragraph from '@/_components/typography/paragraph'
-const P5Comp = dynamic(() => import('./content'), { ssr: false })
+const P5Comp = dynamic(() => import('./Orbit'), { ssr: false })
 
 export default function OrbitSimulation() {
   return (

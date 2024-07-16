@@ -1,5 +1,5 @@
 import React from 'react'
-import { SectionServiceType } from '../types'
+import { SectionServiceType } from './types'
 
 import Heading from '@/_components/typography/heading'
 import Subtitle from '@/_components/typography/subtitle'
