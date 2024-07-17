@@ -18,10 +18,10 @@ const container: StyleProps = {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  height: '90px',
-  width: '190px',
+  height: '60px',
+  width: '160px',
   position: 'absolute',
-  animationDuration: '30s',
+  animationDuration: '31s',
   animationTimingFunction: 'linear',
   animationIterationCount: 'infinite',
 }

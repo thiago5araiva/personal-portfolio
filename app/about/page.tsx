@@ -1,30 +1,29 @@
-"use client";
-import Image from "next/image";
+'use client'
+import Image from 'next/image'
 
-import Heading from "@/_components/typography/heading";
-import Paragraph from "@/_components/typography/paragraph";
-import Subtitle from "@/_components/typography/subtitle";
-import { Button } from "@/_components/ui/button";
+import Heading from '@/_components/typography/heading'
+import Paragraph from '@/_components/typography/paragraph'
+import Subtitle from '@/_components/typography/subtitle'
+import { Button } from '@/_components/ui/button'
 
-import photo from "@/_assets/images/me-photo.png";
-import mock1 from "@/_assets/images/mock-1.png";
-import mock2 from "@/_assets/images/mock-2.png";
-import mock3 from "@/_assets/images/mock-3.png";
-import { Download } from "lucide-react";
+import photo from '@/_assets/images/me-photo.png'
+import mock1 from '@/_assets/images/mock-1.png'
+import mock2 from '@/_assets/images/mock-2.png'
+import mock3 from '@/_assets/images/mock-3.png'
+import { Download } from 'lucide-react'
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-} from "@/_components/ui/carousel";
+} from '@/_components/ui/carousel'
 
 export default function AboutPage() {
   return (
-    <section className="about ">
+    <section className="about">
       <div className="mb-6 sm:mb-10">
         <Heading
           type="h2"
-          className="text-2xl text-font-high sm:text-4xl mb-3 sm:mb-4"
-        >
+          className="text-2xl text-font-high sm:text-4xl mb-3 sm:mb-4">
           More Story About Me
         </Heading>
         <Subtitle className="text-base text-font-medium sm:text-xl">
@@ -40,7 +39,7 @@ export default function AboutPage() {
           experiences has been the driving force behind my journey in the design
           world.
         </Paragraph>
-        <Image src={photo} alt={"me"} width={1040} height={480} />
+        <Image src={photo} alt={'me'} width={1040} height={480} />
         <Paragraph className="text-base text-font-medium sm:text-lg">
           My 10-year journey in design has been marked by innovation,
           collaboration, and a dedication to delivering design solutions that
@@ -87,8 +86,7 @@ export default function AboutPage() {
         <div className="flex justify-center">
           <Button
             className="flex items-center gap-3 rounded-full border border-font-high "
-            variant="ghost"
-          >
+            variant="ghost">
             Download CV
             <Download className="w-4 h-4" />
           </Button>
@@ -97,26 +95,25 @@ export default function AboutPage() {
           <div className="mb-3 sm:mb-10">
             <Heading
               type="h6"
-              className="text-xl text-font-high font-semibold sm:text-2xl"
-            >
+              className="text-xl text-font-high font-semibold sm:text-2xl">
               Some of my galleries ...
             </Heading>
           </div>
           <Carousel>
             <CarouselContent>
               <CarouselItem className="flex justify-center sm:basis-1/2 md:basis-1/3 lg:basis-1/3">
-                <Image src={mock1} alt={"me"} width={320} height={480} />
+                <Image src={mock1} alt={'me'} width={320} height={480} />
               </CarouselItem>
               <CarouselItem className="flex justify-center sm:basis-1/2 md:basis-1/3 lg:basis-1/3">
-                <Image src={mock2} alt={"me"} width={320} height={480} />
+                <Image src={mock2} alt={'me'} width={320} height={480} />
               </CarouselItem>
               <CarouselItem className="flex justify-center sm:basis-1/2 md:basis-1/3 lg:basis-1/3">
-                <Image src={mock3} alt={"me"} width={320} height={480} />
+                <Image src={mock3} alt={'me'} width={320} height={480} />
               </CarouselItem>
             </CarouselContent>
           </Carousel>
         </div>
       </div>
     </section>
-  );
+  )
 }

@@ -19,7 +19,7 @@ export default function HomePage() {
   if (isLoading) <Loading />
   const content = getHomeContentResponse?.pageHome
   return (
-    <section className="my-16 sm:my-[121px]">
+    <section>
       <Hero
         title={content?.sectionHero.title}
         description={content?.sectionHero.description}

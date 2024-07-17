@@ -21,7 +21,7 @@ export default function NavigationComponent() {
   const pathname = usePathname()
 
   return (
-    <nav className="py-5 mb-16 sm-20">
+    <nav className="py-5 mb-16 sm:mb-20">
       <div className="flex items-center justify-between">
         <Link href={'/'}>
           <Image

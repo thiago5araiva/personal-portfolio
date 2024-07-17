@@ -15,7 +15,7 @@ export default function Footer() {
   const year = `${new Date().getFullYear()}`
 
   return (
-    <footer className="border-t-2 py-10">
+    <footer className="border-t-2 py-10 mt-20 sm:mt-32">
       <div className="grid gap-10">
         <div className="lg:flex justify-between">
           <div className="mb-10 lg:mb-0">

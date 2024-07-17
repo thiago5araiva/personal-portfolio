@@ -4,7 +4,7 @@ import { SectionServiceType } from './types'
 import Heading from '@/_components/typography/heading'
 import Subtitle from '@/_components/typography/subtitle'
 import Paragraph from '@/_components/typography/paragraph'
-import InfiniteScroll from '@/_components/scroll'
+import InfiniteScroll from '@/_components/infinite-scroll'
 
 type Props = {
   title?: string
