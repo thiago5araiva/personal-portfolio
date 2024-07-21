@@ -1,19 +1,15 @@
-import React from 'react'
-import { SectionServiceType } from './types'
-
-import Heading from '@/_components/typography/heading'
-import Subtitle from '@/_components/typography/subtitle'
-import Paragraph from '@/_components/typography/paragraph'
-import InfiniteScroll from '@/_components/infinite-scroll'
+import React from "react";
+import { SectionServiceType } from "./types";
+import { Carousel, Paragraph, Subtitle, Heading } from "@/_components/";
 
 type Props = {
-  title?: string
-  content?: SectionServiceType['contentCollection']
+  title?: string;
+  content?: SectionServiceType["contentCollection"];
   images?: {
-    frontend?: SectionServiceType['frontStackCollection']
-    backend?: SectionServiceType['backendStackCollection']
-  }
-}
+    frontend?: SectionServiceType["frontStackCollection"];
+    backend?: SectionServiceType["backendStackCollection"];
+  };
+};
 
 export default function HomeService({ title, content, images }: Props) {
   return (
@@ -21,7 +17,8 @@ export default function HomeService({ title, content, images }: Props) {
       <div className="mb-6">
         <Heading
           type="h3"
-          className="text-xl text-font-medium font-semibold sm:text-2xl">
+          className="text-xl text-font-medium font-semibold sm:text-2xl"
+        >
           {title}
         </Heading>
       </div>
@@ -38,9 +35,9 @@ export default function HomeService({ title, content, images }: Props) {
         ))}
       </div>
       <div className="my-20 sm:my-[121px]">
-        <InfiniteScroll data={images?.backend?.items} right />
-        <InfiniteScroll data={images?.frontend?.items} />
+        <Carousel data={images?.backend?.items} right />
+        <Carousel data={images?.frontend?.items} />
       </div>
     </section>
-  )
+  );
 }

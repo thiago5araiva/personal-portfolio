@@ -18,9 +18,9 @@ export default function HomeWork({ title, content = { items: [] } }: Props) {
         </Heading>
       </div>
       <div className="grid gap-10">
-        {content?.items.map(({ _id, title }, index) => {
+        {content?.items.map(({ _id, title, slug }) => {
           return (
-            <Link key={index} href={`/works/${_id}`}>
+            <Link key={_id} href={`/work/${slug}`}>
               <div className="pb-6 sm:pb-10 border-b border-border-primary">
                 <Heading
                   type="h3"

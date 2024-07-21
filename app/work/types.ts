@@ -1,17 +1,43 @@
+export type ContentWorkParagraphType = {
+  nodeType: string;
+  data: {};
+  content: [
+    {
+      nodeType: string;
+      value: string;
+      marks: [];
+      data: {};
+    },
+  ];
+};
+
+export type ContentWorkType = ContentWorkParagraphType;
+
+export type WorkContentCollectionType = {
+  items: [
+    {
+      sys: {
+        id: string;
+      };
+      title: string;
+      type: string;
+      slug: string;
+      content: {
+        json: {
+          nodeType: "document";
+          data: {};
+          content: Array<ContentWorkType>;
+        };
+      };
+    },
+  ];
+};
+
 export type PageWorkType = {
   pageWork: {
-    _id: string
-    title: string
-    subtitle: string
-    contentCollection: {
-      items: Array<{
-        sys: {
-          id: string
-        }
-        title: string
-        createdAt: string
-        type: string
-      }>
-    }
-  }
-}
+    sys: {
+      id: string;
+    };
+    contentCollection: WorkContentCollectionType;
+  };
+};

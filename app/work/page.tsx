@@ -1,24 +1,18 @@
-import Link from 'next/link'
+import getQueryClient from "@/_providers/getQueryClient";
+import Content from "./content";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { getPageWorkContent } from "./actions";
 
-import Heading from '@/_components/typography/heading'
-import Header from './components/header'
+export default async function WorkPage() {
+  const queryClient = getQueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["pageWork"],
+    queryFn: getPageWorkContent,
+  });
 
-export default function WorksPage() {
   return (
-    <section className="work">
-      <Header
-        title="Work"
-        subtitle="Get Inspired by My Portfolio of Fresh and Innovative Design Projects"
-      />
-      <Link href={'/work/orbit'}>
-        <div className="pb-6 sm:pb-10 border-b border-border-primary">
-          <Heading
-            type="h2"
-            className="text-2xl text-font-medium leading-normal sm:text-4xl sm:leading-normal">
-            Orbit
-          </Heading>
-        </div>
-      </Link>
-    </section>
-  )
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <Content />
+    </HydrationBoundary>
+  );
 }

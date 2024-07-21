@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heading, InfiniteScroll, Subtitle } from "@/_components/";
+import { Heading, Carousel } from "@/_components/";
 
 import {
   Dialog,
@@ -78,7 +78,7 @@ export default function HomeHero({ title, description, cta, images }: Props) {
       </div>
       <div>
         <small className="font-bold ">trusted by:</small>
-        <InfiniteScroll data={images} />
+        <Carousel data={images} />
       </div>
     </div>
   );
