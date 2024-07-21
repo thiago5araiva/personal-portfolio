@@ -34,10 +34,10 @@ export type WorkContentCollectionType = {
 };
 
 export type PageWorkType = {
-  pageWork: {
+  pageWork?: {
     sys: {
       id: string;
     };
-    contentCollection: WorkContentCollectionType;
+    contentCollection?: WorkContentCollectionType;
   };
 };

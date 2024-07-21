@@ -12,7 +12,9 @@ export async function getPageWorkContent(): Promise<PageWorkType> {
         }
         contentCollection {
           items {
-            _id
+            sys {
+              id
+            }
             title
             slug
             type
