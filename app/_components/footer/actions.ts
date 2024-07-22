@@ -1,5 +1,5 @@
-import { client, gql } from '@/_services/contentful'
-import { FooterType } from './types'
+import { client, gql } from "@/_services/contentful";
+import { FooterType } from "./types";
 
 export const getGlobalFooter = async (): Promise<FooterType> => {
   const query = gql`
@@ -17,8 +17,8 @@ export const getGlobalFooter = async (): Promise<FooterType> => {
         poweredBy
       }
     }
-  `
+  `;
   return await client.request(query, {
-    componentFooterId: '2VD03T7wdQAj9he83Dufkd',
-  })
-}
+    componentFooterId: "2VD03T7wdQAj9he83Dufkd",
+  });
+};

@@ -1,26 +1,25 @@
 "use client";
-import Link from "next/link";
-import Header from "./header";
+
 import { Heading } from "@/_components";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
+import { useLayoutEffect } from "react";
 import { getPageWorkContent } from "./actions";
-import Loading from "@/_components/loading";
-import { useEffect } from "react";
+import Header from "./header";
 import useStore from "./store";
 
 export default function Content() {
   const { pageWork, setPageWork } = useStore();
-  const { data: getWorkContentResponse, isLoading } = useQuery({
+
+  const getWorkContentResponse = useQuery({
     queryKey: ["pageWork"],
     queryFn: getPageWorkContent,
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (pageWork) return;
-    setPageWork(getWorkContentResponse);
-  }, [getWorkContentResponse]);
-
-  if (isLoading) <Loading />;
+    setPageWork(getWorkContentResponse?.data);
+  }, []);
 
   return (
     <section className="work">

@@ -1,15 +1,15 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-import { PageWorkType } from "./types";
+import { PageHomeType } from "./types";
 
-interface Store extends PageWorkType {}
+interface Store extends PageHomeType {}
 
 interface Actions {
-  setPageWork: (data?: PageWorkType) => void;
+  setPageHome: (data?: PageHomeType) => void;
 }
 
 const initialState: Store = {
-  pageWork: undefined,
+  pageHome: undefined,
 };
 
 const useStore = create<Store & Actions>()(
@@ -17,7 +17,7 @@ const useStore = create<Store & Actions>()(
     persist(
       (set, get) => ({
         ...initialState,
-        setPageWork: (data) => set((s) => ({ ...s, pageWork: data?.pageWork })),
+        setPageHome: (data) => set((s) => ({ ...s, pageHome: data?.pageHome })),
       }),
       { name: "work-collection" },
     ),

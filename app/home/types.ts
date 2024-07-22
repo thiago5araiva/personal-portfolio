@@ -64,7 +64,7 @@ export type SectionServiceType = {
 };
 
 export type PageHomeType = {
-  pageHome: {
+  pageHome?: {
     _id: string;
     sectionHero: SectionHeroType;
     sectionWork: SectionWorkType;

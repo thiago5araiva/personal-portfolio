@@ -1,43 +1,47 @@
-'use client'
-import dynamic from 'next/dynamic'
-import { useQuery } from '@tanstack/react-query'
+"use client";
+import { useQuery } from "@tanstack/react-query";
+import dynamic from "next/dynamic";
 
-import { Loading } from '@/_components/'
+const Hero = dynamic(() => import("./hero"));
+const Services = dynamic(() => import("./services"));
+const Work = dynamic(() => import("./work"));
 
-const Hero = dynamic(() => import('./hero'))
-const Services = dynamic(() => import('./services'))
-const Work = dynamic(() => import('./work'))
-
-import { getPageHomeContent } from './actions'
+import { useLayoutEffect } from "react";
+import { getPageHomeContent } from "./actions";
+import useStore from "./store";
 
 export default function HomePage() {
-  const { data: getHomeContentResponse, isLoading } = useQuery({
-    queryKey: ['pageHome'],
+  const { pageHome, setPageHome } = useStore();
+  const getHomeContentResponse = useQuery({
+    queryKey: ["pageHome"],
     queryFn: getPageHomeContent,
-  })
+  });
 
-  if (isLoading) <Loading />
-  const content = getHomeContentResponse?.pageHome
+  useLayoutEffect(() => {
+    if (pageHome) return;
+    setPageHome(getHomeContentResponse?.data);
+  }, [getHomeContentResponse?.data]);
+
   return (
     <section>
       <Hero
-        title={content?.sectionHero.title}
-        description={content?.sectionHero.description}
-        cta={content?.sectionHero.cta}
-        images={content?.sectionHero.assetsCollection.items}
+        title={pageHome?.sectionHero.title}
+        description={pageHome?.sectionHero.description}
+        cta={pageHome?.sectionHero.cta}
+        images={pageHome?.sectionHero.assetsCollection.items}
       />
       <Work
-        title={content?.sectionWork.title}
-        content={content?.sectionWork.contentCollection}
+        title={pageHome?.sectionWork.title}
+        content={pageHome?.sectionWork.contentCollection}
       />
       <Services
-        title={content?.sectionService?.title}
-        content={content?.sectionService.contentCollection}
+        title={pageHome?.sectionService?.title}
+        content={pageHome?.sectionService.contentCollection}
         images={{
-          backend: content?.sectionService.backendStackCollection,
-          frontend: content?.sectionService.frontStackCollection,
+          backend: pageHome?.sectionService.backendStackCollection,
+          frontend: pageHome?.sectionService.frontStackCollection,
         }}
       />
     </section>
-  )
+  );
 }
