@@ -22,6 +22,8 @@ export type WorkContentCollectionType = {
       title: string;
       type: string;
       slug: string;
+      createdAt: string;
+      stack: Array<string>;
       content: {
         json: {
           nodeType: "document";

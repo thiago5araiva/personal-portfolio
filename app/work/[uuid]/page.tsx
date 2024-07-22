@@ -1,9 +1,9 @@
 import { Heading, Paragraph } from "@/_components";
 import { MoveLeft } from "lucide-react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import Content from "./content";
 
-export default function WorkContent() {
+export default function WorkPage() {
   return (
     <section className="work-${id}">
       <Link
@@ -13,14 +13,7 @@ export default function WorkContent() {
         <MoveLeft className="w-6 h-5" />
         <span>Latest Works</span>
       </Link>
-      <div>
-        <Heading type="h3" className="mb-4 sm:mb-3">
-          Digital Wallet Revolution: Reimagining Payments with PayZen
-        </Heading>
-        <Paragraph>
-          23 September 2023 • Product Designer • Associated with PayZen
-        </Paragraph>
-      </div>
+      <Content />
     </section>
   );
 }

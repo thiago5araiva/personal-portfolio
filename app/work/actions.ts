@@ -19,6 +19,7 @@ export async function getPageWorkContent(): Promise<PageWorkType> {
             slug
             type
             createdAt
+            stack
             content {
               json
             }
