@@ -9,17 +9,12 @@ import Header from "./header";
 import useStore from "./store";
 
 export default function Content() {
-  const { pageWork, setPageWork } = useStore();
-
   const getWorkContentResponse = useQuery({
     queryKey: ["pageWork"],
     queryFn: getPageWorkContent,
   });
 
-  useLayoutEffect(() => {
-    if (pageWork) return;
-    setPageWork(getWorkContentResponse?.data);
-  }, []);
+  const content = getWorkContentResponse?.data?.pageWork;
 
   return (
     <section className="work">
@@ -29,8 +24,8 @@ export default function Content() {
       I've worked for secret. I hope these examples give you a flavour of my work. "
       />
       <div className="grid gap-6">
-        {pageWork?.contentCollection?.items.map(({ sys, slug, title }) => (
-          <Link href={`/work/${slug}`} key={sys.id}>
+        {content?.contentCollection?.items.map(({ sys, slug, title }) => (
+          <Link href={`/work/${sys.id}`} key={sys.id}>
             <div className="pb-6 sm:pb-10 border-b border-border-primary">
               <Heading
                 type="h2"

@@ -6,40 +6,34 @@ const Hero = dynamic(() => import("./hero"));
 const Services = dynamic(() => import("./services"));
 const Work = dynamic(() => import("./work"));
 
-import { useLayoutEffect } from "react";
 import { getPageHomeContent } from "./actions";
-import useStore from "./store";
 
 export default function HomePage() {
-  const { pageHome, setPageHome } = useStore();
   const getHomeContentResponse = useQuery({
     queryKey: ["pageHome"],
     queryFn: getPageHomeContent,
   });
 
-  useLayoutEffect(() => {
-    if (pageHome) return;
-    setPageHome(getHomeContentResponse?.data);
-  }, [getHomeContentResponse?.data]);
+  const content = getHomeContentResponse?.data?.pageHome;
 
   return (
     <section>
       <Hero
-        title={pageHome?.sectionHero.title}
-        description={pageHome?.sectionHero.description}
-        cta={pageHome?.sectionHero.cta}
-        images={pageHome?.sectionHero.assetsCollection.items}
+        title={content?.sectionHero.title}
+        description={content?.sectionHero.description}
+        cta={content?.sectionHero.cta}
+        images={content?.sectionHero.assetsCollection.items}
       />
       <Work
-        title={pageHome?.sectionWork.title}
-        content={pageHome?.sectionWork.contentCollection}
+        title={content?.sectionWork.title}
+        content={content?.sectionWork.contentCollection}
       />
       <Services
-        title={pageHome?.sectionService?.title}
-        content={pageHome?.sectionService.contentCollection}
+        title={content?.sectionService?.title}
+        content={content?.sectionService.contentCollection}
         images={{
-          backend: pageHome?.sectionService.backendStackCollection,
-          frontend: pageHome?.sectionService.frontStackCollection,
+          backend: content?.sectionService.backendStackCollection,
+          frontend: content?.sectionService.frontStackCollection,
         }}
       />
     </section>

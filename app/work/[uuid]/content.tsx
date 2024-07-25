@@ -5,32 +5,30 @@ import { formatDate } from "@/_utils/date";
 import { useParams } from "next/navigation";
 import { ReactNode } from "react";
 import useStore from "../store";
+import { useQuery } from "@tanstack/react-query";
+import { getWorkContentById } from "../actions";
 
-const renderContent = ({ index, type, value }: { [key: string]: string }) => {
-  const props = { key: index, className: "mb-8 sm:mb-10" };
+const renderContent = ({ type, value }: { [key: string]: string }) => {
+  const props = { className: "mb-8 sm:mb-10" };
 
   const components: { [key: string]: ReactNode } = {
     heading1: <Heading {...props}>{value}</Heading>,
-    paragraph: <Paragraph {...props}>{value}</Paragraph>,
+    text: <Paragraph {...props}>{value}</Paragraph>,
   };
   return components[type];
 };
 
 export default function WorkContent() {
   const params = useParams();
-  const { pageWork } = useStore();
-
-  const collection = pageWork?.contentCollection?.items;
-  const data = collection?.find((item) => item.slug === params.uuid);
-  const content = data?.content.json.content.map((item) => {
-    return {
-      type: item?.nodeType,
-      value: item?.content[0]?.value,
-    };
+  const uuid = params.uuid as string;
+  const getWorkContentByIdResponse = useQuery({
+    queryKey: ["pageWorkById", uuid],
+    queryFn: () => getWorkContentById(uuid),
+    enabled: !!params.uuid,
   });
-
+  const data = getWorkContentByIdResponse?.data?.workContent;
   return (
-    <div>
+    <div className="bg-green w-full">
       <Heading type="h3" className="mb-4 sm:mb-3">
         {data?.title}
       </Heading>
@@ -47,10 +45,19 @@ export default function WorkContent() {
           ))}
         </div>
       </div>
-      <div>
-        {content?.map(({ type, value }, index) =>
-          renderContent({ index: `${index}`, type, value }),
-        )}
+      <div className="w-full">
+        {data?.content?.json?.content.map((item, index) => {
+          const { nodeType, value } = item?.content[0];
+          console.log(item?.content[0]);
+          return (
+            <div key={index}>{renderContent({ type: nodeType, value })}</div>
+          );
+        })}
+        <embed
+          src={data?.embed}
+          className="border-2 rounded border-font-low"
+          style={{ width: "100%", height: 300 }}
+        />
       </div>
     </div>
   );

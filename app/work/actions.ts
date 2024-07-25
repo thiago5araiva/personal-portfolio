@@ -1,5 +1,5 @@
 import { client, gql } from "@/_services/contentful";
-import { PageWorkType } from "./types";
+import { PageWorkType, WorkContentType } from "./types";
 
 const pageWorkId = "6dEjU3iWDzaLKMS2hVS3Fq";
 
@@ -20,6 +20,7 @@ export async function getPageWorkContent(): Promise<PageWorkType> {
             type
             createdAt
             stack
+            embed
             content {
               json
             }
@@ -29,4 +30,26 @@ export async function getPageWorkContent(): Promise<PageWorkType> {
     }
   `;
   return await client.request(query, { pageWorkId });
+}
+
+export async function getWorkContentById(id: string): Promise<WorkContentType> {
+  const query = gql`
+    query WorkContent($workContentId: String!) {
+      workContent(id: $workContentId) {
+        sys {
+          id
+        }
+        content {
+          json
+        }
+        title
+        slug
+        type
+        stack
+        createdAt
+        embed
+      }
+    }
+  `;
+  return await client.request(query, { workContentId: id });
 }

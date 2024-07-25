@@ -12,27 +12,28 @@ export type ContentWorkParagraphType = {
 };
 
 export type ContentWorkType = ContentWorkParagraphType;
-
+export type WorkContentType = {
+  workContent: {
+    sys: {
+      id: string;
+    };
+    title: string;
+    type: string;
+    slug: string;
+    createdAt: string;
+    stack: Array<string>;
+    embed: string;
+    content: {
+      json: {
+        nodeType: "document";
+        data: {};
+        content: Array<ContentWorkType>;
+      };
+    };
+  };
+};
 export type WorkContentCollectionType = {
-  items: [
-    {
-      sys: {
-        id: string;
-      };
-      title: string;
-      type: string;
-      slug: string;
-      createdAt: string;
-      stack: Array<string>;
-      content: {
-        json: {
-          nodeType: "document";
-          data: {};
-          content: Array<ContentWorkType>;
-        };
-      };
-    },
-  ];
+  items: Array<WorkContentType>;
 };
 
 export type PageWorkType = {
