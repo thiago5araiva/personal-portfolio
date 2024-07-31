@@ -7,6 +7,7 @@ const Services = dynamic(() => import("./services"));
 const Work = dynamic(() => import("./work"));
 
 import { getPageHomeContent } from "./actions";
+import { Loading } from "@/_components";
 
 export default function HomePage() {
   const getHomeContentResponse = useQuery({
@@ -15,6 +16,8 @@ export default function HomePage() {
   });
 
   const content = getHomeContentResponse?.data?.pageHome;
+
+  if (getHomeContentResponse.isLoading) return <Loading />;
 
   return (
     <section>

@@ -1,5 +1,5 @@
 "use client";
-import { Heading, Paragraph } from "@/_components";
+import { Heading, Loading, Paragraph } from "@/_components";
 import { Badge } from "@/_components/ui/badge";
 import { formatDate } from "@/_utils/date";
 import { useParams } from "next/navigation";
@@ -7,6 +7,8 @@ import { ReactNode } from "react";
 import useStore from "../store";
 import { useQuery } from "@tanstack/react-query";
 import { getWorkContentById } from "../actions";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
+import { Document } from "@contentful/rich-text-types";
 
 const renderContent = ({ type, value }: { [key: string]: string }) => {
   const props = { className: "mb-8 sm:mb-10" };
@@ -27,6 +29,9 @@ export default function WorkContent() {
     enabled: !!params.uuid,
   });
   const data = getWorkContentByIdResponse?.data?.workContent;
+  if (getWorkContentByIdResponse.isLoading) return <Loading />;
+  const richContent = documentToReactComponents(data?.content.json as Document);
+
   return (
     <div className="bg-green w-full">
       <Heading type="h3" className="mb-4 sm:mb-3">
@@ -45,14 +50,8 @@ export default function WorkContent() {
           ))}
         </div>
       </div>
-      <div className="w-full">
-        {data?.content?.json?.content.map((item, index) => {
-          const { nodeType, value } = item?.content[0];
-          console.log(item?.content[0]);
-          return (
-            <div key={index}>{renderContent({ type: nodeType, value })}</div>
-          );
-        })}
+      <div className="w-full grid gap-6 text-base text-font-medium sm:text-lg leading-normal">
+        {documentToReactComponents(data?.content.json as Document)}
         <embed
           src={data?.embed}
           className="border-2 rounded border-font-low"

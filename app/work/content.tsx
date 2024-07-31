@@ -1,6 +1,6 @@
 "use client";
 
-import { Heading } from "@/_components";
+import { Heading, Loading } from "@/_components";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useLayoutEffect } from "react";
@@ -16,6 +16,8 @@ export default function Content() {
 
   const content = getWorkContentResponse?.data?.pageWork;
 
+  if (getWorkContentResponse.isLoading) return <Loading />;
+
   return (
     <section className="work">
       <Header
@@ -24,7 +26,7 @@ export default function Content() {
       I've worked for secret. I hope these examples give you a flavour of my work. "
       />
       <div className="grid gap-6">
-        {content?.contentCollection?.items.map(({ sys, slug, title }) => (
+        {content?.contentCollection?.items.map(({ sys, title }) => (
           <Link href={`/work/${sys.id}`} key={sys.id}>
             <div className="pb-6 sm:pb-10 border-b border-border-primary">
               <Heading

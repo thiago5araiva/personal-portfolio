@@ -27,7 +27,7 @@ export default function HomeHero({ title, description, cta, images }: Props) {
         <div className="mb-4 sm:mb-6 ">
           <Heading
             type="h1"
-            className="text-font-low leading-normal sm:text-6xl sm:leading-normal"
+            className="text-font-low text-5xl leading-normal sm:text-6xl sm:leading-normal "
           >
             {title}
           </Heading>
@@ -35,7 +35,7 @@ export default function HomeHero({ title, description, cta, images }: Props) {
         <div className="mb-10 sm:mb-16">
           <Heading
             type="h2"
-            className="text-font-medium leading-normal sm:text-xl"
+            className="text-font-medium text-lg font-normal leading-loose sm:text-xl sm:leading-normal"
           >
             {description}
           </Heading>

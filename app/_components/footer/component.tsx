@@ -1,18 +1,18 @@
-'use client'
-import { getGlobalFooter } from './actions'
-import { useQuery } from '@tanstack/react-query'
-import Heading from '@/_components/typography/heading'
-import Link from 'next/link'
-import { BatteryCharging } from 'lucide-react'
+"use client";
+import { getGlobalFooter } from "./actions";
+import { useQuery } from "@tanstack/react-query";
+import Heading from "@/_components/typography/heading";
+import Link from "next/link";
+import { BatteryCharging } from "lucide-react";
 
 export default function Footer() {
   const getGlobalFooterResponse = useQuery({
-    queryKey: ['globalFooter'],
+    queryKey: ["globalFooter"],
     queryFn: getGlobalFooter,
-  })
+  });
 
-  const content = getGlobalFooterResponse?.data?.componentFooter
-  const year = `${new Date().getFullYear()}`
+  const content = getGlobalFooterResponse?.data?.componentFooter;
+  const year = `${new Date().getFullYear()}`;
 
   return (
     <footer className="border-t-2 py-10 mt-20 sm:mt-32">
@@ -21,12 +21,14 @@ export default function Footer() {
           <div className="mb-10 lg:mb-0">
             <Heading
               type="h3"
-              className="text-2xl text-center text-font-high lg:text-2xl lg:text-left font-bold mb-4">
+              className="text-lg text-center text-font-high lg:text-2xl lg:text-left font-bold mb-4"
+            >
               {content?.text}
             </Heading>
             <Heading
               type="h3"
-              className="text-xl text-center text-font-low lg:text-2xl lg:text-left font-bold">
+              className="text-lg text-center text-font-low lg:text-2xl lg:text-left font-bold"
+            >
               {content?.email}
             </Heading>
           </div>
@@ -35,7 +37,8 @@ export default function Footer() {
               <Link
                 href={link.url}
                 className="text-base text-font-low"
-                key={index}>
+                key={index}
+              >
                 {link.label}
               </Link>
             ))}
@@ -61,5 +64,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
