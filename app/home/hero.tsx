@@ -77,7 +77,7 @@ export default function HomeHero({ title, description, cta, images }: Props) {
         </div>
       </div>
       <div>
-        <small className="font-bold ">trusted by:</small>
+        <small className="font-bold ">work with:</small>
         <Carousel data={images} />
       </div>
     </div>

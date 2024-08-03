@@ -13,21 +13,32 @@ export type ContentWorkParagraphType = {
 
 export type ContentWorkType = ContentWorkParagraphType;
 export type WorkContentType = {
-  workContent: {
-    sys: {
-      id: string;
+  sys: {
+    id: string;
+  };
+  title: string;
+  type: string;
+  slug: string;
+  createdAt: string;
+  stack: Array<string>;
+  embed: string;
+  content: {
+    json: {
+      nodeType: "document";
+      data: {};
+      content: Array<ContentWorkType>;
     };
-    title: string;
-    type: string;
-    slug: string;
-    createdAt: string;
-    stack: Array<string>;
-    embed: string;
-    content: {
-      json: {
-        nodeType: "document";
-        data: {};
-        content: Array<ContentWorkType>;
+    links: {
+      assets: {
+        block: Array<{
+          url: string;
+          width: number;
+          height: number;
+          title: string;
+          sys: {
+            id: string;
+          };
+        }>;
       };
     };
   };
@@ -43,4 +54,8 @@ export type PageWorkType = {
     };
     contentCollection?: WorkContentCollectionType;
   };
+};
+
+export type PageWordContent = {
+  workContent: WorkContentType;
 };

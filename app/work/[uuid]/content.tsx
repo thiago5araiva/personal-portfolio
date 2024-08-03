@@ -2,23 +2,12 @@
 import { Heading, Loading, Paragraph } from "@/_components";
 import { Badge } from "@/_components/ui/badge";
 import { formatDate } from "@/_utils/date";
-import { useParams } from "next/navigation";
-import { ReactNode } from "react";
-import useStore from "../store";
-import { useQuery } from "@tanstack/react-query";
-import { getWorkContentById } from "../actions";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { Document } from "@contentful/rich-text-types";
-
-const renderContent = ({ type, value }: { [key: string]: string }) => {
-  const props = { className: "mb-8 sm:mb-10" };
-
-  const components: { [key: string]: ReactNode } = {
-    heading1: <Heading {...props}>{value}</Heading>,
-    text: <Paragraph {...props}>{value}</Paragraph>,
-  };
-  return components[type];
-};
+import { BLOCKS, Document } from "@contentful/rich-text-types";
+import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
+import { useParams } from "next/navigation";
+import { getWorkContentById } from "../actions";
 
 export default function WorkContent() {
   const params = useParams();
@@ -29,11 +18,38 @@ export default function WorkContent() {
     enabled: !!params.uuid,
   });
   const data = getWorkContentByIdResponse?.data?.workContent;
+
   if (getWorkContentByIdResponse.isLoading) return <Loading />;
-  const richContent = documentToReactComponents(data?.content.json as Document);
+  const content = data?.content.json as Document;
+  const options = {
+    renderNode: {
+      [BLOCKS.HEADING_2]: (node: any, children: any) => (
+        <Heading type="h2">{children}</Heading>
+      ),
+      [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
+        <Paragraph>{children}</Paragraph>
+      ),
+      [BLOCKS.EMBEDDED_ASSET]: (node: any, children: any) => {
+        const img = data?.content?.links.assets.block.find(
+          (item) => item.sys.id === node.data.target.sys.id,
+        );
+        if (!img) return;
+        return (
+          <Image
+            className="rounded mx-auto"
+            src={img.url}
+            alt={img.title}
+            width={img.width}
+            height={img.height}
+            priority
+          />
+        );
+      },
+    },
+  };
 
   return (
-    <div className="bg-green w-full">
+    <div>
       <Heading type="h3" className="mb-4 sm:mb-3">
         {data?.title}
       </Heading>
@@ -51,7 +67,7 @@ export default function WorkContent() {
         </div>
       </div>
       <div className="w-full grid gap-6 text-base text-font-medium sm:text-lg leading-normal">
-        {documentToReactComponents(data?.content.json as Document)}
+        {documentToReactComponents(data?.content.json as Document, options)}
         <embed
           src={data?.embed}
           className="border-2 rounded border-font-low"
