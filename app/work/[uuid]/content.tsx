@@ -67,11 +67,13 @@ export default function WorkContent() {
       </div>
       <div className="w-full grid gap-6 text-base text-font-medium sm:text-lg leading-normal">
         {documentToReactComponents(content, options)}
-        <embed
-          src={data?.embed}
-          className="border-2 rounded border-font-low"
-          style={{ width: "100%", height: 300 }}
-        />
+        {data?.embed && data?.embed.length > 7 && (
+          <embed
+            src={data?.embed}
+            className="border-2 rounded border-font-low"
+            style={{ width: "100%", height: 300 }}
+          />
+        )}
       </div>
     </div>
   );

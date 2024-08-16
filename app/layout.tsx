@@ -27,11 +27,9 @@ type Props = Readonly<{
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <PosthogProvider>
-        <body className={cn("", overpass.variable, alegreya.variable)}>
-          {children}
-        </body>
-      </PosthogProvider>
+      <body className={cn("", overpass.variable, alegreya.variable)}>
+        {children}
+      </body>
     </html>
   );
 }

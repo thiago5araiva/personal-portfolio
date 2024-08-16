@@ -27,8 +27,8 @@ export default function NavigationComponent() {
           <Image
             src={Logo}
             alt="Logo"
-            width={39}
-            height={39}
+            width={30}
+            height={30}
             draggable={false}
             priority
           />
