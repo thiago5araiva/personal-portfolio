@@ -1,29 +1,29 @@
-'use client'
-import Image from 'next/image'
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { twMerge as merge } from 'tailwind-merge'
-import Logo from '@/_assets/images/portfolio-log.png'
-import Drawer from './Drawer'
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { twMerge as merge } from "tailwind-merge";
+import Logo from "@/_assets/images/portfolio-logo.png";
+import Drawer from "./Drawer";
 
 const routes = [
-  { label: 'Home', value: '/' },
-  { label: 'Work', value: '/work' },
-  { label: 'About', value: '/about' },
-]
+  { label: "Home", value: "/" },
+  { label: "Work", value: "/work" },
+  { label: "About", value: "/about" },
+];
 
 const styles = {
-  base: 'text-xl font-bold hover:text-primary-hover',
-  inactive: 'text-low font-light ',
-}
+  base: "text-xl font-bold hover:text-primary-hover",
+  inactive: "text-low font-light ",
+};
 
 export default function NavigationComponent() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <nav className="py-5 mb-16 sm:mb-20">
       <div className="flex items-center justify-between">
-        <Link href={'/'}>
+        <Link href={"/"}>
           <Image
             src={Logo}
             alt="Logo"
@@ -42,11 +42,12 @@ export default function NavigationComponent() {
                 className={merge(
                   `${styles.base} ${
                     pathname !== route.value && styles.inactive
-                  }`
-                )}>
+                  }`,
+                )}
+              >
                 {route.label}
               </Link>
-            )
+            );
           })}
         </div>
         <div className="lg:hidden">
@@ -54,5 +55,5 @@ export default function NavigationComponent() {
         </div>
       </div>
     </nav>
-  )
+  );
 }

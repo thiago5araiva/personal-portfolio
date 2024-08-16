@@ -18,9 +18,8 @@ export default function WorkContent() {
     enabled: !!params.uuid,
   });
   const data = getWorkContentByIdResponse?.data?.workContent;
-
-  if (getWorkContentByIdResponse.isLoading) return <Loading />;
   const content = data?.content.json as Document;
+  if (getWorkContentByIdResponse.isLoading) return <Loading />;
   const options = {
     renderNode: {
       [BLOCKS.HEADING_2]: (node: any, children: any) => (
@@ -67,7 +66,7 @@ export default function WorkContent() {
         </div>
       </div>
       <div className="w-full grid gap-6 text-base text-font-medium sm:text-lg leading-normal">
-        {documentToReactComponents(data?.content.json as Document, options)}
+        {documentToReactComponents(content, options)}
         <embed
           src={data?.embed}
           className="border-2 rounded border-font-low"
