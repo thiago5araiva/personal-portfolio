@@ -12,6 +12,9 @@ import { getWorkContentById } from "../actions";
 export default function WorkContent() {
   const params = useParams();
   const uuid = params.uuid as string;
+
+  console.log(uuid);
+
   const getWorkContentByIdResponse = useQuery({
     queryKey: ["pageWorkById", uuid],
     queryFn: () => getWorkContentById(uuid),

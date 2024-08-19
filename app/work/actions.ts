@@ -37,8 +37,12 @@ export async function getWorkContentById(id: string): Promise<PageWordContent> {
     query PageAbout($workContentId: String!) {
       workContent(id: $workContentId) {
         title
-        subtitle
-        cta
+        slug
+        stack
+        embed
+        sys {
+          id
+        }
         content {
           json
           links {
