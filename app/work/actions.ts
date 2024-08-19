@@ -34,8 +34,8 @@ export async function getPageWorkContent(): Promise<PageWorkType> {
 
 export async function getWorkContentById(id: string): Promise<PageWordContent> {
   const query = gql`
-    query PageAbout($pageAboutId: String!) {
-      pageAbout(id: $pageAboutId) {
+    query PageAbout($workContentId: String!) {
+      workContent(id: $workContentId) {
         title
         subtitle
         cta
