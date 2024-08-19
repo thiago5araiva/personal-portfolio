@@ -1,4 +1,4 @@
-export type ContentWorkParagraphType = {
+export type ContentWorkType = {
   nodeType: string;
   data: {};
   content: [
@@ -10,8 +10,6 @@ export type ContentWorkParagraphType = {
     },
   ];
 };
-
-export type ContentWorkType = ContentWorkParagraphType;
 export type WorkContentType = {
   sys: {
     id: string;

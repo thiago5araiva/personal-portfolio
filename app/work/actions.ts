@@ -34,20 +34,20 @@ export async function getPageWorkContent(): Promise<PageWorkType> {
 
 export async function getWorkContentById(id: string): Promise<PageWordContent> {
   const query = gql`
-    query WorkContent($workContentId: String!) {
-      workContent(id: $workContentId) {
-        sys {
-          id
-        }
+    query PageAbout($pageAboutId: String!) {
+      pageAbout(id: $pageAboutId) {
+        title
+        subtitle
+        cta
         content {
           json
           links {
             assets {
               block {
+                title
                 url
                 width
                 height
-                title
                 sys {
                   id
                 }
@@ -55,12 +55,6 @@ export async function getWorkContentById(id: string): Promise<PageWordContent> {
             }
           }
         }
-        title
-        slug
-        type
-        stack
-        createdAt
-        embed
       }
     }
   `;
