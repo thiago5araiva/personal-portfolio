@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Alegreya, Overpass } from "next/font/google";
 
 import { cn } from "@/_lib/utils";
-import PosthogProvider from "@/_providers/posthogProvider";
+import { Analytics } from "@vercel/analytics/react";
+
 import "./globals.css";
 
 const overpass = Overpass({
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className={cn("", overpass.variable, alegreya.variable)}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
