@@ -1,20 +1,20 @@
-import { ReactNode } from "react";
-import { Footer, Navigation } from "@/_components/";
+import { ReactNode } from 'react'
+import { Footer, Navigation } from '@/components/'
 
-import QueryProvider from "@/_providers/queryProvider";
+import QueryProvider from '@/providers/queryProvider'
 
 type Props = {
-  children: ReactNode;
-};
+    children: ReactNode
+}
 
 export default async function RootTemplate({ children }: Props) {
-  return (
-    <QueryProvider>
-      <main className="container mx-auto px-6 max-w-screen-lg">
-        <Navigation />
-        {children}
-        <Footer />
-      </main>
-    </QueryProvider>
-  );
+    return (
+        <QueryProvider>
+            <main className="container mx-auto px-6 max-w-screen-lg">
+                <Navigation />
+                {children}
+                <Footer />
+            </main>
+        </QueryProvider>
+    )
 }
