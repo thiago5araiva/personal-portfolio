@@ -64,6 +64,3 @@ export async function getWorkContentById(id: string): Promise<PageWordContent> {
     `
     return await client.request(query, { workContentId: id })
 }
-export async function getNotionContent() {
-    return await notion.get('work/api/notion')
-}

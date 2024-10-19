@@ -1,59 +1,64 @@
 'use client'
-import { Heading, Loading, Paragraph } from '../../components'
-import { Badge } from '@/components/ui/badge'
-import { formatDate } from '@/utils/date'
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, Document } from '@contentful/rich-text-types'
+import { getNotionContent } from '@/work/service'
 import { useQuery } from '@tanstack/react-query'
-import Image from 'next/image'
 import { useParams } from 'next/navigation'
-import { getWorkContentById } from '../actions'
-
+import { INotionBlock, INotionPage } from '../types'
+import { Heading, Loading } from '@/components'
 export default function WorkContent() {
     const params = useParams()
-    const uuid = params.uuid as string
-
-    const getWorkContentByIdResponse = useQuery({
-        queryKey: ['pageWorkById', uuid],
-        queryFn: () => getWorkContentById(uuid),
-        enabled: !!params.uuid,
+    const PAGE_ID = `${params.uuid}`
+    const { data: notionData, ...notionResponse } = useQuery({
+        queryKey: ['notion-posts'],
+        queryFn: () => getNotionContent(`${PAGE_ID}/api`),
     })
-    const data = getWorkContentByIdResponse?.data?.workContent
-    const content = data?.content.json as Document
-    if (getWorkContentByIdResponse.isLoading) return <Loading />
-    const options = {
-        renderNode: {
-            [BLOCKS.HEADING_2]: (node: any, children: any) => (
-                <Heading type="h2">{children}</Heading>
-            ),
-            [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
-                <Paragraph>{children}</Paragraph>
-            ),
-            [BLOCKS.EMBEDDED_ASSET]: (node: any, children: any) => {
-                const img = data?.content?.links.assets.block.find(
-                    (item) => item.sys.id === node.data.target.sys.id
-                )
-                if (!img) return
-                return (
-                    <Image
-                        className="rounded mx-auto"
-                        src={img.url}
-                        alt={img.title}
-                        width={img.width}
-                        height={img.height}
-                        priority
-                    />
-                )
-            },
-        },
-    }
 
+    const page: INotionPage = notionData?.data.page
+    const block: INotionBlock[] = notionData?.data.block.results
+    const title = page?.properties.title.title[0].text.content
+    const subtitle = block?.find((b) => b.type === 'paragraph')
+
+    if (notionResponse.isLoading) return <Loading />
+    console.log(page)
+    // const getWorkContentByIdResponse = useQuery({
+    //     queryKey: ['pageWorkById', uuid],
+    //     queryFn: () => getWorkContentById(uuid),
+    //     enabled: !!params.uuid,
+    // })
+    // const data = getWorkContentByIdResponse?.data?.workContent
+    // const content = data?.content.json as Document
+    // if (getWorkContentByIdResponse.isLoading) return <Loading />
+    // const options = {
+    //     renderNode: {
+    //         [BLOCKS.HEADING_2]: (node: any, children: any) => (
+    //             <Heading type="h2">{children}</Heading>
+    //         ),
+    //         [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
+    //             <Paragraph>{children}</Paragraph>
+    //         ),
+    //         [BLOCKS.EMBEDDED_ASSET]: (node: any, children: any) => {
+    //             const img = data?.content?.links.assets.block.find(
+    //                 (item) => item.sys.id === node.data.target.sys.id
+    //             )
+    //             if (!img) return
+    //             return (
+    //                 <Image
+    //                     className="rounded mx-auto"
+    //                     src={img.url}
+    //                     alt={img.title}
+    //                     width={img.width}
+    //                     height={img.height}
+    //                     priority
+    //                 />
+    //             )
+    //         },
+    //     },
+    // }
     return (
         <div>
             <Heading type="h3" className="mb-4 sm:mb-3">
-                {data?.title}
+                {title}
             </Heading>
-            <div className="flex justify-between mb-8 sm:mb-10">
+            {/* <div className="flex justify-between mb-8 sm:mb-10">
                 <Paragraph>{`${formatDate(data?.createdAt)} • ${data?.type}`}</Paragraph>
                 <div className="flex gap-3 ml-6">
                     {data?.stack.map((item, index) => (
@@ -75,7 +80,7 @@ export default function WorkContent() {
                         style={{ width: '100%', height: 300 }}
                     />
                 )}
-            </div>
+            </div> */}
         </div>
     )
 }

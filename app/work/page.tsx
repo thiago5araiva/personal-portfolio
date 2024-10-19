@@ -1,20 +1,15 @@
 import getQueryClient from '@/providers/getQueryClient'
-import Content from './content'
+import { getNotionContent } from '@/work/service'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
-import { getNotionContent, getPageWorkContent } from './actions'
+import { PAGE_ID } from './constants'
+import Content from './content'
 
 export default async function WorkPage() {
     const queryClient = getQueryClient()
     await queryClient.prefetchQuery({
-        queryKey: ['pageWork'],
-        queryFn: getPageWorkContent,
-    })
-
-    await queryClient.prefetchQuery({
         queryKey: ['notion'],
-        queryFn: getNotionContent,
+        queryFn: () => getNotionContent('work/api'),
     })
-
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
             <Content />
