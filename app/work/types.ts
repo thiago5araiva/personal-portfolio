@@ -44,7 +44,6 @@ export type WorkContentType = {
 export type WorkContentCollectionType = {
     items: Array<WorkContentType>
 }
-
 export type PageWorkType = {
     pageWork?: {
         sys: {
@@ -53,12 +52,53 @@ export type PageWorkType = {
         contentCollection?: WorkContentCollectionType
     }
 }
-
 export type PageWordContent = {
     workContent: WorkContentType
 }
 
 // NOTION
+export type INotionPropertyTitle = {
+    type: 'text'
+    text: {
+        content: 'Living with JSX'
+        link: null
+    }
+    annotations: {
+        bold: false
+        italic: false
+        strikethrough: false
+        underline: false
+        code: false
+        color: 'default'
+    }
+    plain_text: 'Living with JSX'
+    href: null
+}
+export type INotionPageProperties = {
+    'Due date': {
+        id: string
+        type: string
+        date: {
+            start: string
+            end: null
+            time_zone: null
+        }
+    }
+    Status: {
+        id: string
+        type: string
+        status: {
+            id: string
+            name: string
+            color: string
+        }
+    }
+    title: {
+        id: string
+        type: string
+        title: INotionPropertyTitle[]
+    }
+}
 export interface INotionPage {
     object: string
     id: string
@@ -83,53 +123,12 @@ export interface INotionPage {
     }
     archived: boolean
     in_trash: boolean
-    properties: {
-        'Due date': {
-            id: string
-            type: string
-            date: {
-                start: string
-                end: null
-                time_zone: null
-            }
-        }
-        Status: {
-            id: string
-            type: string
-            status: {
-                id: string
-                name: string
-                color: string
-            }
-        }
-        title: {
-            id: string
-            type: string
-            title: [
-                {
-                    type: string
-                    text: {
-                        content: string
-                        link: null
-                    }
-                    annotations: {
-                        bold: boolean
-                        italic: boolean
-                        strikethrough: boolean
-                        underline: boolean
-                        code: boolean
-                        color: string
-                    }
-                    plain_text: string
-                    href: null
-                },
-            ]
-        }
-    }
+    properties: INotionPageProperties
     url: string
     public_url: string
 }
-export interface INotionBlock {
+
+export interface INotionBlockResults {
     object: string
     id: string
     child_page: {
@@ -175,4 +174,14 @@ export interface INotionBlock {
         ]
         color: string
     }
+}
+
+export interface INotionBlock {
+    object: string
+    results: INotionBlockResults[]
+    next_cursor: null
+    has_more: boolean
+    type: string
+    block: {}
+    request_id: string
 }

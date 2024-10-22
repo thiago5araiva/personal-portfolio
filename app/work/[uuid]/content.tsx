@@ -4,21 +4,20 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import { INotionBlock, INotionPage } from '../types'
 import { Heading, Loading } from '@/components'
+import { formatContentBlocks, formatContentPage } from '../utils/formatContent'
 export default function WorkContent() {
     const params = useParams()
     const PAGE_ID = `${params.uuid}`
+
     const { data: notionData, ...notionResponse } = useQuery({
         queryKey: ['notion-posts'],
         queryFn: () => getNotionContent(`${PAGE_ID}/api`),
     })
-
-    const page: INotionPage = notionData?.data.page
-    const block: INotionBlock[] = notionData?.data.block.results
-    const title = page?.properties.title.title[0].text.content
-    const subtitle = block?.find((b) => b.type === 'paragraph')
+    const page = formatContentPage(notionData?.data.page)
+    const block = formatContentBlocks(notionData?.data.block)
 
     if (notionResponse.isLoading) return <Loading />
-    console.log(page)
+
     // const getWorkContentByIdResponse = useQuery({
     //     queryKey: ['pageWorkById', uuid],
     //     queryFn: () => getWorkContentById(uuid),
@@ -56,7 +55,7 @@ export default function WorkContent() {
     return (
         <div>
             <Heading type="h3" className="mb-4 sm:mb-3">
-                {title}
+                {page?.title}
             </Heading>
             {/* <div className="flex justify-between mb-8 sm:mb-10">
                 <Paragraph>{`${formatDate(data?.createdAt)} • ${data?.type}`}</Paragraph>
@@ -81,6 +80,9 @@ export default function WorkContent() {
                     />
                 )}
             </div> */}
+            <div className="w-full grid gap-6 text-base text-font-medium sm:text-lg leading-normal">
+                {}
+            </div>
         </div>
     )
 }

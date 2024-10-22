@@ -21,7 +21,7 @@ export default function Content() {
     const content = block?.filter((b) => b.type === 'child_page')
 
     console.clear()
-    console.log(block)
+    console.log(page)
 
     if (notionResponse.isLoading) return <Loading />
     return (
