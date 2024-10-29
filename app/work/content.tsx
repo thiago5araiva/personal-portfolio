@@ -2,44 +2,38 @@
 
 import { Heading, Loading } from '@/components'
 import { useQuery } from '@tanstack/react-query'
-import Link from 'next/link'
 import React from 'react'
 import Header from './header'
-import { INotionBlock, INotionPage } from './types'
 import { getNotionContent } from '@/work/service'
+import { contentBlock, contentPage } from '@/work/utils/format'
+import Link from 'next/link'
 
 export default function Content() {
-    const { data: notionData, ...notionResponse } = useQuery({
+    const { data: notion, ...response } = useQuery({
         queryKey: ['notion'],
         queryFn: () => getNotionContent('work/api'),
     })
-
-    const page: INotionPage = notionData?.data.page
-    const block: INotionBlock[] = notionData?.data.block.results
-    const title = page?.properties.title.title[0].text.content
-    const subtitle = block?.find((b) => b.type === 'paragraph')
-    const content = block?.filter((b) => b.type === 'child_page')
-
-    console.clear()
-    console.log(page)
-
-    if (notionResponse.isLoading) return <Loading />
+    if (response.isLoading) return <Loading />
+    const page = contentPage(notion?.data.page)
+    const block = contentBlock(notion?.data.block)
+    const subtitle = block.find((item) => item.type === 'heading_2')
+    const child = block.filter((item) => item.type === 'child_page')
     return (
         <section className="work">
             <Header
-                title={title}
-                subtitle={subtitle?.paragraph.rich_text[0].text.content}
+                title={page?.title}
+                subtitle={subtitle?.content.rich_text[0].plain_text}
             />
             <div className="grid gap-6">
-                {content.map(({ id, child_page }) => {
+                {child.map((item) => {
                     return (
-                        <Link href={`/work/${id}`} key={id}>
+                        <Link href={`/work/${item?.id}`} key={item.id}>
                             <div className="pb-6 sm:pb-10 border-b border-border-primary">
                                 <Heading
                                     type="h2"
                                     className="text-2xl text-font-medium leading-normal sm:text-4xl sm:leading-normal"
                                 >
-                                    {child_page.title}
+                                    {item.content.title}
                                 </Heading>
                             </div>
                         </Link>

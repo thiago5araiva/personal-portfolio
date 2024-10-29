@@ -1,10 +1,10 @@
-import { getNotionBlocks, getNotionPage } from '@/work/service'
+import { getNotionBlock, getNotionPage } from '@/work/service'
 
 export async function GET(
     request: Request,
     { params }: { params: { uuid: string } }
 ) {
     const { data: page } = await getNotionPage(params.uuid)
-    const { data: block } = await getNotionBlocks(page.id)
+    const { data: block } = await getNotionBlock(page.id)
     return Response.json({ page, block })
 }

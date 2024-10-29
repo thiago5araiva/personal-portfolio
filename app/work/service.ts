@@ -1,6 +1,6 @@
 import notion, { BASE_URL } from '@/services/notion'
 
-export async function getNotionBlocks(id: string) {
+export async function getNotionBlock(id: string) {
     const url = `${BASE_URL}/blocks/${id}/children?page_size=100`
     return await notion.get(url)
 }

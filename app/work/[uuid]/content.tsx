@@ -2,86 +2,84 @@
 import { getNotionContent } from '@/work/service'
 import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
-import { INotionBlock, INotionPage } from '../types'
-import { Heading, Loading } from '@/components'
-import { formatContentBlocks, formatContentPage } from '../utils/formatContent'
+import Image from 'next/image'
+import { Heading, Loading, Paragraph } from '@/components'
+import {
+    contentBlock,
+    ContentBlockType,
+    contentPage,
+} from '@/work/utils/format'
+import { formatDate } from '@/utils/date'
+import { ReactElement } from 'react'
+import { HeadingType, ParagraphType } from '@/work/types'
+
 export default function WorkContent() {
     const params = useParams()
     const PAGE_ID = `${params.uuid}`
 
-    const { data: notionData, ...notionResponse } = useQuery({
+    const { data: notion, ...notionResponse } = useQuery({
         queryKey: ['notion-posts'],
         queryFn: () => getNotionContent(`${PAGE_ID}/api`),
     })
-    const page = formatContentPage(notionData?.data.page)
-    const block = formatContentBlocks(notionData?.data.block)
 
     if (notionResponse.isLoading) return <Loading />
+    const { title, created_time } = contentPage(notion?.data.page)
+    const block = contentBlock(notion?.data.block)
 
-    // const getWorkContentByIdResponse = useQuery({
-    //     queryKey: ['pageWorkById', uuid],
-    //     queryFn: () => getWorkContentById(uuid),
-    //     enabled: !!params.uuid,
-    // })
-    // const data = getWorkContentByIdResponse?.data?.workContent
-    // const content = data?.content.json as Document
-    // if (getWorkContentByIdResponse.isLoading) return <Loading />
-    // const options = {
-    //     renderNode: {
-    //         [BLOCKS.HEADING_2]: (node: any, children: any) => (
-    //             <Heading type="h2">{children}</Heading>
-    //         ),
-    //         [BLOCKS.PARAGRAPH]: (node: any, children: any) => (
-    //             <Paragraph>{children}</Paragraph>
-    //         ),
-    //         [BLOCKS.EMBEDDED_ASSET]: (node: any, children: any) => {
-    //             const img = data?.content?.links.assets.block.find(
-    //                 (item) => item.sys.id === node.data.target.sys.id
-    //             )
-    //             if (!img) return
-    //             return (
-    //                 <Image
-    //                     className="rounded mx-auto"
-    //                     src={img.url}
-    //                     alt={img.title}
-    //                     width={img.width}
-    //                     height={img.height}
-    //                     priority
-    //                 />
-    //             )
-    //         },
-    //     },
-    // }
+    console.log(block[21])
+
+    const components = (node: ContentBlockType, index: number) => {
+        const { content } = node
+        const { rich_text } = content as HeadingType | ParagraphType
+        const flatText = rich_text?.map((text) => text.plain_text).join(' ')
+
+        const type: { [key: string]: () => ReactElement } = {
+            paragraph: () => <Paragraph key={index}>{flatText}</Paragraph>,
+            heading_2: () => (
+                <Heading type={'h2'} key={index}>
+                    {flatText}
+                </Heading>
+            ),
+            heading_3: () => (
+                <Heading type={'h3'} key={index}>
+                    {flatText}
+                </Heading>
+            ),
+            image: () => {
+                return (
+                    <div className="max-w-2xl mx-auto">
+                        <Image
+                            alt={`img-${title}`}
+                            className="rounded mx-auto"
+                            src={node?.content.file.url}
+                            sizes="100vw"
+                            width={300}
+                            height={300}
+                            style={{
+                                width: 'auto',
+                                height: 'auto',
+                            }}
+                            priority
+                        />
+                    </div>
+                )
+            },
+        }
+        const renderFunction = type[node.type]
+        if (renderFunction) return renderFunction()
+        console.error(`Unknown type: ${node.type}-${index}`)
+        return null
+    }
     return (
         <div>
             <Heading type="h3" className="mb-4 sm:mb-3">
-                {page?.title}
+                {title}
             </Heading>
-            {/* <div className="flex justify-between mb-8 sm:mb-10">
-                <Paragraph>{`${formatDate(data?.createdAt)} • ${data?.type}`}</Paragraph>
-                <div className="flex gap-3 ml-6">
-                    {data?.stack.map((item, index) => (
-                        <Badge
-                            key={index}
-                            className="bg-background-secondary texst-font-low cursor-pointer"
-                        >
-                            {item}
-                        </Badge>
-                    ))}
-                </div>
+            <div className="flex mb-8 sm:mb-10">
+                <Paragraph>{`${formatDate(created_time)}`}</Paragraph>
             </div>
             <div className="w-full grid gap-6 text-base text-font-medium sm:text-lg leading-normal">
-                {documentToReactComponents(content, options)}
-                {data?.embed && data?.embed.length > 7 && (
-                    <embed
-                        src={data?.embed}
-                        className="border-2 rounded border-font-low"
-                        style={{ width: '100%', height: 300 }}
-                    />
-                )}
-            </div> */}
-            <div className="w-full grid gap-6 text-base text-font-medium sm:text-lg leading-normal">
-                {}
+                {block.map((node, index) => components(node, index))}
             </div>
         </div>
     )
