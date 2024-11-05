@@ -11,7 +11,8 @@ import {
 } from '@/work/utils/format'
 import { formatDate } from '@/utils/date'
 import { ReactElement } from 'react'
-import { HeadingType, ParagraphType } from '@/work/types'
+import { HeadingType, ImageType, ParagraphType } from '@/work/types'
+import { ChevronRight } from 'lucide-react'
 
 export default function WorkContent() {
     const params = useParams()
@@ -26,14 +27,21 @@ export default function WorkContent() {
     const { title, created_time } = contentPage(notion?.data.page)
     const block = contentBlock(notion?.data.block)
 
-    console.log(block[21])
-
     const components = (node: ContentBlockType, index: number) => {
         const { content } = node
         const { rich_text } = content as HeadingType | ParagraphType
         const flatText = rich_text?.map((text) => text.plain_text).join(' ')
 
         const type: { [key: string]: () => ReactElement } = {
+            bulleted_list_item: () => {
+                const text = flatText.replace(/\s*\\r\\n/g, ' ')
+                return (
+                    <div className="flex items-center gap-6">
+                        <ChevronRight className="w-4 h-6" />
+                        <Paragraph>{text}</Paragraph>
+                    </div>
+                )
+            },
             paragraph: () => <Paragraph key={index}>{flatText}</Paragraph>,
             heading_2: () => (
                 <Heading type={'h2'} key={index}>
@@ -46,12 +54,13 @@ export default function WorkContent() {
                 </Heading>
             ),
             image: () => {
+                const image = node as unknown as ImageType
                 return (
                     <div className="max-w-2xl mx-auto">
                         <Image
                             alt={`img-${title}`}
                             className="rounded mx-auto"
-                            src={node?.content.file.url}
+                            src={image?.content.file.url}
                             sizes="100vw"
                             width={300}
                             height={300}
@@ -70,6 +79,9 @@ export default function WorkContent() {
         console.error(`Unknown type: ${node.type}-${index}`)
         return null
     }
+    console.clear()
+    console.log(block)
+
     return (
         <div>
             <Heading type="h3" className="mb-4 sm:mb-3">
