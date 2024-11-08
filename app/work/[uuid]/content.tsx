@@ -56,16 +56,16 @@ export default function WorkContent() {
             image: () => {
                 const image = node as unknown as ImageType
                 return (
-                    <div className="max-w-2xl mx-auto">
+                    <div className="w-full">
                         <Image
                             alt={`img-${title}`}
                             className="rounded mx-auto"
                             src={image?.content.file.url}
                             sizes="100vw"
-                            width={300}
+                            width={1024}
                             height={300}
                             style={{
-                                width: 'auto',
+                                width: '100vw',
                                 height: 'auto',
                             }}
                             priority
@@ -79,9 +79,6 @@ export default function WorkContent() {
         console.error(`Unknown type: ${node.type}-${index}`)
         return null
     }
-    console.clear()
-    console.log(block)
-
     return (
         <div>
             <Heading type="h3" className="mb-4 sm:mb-3">

@@ -19,7 +19,8 @@ const styles = {
 
 export default function NavigationComponent() {
     const pathname = usePathname()
-
+    console.clear()
+    console.log(pathname.split('/')[1])
     return (
         <nav className="py-5 mb-16 sm:mb-20">
             <div className="flex items-center justify-between">
@@ -35,13 +36,14 @@ export default function NavigationComponent() {
                 </Link>
                 <div className="hidden lg:flex gap-10">
                     {routes?.map((route, index) => {
+                        const currentPath = `/${pathname.split('/')[1]}`
                         return (
                             <Link
                                 key={index}
                                 href={route.value}
                                 className={merge(
                                     `${styles.base} ${
-                                        pathname !== route.value &&
+                                        currentPath !== route.value &&
                                         styles.inactive
                                     }`
                                 )}
