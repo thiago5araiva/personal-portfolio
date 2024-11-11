@@ -1,3 +1,10 @@
+export type ContentBlockType = {
+    id: string
+    type: string
+    created_time: string
+    content: Content
+}
+
 type DueDate = {
     id: string
     type: string
@@ -99,6 +106,9 @@ export type ImageType = {
     content: {
         caption: []
         type: string
+        external: {
+            url: string
+        }
         file: {
             url: string
             expiry_time: string
@@ -106,14 +116,25 @@ export type ImageType = {
     }
 }
 
-type Child = {
+export type ChildType = {
     id: string
     type: string
     created_time: string
     title: string
 }
 
-export type Content = HeadingType | ParagraphType | Child | ImageType
+export type CodeType = {
+    caption: []
+    rich_text: RichText[]
+    language: string
+}
+
+export type Content =
+    | HeadingType
+    | ParagraphType
+    | ChildType
+    | ImageType
+    | CodeType
 
 export type Results = {
     object: string

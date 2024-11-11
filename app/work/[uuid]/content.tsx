@@ -4,15 +4,33 @@ import { useQuery } from '@tanstack/react-query'
 import { useParams } from 'next/navigation'
 import Image from 'next/image'
 import { Heading, Loading, Paragraph } from '@/components'
-import {
-    contentBlock,
-    ContentBlockType,
-    contentPage,
-} from '@/work/utils/format'
+import { contentBlock, contentPage } from '@/work/utils/format'
 import { formatDate } from '@/utils/date'
 import { ReactElement } from 'react'
-import { HeadingType, ImageType, ParagraphType } from '@/work/types'
+import {
+    CodeType,
+    Content,
+    ContentBlockType,
+    HeadingType,
+    ImageType,
+    ChildType,
+    ParagraphType,
+} from '@/work/types'
 import { ChevronRight } from 'lucide-react'
+import { langs } from '@uiw/codemirror-extensions-langs'
+
+import CodeMirror, { Extension } from '@uiw/react-codemirror'
+import { gruvboxDark } from '@uiw/codemirror-theme-gruvbox-dark'
+import { StreamLanguage } from '@codemirror/language'
+import './styles.css'
+
+interface LanguageExtension {
+    javascript: Extension | null
+    python: Extension | null
+    css: Extension | null
+}
+
+type RichTextType = Exclude<Content, ChildType | ImageType>
 
 export default function WorkContent() {
     const params = useParams()
@@ -29,7 +47,7 @@ export default function WorkContent() {
 
     const components = (node: ContentBlockType, index: number) => {
         const { content } = node
-        const { rich_text } = content as HeadingType | ParagraphType
+        const { rich_text } = content as RichTextType
         const flatText = rich_text?.map((text) => text.plain_text).join(' ')
 
         const type: { [key: string]: () => ReactElement } = {
@@ -60,7 +78,10 @@ export default function WorkContent() {
                         <Image
                             alt={`img-${title}`}
                             className="rounded mx-auto"
-                            src={image?.content.file.url}
+                            src={
+                                image?.content.file?.url ||
+                                image?.content.external?.url
+                            }
                             sizes="100vw"
                             width={1024}
                             height={300}
@@ -71,6 +92,33 @@ export default function WorkContent() {
                             priority
                         />
                     </div>
+                )
+            },
+            code: () => {
+                const { language } = node?.content as CodeType
+                const languages: LanguageExtension = {
+                    javascript: langs.tsx(),
+                    python: langs.python(),
+                    css: langs.css(),
+                }
+                const getLanguageExtension = (language: string) =>
+                    languages[language as keyof LanguageExtension]
+                const currLanguage = getLanguageExtension(language)
+
+                return (
+                    <CodeMirror
+                        value={flatText}
+                        theme={gruvboxDark}
+                        height="auto"
+                        extensions={currLanguage ? [currLanguage] : []}
+                        editable={false}
+                        maxHeight="300px"
+                        maxWidth="1024px"
+                        basicSetup={{
+                            lineNumbers: false,
+                            foldGutter: false,
+                        }}
+                    />
                 )
             },
         }

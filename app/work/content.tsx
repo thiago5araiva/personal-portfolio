@@ -9,21 +9,22 @@ import { contentBlock, contentPage } from '@/work/utils/format'
 import Link from 'next/link'
 import { HeadingType } from '@/work/types'
 
+const title = 'Work'
+const description = `Here are some of my projects and case studies, part of my job is to 
+keep the projects of the companies I've worked for secret. These examples give you a flavor of my work.`
+
 export default function Content() {
     const { data: notion, ...response } = useQuery({
         queryKey: ['notion'],
         queryFn: () => getNotionContent('work/api'),
     })
     if (response.isLoading) return <Loading />
-    const page = contentPage(notion?.data.page)
     const block = contentBlock(notion?.data.block)
-    const subtitle = block.find((item) => item.type === 'heading_2')
     const child = block.filter((item) => item.type === 'child_page')
-    const { rich_text } = subtitle?.content as HeadingType
 
     return (
         <section className="work">
-            <Header title={page?.title} subtitle={rich_text[0].plain_text} />
+            <Header title={title} subtitle={description} />
             <div className="grid gap-6">
                 {child?.map((item) => {
                     const { title } = item.content as { title: string }

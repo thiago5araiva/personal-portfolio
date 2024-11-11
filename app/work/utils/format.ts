@@ -1,4 +1,4 @@
-import { Block, Content, Page } from '../types'
+import { Block, Content, ContentBlockType, Page } from '../types'
 
 export function contentPage(page: Page) {
     return {
@@ -7,13 +7,9 @@ export function contentPage(page: Page) {
         title: page?.properties.title.title[0].plain_text,
     }
 }
-export type ContentBlockType = {
-    id: string
-    type: string
-    created_time: string
-    content: Content
-}
+
 export function contentBlock(block: Block): ContentBlockType[] {
+    if (!block) return []
     const { results } = block
     return results.map((item: any) => ({
         id: item.id,
