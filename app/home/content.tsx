@@ -37,7 +37,7 @@ export default function HomePage() {
                 cta={content?.sectionHero.cta}
                 images={content?.sectionHero.assetsCollection.items}
             />
-            <Work title={'Last Work'} content={child} />
+            <Work title={'Last Work'} content={child.slice(0, 3)} />
             <Services
                 title={content?.sectionService?.title}
                 content={content?.sectionService.contentCollection}
