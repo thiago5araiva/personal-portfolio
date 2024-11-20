@@ -1,18 +1,19 @@
 import getQueryClient from '@/providers/getQueryClient'
-import { getNotionContent } from '@/work/service'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
-import { PAGE_ID } from './constants'
-import Content from './content'
+import { getGlobalFooter } from './actions'
+
+import Footer from './component'
 
 export default async function WorkPage() {
     const queryClient = getQueryClient()
     await queryClient.prefetchQuery({
-        queryKey: ['notion'],
-        queryFn: () => getNotionContent('work/api'),
+        queryKey: ['globalFooter'],
+        queryFn: getGlobalFooter,
     })
+
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>
-            <Content />
+            <Footer />
         </HydrationBoundary>
     )
 }
