@@ -10,6 +10,8 @@ import { getPageHomeContent } from './actions'
 import { Loading } from '../components'
 import { getNotionContent } from '@/work/service'
 import { contentBlock } from '@/work/utils/format'
+import { useEffect } from 'react'
+import supabase from '@/services/supabase'
 
 export default function HomePage() {
     const getHomeContentResponse = useQuery({
@@ -23,7 +25,7 @@ export default function HomePage() {
         queryKey: ['notion'],
         queryFn: () => getNotionContent('work/api'),
     })
-    if (response.isLoading) return <Loading />
+
     const block = contentBlock(notion?.data.block)
     const child = block.filter((item) => item.type === 'child_page')
 
