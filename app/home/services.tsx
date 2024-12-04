@@ -12,6 +12,15 @@ type Props = {
 }
 
 export default function HomeService({ title, content, images }: Props) {
+    const resizeLogo = (data: any) =>
+        data?.map((i: any) => ({
+            ...i,
+            height: 60,
+            width: 60,
+        }))
+    const front = resizeLogo(images?.frontend?.items)
+    const backend = resizeLogo(images?.backend?.items)
+
     return (
         <section className="my-20 sm:my-[140px]">
             <div className="mb-6">
@@ -35,8 +44,8 @@ export default function HomeService({ title, content, images }: Props) {
                 ))}
             </div>
             <div className="my-20 sm:my-[121px]">
-                <Carousel data={images?.backend?.items} right />
-                <Carousel data={images?.frontend?.items} />
+                <Carousel data={backend} right />
+                <Carousel data={front} />
             </div>
         </section>
     )

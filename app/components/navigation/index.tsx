@@ -19,8 +19,6 @@ const styles = {
 
 export default function NavigationComponent() {
     const pathname = usePathname()
-    console.clear()
-    console.log(pathname.split('/')[1])
     return (
         <nav className="py-5 mb-16 sm:mb-20">
             <div className="flex items-center justify-between">

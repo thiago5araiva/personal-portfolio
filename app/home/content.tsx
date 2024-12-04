@@ -17,8 +17,6 @@ export default function HomePage() {
         queryFn: getPageHomeContent,
     })
 
-    const content = getHomeContentResponse?.data?.pageHome
-
     const { data: notion, ...response } = useQuery({
         queryKey: ['notion'],
         queryFn: () => getNotionContent('work/api'),
@@ -28,6 +26,8 @@ export default function HomePage() {
     const child = block.filter((item) => item.type === 'child_page')
 
     if (getHomeContentResponse.isLoading) return <Loading />
+
+    const content = getHomeContentResponse?.data?.pageHome
 
     return (
         <section>
