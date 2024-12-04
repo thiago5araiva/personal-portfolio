@@ -25,8 +25,6 @@ export default function HomePage() {
     const block = contentBlock(notion?.data.block)
     const child = block.filter((item) => item.type === 'child_page')
 
-    if (getHomeContentResponse.isLoading) return <Loading />
-
     const content = getHomeContentResponse?.data?.pageHome
 
     return (
