@@ -9,7 +9,7 @@ const config: CreateAxiosDefaults = {
     },
 }
 const notion = axios.create(config)
-notion.interceptors.request.use(async (config) => {
+notion.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${TOKEN}`
     return config
 })

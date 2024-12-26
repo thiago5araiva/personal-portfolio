@@ -6,10 +6,11 @@ const Hero = dynamic(() => import('./hero'))
 const Services = dynamic(() => import('./services'))
 const Work = dynamic(() => import('./work'))
 
-import { getPageHomeContent } from './actions'
-import { Loading } from '../components'
-import { getNotionContent } from '@/work/service'
+import { notionRepository } from '@/services/notion/notion-repository'
 import { contentBlock } from '@/work/utils/format'
+import { Loading } from '../components'
+import { getPageHomeContent } from './actions'
+import { getNotionContent } from '@/work/service'
 
 export default function HomePage() {
     const getHomeContentResponse = useQuery({
@@ -21,6 +22,7 @@ export default function HomePage() {
         queryKey: ['notion'],
         queryFn: () => getNotionContent('work/api'),
     })
+
     if (response.isLoading) return <Loading />
     const block = contentBlock(notion?.data.block)
     const child = block.filter((item) => item.type === 'child_page')

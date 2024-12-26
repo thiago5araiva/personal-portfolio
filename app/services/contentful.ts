@@ -1,4 +1,5 @@
 import { GraphQLClient, gql } from 'graphql-request'
+import { IGraphQLClient } from '@/services/graphql-client.interface'
 
 const SPACE_ID = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
 const ACCESS_TOKEN = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
@@ -13,3 +14,17 @@ const client = new GraphQLClient(CONTENTFUL_ENDPOINT, {
     }),
 })
 export { client, gql }
+
+export class ContentfulClient {
+    private GraphQLClientInstance: GraphQLClient
+    private query: typeof gql
+    constructor() {
+        this.query = gql
+        this.GraphQLClientInstance = new GraphQLClient(CONTENTFUL_ENDPOINT, {
+            headers: () => ({
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${ACCESS_TOKEN}`,
+            }),
+        })
+    }
+}

@@ -22,9 +22,9 @@ export class NotionHttpClient implements IHttpClient {
         })
     }
     async get(url: string, config: AxiosRequestConfig<any>) {
-        return this.axiosInstance.get(url, config)
+        return await this.axiosInstance.get(url)
     }
     async post(url: string, data?: any, config?: any) {
-        return this.axiosInstance.post(url, data, config)
+        return await this.axiosInstance.post(url, data, config)
     }
 }

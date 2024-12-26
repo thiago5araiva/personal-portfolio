@@ -1,12 +1,9 @@
 import getQueryClient from '@/providers/getQueryClient'
-import { NotionHttpClient } from '@/services/notion/notion-http-client'
-import { NotionRepository } from '@/services/notion/notion-repository'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 import { getPageHomeContent } from './actions'
 import Content from './content'
-
-const notionHttpClient = new NotionHttpClient()
-const notionRepository = new NotionRepository(notionHttpClient)
+import { notionRepository } from '@/services/notion/notion-repository'
+import { getNotionContent } from '@/work/service'
 
 export default async function WorkPage() {
     const queryClient = getQueryClient()
@@ -18,7 +15,7 @@ export default async function WorkPage() {
 
     await queryClient.prefetchQuery({
         queryKey: ['notion'],
-        queryFn: () => notionRepository.getNotionContent('work/api'),
+        queryFn: () => getNotionContent('work/api'),
     })
 
     return (
