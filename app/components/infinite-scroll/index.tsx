@@ -18,7 +18,7 @@ const container: StyleProps = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '60px',
+    height: '90px',
     width: '160px',
     position: 'absolute',
     animationDuration: '31s',
@@ -58,10 +58,11 @@ export default function InfiniteScrollComponent({ data, right }: Props) {
                     >
                         <Image
                             draggable={false}
-                            alt={item.title}
-                            src={item.url}
-                            width={`${item.width}`}
-                            height={`${item.height}`}
+                            alt={item.alt}
+                            src={item.image}
+                            width={160}
+                            height={60}
+                            objectFit="contain"
                             priority
                         />
                     </div>
