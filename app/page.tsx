@@ -1,22 +1,27 @@
-import { Heading, Paragraph } from '@/components/'
+import { Action, Heading, Paragraph } from '@/components/'
+import { MoveRight } from 'lucide-react'
 
-const title = 'Creative Engineer: Building Experiences with Software'
-const description = `As a fullstack developer from Brazil, I'm ready to bring your ideas to life. With a background in advertising and software engineering, I specialize in creating experiences for companies of all sizes, from startups to big tech giants. I'm a problem solver at heart and thrive on tackling complex, challenging projects. Let's transform your vision into reality.`
-
-export const Title = ({ content }: { content: string }) => {
-    return <Heading type="h1">{content}</Heading>
-}
-
-export const Description = ({ content }: { content: string }) => {
-    return <Paragraph size="xl">{content}</Paragraph>
+const header = {
+    title: 'Creative Engineer: Building Experiences with Software',
+    description: `As a fullstack developer from Brazil, I'm ready to bring your ideas to life. With a background in advertising and software engineering, I specialize in creating experiences for companies of all sizes, from startups to big tech giants. I'm a problem solver at heart and thrive on tackling complex, challenging projects. Let's transform your vision into reality.`,
+    action: `Get in touch`,
 }
 
 export default function Page() {
     return (
         <section id="home">
             <div className="home-header grid gap-6">
-                <Title content={title} />
-                <Description content={description} />
+                <Heading type="h1" weight="bold">
+                    {header.title}
+                </Heading>
+                <Paragraph size="xl">{header.description}</Paragraph>
+            </div>
+            <div className="home-cta my-16">
+                <Action
+                    icon={<MoveRight />}
+                    label={header.action}
+                    variant="primary"
+                />
             </div>
         </section>
     )
