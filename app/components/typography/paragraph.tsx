@@ -1,19 +1,22 @@
-import { createElement, ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
+import {
+    color,
+    lineHeight,
+    ParagraphSizes,
+    TypographyProps,
+    TypographyWeight,
+} from '@/components/typography/types'
+import { cn } from '@/lib/utils'
+import { createElement } from 'react'
+export default function ParagraphComponent({
+    children,
+    ...rest
+}: TypographyProps) {
+    const size = !rest.size ? 'text-base' : ParagraphSizes[rest.size]
+    const weight = !rest.weight ? 'font-normal' : TypographyWeight[rest.weight]
+    const className = !rest.className ? '' : rest.className
 
-type Props = {
-  className?: string
-  children: ReactNode
-}
+    const values = [color, className, lineHeight]
+    const classValue = cn(size, weight, ...values)
 
-export default function ParagraphComponent({ className, children }: Props) {
-  return createElement(
-    'p',
-    {
-      className: twMerge(
-        `${className} text-base text-font-medium sm:text-lg leading-normal`
-      ),
-    },
-    children
-  )
+    return createElement('p', { className: classValue }, children)
 }
