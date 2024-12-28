@@ -1,5 +1,5 @@
 import {
-    color,
+    paragraphColor,
     lineHeight,
     ParagraphSizes,
     TypographyProps,
@@ -15,7 +15,7 @@ export default function ParagraphComponent({
     const weight = !rest.weight ? 'font-normal' : TypographyWeight[rest.weight]
     const className = !rest.className ? '' : rest.className
 
-    const values = [color, className, lineHeight]
+    const values = [paragraphColor, className, lineHeight]
     const classValue = cn(size, weight, ...values)
 
     return createElement('p', { className: classValue }, children)

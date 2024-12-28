@@ -5,7 +5,7 @@ import {
     TypographyWeight,
     TypographyProps,
     lineHeight,
-    color,
+    headingColor,
 } from '@/components/typography/types'
 
 export default function HeadingComponent({
@@ -17,7 +17,7 @@ export default function HeadingComponent({
     const weight = !rest.weight ? 'font-normal' : TypographyWeight[rest.weight]
     const className = !rest.className ? '' : rest.className
 
-    const values = [color, className, lineHeight]
+    const values = [headingColor, className, lineHeight]
     const classValue = cn(HeadingType[defaultType], weight, ...values)
 
     return createElement(defaultType, { className: classValue }, children)

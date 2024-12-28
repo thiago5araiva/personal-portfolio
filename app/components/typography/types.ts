@@ -36,4 +36,5 @@ export enum TypographyWeight {
     bold = 'font-bold',
 }
 export const lineHeight = 'leading-normal'
-export const color = 'text-font-medium'
+export const headingColor = 'text-font-high'
+export const paragraphColor = 'text-font-medium'

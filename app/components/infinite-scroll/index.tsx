@@ -10,7 +10,7 @@ const wrapper: StyleProps = {
     alignItems: 'center',
     justifyItems: 'center',
     position: 'relative',
-    height: '90px',
+    height: 90,
     overflow: 'hidden',
 }
 
@@ -18,8 +18,8 @@ const container: StyleProps = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    height: '90px',
-    width: '160px',
+    height: 90,
+    width: 160,
     position: 'absolute',
     animationDuration: '31s',
     animationTimingFunction: 'linear',
@@ -60,10 +60,10 @@ export default function InfiniteScrollComponent({ data, right }: Props) {
                             draggable={false}
                             alt={item.alt}
                             src={item.image}
-                            width={160}
-                            height={60}
-                            objectFit="contain"
-                            priority
+                            width="0"
+                            height="0"
+                            sizes="100vw"
+                            className="w-full h-auto"
                         />
                     </div>
                 )

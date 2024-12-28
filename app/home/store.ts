@@ -1,26 +1,29 @@
-import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
-import { PageHomeType } from "./types";
+import { create } from 'zustand'
+import { devtools, persist } from 'zustand/middleware'
+import { PageHomeType } from './types'
+import { NotionContentType } from '@/api/type'
 
-interface Store extends PageHomeType {}
-
-interface Actions {
-  setPageHome: (data?: PageHomeType) => void;
+interface IInitialState {
+    content: NotionContentType[]
 }
 
-const initialState: Store = {
-  pageHome: undefined,
-};
+interface IActions {
+    setContent: (data: NotionContentType[]) => void
+}
 
-const useStore = create<Store & Actions>()(
-  devtools(
+const initialState: IInitialState = {
+    content: [],
+}
+
+type Store = IInitialState & IActions
+
+const useStore = create<Store>()(
     persist(
-      (set, get) => ({
-        ...initialState,
-        setPageHome: (data) => set((s) => ({ ...s, pageHome: data?.pageHome })),
-      }),
-      { name: "work-collection" },
-    ),
-  ),
-);
-export default useStore;
+        (set, get) => ({
+            ...initialState,
+            setContent: (data) => set((state) => ({ ...state, content: data })),
+        }),
+        { name: 'work-collection' }
+    )
+)
+export default useStore
