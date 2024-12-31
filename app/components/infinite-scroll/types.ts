@@ -1,5 +1,3 @@
-import { AssetsCollection } from '@/home/types'
-
 export type Props = {
     data?: Array<{
         alt: string

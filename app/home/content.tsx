@@ -1,59 +1,22 @@
 'use client'
-// import { useQuery } from '@tanstack/react-query'
-// import dynamic from 'next/dynamic'
 
-// const Services = dynamic(() => import('./services'))
-// const Work = dynamic(() => import('./work'))
-
-// import { notionRepository } from '@/services/notion/notion-repository'
-// import { contentBlock } from '@/work/utils/format'
-// import { Loading } from '../components'
-// import { getPageHomeContent } from './actions'
-// import { getNotionContent } from '@/work/service'
-
-// export default function HomePage() {
-//     const getHomeContentResponse = useQuery({
-//         queryKey: ['pageHome'],
-//         queryFn: getPageHomeContent,
-//     })
-
-//     const { data: notion, ...response } = useQuery({
-//         queryKey: ['notion'],
-//         queryFn: () => getNotionContent('work/api'),
-//     })
-
-//     if (response.isLoading) return <Loading />
-//     const block = contentBlock(notion?.data.block)
-//     const child = block.filter((item) => item.type === 'child_page')
-
-//     const content = getHomeContentResponse?.data?.pageHome
-
-//     return (
-//         <section>
-//             <Work title={'Last Work'} content={child.slice(0, 3)} />
-//             <Services
-//                 title={content?.sectionService?.title}
-//                 content={content?.sectionService.contentCollection}
-//                 images={{
-//                     backend: content?.sectionService.backendStackCollection,
-//                     frontend: content?.sectionService.frontStackCollection,
-//                 }}
-//             />
-//         </section>
-//     )
-// }
-import { getContent } from '@/api/route'
 import { Action, Carousel, Heading, Paragraph } from '@/components/'
 import { useQuery } from '@tanstack/react-query'
 import { MoveRight } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { action, header, work, service } from './mock'
-import useStore from './store'
+import useStore from '@/store'
 import Loading from '@/components/loading'
+import { NotionContentType } from '@/api/type'
 
 export default function Content() {
     const { content, setContent } = useStore()
+
+    const getContent = async (): Promise<{ data: NotionContentType[] }> => {
+        const response = await fetch('api')
+        return response.json()
+    }
 
     const notionResponse = useQuery({
         queryKey: ['content'],
