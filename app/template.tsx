@@ -1,20 +1,42 @@
+import { Navigation } from '@/components/'
 import { ReactNode } from 'react'
-import { Footer, Navigation } from '@/components/'
 
+import Footer from '@/components/footer'
 import QueryProvider from '@/providers/queryProvider'
 
 type Props = {
     children: ReactNode
 }
 
+const footer = {
+    heading: 'Let’s connect and make something great',
+    mail: 'thiagosaraivacsouza@gmail.com',
+    year: new Date().getFullYear(),
+    social: [
+        {
+            label: 'Linkedin',
+            href: 'https://www.linkedin.com/in/thiago5araiva/',
+        },
+        {
+            label: 'Instagram',
+            href: 'https://www.instagram.com/thiago5araiva/',
+        },
+    ],
+}
+
 export default async function RootTemplate({ children }: Props) {
     return (
         <QueryProvider>
-            <main className="container mx-auto px-6 max-w-screen-lg">
+            <div className="container mx-auto px-6 max-w-screen-lg">
                 <Navigation />
-                {children}
-                {/* <Footer /> */}
-            </main>
+                <main>{children}</main>
+                <Footer
+                    heading={footer.heading}
+                    mail={footer.mail}
+                    year={footer.year}
+                    social={footer.social}
+                />
+            </div>
         </QueryProvider>
     )
 }

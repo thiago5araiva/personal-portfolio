@@ -7,7 +7,7 @@ import Subtitle from '@/components/typography/subtitle'
 import { Button } from '@/components/ui/button'
 
 import photo from '@/assets/images/me-photo.png'
-import { Loading } from '../components'
+import { Loading } from '@/components'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, Document } from '@contentful/rich-text-types'
 import { useQuery } from '@tanstack/react-query'
