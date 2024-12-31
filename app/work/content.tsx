@@ -1,6 +1,6 @@
 'use client'
 
-import { Heading, Paragraph } from '@/components'
+import { ContentLink, Heading, Paragraph } from '@/components'
 import useStore from '@/store'
 import Link from 'next/link'
 
@@ -25,20 +25,17 @@ export default function WorkPageContent() {
                 </Paragraph>
             </div>
             <div className="grid gap-6 mb-36">
-                {content?.map((item) => {
-                    return (
-                        <Link href={`/work/${item?.id}`} key={item.id}>
-                            <div className="pb-6 sm:pb-10 border-b border-border-primary">
-                                <Heading
-                                    type="h2"
-                                    className="text-2xl text-font-medium leading-normal sm:text-4xl sm:leading-normal"
-                                >
-                                    {item.child_page.title}
-                                </Heading>
-                            </div>
-                        </Link>
-                    )
-                })}
+                {/* 
+                `/work/${item?.id}`
+                item.child_page.title
+                */}
+                {content?.map(({ id, child_page }, index) => (
+                    <ContentLink
+                        key={index}
+                        href={`/work/${id}`}
+                        label={child_page.title}
+                    />
+                ))}
             </div>
         </section>
     )

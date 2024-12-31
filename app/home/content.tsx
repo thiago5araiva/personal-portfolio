@@ -1,6 +1,6 @@
 'use client'
 
-import { Action, Carousel, Heading, Paragraph } from '@/components/'
+import { CTA, Carousel, ContentLink, Heading, Paragraph } from '@/components/'
 import { useQuery } from '@tanstack/react-query'
 import { MoveRight } from 'lucide-react'
 import Link from 'next/link'
@@ -42,7 +42,7 @@ export default function Content() {
             </div>
             <div className="home-cta mt-16">
                 <Link target="blank" href={action.url}>
-                    <Action
+                    <CTA
                         icon={<MoveRight />}
                         label={action.label}
                         variant="primary"
@@ -56,16 +56,12 @@ export default function Content() {
                 <Heading type="h6" weight="bold">
                     {work.title}
                 </Heading>
-                {content.map((item) => (
-                    <Link href={`/work/${item.id}`} key={item.id}>
-                        <Heading
-                            key={item.id}
-                            type="h4"
-                            className="text-font-medium pb-12 border-b-2"
-                        >
-                            {item.child_page?.title}
-                        </Heading>
-                    </Link>
+                {content?.map(({ id, child_page }, index) => (
+                    <ContentLink
+                        key={index}
+                        href={`/work/${id}`}
+                        label={child_page.title}
+                    />
                 ))}
             </div>
             <div className="home-service my-36 grid gap-12">
