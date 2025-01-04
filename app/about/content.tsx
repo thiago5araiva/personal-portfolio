@@ -1,13 +1,13 @@
 'use client'
 import Image from 'next/image'
 
-import Heading from '@/components/typography/heading'
-import Paragraph from '@/components/typography/paragraph'
-import Subtitle from '@/components/typography/subtitle'
-import { Button } from '@/components/ui/button'
+import Heading from '@/_components/typography/heading'
+import Paragraph from '@/_components/typography/paragraph'
+import Subtitle from '@/_components/typography/subtitle'
+import { Button } from '@/_components/ui/button'
 
 import photo from '@/assets/images/me-photo.png'
-import { Loading } from '@/components'
+import { Loading } from '@/_components'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { BLOCKS, Document } from '@contentful/rich-text-types'
 import { useQuery } from '@tanstack/react-query'

@@ -1,25 +1,25 @@
 'use client'
 
-import { CTA, Carousel, ContentLink, Heading, Paragraph } from '@/components/'
+import { CTA, Carousel, ContentLink, Heading, Paragraph } from '@/_components/'
 import { useQuery } from '@tanstack/react-query'
 import { MoveRight } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { action, header, work, service } from './mock'
-import useStore from '@/store'
-import Loading from '@/components/loading'
-import { NotionContentType } from '@/api/type'
+import useStore from '@/_store'
+import Loading from '@/_components/loading'
+import { NotionContentType } from '@/home/api/type'
 
-export default function Content() {
+export default function HomeContent() {
     const { content, setContent } = useStore()
 
     const getContent = async (): Promise<{ data: NotionContentType[] }> => {
-        const response = await fetch('api')
+        const response = await fetch('home/api')
         return response.json()
     }
 
     const notionResponse = useQuery({
-        queryKey: ['content'],
+        queryKey: ['home'],
         queryFn: () => getContent(),
     })
 
