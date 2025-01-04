@@ -1,11 +1,12 @@
-import { NextResponse } from 'next/server'
-import { NotionHttpClient } from '@/_services/notion/notion-http-client'
-import { NotionRepository } from '@/_services/notion/notion-repository'
+import { notionRepository } from '@/_services/notion/notion-repository'
 
-const notionHttpClient = new NotionHttpClient()
-const notionRepository = new NotionRepository(notionHttpClient)
-
-export async function GET(params: { id: string }) {
-    const { data } = await notionRepository.getNotionContent(params.id)
-    return NextResponse.json({ data: data?.results })
+export async function GET(
+    request: Request,
+    response: Response,
+    params: { id: string }
+) {
+    const { data } = await notionRepository.getNotionContent(
+        `88811f55-c0a2-4994-829f-4ea0205709a5`
+    )
+    return Response.json({ data: data.results })
 }

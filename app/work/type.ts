@@ -30,7 +30,7 @@ export type TParagraph = {
     color: string
 }
 
-export type TBlock = {
+export interface IBlock {
     object: string
     id: string
     parent: TBlockParent

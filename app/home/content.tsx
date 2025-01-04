@@ -8,7 +8,7 @@ import { useEffect } from 'react'
 import { action, header, work, service } from './mock'
 import useStore from '@/_store'
 import Loading from '@/_components/loading'
-import { NotionContentType } from '@/home/api/type'
+import { NotionContentType } from '@/home/type'
 
 export default function HomeContent() {
     const { content, setContent } = useStore()
@@ -18,7 +18,7 @@ export default function HomeContent() {
         return response.json()
     }
 
-    const notionResponse = useQuery({
+    const { data: notionData, ...notionResponse } = useQuery({
         queryKey: ['home'],
         queryFn: () => getContent(),
     })
@@ -26,8 +26,7 @@ export default function HomeContent() {
     useEffect(() => {
         if (!notionResponse.isSuccess) return
         if (content.length > 0) return
-        const { data: notionData } = notionResponse
-        setContent(notionData.data)
+        if (notionData) setContent(notionData.data)
     }, [notionResponse.isSuccess])
 
     if (!notionResponse.isSuccess) return <Loading />

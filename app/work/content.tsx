@@ -12,13 +12,6 @@ keep the projects of the companies I've worked for secret. These examples give y
 
 export default function WorkPageContent() {
     const { content } = useStore()
-    const params = useParams<{ id: string }>()
-
-    const handleSelect = async (id: string) => {
-        const response = await fetch(
-            'work/api/?id=' + '07e21cd8-1338-4721-ad8d-9173484d27fb'
-        )
-    }
     return (
         <section className="work">
             <div className="mb-12 sm:mb-20">
@@ -34,17 +27,11 @@ export default function WorkPageContent() {
             </div>
             <div className="grid gap-6 mb-36">
                 {content?.map(({ id, child_page }, index) => (
-                    <div
+                    <ContentLink
                         key={index}
-                        onClick={() =>
-                            handleSelect('88811f55-c0a2-4994-829f-4ea0205709a5')
-                        }
-                    >
-                        <ContentLink
-                            href={`/work/${id}`}
-                            label={child_page.title}
-                        />
-                    </div>
+                        href={`/work/${id}`}
+                        label={child_page.title}
+                    />
                 ))}
             </div>
         </section>

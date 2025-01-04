@@ -1,6 +1,7 @@
 'use client'
 import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'next/navigation'
+import { IBlock } from '../type'
+import { Loading } from '@/_components'
 // import { getNotionContent } from '@/work/service'
 // import { useQuery } from '@tanstack/react-query'
 // import { useParams } from 'next/navigation'
@@ -143,8 +144,21 @@ import { useParams } from 'next/navigation'
 //         </div>
 //     )
 // }
+type Props = {
+    uuid: string
+}
+export default function WorkItem({ uuid }: Props) {
+    const getContent = async (): Promise<{ data: any }> => {
+        const response = await fetch(`${uuid}/api`)
+        return response.json()
+    }
+    const { data: notionData, ...notionResponse } = useQuery({
+        queryKey: ['work-item'],
+        queryFn: () => getContent(),
+    })
 
-export default function WorkItem() {
+    console.log(notionData?.data)
+    if (notionResponse.isLoading) return <Loading />
     return (
         <div>
             <h1>WorkItem</h1>

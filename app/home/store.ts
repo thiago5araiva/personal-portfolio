@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { NotionContentType } from '@/home/api/type'
+import { NotionContentType } from '@/home/type'
 
 interface IInitialState {
     content: NotionContentType[]
