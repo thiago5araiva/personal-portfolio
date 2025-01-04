@@ -13,7 +13,7 @@ export default async function RootTemplate({ children }: Props) {
             <main className="container mx-auto px-6 max-w-screen-lg">
                 <Navigation />
                 {children}
-                {/* <Footer /> */}
+                <Footer />
             </main>
         </QueryProvider>
     )
