@@ -5,8 +5,6 @@ export async function GET(
     response: Response,
     params: { id: string }
 ) {
-    const { data } = await notionRepository.getNotionContent(
-        `88811f55-c0a2-4994-829f-4ea0205709a5`
-    )
-    return Response.json({ data: data.results })
+    const { data } = await notionRepository.getNotionContent(params?.id)
+    return Response.json({ data })
 }

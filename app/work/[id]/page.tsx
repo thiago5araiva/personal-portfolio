@@ -12,6 +12,7 @@ export default async function WorkPage({ params }: Props) {
         queryKey: ['work-item'],
         queryFn: () => fetch(`${id}/api`),
     })
+
     return (
         <section className="work-item">
             <Link
