@@ -1,5 +1,4 @@
 import { GraphQLClient, gql } from 'graphql-request'
-import { IGraphQLClient } from '@/services/graphql-client.interface'
 
 const SPACE_ID = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID
 const ACCESS_TOKEN = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
