@@ -1,6 +1,6 @@
 import { Heading } from '@/_components'
 import { ReactNode } from 'react'
-import { BlockHeading } from '../types'
+import { BlockHeading } from '@/post/types'
 
 type Props = {
     data: BlockHeading

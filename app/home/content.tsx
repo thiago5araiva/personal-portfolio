@@ -58,7 +58,7 @@ export default function HomeContent() {
                 {content?.map(({ id, child_page }, index) => (
                     <ContentLink
                         key={index}
-                        href={`/work/${id}`}
+                        href={`/post/${id}`}
                         label={child_page.title}
                     />
                 ))}

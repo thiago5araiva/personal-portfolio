@@ -1,17 +1,20 @@
 import { MoveLeft } from 'lucide-react'
 import Link from 'next/link'
-import Content from './content'
+import Content from '../content'
 import getQueryClient from '@/_providers/getQueryClient'
+import { useEffect } from 'react'
 
 type Props = { params: Promise<{ id: string }> }
 
-export default async function WorkPage({ params }: Props) {
+export default async function PostPage({ params }: Props) {
     const id = (await params).id
-    const queryClient = getQueryClient()
-    await queryClient.prefetchQuery({
-        queryKey: ['work-item'],
-        queryFn: () => fetch(`${id}/api`),
-    })
+    console.log(id)
+
+    // const queryClient = getQueryClient()
+    // await queryClient.prefetchQuery({
+    //     queryKey: ['work-item'],
+    //     queryFn: async () => await fetch(`${id}/api/`),
+    // })
 
     return (
         <section className="work-item">

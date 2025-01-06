@@ -1,6 +1,6 @@
 import { Paragraph } from '@/_components'
 import { ReactNode } from 'react'
-import { BlockParagraph, BlockType } from '../types'
+import { BlockParagraph, BlockType } from '@/post/types'
 
 type Props = {
     data: BlockParagraph

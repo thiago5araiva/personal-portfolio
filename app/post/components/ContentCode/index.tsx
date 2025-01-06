@@ -1,9 +1,8 @@
-import CodeMirror, { Extension } from '@uiw/react-codemirror'
-import { gruvboxDark } from '@uiw/codemirror-theme-gruvbox-dark'
+import { BlockCode } from '@/post/types'
 import { langs } from '@uiw/codemirror-extensions-langs'
-import { StreamLanguage } from '@codemirror/language'
+import { gruvboxDark } from '@uiw/codemirror-theme-gruvbox-dark'
+import CodeMirror, { Extension } from '@uiw/react-codemirror'
 import './styles.css'
-import { BlockCode, BlockType } from '../types'
 
 type Props = {
     data: BlockCode

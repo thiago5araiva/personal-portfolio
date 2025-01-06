@@ -1,10 +1,8 @@
-import dynamic from 'next/dynamic'
-
-export const Heading = dynamic(() => import('./typography/heading'))
-export const Subtitle = dynamic(() => import('./typography/subtitle'))
-export const Paragraph = dynamic(() => import('./typography/paragraph'))
-export const Carousel = dynamic(() => import('./infinite-scroll'))
-export const Navigation = dynamic(() => import('./navigation'))
-export const Loading = dynamic(() => import('./loading'))
-export const CTA = dynamic(() => import('./cta'))
-export const ContentLink = dynamic(() => import('./content-link'))
+export { default as Heading } from './typography/heading'
+export { default as Subtitle } from './typography/subtitle'
+export { default as Paragraph } from './typography/paragraph'
+export { default as Carousel } from './infinite-scroll'
+export { default as Navigation } from './navigation'
+export { default as Loading } from './loading'
+export { default as CTA } from './cta'
+export { default as ContentLink } from './content-link'

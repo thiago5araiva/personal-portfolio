@@ -2,9 +2,6 @@
 
 import { ContentLink, Heading, Paragraph } from '@/_components'
 import useStore from '@/_store'
-import { useQuery } from '@tanstack/react-query'
-import { useParams } from 'next/navigation'
-import { useState } from 'react'
 
 const title = 'Work'
 const description = `Here are some of my projects and case studies, part of my job is to 
@@ -29,7 +26,7 @@ export default function WorkPageContent() {
                 {content?.map(({ id, child_page }, index) => (
                     <ContentLink
                         key={index}
-                        href={`/work/${id}`}
+                        href={`/post/${id}`}
                         label={child_page.title}
                     />
                 ))}
