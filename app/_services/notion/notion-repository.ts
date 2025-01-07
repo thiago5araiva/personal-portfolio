@@ -3,13 +3,13 @@ import { NotionHttpClient } from './notion-http-client'
 
 export class NotionRepository {
     constructor(private httpClient: IHttpClient) {}
-    async getNotionPage(id: string) {
+    async getNotionPage(id: string | null) {
         return await this.httpClient.get(`/pages/${id}`)
     }
     async getNotionBlock(id: string) {
         return await this.httpClient.get(`/blocks/${id}/children?page_size=100`)
     }
-    async getNotionContent(pageID: string) {
+    async getNotionContent(pageID: string | null) {
         const { data: page } = await this.getNotionPage(pageID)
         return await this.getNotionBlock(page.id)
     }

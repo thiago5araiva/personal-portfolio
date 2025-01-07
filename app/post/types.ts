@@ -32,7 +32,7 @@ export type BlockHeading = {
 }
 
 export type BlockCode = {
-    caption: []
+    caption: BlockRichText[]
     rich_text: BlockRichText[]
     language: string
 }

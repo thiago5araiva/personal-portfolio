@@ -24,7 +24,7 @@ export default function ContentCode({ data }: Props) {
     const getExtension = (l: string) => languages[l as keyof LanguageExtension]
     const currLanguage = getExtension(language)
     const children = rich_text?.map((val) => val.plain_text).join(' ')
-    const caption = rich_text?.map((val) => val.plain_text).join(' ')
+    const caption = data.caption?.map((val) => val.plain_text).join(' ')
     return (
         <div className="grid gap-3 mb-10">
             <CodeMirror
@@ -41,7 +41,7 @@ export default function ContentCode({ data }: Props) {
                     foldGutter: false,
                 }}
             />
-            <small className="my-3">{caption}</small>
+            {caption ? <small>{caption}</small> : null}
         </div>
     )
 }

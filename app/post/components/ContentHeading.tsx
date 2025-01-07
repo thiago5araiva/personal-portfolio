@@ -11,8 +11,8 @@ export default function ContentHeading({ data }: Props) {
     const children: ReactNode = rich_text?.map((val) => val.plain_text)
     return (
         <Heading
-            type="h3"
-            className="text-font-high text-base mb-4"
+            type="h2"
+            className="text-font-high text-2xl mb-4"
             weight="bold"
         >
             {children}

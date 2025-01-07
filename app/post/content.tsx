@@ -1,27 +1,29 @@
 'use client'
-import { Loading } from '@/_components'
+import { Heading, Loading } from '@/_components'
 import { useQuery } from '@tanstack/react-query'
-import { BlockType } from './types'
 import ContentCode from './components/ContentCode'
 import ContentHeading from './components/ContentHeading'
 import ContentParagraph from './components/ContentParagraph'
-import { useEffect, useState } from 'react'
+import { BlockType } from './types'
+import useStore from '@/_store'
+import { useEffect } from 'react'
 
 type Props = {
-    uuid: string
+    query: { [key: string]: string | string[] | undefined }
 }
-export default function PostPageContent({ uuid }: Props) {
-    // const getContent = async (): Promise<{ data: any }> => {
-    //     const response = await fetch(`${uuid}/api/`)
-    //     return response.json()
-    // }
-    // const { data: notionData, ...notionResponse } = useQuery({
-    //     queryKey: ['work-item'],
-    //     queryFn: async () => await getContent(),
-    // })
+export default function PostPageContent({ query }: Props) {
+    const { content, setContent } = useStore()
+    const getContent = async (): Promise<{ data: any }> => {
+        const response = await fetch(`post/api/?id=${query.id}`)
+        return response.json()
+    }
+    const { data: notionData, ...notionResponse } = useQuery({
+        queryKey: ['post'],
+        queryFn: async () => await getContent(),
+    })
 
     const components = (node: BlockType, type: string) => {
-        const { id, heading_2 } = node
+        const { id } = node
         const values: { [key: string]: JSX.Element } = {
             heading_2: <ContentHeading key={id} data={node?.heading_2} />,
             paragraph: <ContentParagraph key={id} data={node?.paragraph} />,
@@ -30,13 +32,20 @@ export default function PostPageContent({ uuid }: Props) {
         return values[type]
     }
 
-    // if (notionResponse.isLoading) return <Loading />
+    const post = content.find((item) => item.id === query.id)
+    console.clear()
+    console.log(
+        notionData?.data.filter((node: BlockType) => node.type === 'code')
+    )
+    if (notionResponse.isLoading) return <Loading />
     return (
         <div className="grid">
-            <h1>WorkItem</h1>
-            {/* {notionData?.data?.results.map((node: BlockType) =>
+            <Heading type="h1" className="text-4xl text-font-medium mb-4">
+                {post?.child_page.title}
+            </Heading>
+            {notionData?.data?.map((node: BlockType) =>
                 components(node, node.type)
-            )} */}
+            )}
         </div>
     )
 }

@@ -25,8 +25,9 @@ export default function WorkPageContent() {
             <div className="grid gap-6 mb-36">
                 {content?.map(({ id, child_page }, index) => (
                     <ContentLink
+                        id={id}
                         key={index}
-                        href={`/post/${id}`}
+                        href={`post/`}
                         label={child_page.title}
                     />
                 ))}
