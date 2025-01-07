@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import ContentCode from './components/ContentCode'
 import ContentHeading from './components/ContentHeading'
 import ContentParagraph from './components/ContentParagraph'
-import { BlockType } from './types'
+import { BlockType } from '@/post/types'
 import useStore from '@/_store'
 import { useEffect } from 'react'
 

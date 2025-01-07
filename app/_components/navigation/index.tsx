@@ -7,9 +7,9 @@ import Logo from '@/_assets/images/portfolio-logo.png'
 import Drawer from './Drawer'
 
 const routes = [
-    { label: 'Home', value: '/' },
-    { label: 'Work', value: '/work' },
-    { label: 'About', value: '/about' },
+    { label: 'home', value: '/' },
+    { label: 'work', value: '/work' },
+    { label: 'about', value: '/about' },
 ]
 
 const styles = {
