@@ -8,7 +8,7 @@ type Props = {
     children: ReactNode
 }
 
-const footer = {
+const footerMockData = {
     heading: 'Let’s connect and make something great',
     mail: 'thiagosaraivacsouza@gmail.com',
     year: new Date().getFullYear(),
@@ -30,12 +30,7 @@ export default async function RootTemplate({ children }: Props) {
             <div className="container mx-auto px-6 max-w-screen-lg">
                 <Navigation />
                 <main>{children}</main>
-                <Footer
-                    heading={footer.heading}
-                    mail={footer.mail}
-                    year={footer.year}
-                    social={footer.social}
-                />
+                <Footer data={footerMockData} />
             </div>
         </QueryProvider>
     )

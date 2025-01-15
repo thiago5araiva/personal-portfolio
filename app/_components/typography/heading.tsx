@@ -1,24 +1,18 @@
+import { EHeading, TypographyProps } from '@/_components/typography/types'
 import { cn } from '@/_lib/utils'
 import { createElement } from 'react'
-import {
-    HeadingType,
-    TypographyWeight,
-    TypographyProps,
-    lineHeight,
-    headingColor,
-} from '@/_components/typography/types'
 
 export default function HeadingComponent({
-    type,
+    type = 'h1',
     children,
-    ...rest
+    className,
 }: TypographyProps) {
-    const defaultType = !type ? 'h1' : type
-    const weight = !rest.weight ? 'font-normal' : TypographyWeight[rest.weight]
-    const className = !rest.className ? '' : rest.className
-
-    const values = [headingColor, className, lineHeight]
-    const classValue = cn(HeadingType[defaultType], weight, ...values)
-
-    return createElement(defaultType, { className: classValue }, children)
+    const obj = {
+        size: EHeading[type],
+        height: 'leading-normal lg:leading-normal',
+        weight: 'font-bold',
+    }
+    const styles = cn(Object.values(obj).join(' '), className)
+    const classValue = { className: styles }
+    return createElement(type, classValue, children)
 }

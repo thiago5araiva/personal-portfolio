@@ -83,3 +83,10 @@ const service = {
 }
 
 export { header, action, work, service }
+
+export const content = {
+    header,
+    action,
+    work,
+    service,
+}

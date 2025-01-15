@@ -17,14 +17,11 @@ export default function ContentLinkComponent({
         <Link href={{ pathname: href, query: { id } }}>
             <div
                 className={cn(
-                    'pb-6 sm:pb-10 border-b border-border-primary',
+                    'pb-6 lg:pb-10 border-b border-border-primary',
                     className
                 )}
             >
-                <Heading
-                    type="h2"
-                    className="text-2xl text-font-medium leading-normal sm:text-4xl sm:leading-normal"
-                >
+                <Heading type="h3" className="text-font-medium">
                     {label}
                 </Heading>
             </div>

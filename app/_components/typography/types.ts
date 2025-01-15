@@ -1,21 +1,20 @@
 import { ReactNode } from 'react'
 
 /*-- heading --*/
-export enum HeadingType {
-    h1 = 'text-7xl',
+export enum EHeading {
+    h1 = 'text-5xl lg:text-7xl',
     h2 = 'text-6xl',
-    h3 = 'text-5xl',
+    h3 = 'text-3xl lg:text-5xl',
     h4 = 'text-4xl',
     h5 = 'text-3xl',
-    h6 = 'text-2xl',
-    p = 'text-base',
+    h6 = 'text-2xl lg:text-3xl',
 }
 
 /*-- paragraph --*/
-export enum ParagraphSizes {
+export enum EParagraphSize {
     xs = 'text-xs',
     sm = 'text-sm',
-    base = 'text-base',
+    base = 'text-base lg:text-xl',
     lg = 'text-lg',
     xl = 'text-xl',
     '2xl' = 'text-2xl',
@@ -23,8 +22,8 @@ export enum ParagraphSizes {
 
 /*-- common --*/
 export type TypographyProps = {
-    size?: keyof typeof ParagraphSizes
-    type?: keyof typeof HeadingType
+    size?: keyof typeof EParagraphSize
+    type?: keyof typeof EHeading
     weight?: keyof typeof TypographyWeight
     className?: string
     children: ReactNode
