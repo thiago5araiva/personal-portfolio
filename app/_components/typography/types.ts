@@ -5,7 +5,7 @@ export enum EHeading {
     h1 = 'text-5xl lg:text-7xl',
     h2 = 'text-2xl text-4xl',
     h3 = 'text-xl lg:text-2xl',
-    h4 = 'text-4xl',
+    h4 = 'text-lg lg:text-xl',
     h5 = 'text-3xl',
     h6 = 'text-2xl lg:text-3xl',
 }
