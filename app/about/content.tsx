@@ -18,23 +18,15 @@ export default function AboutPage() {
                     height={10}
                     className="rounded-full"
                 />
-                <div>
-                    <Heading
-                        type="h2"
-                        className="text-font-high sm:text-4xl mb-3 sm:mb-4"
-                    >
-                        {about?.title}
-                    </Heading>
-                    <Heading
-                        type="h3"
-                        className="text-base text-font-medium sm:text-xl"
-                    >
+                <div className="grid gap-3 lg:gap-4">
+                    <Heading type="h2">{about?.title}</Heading>
+                    <Paragraph size="xl" className="text-font-medium">
                         {about?.subtitle}
-                    </Heading>
+                    </Paragraph>
                 </div>
             </div>
-            <div className="grid gap-6 sm:gap-10">
-                <Paragraph className="text-2xl" size="2xl" weight="medium">
+            <div className="grid gap-6 lg:gap-10 ">
+                <Paragraph size="2xl">
                     Hi, I am a experient software engineer with a decade working
                     with application development, management, and maintenance,
                     based in Brazil. My passion for creating and developing is
@@ -42,44 +34,38 @@ export default function AboutPage() {
                     applications for. You can be sure that I will put all my
                     knowledge and passion into every project.
                 </Paragraph>
-                <Heading
-                    type="h3"
-                    className="text-2xl"
-                    size="2xl"
-                    weight="medium"
-                >
-                    A Soldier Discipline
-                </Heading>
-                <Paragraph size="lg">
-                    Practicing martial arts, especially Krav Maga which was
-                    developed and perfected by the Israeli army, offers benefits
-                    that align with military principles and are highly
-                    applicable in technology. Readiness is similar to a military
-                    mentality, which is crucial for risk management and asset
-                    protection. discipline and focus, essential qualities for
-                    maintaining productivity and efficiency in projects. mental
-                    resilience, which allows you to overcome obstacles and deal
-                    with inherent stress.
-                </Paragraph>
-                <Heading
-                    type="h3"
-                    className="text-2xl"
-                    size="2xl"
-                    weight="medium"
-                >
-                    Offroad Enthusiast
-                </Heading>
-                <Paragraph size="lg">
-                    Practicing martial arts, especially Krav Maga which was
-                    developed and perfected by the Israeli army, offers benefits
-                    that align with military principles and are highly
-                    applicable in technology. Readiness is similar to a military
-                    mentality, which is crucial for risk management and asset
-                    protection. discipline and focus, essential qualities for
-                    maintaining productivity and efficiency in projects. mental
-                    resilience, which allows you to overcome obstacles and deal
-                    with inherent stress.
-                </Paragraph>
+                <div className="grid gap-3 lg:gap-4">
+                    <Heading type="h3" size="xl">
+                        A Soldier Discipline
+                    </Heading>
+                    <Paragraph size="lg">
+                        Practicing martial arts, especially Krav Maga which was
+                        developed and perfected by the Israeli army, offers
+                        benefits that align with military principles and are
+                        highly applicable in technology. Readiness is similar to
+                        a military mentality, which is crucial for risk
+                        management and asset protection. discipline and focus,
+                        essential qualities for maintaining productivity and
+                        efficiency in projects. mental resilience, which allows
+                        you to overcome obstacles and deal with inherent stress.
+                    </Paragraph>
+                </div>
+                <div className="grid gap-3 lg:gap-4">
+                    <Heading type="h3" size="xl">
+                        Offroad Enthusiast
+                    </Heading>
+                    <Paragraph size="lg">
+                        Practicing martial arts, especially Krav Maga which was
+                        developed and perfected by the Israeli army, offers
+                        benefits that align with military principles and are
+                        highly applicable in technology. Readiness is similar to
+                        a military mentality, which is crucial for risk
+                        management and asset protection. discipline and focus,
+                        essential qualities for maintaining productivity and
+                        efficiency in projects. mental resilience, which allows
+                        you to overcome obstacles and deal with inherent stress.
+                    </Paragraph>
+                </div>
             </div>
         </section>
     )

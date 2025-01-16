@@ -7,20 +7,10 @@ type Props = {
     href: string
     label: string
 }
-export default function ContentLinkComponent({
-    id,
-    label,
-    href,
-    className,
-}: Props) {
+export default function ContentLinkComponent({ id, label, href }: Props) {
     return (
         <Link href={{ pathname: href, query: { id } }}>
-            <div
-                className={cn(
-                    'pb-6 lg:pb-10 border-b border-border-primary',
-                    className
-                )}
-            >
+            <div className={'pb-6 lg:pb-10 border-b border-border-primary'}>
                 <Heading type="h3" className="text-font-medium">
                     {label}
                 </Heading>

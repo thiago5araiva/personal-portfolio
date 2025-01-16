@@ -16,18 +16,20 @@ type Props = {
 export default function FooterComponent({ data }: Props) {
     return (
         <footer className="pt-10 mt-16 border-t border-border-primary">
-            <div className="grid lg:grid-cols-2">
-                <div>
-                    <Heading type="h6">{data.heading}</Heading>
-                    <Paragraph className="text-2xl text-font-low">
+            <div className="grid justify-center gap-10 lg:grid-cols-3">
+                <div className="grid gap-2 lg:col-span-2">
+                    <Heading type="h6" className="text-center lg:text-left">
+                        {data.heading}
+                    </Heading>
+                    <Paragraph className="text-center lg:text-left text-2xl text-font-low">
                         {data.mail}
                     </Paragraph>
                 </div>
-                <div className="justify-self-end">
-                    <ul>
+                <div className=" lg:justify-self-end">
+                    <ul className="grid gap-4 items-center justify-center">
                         {data.social.map((item, index) => (
                             <Link href={item.href} key={index} target="_blank">
-                                <li>{item.label}</li>
+                                <li className="text-center">{item.label}</li>
                             </Link>
                         ))}
                     </ul>

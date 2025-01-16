@@ -3,8 +3,8 @@ import { ReactNode } from 'react'
 /*-- heading --*/
 export enum EHeading {
     h1 = 'text-5xl lg:text-7xl',
-    h2 = 'text-6xl',
-    h3 = 'text-3xl lg:text-5xl',
+    h2 = 'text-2xl text-4xl',
+    h3 = 'text-xl lg:text-2xl',
     h4 = 'text-4xl',
     h5 = 'text-3xl',
     h6 = 'text-2xl lg:text-3xl',
@@ -15,8 +15,8 @@ export enum EParagraphSize {
     xs = 'text-xs',
     sm = 'text-sm',
     base = 'text-base lg:text-xl',
-    lg = 'text-lg',
-    xl = 'text-xl',
+    lg = 'text-base lg:text-lg',
+    xl = 'text-base lg:text-xl',
     '2xl' = 'text-2xl',
 }
 

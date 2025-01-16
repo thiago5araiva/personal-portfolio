@@ -71,7 +71,7 @@ export default function HomeContent() {
                         <div className="grid gap-4" key={index}>
                             <Heading
                                 type="h6"
-                                className="text-lg uppercase font-light"
+                                className="text-base lg:text-lg uppercase font-light"
                             >
                                 {item.title}
                             </Heading>
