@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Alegreya, Overpass } from 'next/font/google'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/_lib/utils'
 import { Analytics } from '@vercel/analytics/react'
 
 import './globals.css'

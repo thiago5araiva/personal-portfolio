@@ -1,4 +1,4 @@
-import { client, gql } from '@/services/contentful'
+import { client, gql } from '@/_services/contentful'
 import { AboutPageType } from './types'
 
 export async function getPageAboutContent(): Promise<AboutPageType> {
