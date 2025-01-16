@@ -64,12 +64,15 @@ export default function HomeContent() {
                     />
                 ))}
             </div>
-            <div className="home-service my-36 grid gap-12">
+            <div className="home-service my-36 grid gap-6 lg:gap-12">
                 <Heading type="h6">{service.title}</Heading>
-                <div className="grid grid-cols-2 gap-28">
+                <div className="grid gap-6 lg:grid-cols-2 lg:gap-28">
                     {service.items.map((item, index) => (
                         <div className="grid gap-4" key={index}>
-                            <Heading type="h6" className="text-lg uppercase">
+                            <Heading
+                                type="h6"
+                                className="text-lg uppercase font-light"
+                            >
                                 {item.title}
                             </Heading>
                             <Paragraph size="lg">{item.description}</Paragraph>
