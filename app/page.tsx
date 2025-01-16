@@ -6,7 +6,7 @@ export default async function Page() {
     const queryClient = getQueryClient()
     await queryClient.prefetchQuery({
         queryKey: ['home'],
-        queryFn: () => fetch('home/api'),
+        queryFn: () => fetch('/api'),
     })
     return (
         <HydrationBoundary state={dehydrate(queryClient)}>

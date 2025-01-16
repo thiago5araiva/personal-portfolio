@@ -23,3 +23,35 @@ export type NotionContentType = {
         title: string
     }
 }
+
+export type ContentHome = {
+    components: {
+        hero: {
+            title: string
+            description: string
+            action: {
+                label: string
+                url: string
+            }
+        }
+        infiniteScroll: Array<{
+            image: string
+            alt: string
+        }>
+        section: [
+            {
+                id: string
+                title: string
+                content: NotionContentType[]
+            },
+            {
+                id: string
+                title: string
+                content: Array<{
+                    title: string
+                    description: string
+                }>
+            },
+        ]
+    }
+}

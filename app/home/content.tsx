@@ -6,28 +6,27 @@ import { MoveRight } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { action, header, work, service } from './mock'
-import useStore from '@/_store'
+import useStore from './store'
 import Loading from '@/_components/loading'
-import { NotionContentType } from '@/home/type'
+import { ContentHome, NotionContentType } from '@/home/type'
 
 export default function HomeContent() {
     const { content, setContent } = useStore()
-
-    const getContent = async (): Promise<{ data: NotionContentType[] }> => {
-        const response = await fetch('home/api')
-        return response.json()
-    }
-
     const { data: notionData, ...notionResponse } = useQuery({
         queryKey: ['home'],
-        queryFn: () => getContent(),
+        queryFn: async (): Promise<{ data: ContentHome }> =>
+            await fetch('/api').then((res) => res.json()),
     })
 
     useEffect(() => {
         if (!notionResponse.isSuccess) return
-        if (content.length > 0) return
         if (notionData) setContent(notionData.data)
     }, [notionResponse.isSuccess])
+
+    const hero = content?.components.hero
+    const infiniteScroll = content?.components.infiniteScroll
+    const work = content?.components.section[0]
+    const service = content?.components.section[1]
 
     if (!notionResponse.isSuccess) return <Loading />
 
@@ -35,27 +34,27 @@ export default function HomeContent() {
         <section id="home">
             <div className="home-header grid gap-6">
                 <Heading type="h1" weight="bold">
-                    {header.title}
+                    {hero?.title}
                 </Heading>
-                <Paragraph size="xl">{header.description}</Paragraph>
+                <Paragraph size="xl">{hero?.description}</Paragraph>
             </div>
             <div className="home-cta mt-16">
-                <Link target="blank" href={action.url}>
+                <Link target="blank" href={hero?.action.url || ''}>
                     <CTA
                         icon={<MoveRight />}
-                        label={action.label}
+                        label={hero?.action.label || ''}
                         variant="primary"
                     />
                 </Link>
             </div>
             <div className="home-companies mt-36">
-                <Carousel data={header.logos} />
+                <Carousel data={infiniteScroll} />
             </div>
             <div className="home-work mt-12 grid gap-12">
                 <Heading type="h6" weight="bold">
-                    {work.title}
+                    {work?.title}
                 </Heading>
-                {content?.map(({ id, child_page }, index) => (
+                {work?.content?.map(({ id, child_page }, index) => (
                     <ContentLink
                         id={id}
                         key={index}
@@ -65,9 +64,9 @@ export default function HomeContent() {
                 ))}
             </div>
             <div className="home-service my-36 grid gap-6 lg:gap-12">
-                <Heading type="h6">{service.title}</Heading>
+                <Heading type="h6">{service?.title}</Heading>
                 <div className="grid gap-6 lg:grid-cols-2 lg:gap-28">
-                    {service.items.map((item, index) => (
+                    {service?.content.map((item, index) => (
                         <div className="grid gap-4" key={index}>
                             <Heading
                                 type="h6"

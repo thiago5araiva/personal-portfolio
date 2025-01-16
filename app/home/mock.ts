@@ -19,7 +19,6 @@ const action = {
 const header = {
     title: 'Creative Engineer: Building Experiences with Software',
     description: `As a fullstack developer from Brazil, I'm ready to bring your ideas to life. With a background in advertising and software engineering, I specialize in creating experiences for companies of all sizes, from startups to big tech giants. I'm a problem solver at heart and thrive on tackling complex, challenging projects. Let's transform your vision into reality.`,
-
     logos: [
         {
             image: accenture,

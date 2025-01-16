@@ -1,17 +1,17 @@
 import { create } from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { NotionContentType } from '@/home/type'
+import { ContentHome, NotionContentType } from '@/home/type'
 
 interface IInitialState {
-    content: NotionContentType[]
+    content?: ContentHome
 }
 
 interface IActions {
-    setContent: (data: NotionContentType[]) => void
+    setContent: (data: ContentHome) => void
 }
 
 const initialState: IInitialState = {
-    content: [],
+    content: undefined,
 }
 
 type Store = IInitialState & IActions
