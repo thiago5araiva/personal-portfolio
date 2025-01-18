@@ -6,7 +6,7 @@ import { MoveRight } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { action, header, work, service } from './mock'
-import useStore from './store'
+import useStore from '@/_store'
 import Loading from '@/_components/loading'
 import { ContentHome, NotionContentType } from '@/home/type'
 

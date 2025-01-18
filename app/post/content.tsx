@@ -13,6 +13,7 @@ type Props = {
 }
 export default function PostPageContent({ query }: Props) {
     const { content, setContent } = useStore()
+    const work = content?.components.section[0]
     const getContent = async (): Promise<{ data: any }> => {
         const response = await fetch(`post/api/?id=${query.id}`)
         return response.json()
@@ -31,12 +32,7 @@ export default function PostPageContent({ query }: Props) {
         }
         return values[type]
     }
-
-    const post = content.find((item) => item.id === query.id)
-    console.clear()
-    console.log(
-        notionData?.data.filter((node: BlockType) => node.type === 'code')
-    )
+    const post = work?.content.find((item) => item.id === query.id)
     if (notionResponse.isLoading) return <Loading />
     return (
         <div className="grid">
