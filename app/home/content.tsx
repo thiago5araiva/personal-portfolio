@@ -1,13 +1,13 @@
 'use client'
 
-import { CTA, Carousel, ContentLink, Heading, Paragraph } from '@/_components/'
+import { CTA, Carousel, ContentLink, Heading, Paragraph } from '@/components/'
 import { useQuery } from '@tanstack/react-query'
 import { MoveRight } from 'lucide-react'
 import Link from 'next/link'
 import { useEffect } from 'react'
 import { action, header, work, service } from './mock'
-import useStore from '@/_store'
-import Loading from '@/_components/loading'
+import useStore from '@/store'
+import Loading from '@/components/loading'
 import { ContentHome, NotionContentType } from '@/home/type'
 
 export default function HomeContent() {
@@ -59,7 +59,7 @@ export default function HomeContent() {
                         id={id}
                         key={index}
                         href={`post`}
-                        label={child_page.title}
+                        label={child_page?.title}
                     />
                 ))}
             </div>

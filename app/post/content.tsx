@@ -1,11 +1,11 @@
 'use client'
-import { Heading, Loading } from '@/_components'
+import { Heading, Loading } from '@/components'
 import { useQuery } from '@tanstack/react-query'
 import ContentCode from './components/ContentCode'
 import ContentHeading from './components/ContentHeading'
 import ContentParagraph from './components/ContentParagraph'
 import { BlockType } from '@/post/types'
-import useStore from '@/_store'
+import useStore from '@/store'
 import { useEffect } from 'react'
 
 type Props = {

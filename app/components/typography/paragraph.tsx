@@ -4,8 +4,8 @@ import {
     EParagraphSize,
     TypographyProps,
     TypographyWeight,
-} from '@/_components/typography/types'
-import { cn } from '@/_lib/utils'
+} from '@/components/typography/types'
+import { cn } from '@/lib/utils'
 import { createElement } from 'react'
 
 export default function ParagraphComponent({

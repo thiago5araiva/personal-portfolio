@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { twMerge as merge } from 'tailwind-merge'
-import Logo from '@/_assets/images/portfolio-logo.png'
+import Logo from '@/assets/images/portfolio-logo.png'
 import Drawer from './Drawer'
 
 const routes = [

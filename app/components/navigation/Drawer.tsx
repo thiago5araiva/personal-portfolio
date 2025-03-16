@@ -11,10 +11,10 @@ import {
     DrawerHeader,
     DrawerTitle,
     DrawerTrigger,
-} from '@/_components/ui/drawer'
-import Paragraph from '@/_components/typography/paragraph'
-import Heading from '@/_components/typography/heading'
-import { Button } from '@/_components/ui/button'
+} from '@/components/ui/drawer'
+import Paragraph from '@/components/typography/paragraph'
+import Heading from '@/components/typography/heading'
+import { Button } from '@/components/ui/button'
 
 import { AlignJustify } from 'lucide-react'
 

@@ -9,7 +9,7 @@ import {
     pinterest,
     porto,
     squarespace,
-} from '@/_assets/images/companies'
+} from '@/assets/images/companies'
 
 const action = {
     label: 'Get in touch',

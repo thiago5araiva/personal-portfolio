@@ -1,7 +1,7 @@
 'use client'
 
-import { ContentLink, Heading, Paragraph } from '@/_components'
-import useStore from '@/_store'
+import { ContentLink, Heading, Paragraph } from '@/components'
+import useStore from '@/store'
 
 const title = 'Work'
 const description = `Here are some of my projects and case studies, part of my job is to 

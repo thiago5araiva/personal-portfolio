@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { Heading } from '@/_components'
-import { cn } from '@/_lib/utils'
+import { Heading } from '@/components'
+import { cn } from '@/lib/utils'
 type Props = {
     id?: string
     className?: string

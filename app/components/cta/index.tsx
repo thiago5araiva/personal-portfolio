@@ -1,5 +1,5 @@
-import { cn } from '@/_lib/utils'
-import { Button } from '@/_components/ui/button'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import { base, ButtonType, CTAProps } from './types'
 
 export default function ActionButton({

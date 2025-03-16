@@ -1,5 +1,5 @@
-import Heading from '@/_components/typography/heading'
-import Paragraph from '@/_components/typography/paragraph'
+import Heading from '@/components/typography/heading'
+import Paragraph from '@/components/typography/paragraph'
 import Link from 'next/link'
 
 type Props = {

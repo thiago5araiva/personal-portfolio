@@ -1,4 +1,4 @@
-import getQueryClient from '@/_providers/getQueryClient'
+import getQueryClient from '@/providers/getQueryClient'
 import { MoveLeft } from 'lucide-react'
 import Link from 'next/link'
 import Content from './content'

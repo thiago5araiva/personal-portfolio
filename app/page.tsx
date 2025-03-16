@@ -1,5 +1,5 @@
 import Content from '@/home/content'
-import getQueryClient from '@/_providers/getQueryClient'
+import getQueryClient from '@/providers/getQueryClient'
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
 
 export default async function Page() {

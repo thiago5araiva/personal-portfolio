@@ -1,8 +1,8 @@
-import { Navigation } from '@/_components/'
+import { Navigation } from '@/components/'
 import { ReactNode } from 'react'
 
-import Footer from '@/_components/footer'
-import QueryProvider from '@/_providers/queryProvider'
+import Footer from '@/components/footer'
+import QueryProvider from '@/providers/queryProvider'
 
 type Props = {
     children: ReactNode
