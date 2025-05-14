@@ -5,6 +5,9 @@ import { cn } from '@/lib/utils'
 import { Analytics } from '@vercel/analytics/react'
 
 import './globals.css'
+import QueryProvider from './providers/queryProvider'
+import { Navigation } from './components'
+import Footer from './components/footer'
 
 const overpass = Overpass({
     subsets: ['latin'],
@@ -25,11 +28,34 @@ export const metadata: Metadata = {
 type Props = Readonly<{
     children: React.ReactNode
 }>
+
+const data = {
+    heading: 'Let’s connect and make something great',
+    mail: 'thiagosaraivacsouza@gmail.com',
+    year: new Date().getFullYear(),
+    social: [
+        {
+            label: 'Linkedin',
+            href: 'https://www.linkedin.com/in/thiago5araiva/',
+        },
+        {
+            label: 'Instagram',
+            href: 'https://www.instagram.com/thiago5araiva/',
+        },
+    ],
+}
+
 export default function RootLayout({ children }: Props) {
     return (
         <html lang="en">
             <body className={cn('', overpass.variable, alegreya.variable)}>
-                {children}
+                <QueryProvider>
+                    <div className="container mx-auto px-6 max-w-screen-lg">
+                        <Navigation />
+                        <main>{children}</main>
+                        <Footer data={data} />
+                    </div>
+                </QueryProvider>
                 <Analytics />
             </body>
         </html>

@@ -1,16 +1,5 @@
-import Content from '@/home/content'
-import getQueryClient from '@/providers/getQueryClient'
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+import Landpage from '@/landpage/landpage.view'
 
 export default async function Page() {
-    const queryClient = getQueryClient()
-    await queryClient.prefetchQuery({
-        queryKey: ['home'],
-        queryFn: () => fetch('/api'),
-    })
-    return (
-        <HydrationBoundary state={dehydrate(queryClient)}>
-            <Content />
-        </HydrationBoundary>
-    )
+    return <Landpage />
 }
