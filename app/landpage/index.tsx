@@ -8,12 +8,18 @@ import {
 } from '@/components'
 import { TypeModule } from './landpage.types'
 import Link from 'next/link'
-import { MoveRight } from 'lucide-react'
+import { MoveRight, Plus } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import * as stackIcon from '@/assets/images/stack/'
+import Image from 'next/image'
 
 type Props = TypeModule
+
 export default function View(props: Props) {
-    const { state, action } = props
+    const { state } = props
+
     if (state.data.length == 0) return <Loading />
+
     return (
         <section id="home">
             <div className="home-header grid gap-6">
@@ -38,7 +44,7 @@ export default function View(props: Props) {
                 <Heading type="h6" weight="bold">
                     {state.WORK.title}
                 </Heading>
-                {state.data?.map(({ id, child_page }) => (
+                {state.data.map(({ id, child_page }) => (
                     <ContentLink
                         id={id}
                         key={id}
@@ -46,6 +52,11 @@ export default function View(props: Props) {
                         label={child_page?.title}
                     />
                 ))}
+                <div className="flex justify-center">
+                    <Button variant={'outline'} className="rounded-full w-36">
+                        <Link href={'/work'}>See more</Link>
+                    </Button>
+                </div>
             </div>
             <div className="home-service my-36 grid gap-6 lg:gap-12">
                 <Heading type="h6">{state.SERVICES.title}</Heading>
@@ -62,6 +73,19 @@ export default function View(props: Props) {
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="home-stack flex justify-around">
+                {Object.keys(stackIcon).map((item, index) => (
+                    <Image
+                        key={index}
+                        src={stackIcon[item as keyof typeof stackIcon]}
+                        alt="Logo"
+                        width={45}
+                        height={45}
+                        draggable={false}
+                        priority
+                    />
+                ))}
             </div>
         </section>
     )

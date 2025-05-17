@@ -1,8 +1,8 @@
-//TODO: : fetch data just one time create a store to save the data
-
 'use client'
 
-import { useEffect, useState } from 'react'
+import useNotionStore, { setNotionContent } from '@/store/notion.store'
+import { useQuery } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import {
     COMPANIES_LOGO,
     CTA_BUTTON,
@@ -10,26 +10,24 @@ import {
     SERVICES,
     WORK,
 } from './landpage.constants'
-import useLandpageQuery from './landpage.query'
-import { NotionContentType } from './landpage.types'
 
 export default function Model() {
-    const [notionData, setNotionData] = useState<NotionContentType[]>([])
-    const [notionLoading, setNotionLoading] = useState<boolean>(false)
-
-    const { asyncGetLandpageContent } = useLandpageQuery()
-    const { data: notionResponseData, ...response } = asyncGetLandpageContent
-
-    useEffect(() => {
-        if (!notionResponseData?.data) return
-        setNotionData(notionResponseData.data)
-        setNotionLoading(response.isLoading)
-    }, [notionResponseData?.data])
-
+    const { content } = useNotionStore()
+    const asyncGetLandpageResponse = useQuery({
+        queryKey: ['landpage'],
+        queryFn: async () => (await fetch('/landpage/api')).json(),
+        enabled: content.length > 0 ? false : true,
+    })
+    const { data: landpageData, ...landpageResponse } = asyncGetLandpageResponse
+    const handleSetNotionContent = () => {
+        if (!landpageData?.data) return
+        setNotionContent(landpageData?.data)
+    }
+    useEffect(handleSetNotionContent, [landpageData?.data])
     return {
         state: {
-            loading: notionLoading,
-            data: notionData,
+            loading: landpageResponse.isLoading,
+            data: content.slice(0, 3),
             HEADER,
             CTA_BUTTON,
             COMPANIES_LOGO,

@@ -1,29 +1,19 @@
-import getQueryClient from '@/providers/getQueryClient'
-import { MoveLeft } from 'lucide-react'
-import Link from 'next/link'
-import Content from './content'
+'use client'
 
-type Props = {
-    searchParams: { [key: string]: string | string[] | undefined }
+import { Loading } from '@/components'
+import { Suspense } from 'react'
+import useModel from './post.model'
+import View from './post.view'
+
+const WrapperView = () => {
+    const model = useModel()
+    return <View {...model} />
 }
 
-export default async function PostPage({ searchParams }: Props) {
-    const queryClient = getQueryClient()
-    await queryClient.prefetchQuery({
-        queryKey: ['post'],
-        queryFn: () => fetch(`post/api/?id=${searchParams.id}`),
-    })
-
+export default function ViewModel() {
     return (
-        <section className="work-item">
-            <Link
-                href={'work/'}
-                className="flex items-center gap-3 text-font-medium mb-6 sm:mb-10"
-            >
-                <MoveLeft className="w-6 h-5" />
-                <span>Latest Works</span>
-            </Link>
-            <Content query={searchParams} />
-        </section>
+        <Suspense fallback={<Loading />}>
+            <WrapperView />
+        </Suspense>
     )
 }
