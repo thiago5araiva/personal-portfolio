@@ -1,14 +1,14 @@
 'use client'
 
-import { ContentLink, Heading, Paragraph } from '@/_components'
-import useStore from '@/_store'
+import { ContentLink, Heading, Paragraph } from '@/components'
+import useNotionStore from '@/store/notion.store'
 
 const title = 'Work'
 const description = `Here are some of my projects and case studies, part of my job is to 
 keep the projects of the companies I've worked for secret. These examples give you a flavor of my work.`
 
 export default function WorkPageContent() {
-    const { content } = useStore()
+    const { content } = useNotionStore()
     return (
         <section className="work">
             <div className="mb-12 sm:mb-20">
@@ -23,7 +23,7 @@ export default function WorkPageContent() {
                 </Paragraph>
             </div>
             <div className="grid gap-6 mb-36">
-                {content?.map(({ id, child_page }, index) => (
+                {content.map(({ id, child_page }, index) => (
                     <ContentLink
                         id={id}
                         key={index}

@@ -1,11 +1,11 @@
 'use client'
 
-import Heading from '@/_components/typography/heading'
+import Heading from '@/components/typography/heading'
 import Image from 'next/image'
 
-import { Paragraph } from '@/_components'
+import { Paragraph } from '@/components'
 import { about } from './mock'
-import me from '@/_assets/images/photo-me.webp'
+import me from '@/assets/images/photo-me.webp'
 export default function AboutPage() {
     return (
         <section className="about">

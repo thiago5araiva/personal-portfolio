@@ -1,4 +1,4 @@
-import { Paragraph } from '@/_components'
+import { Paragraph } from '@/components'
 import { ReactNode } from 'react'
 import { BlockParagraph, BlockType } from '@/post/types'
 
