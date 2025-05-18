@@ -1,6 +1,6 @@
 'use client'
 
-import { Loading } from '@/components'
+import { Loading } from '@/_components'
 import { Suspense } from 'react'
 import useModel from './post.model'
 import View from './post.view'

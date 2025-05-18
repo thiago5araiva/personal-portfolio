@@ -1,6 +1,6 @@
-import Heading from '@/components/typography/heading'
-import Paragraph from '@/components/typography/paragraph'
-import { Button } from '@/components/ui/button'
+import Heading from '@/_components/typography/heading'
+import Paragraph from '@/_components/typography/paragraph'
+import { Button } from '@/_components/ui/button'
 import { MoveLeft, MoveRight } from 'lucide-react'
 import Link from 'next/link'
 

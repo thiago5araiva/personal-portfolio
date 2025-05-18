@@ -1,5 +1,7 @@
-import Content from './content'
-
-export default async function AboutPage() {
-    return <Content />
+'use client'
+import useAboutModel from './about.model'
+import AboutView from './about.view'
+export default function AboutPage() {
+    const model = useAboutModel()
+    return <AboutView {...model} />
 }

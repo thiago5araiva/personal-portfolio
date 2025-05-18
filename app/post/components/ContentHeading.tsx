@@ -1,4 +1,4 @@
-import { Heading } from '@/components'
+import { Heading } from '@/_components'
 import { ReactNode } from 'react'
 import { BlockHeading } from '@/post/types'
 
