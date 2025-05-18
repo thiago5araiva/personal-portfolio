@@ -8,7 +8,7 @@ import './globals.css'
 import QueryProvider from './_providers/queryProvider'
 import { Navigation } from './_components'
 import Footer from './_components/footer'
-
+import { SpeedInsights } from '@vercel/speed-insights/next'
 const overpass = Overpass({
     subsets: ['latin'],
     variable: '--font-overpass',
@@ -57,6 +57,7 @@ export default function RootLayout({ children }: Props) {
                     </div>
                 </QueryProvider>
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     )
