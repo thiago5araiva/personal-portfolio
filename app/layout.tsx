@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
 import { Alegreya, Overpass } from 'next/font/google'
 
-import { cn } from '@/lib/utils'
+import { cn } from '@/_lib/utils'
 import { Analytics } from '@vercel/analytics/react'
 
 import './globals.css'
-import QueryProvider from './providers/queryProvider'
-import { Navigation } from './components'
-import Footer from './components/footer'
+import QueryProvider from './_providers/queryProvider'
+import { Navigation } from './_components'
+import Footer from './_components/footer'
 
 const overpass = Overpass({
     subsets: ['latin'],

@@ -1,5 +1,5 @@
-import Landpage from '@/landpage/landpage.view'
+import Home from '@/home/home.view'
 
 export default async function Page() {
-    return <Landpage />
+    return <Home />
 }

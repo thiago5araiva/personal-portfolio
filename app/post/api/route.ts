@@ -1,4 +1,4 @@
-import { notionRepository } from '@/services/notion/notion-repository'
+import { notionRepository } from '@/_services/notion/notion-repository'
 import { NextRequest } from 'next/server'
 
 export async function GET(request: NextRequest) {

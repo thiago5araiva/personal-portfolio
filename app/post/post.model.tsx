@@ -1,4 +1,6 @@
-import useNotionStore, { setNotionPostBlockContent } from '@/store/notion.store'
+import useNotionStore, {
+    setNotionPostBlockContent,
+} from '@/_store/notion.store'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
