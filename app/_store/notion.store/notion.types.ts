@@ -1,30 +1,23 @@
+export interface NotionResponse {
+    data: NotionBlockType[]
+}
 export interface NotionBlockType {
     object: string
     id: string
-    parent: Parent
+    parent: BlockParent
     created_time: string
     last_edited_time: string
-    created_by: User
-    last_edited_by: User
+    created_by: BlockUser
+    last_edited_by: BlockUser
     has_children: boolean
     archived: boolean
     in_trash: boolean
-    type: 'paragraph' | 'heading_2' // Add other block types as needed
-    paragraph?: Paragraph
-    heading_2?: Heading2
+    type: 'paragraph' | 'heading_2' | 'code'
+    paragraph?: BlockParagraph
+    heading_2?: BlockHeading
+    code?: BlockCode
 }
-
-interface Parent {
-    type: string
-    page_id: string
-}
-
-interface User {
-    object: string
-    id: string
-}
-
-interface RichText {
+interface BlockRichText {
     type: string
     text: {
         content: string
@@ -41,16 +34,31 @@ interface RichText {
     plain_text: string
     href: string | null
 }
-
-interface Paragraph {
-    rich_text: RichText[]
+export interface BlockParagraph {
+    rich_text: BlockRichText[]
     color: string
 }
 
-interface Heading2 {
-    rich_text: RichText[]
+export interface BlockHeading {
+    rich_text: BlockRichText[]
     is_toggleable: boolean
     color: string
+}
+
+export interface BlockCode {
+    caption: BlockRichText[]
+    rich_text: BlockRichText[]
+    language: string
+}
+
+interface BlockParent {
+    type: string
+    page_id: string
+}
+
+interface BlockUser {
+    object: string
+    id: string
 }
 
 export type NotionContentType = {

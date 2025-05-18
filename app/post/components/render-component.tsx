@@ -1,7 +1,7 @@
 import ContentCode from './ContentCode'
 import ContentHeading from './ContentHeading'
 import ContentParagraph from './ContentParagraph'
-import { BlockType } from '../types'
+import { NotionBlockType } from '@/_store/notion.store/notion.types'
 
 type ComponentMap = {
     heading_2: typeof ContentHeading
@@ -10,7 +10,7 @@ type ComponentMap = {
 }
 
 export default function PostRenderCmponent(
-    node: BlockType,
+    node: NotionBlockType,
     type: keyof ComponentMap
 ) {
     const { id } = node
