@@ -7,12 +7,13 @@ import View from './post.view'
 
 const WrapperView = () => {
     const model = useModel()
+    if (model.state?.isLoading) return <Loading />
     return <View {...model} />
 }
 
 export default function ViewModel() {
     return (
-        <Suspense fallback={<Loading />}>
+        <Suspense>
             <WrapperView />
         </Suspense>
     )

@@ -50,11 +50,16 @@ export default function View(props: Props) {
                         label={child_page?.title}
                     />
                 ))}
-                <div className="flex justify-center">
-                    <Button variant={'outline'} className="rounded-full w-36">
-                        <Link href={'/content'}>See more</Link>
-                    </Button>
-                </div>
+                <Link href={'/content'}>
+                    <div className="flex justify-center">
+                        <Button
+                            variant={'outline'}
+                            className="rounded-full w-36"
+                        >
+                            See more
+                        </Button>
+                    </div>
+                </Link>
             </div>
             <div className="home-service my-36 grid gap-6 lg:gap-12">
                 <Heading type="h6">{state.SERVICES.title}</Heading>
