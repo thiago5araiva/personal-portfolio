@@ -57,6 +57,7 @@ export default function InfiniteScrollComponent({ data, right }: Props) {
                         key={index}
                     >
                         <Image
+                            priority={true}
                             draggable={false}
                             alt={item.alt}
                             src={item.image}

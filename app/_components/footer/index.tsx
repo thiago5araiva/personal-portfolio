@@ -6,7 +6,7 @@ type Props = {
     data: {
         heading: string
         mail: string
-        year: number
+        year: string
         social: Array<{
             label: string
             href: string

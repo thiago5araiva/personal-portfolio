@@ -1,5 +1,5 @@
 const config = {
-  siteUrl: "https://yourwebsite.com",
+  siteUrl: "https://thiagosaraiva.com", // Atualize para sua URL real
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [

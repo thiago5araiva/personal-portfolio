@@ -1,2 +1,13 @@
+# *
 User-agent: *
-Disallow: /sensitive-data/
+Disallow: /private/
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://thiagosaraiva.com
+
+# Sitemaps
+Sitemap: https://thiagosaraiva.com/sitemap.xml
