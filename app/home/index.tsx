@@ -17,7 +17,6 @@ type Props = TypeModule
 
 export default function View(props: Props) {
     const { state } = props
-    if (state.data.length == 0) return <Loading />
     return (
         <section id="home">
             <div className="home-header grid gap-6">
@@ -86,7 +85,7 @@ export default function View(props: Props) {
                         width={45}
                         height={45}
                         draggable={false}
-                        priority
+                        priority={true}
                     />
                 ))}
             </div>

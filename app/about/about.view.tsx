@@ -17,6 +17,7 @@ export default function AboutView(props: Props) {
                     width={150}
                     height={10}
                     className="rounded-full"
+                    priority={true}
                 />
                 <div className="grid gap-3 lg:gap-4">
                     <Heading type="h2">{about?.title}</Heading>

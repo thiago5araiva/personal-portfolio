@@ -29,7 +29,7 @@ export default function NavigationComponent() {
                         width={30}
                         height={30}
                         draggable={false}
-                        priority
+                        priority={true}
                     />
                 </Link>
                 <div className="hidden lg:flex gap-10">
