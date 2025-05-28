@@ -26,7 +26,7 @@ export default function WorkPageContent(props: Props) {
                         id={id}
                         key={index}
                         href={`post/`}
-                        label={child_page.title}
+                        label={child_page?.title}
                     />
                 ))}
             </div>
