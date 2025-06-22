@@ -56,15 +56,15 @@ export default function AboutView(props: Props) {
                         Offroad Enthusiast
                     </Heading>
                     <Paragraph size="lg">
-                        Practicing martial arts, especially Krav Maga which was
-                        developed and perfected by the Israeli army, offers
-                        benefits that align with military principles and are
-                        highly applicable in technology. Readiness is similar to
-                        a military mentality, which is crucial for risk
-                        management and asset protection. discipline and focus,
-                        essential qualities for maintaining productivity and
-                        efficiency in projects. mental resilience, which allows
-                        you to overcome obstacles and deal with inherent stress.
+                        Just like in offroad driving, software development
+                        demands from the developer a combination of technical
+                        preparation, adaptability, and resilience. Each trail
+                        brings its own challenges, such as obstacles or steep
+                        climbs, requiring an ability to read the environment,
+                        plan ahead, and often improvise to keep moving forward.
+                        In the same way, a developer faces shifting requirements
+                        and unexpected bugs, relying on analysis and
+                        adaptability to overcome obstacles and deliver value.
                     </Paragraph>
                 </div>
             </div>
