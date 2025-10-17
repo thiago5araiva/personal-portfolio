@@ -1,6 +1,6 @@
 import { Paragraph } from '@/_components'
 import { ReactNode } from 'react'
-import { BlockParagraph } from '@/_store/notion.store/notion.types'
+import { BlockParagraph } from '@/src/store/notion.types'
 
 type Props = {
     data: BlockParagraph

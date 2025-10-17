@@ -1,7 +1,7 @@
 import ContentCode from './ContentCode'
 import ContentHeading from './ContentHeading'
 import ContentParagraph from './ContentParagraph'
-import { NotionBlockType } from '@/_store/notion.store/notion.types'
+import { NotionBlockType } from '@/src/store/notion.types'
 
 type ComponentMap = {
     heading_2: typeof ContentHeading

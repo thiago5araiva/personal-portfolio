@@ -1,25 +1,42 @@
 {
-    "name": "Thiago Saraiva - Developer",
-    "short_name": "Thiago Saraiva",
+    "name": "Thiago Saraiva - Developer Portfolio",
+    "short_name": "TS Portfolio",
+    "description": "Experienced software engineer with a decade working with application development, management, and maintenance",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#FCFBF9",
+    "theme_color": "#001514",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "en-US",
+    "categories": ["portfolio", "developer", "software"],
     "icons": [
+        {
+            "src": "/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
         {
             "src": "/android-chrome-192x192.png",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "maskable any"
         },
         {
             "src": "/android-chrome-256x256.png",
             "sizes": "256x256",
-            "type": "image/png"
-        },
-        {
-            "src": "/android-chrome-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png"
+            "type": "image/png",
+            "purpose": "maskable any"
         }
-    ],
-    "theme_color": "#001514",
-    "background_color": "#FCFBF9",
-    "display": "standalone",
-    "start_url": "/"
+    ]
 }

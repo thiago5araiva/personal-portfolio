@@ -1,4 +1,4 @@
-import { BlockCode } from '@/_store/notion.store/notion.types'
+import { BlockCode } from '@/src/store/notion.types'
 import { langs } from '@uiw/codemirror-extensions-langs'
 import { gruvboxDark } from '@uiw/codemirror-theme-gruvbox-dark'
 import CodeMirror, { Extension } from '@uiw/react-codemirror'

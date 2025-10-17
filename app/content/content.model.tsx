@@ -1,4 +1,4 @@
-import useNotionStore from '@/_store/notion.store'
+import useNotionStore from '@/src/store'
 
 export default function useModel() {
     const { content } = useNotionStore()

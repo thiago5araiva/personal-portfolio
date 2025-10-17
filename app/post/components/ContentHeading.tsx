@@ -1,6 +1,6 @@
 import { Heading } from '@/_components'
 import { ReactNode } from 'react'
-import { BlockHeading } from '@/_store/notion.store/notion.types'
+import { BlockHeading } from '@/src/store/notion.types'
 
 type Props = {
     data: BlockHeading
