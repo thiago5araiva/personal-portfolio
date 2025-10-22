@@ -14,6 +14,8 @@ import {
 } from '@/src/components/ui/form'
 import { Input } from '@/src/components/ui/input'
 import { Search } from 'lucide-react'
+import { HTMLAttributes } from 'react'
+import { cn } from '../lib/utils'
 
 const FormSchema = z.object({
     search: z.string().min(2, {
@@ -21,7 +23,9 @@ const FormSchema = z.object({
     }),
 })
 
-export default function SearchHomeComponent() {
+type Props = { className?: string }
+
+export default function SearchHomeComponent({ className }: Props) {
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
@@ -32,7 +36,7 @@ export default function SearchHomeComponent() {
     const onSubmit = (data: z.infer<typeof FormSchema>) => console.log(data)
 
     return (
-        <div className="search__component mb-6">
+        <div className={cn('search__component', className)}>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
                     <FormField

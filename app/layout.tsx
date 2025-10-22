@@ -1,12 +1,14 @@
 import { fonts } from '@/config/layout.config'
 import { Analytics } from '@vercel/analytics/react'
 
+import '@/config/style.config.css'
+import QueryProvider from '@/src/providers/queryProvider'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
-import QueryProvider from '@/src/providers/queryProvider'
-import '@/config/style.config.css'
-import NavigationComponent from './src/components/navigation.component'
+import Navigation from '@/src/components/navigation.component'
+import Footer from '@/src/components/footer.component'
+
 import routes from './src/routes'
 
 type Props = Readonly<{
@@ -61,12 +63,16 @@ export default function RootLayout({ children }: Props) {
             </head>
             <body className={fonts}>
                 <QueryProvider>
-                    <div className="container mx-auto px-6 h-screen lg:flex max-w-screen-2xl">
-                        <div className="page__left navigation__container lg:h-full lg:pr-6 lg:border-r lg:mr-6">
-                            <NavigationComponent links={routes} />
+                    <main className="main relative container max-w-screen-2xl mx-auto px-8">
+                        <div className="main__container md:flex md:justify-center">
+                            <div className="main__navigation border-r pr-8">
+                                <Navigation links={routes} />
+                            </div>
+                            <div className="main__content md:mx-8">
+                                {children}
+                            </div>
                         </div>
-                        <main>{children}</main>
-                    </div>
+                    </main>
                 </QueryProvider>
                 <Analytics />
                 <SpeedInsights />
