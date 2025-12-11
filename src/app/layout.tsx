@@ -7,9 +7,9 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
 
-import Navigation from '@/components/navigation.component'
+import Navigation from '@/navigation/sidebar-left'
 
-import routes from '../routes'
+import routes from '../navigation'
 
 type Props = Readonly<{
     children: ReactNode
@@ -66,9 +66,7 @@ export default function RootLayout({ children }: Props) {
                 <QueryProvider>
                     <main className="main relative container max-w-screen-2xl mx-auto px-4 sm:px-8">
                         <div className="main__container lg:flex lg:justify-center">
-                            <div className="main__navigation lg:border-r lg:pr-8">
-                                <Navigation links={routes} />
-                            </div>
+                            <Navigation links={routes} />
                             <div className="main__content lg:mx-8">
                                 {children}
                             </div>
