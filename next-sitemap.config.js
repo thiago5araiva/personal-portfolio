@@ -1,5 +1,6 @@
+/** @type {import('next-sitemap').IConfig} */
 const config = {
-  siteUrl: "https://thiagosaraiva.com", // Atualize para sua URL real
+  siteUrl: "https://thiagosaraiva.com",
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
@@ -9,4 +10,4 @@ const config = {
   },
 };
 
-module.exports = config;
+export default config;
