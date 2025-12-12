@@ -3,10 +3,12 @@ import { persist } from 'zustand/middleware'
 import { ContentfulPostData } from '@/store/contentful.store/contentful.type'
 
 interface InterfaceContentfulData {
+    updatedAt: string
     data: ContentfulPostData
 }
 
 const initialState: InterfaceContentfulData = {
+    updatedAt: '',
     data: {
         sys: {
             type: '',
@@ -26,8 +28,9 @@ const useContentfulStore = create<TypeContentfulStore>()(
 const { setState, getState } = useContentfulStore
 
 export const resetContentfulData = () => setState(initialState)
-export const setContentfulData = (data: ContentfulPostData) => {
-    setState({ data })
+export const getContentfulData = () => getState()
+export const setContentfulData = (data: TypeContentfulStore) => {
+    setState(data)
 }
 
 export default useContentfulStore

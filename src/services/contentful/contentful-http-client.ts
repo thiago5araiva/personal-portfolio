@@ -12,8 +12,7 @@ export class ContentfulHttpClient implements IHttpClient {
         const config: CreateAxiosDefaults = {
             baseURL: ContentfulConfig.baseUrl,
             headers: {
-                'Content-Type':
-                    'application/vnd.contentful.store.delivery.v1+json',
+                'Content-Type': 'application/json',
             },
         }
         this.axiosInstance = axios.create(config)

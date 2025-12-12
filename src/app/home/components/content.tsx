@@ -5,7 +5,7 @@ import { BookmarkPlus, Dot } from 'lucide-react'
 import { ReactNode } from 'react'
 
 function Content({ children }: { children: ReactNode }) {
-    return <div className="content__container">{children}</div>
+    return <div className="content content__container">{children}</div>
 }
 
 Content.Header = function ContentHeader() {
@@ -80,6 +80,21 @@ Content.Image = function ContentImage() {
                 alt="placeholder"
                 className="object-cover"
             />
+        </div>
+    )
+}
+Content.List = function ContentList() {
+    return (
+        <div className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-6">
+            {Array.from({ length: 6 }).map((_, index) => (
+                <div key={index}>
+                    <Content>
+                        <Content.Header />
+                        <Content.Body />
+                        <Content.Footer />
+                    </Content>
+                </div>
+            ))}
         </div>
     )
 }
