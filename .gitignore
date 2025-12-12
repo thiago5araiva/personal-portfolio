@@ -36,5 +36,9 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 /.vscode
+/.idea
+
+# claude code
+.claude/settings.local.json
 
 pnpm-lock.yaml
