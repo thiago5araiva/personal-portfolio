@@ -8,6 +8,10 @@ export class ContentfulRepository {
         const url = `/spaces/${ContentfulConfig.space}/environments/master/entries`
         return await this.httpClient.get(url)
     }
+    async getPostAssetById(id: string) {
+        const url = `/spaces/${ContentfulConfig.space}/environments/master/entries/${id}`
+        return await this.httpClient.get(url)
+    }
 }
 
 const httpClient = new ContentfulHttpClient()
