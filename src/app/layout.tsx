@@ -2,7 +2,6 @@ import { fonts } from '@/app/config/layout.config'
 import { Analytics } from '@vercel/analytics/react'
 
 import '@/app/config/style.config.css'
-import QueryProvider from '@/providers/query'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
@@ -10,6 +9,7 @@ import { ReactNode } from 'react'
 import Navigation from '@/navigation/sidebar-left'
 
 import routes from '../navigation'
+import Providers from '@/providers'
 
 type Props = Readonly<{
     children: ReactNode
@@ -60,10 +60,10 @@ export default function RootLayout({ children }: Props) {
             <head>
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-                <title>Thiago Saraiva - Developergeres</title>
+                <title>Thiago Saraiva - Developer</title>
             </head>
             <body className={fonts}>
-                <QueryProvider>
+                <Providers>
                     <main className="main relative container max-w-screen-2xl mx-auto px-4 sm:px-8">
                         <div className="main__container lg:flex lg:justify-center">
                             <Navigation links={routes} />
@@ -72,7 +72,7 @@ export default function RootLayout({ children }: Props) {
                             </div>
                         </div>
                     </main>
-                </QueryProvider>
+                </Providers>
                 <Analytics />
                 <SpeedInsights />
             </body>
