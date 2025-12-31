@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils'
-import { Alegreya, Overpass } from 'next/font/google'
+import { Archivo, Inter } from 'next/font/google'
 
-export const overpass = Overpass({
+export const archivo = Archivo({
     subsets: ['latin'],
-    variable: '--font-overpass',
+    variable: '--font-archivo',
     display: 'swap',
 })
-export const alegreya = Alegreya({
+export const inter = Inter({
     subsets: ['latin'],
-    variable: '--font-alegreya',
+    variable: '--font-inter',
     display: 'swap',
 })
 
-export const fonts = cn(overpass.variable, alegreya.variable)
+export const fonts = cn(archivo.variable, inter.variable)

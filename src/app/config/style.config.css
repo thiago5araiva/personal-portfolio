@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 * {
-  font-family: var(--font-overpass);
+  font-family: var(--font-archivo);
 }
 p {
-  font-family: var(--font-alegreya);
+  font-family: var(--font-inter);
 }
