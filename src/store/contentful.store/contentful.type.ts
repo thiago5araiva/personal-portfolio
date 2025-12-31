@@ -3,14 +3,14 @@ export interface ContentfulPostData {
     total: number
     skip: number
     limit: number
-    items: Item[]
+    items: PostDataItem[]
 }
 
 export interface SysRoot {
     type: string
 }
 
-export interface Item {
+export interface PostDataItem {
     metadata: Metadata
     sys: SysItem
     fields: Fields

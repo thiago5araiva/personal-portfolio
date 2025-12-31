@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { ContentfulPostData } from '@/store/contentful.store/contentful.type'
+import { useEffect, useState } from 'react'
 
 interface InterfaceContentfulData {
     updatedAt: string
     data: ContentfulPostData
+    assets?: any[]
 }
 
 const initialState: InterfaceContentfulData = {
@@ -18,19 +20,36 @@ const initialState: InterfaceContentfulData = {
         limit: 0,
         items: [],
     },
+    assets: [],
 }
 
-type TypeContentfulStore = InterfaceContentfulData
-const useContentfulStore = create<TypeContentfulStore>()(
+type TContentfulStore = InterfaceContentfulData
+const useContentfulStore = create<TContentfulStore>()(
     persist(() => initialState, { name: 'post-collection' })
 )
 
+// Hook hydration-safe para evitar mismatch entre SSR e cliente
+export function useContentfulStoreHydrated() {
+    const [hydrated, setHydrated] = useState(false)
+    const store = useContentfulStore()
+    const handleHydrated = () => setHydrated(true)
+    useEffect(handleHydrated, [])
+    return hydrated ? store : initialState
+}
+
 const { setState, getState } = useContentfulStore
 
-export const resetContentfulData = () => setState(initialState)
-export const getContentfulData = () => getState()
-export const setContentfulData = (data: TypeContentfulStore) => {
-    setState(data)
+/*** contentful-store***/
+
+export const getContentfulStore = () => getState()
+export const resetContentfulStore = () => setState(initialState)
+
+/*** contentful-data***/
+export const setContentfulData = (payload: TContentfulStore) => {
+    setState({ ...payload })
+}
+export const setContentfulAssets = (payload: any[]) => {
+    setState({ ...getState(), assets: payload })
 }
 
 export default useContentfulStore
