@@ -33,8 +33,10 @@ const useContentfulStore = create<TContentfulStore>()(
 export function useContentfulStoreHydrated() {
     const [hydrated, setHydrated] = useState(false)
     const store = useContentfulStore()
-    const handleHydrated = () => setHydrated(true)
-    useEffect(handleHydrated, [])
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: marks store as hydrated after client mount
+        setHydrated(true)
+    }, [])
     return hydrated ? store : initialState
 }
 
