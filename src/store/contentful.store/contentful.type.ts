@@ -4,6 +4,7 @@ export interface ContentfulPostData {
     skip: number
     limit: number
     items: PostDataItem[]
+    following: string[]
 }
 
 export interface SysRoot {
@@ -11,6 +12,7 @@ export interface SysRoot {
 }
 
 export interface PostDataItem {
+    follow?: boolean
     metadata: Metadata
     sys: SysItem
     fields: Fields

@@ -19,6 +19,7 @@ const initialState: InterfaceContentfulData = {
         skip: 0,
         limit: 0,
         items: [],
+        following: [],
     },
     assets: [],
 }
@@ -47,9 +48,23 @@ export const resetContentfulStore = () => setState(initialState)
 /*** contentful-data***/
 export const setContentfulData = (payload: TContentfulStore) => {
     setState({ ...payload })
+    return
 }
 export const setContentfulAssets = (payload: any[]) => {
     setState({ ...getState(), assets: payload })
+    return
+}
+
+export const setContentFollowing = (payload: string) => {
+    const { data } = getState()
+    const recommendedData = [...data?.items]
+    const recommendedIndex = data.items?.findIndex((i) => i.sys.id === payload)
+    const recommendItem = data.items?.[recommendedIndex]
+
+    const isFollow = !!recommendItem?.follow
+    recommendedData[recommendedIndex] = { ...recommendItem, follow: !isFollow }
+    setState({ ...getState(), data: { ...data, items: recommendedData } })
+    return
 }
 
 export default useContentfulStore
