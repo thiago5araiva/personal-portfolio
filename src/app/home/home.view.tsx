@@ -5,20 +5,24 @@ import { TypeHomeModel } from '@/app/home/home.model'
 import Featured from '@/app/home/components/featured'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import Content from '@/app/home/components/content'
+import { Badge } from '@/components/ui/badge'
 import { useState } from 'react'
 
+type Props = TypeHomeModel
 type TabValue = 'following' | 'recommended'
 
-type Props = TypeHomeModel
-
 export default function View({ state, actions }: Props) {
-    const [activeTab, setActiveTab] = useState<TabValue>('following')
-    const handleTabs = (value: string) => setActiveTab(value as TabValue)
+    const [activeTab, setActiveTab] = useState<TabValue>('recommended')
 
-    const { posts } = state
+    const { recommended, following } = state
+    const { handleContentFollowing } = actions
+
+    const isContentType = activeTab === 'recommended' ? recommended : following
+
+    const handleTabs = (value = '') => setActiveTab(value as TabValue)
 
     return (
-        <section className={'home'}>
+        <section className={'home h-full'}>
             <div className="lg:flex lg:gap-8">
                 {/* content-component */}
                 <div className="home__content max-w-3xl">
@@ -29,23 +33,26 @@ export default function View({ state, actions }: Props) {
                         <div className="sticky top-0 pt-4 sm:pt-8 bg-white z-20">
                             <TabsList className="w-full text-base justify-around border-b rounded-none shadow-none">
                                 <TabsTrigger
-                                    value="following"
-                                    className="font-light text-base data-[state=active]:shadow-none data-[state=active]:font-bold">
-                                    Following
-                                </TabsTrigger>
-                                <TabsTrigger
                                     value="recommended"
                                     className="font-light text-base data-[state=active]:shadow-none data-[state=active]:font-bold">
                                     Recommended
                                 </TabsTrigger>
+                                <TabsTrigger
+                                    value="following"
+                                    className="font-light text-base data-[state=active]:shadow-none data-[state=active]:font-bold">
+                                    <div className={'flex gap-3 items-center'}>
+                                        <span>Following</span>
+                                        <Badge
+                                            className={'text-gray-400'}
+                                            variant="outline">{`${following.length}`}</Badge>
+                                    </div>
+                                </TabsTrigger>
                             </TabsList>
                         </div>
-                        {activeTab === 'following' && (
-                            <Content.List data={posts} />
-                        )}
-                        {activeTab === 'recommended' && (
-                            <Content.List data={posts} />
-                        )}
+                        <Content
+                            data={isContentType}
+                            onSelect={handleContentFollowing}
+                        />
                     </Tabs>
                 </div>
                 {/* desktop: topic-component lateral */}

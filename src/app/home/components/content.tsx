@@ -1,19 +1,34 @@
 import AvatarComponent from '@/components/avatar.component'
 import PlaceholderImage from '@/assets/images/placeholder.png'
 import Image from 'next/image'
-import { BookmarkPlus, Dot } from 'lucide-react'
+import { Bookmark, BookmarkCheck, Dot } from 'lucide-react'
 import { PropsWithChildren } from 'react'
 import { PostDataItem } from '@/store/contentful.store/contentful.type'
 
-type Props = {
+interface ContentContextType {
+    state: { content: PostDataItem[] }
+    actions: { onSelect: (id: string) => void }
+}
+
+type Props = PropsWithChildren<{
+    data: PostDataItem[]
+    onSelect: (id: string) => void
+}>
+
+type ContentProps = {
     image: string
     body: { title: string; description: string }
     createdAt: string
 }
 
-type TypeHeader = Pick<Props, 'createdAt'>
+type TypeHeader = Pick<ContentProps, 'createdAt'>
 
-type TypeBody = Pick<Props, 'body'>
+type TypeBody = Pick<ContentProps, 'body'>
+
+type TypeFooter = {
+    state: { follow?: boolean; time: number }
+    actions: { onSelect: () => void }
+}
 
 type TypeListItem = { value: PostDataItem }
 
@@ -43,7 +58,9 @@ Content.Body = function ContentBody({ body }: TypeBody) {
     )
 }
 
-Content.Footer = function ContentFooter() {
+Content.Footer = function ContentFooter(props: TypeFooter) {
+    const { state, actions } = props
+    const handleOnSelect = () => actions.onSelect()
     return (
         <div className="flex items-center justify-between text-sm mt-4 lg:mt-3 border-b pb-8">
             <div className="flex items-center gap-1 sm:gap-3 flex-wrap">
@@ -52,15 +69,18 @@ Content.Footer = function ContentFooter() {
                 </div>
                 <Dot className="hidden sm:block" />
                 <div className="flex items-center">
-                    <span>3 min read</span>
+                    <span>{`${Math.round(state.time)} min read`}</span>
                 </div>
                 <Dot className="hidden sm:block" />
                 <div className="hidden sm:flex items-center">
                     <span>Selected for you</span>
                 </div>
             </div>
-            <div className="shrink-0 ml-2">
-                <BookmarkPlus size={20} />
+            <div className="shrink-0 ml-2" onClick={handleOnSelect}>
+                {!state.follow && <Bookmark className={'text-brand-primary'} />}
+                {state.follow && (
+                    <BookmarkCheck className={'text-brand-primary'} />
+                )}
             </div>
         </div>
     )
@@ -75,7 +95,7 @@ Content.Title = function ContentTitle({ value }: { value: string }) {
 }
 
 Content.Description = function ContentText({ value }: { value: string }) {
-    return <p className="mb-0 lg:mb-0">{value}</p>
+    return <p className="mb-0 lg:mb-0 font-light">{value}</p>
 }
 
 Content.Image = function ContentImage() {
@@ -93,31 +113,27 @@ Content.Image = function ContentImage() {
     )
 }
 
-Content.ListItem = function ContentListItem({ value }: TypeListItem) {
-    const title = value?.fields.title
-    const description = value?.fields.description
-    return (
-        <Content>
-            <Content.Header createdAt={value?.sys.createdAt} />
-            <Content.Body body={{ title, description }} />
-            <Content.Footer />
-        </Content>
-    )
-}
-
-Content.List = function ContentList({ data }: { data: PostDataItem[] }) {
-    if (!data) return
+export default function Content({ data, onSelect }: Props) {
     return (
         <div className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-6">
-            {data.map((item) => (
-                <div key={item?.sys.id}>
-                    <Content.ListItem value={item} />
-                </div>
-            ))}
+            {data.map((item) => {
+                const { sys, follow, fields } = item
+                const title = fields.title
+                const description = fields.description
+                const time = fields.body.split(' ').length / 200
+                const handleBookmark = () => onSelect(sys.id)
+
+                return (
+                    <div key={sys.id}>
+                        <Content.Header createdAt={sys.createdAt} />
+                        <Content.Body body={{ title, description }} />
+                        <Content.Footer
+                            actions={{ onSelect: handleBookmark }}
+                            state={{ follow, time }}
+                        />
+                    </div>
+                )
+            })}
         </div>
     )
-}
-
-export default function Content({ children }: PropsWithChildren) {
-    return <div className="content content__container">{children}</div>
 }
