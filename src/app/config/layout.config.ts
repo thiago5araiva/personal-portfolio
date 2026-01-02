@@ -1,15 +1,11 @@
 import { cn } from '@/lib/utils'
-import { Archivo, Inter } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 
-export const archivo = Archivo({
+export const roboto = Roboto({
     subsets: ['latin'],
-    variable: '--font-archivo',
-    display: 'swap',
-})
-export const inter = Inter({
-    subsets: ['latin'],
-    variable: '--font-inter',
+    weight: ['300', '400', '500', '700'],
+    variable: '--font-roboto',
     display: 'swap',
 })
 
-export const fonts = cn(archivo.variable, inter.variable)
+export const fonts = cn(roboto.variable)

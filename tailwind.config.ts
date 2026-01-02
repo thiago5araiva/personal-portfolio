@@ -6,8 +6,9 @@ const config: Config = {
     theme: {
         extend: {
             fontFamily: {
-                title: 'Overpass ,sans-serif',
-                text: 'Alegreya Sans, sans-serif',
+                sans: ['var(--font-roboto)', 'sans-serif'],
+                title: ['var(--font-roboto)', 'sans-serif'],
+                text: ['var(--font-roboto)', 'sans-serif'],
             },
             colors: {
                 'brand-primary': '#243447',
