@@ -17,9 +17,9 @@ export default function View({ state, actions }: Props) {
     const { recommended, following } = state
     const { handleContentFollowing } = actions
 
-    const isContentType = activeTab === 'recommended' ? recommended : following
-
     const handleTabs = (value = '') => setActiveTab(value as TabValue)
+
+    const contentType = activeTab === 'recommended' ? recommended : following
 
     return (
         <section className={'home h-full'}>
@@ -29,8 +29,8 @@ export default function View({ state, actions }: Props) {
                     <Tabs
                         value={activeTab}
                         onValueChange={handleTabs}
-                        className="grid gap-4 sm:gap-8">
-                        <div className="sticky top-0 pt-4 sm:pt-8 bg-white z-20">
+                        className="grid gap-4 sm:gap-8 mb-4">
+                        <div className="sticky top-0 pt-4 sm:pt-8 bg-caesar-white z-20">
                             <TabsList className="w-full text-base justify-around border-b rounded-none shadow-none">
                                 <TabsTrigger
                                     value="recommended"
@@ -38,21 +38,19 @@ export default function View({ state, actions }: Props) {
                                     Recommended
                                 </TabsTrigger>
                                 <TabsTrigger
+                                    disabled={!following.length}
                                     value="following"
                                     className="font-light text-base data-[state=active]:shadow-none data-[state=active]:font-bold">
                                     <div className={'flex gap-3 items-center'}>
                                         <span>Following</span>
                                         <Badge
-                                            className={'text-gray-400'}
+                                            className={'text-caesar-black/40'}
                                             variant="outline">{`${following.length}`}</Badge>
                                     </div>
                                 </TabsTrigger>
                             </TabsList>
                         </div>
-                        <Content
-                            data={isContentType}
-                            onSelect={handleContentFollowing}
-                        />
+                        <Content data={contentType} />
                     </Tabs>
                 </div>
                 {/* desktop: topic-component lateral */}

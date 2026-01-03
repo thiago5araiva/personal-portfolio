@@ -62,7 +62,7 @@ export default function RootLayout({ children }: Props) {
                 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
                 <title>Thiago Saraiva - Developer</title>
             </head>
-            <body className={`${fonts} font-sans`}>
+            <body className={`${fonts} font-sans bg-caesar-white`}>
                 <Providers>
                     <main className="main relative container max-w-screen-2xl mx-auto px-4 sm:px-8">
                         <div className="main__container lg:flex lg:justify-center">

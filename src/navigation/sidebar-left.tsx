@@ -19,7 +19,7 @@ type Props = {
 
 function NavigationLinks({ data }: { data: Props['links'] }) {
     return (
-        <nav className="flex lg:flex-col gap-6 justify-center text-brand-secondary">
+        <nav className="flex lg:flex-col gap-6 justify-center text-caesar-black">
             {data.map(({ label, href, name }) => {
                 const icon = name as Icon
                 return (
@@ -28,7 +28,7 @@ function NavigationLinks({ data }: { data: Props['links'] }) {
                             key={name}
                             name={icon}
                             size={21}
-                            className="text-brand-primary hover:text-brand-tertiary"
+                            className="text-caesar-black/70 hover:text-caesar-black transition-colors"
                         />
                         <span className="sr-only">{label}</span>
                     </Link>
@@ -41,7 +41,7 @@ function NavigationLinks({ data }: { data: Props['links'] }) {
 export default function SidebarLeft({ links }: Props) {
     return (
         <div className="main__navigation lg:border-r lg:pr-8">
-            <nav className="navi__position bg-white sticky top-0 z-10 right-0 left-0">
+            <nav className="navi__position bg-caesar-white sticky top-0 z-10 right-0 left-0">
                 <div className="nav__container flex lg:flex-col lg:h-screen items-center justify-between py-4 sm:py-9">
                     {/* logo */}
                     <div className="navigation-logo">
@@ -53,9 +53,9 @@ export default function SidebarLeft({ links }: Props) {
                     </div>
                     {/* avatar */}
                     <div className="navigation-avatar order-2">
-                        <Avatar className="bg-white">
+                        <Avatar className="bg-caesar-black text-caesar-white">
                             <AvatarImage src="" alt="user" />
-                            <AvatarFallback>ER</AvatarFallback>
+                            <AvatarFallback className="bg-caesar-black text-caesar-white text-xs">ER</AvatarFallback>
                         </Avatar>
                     </div>
                 </div>
