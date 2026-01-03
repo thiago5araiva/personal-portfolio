@@ -11,11 +11,10 @@ import { useState } from 'react'
 type Props = TypeHomeModel
 type TabValue = 'following' | 'recommended'
 
-export default function View({ state, actions }: Props) {
+export default function View({ state }: Props) {
     const [activeTab, setActiveTab] = useState<TabValue>('recommended')
 
     const { recommended, following } = state
-    const { handleContentFollowing } = actions
 
     const handleTabs = (value = '') => setActiveTab(value as TabValue)
 
@@ -30,11 +29,11 @@ export default function View({ state, actions }: Props) {
                         value={activeTab}
                         onValueChange={handleTabs}
                         className="grid gap-4 sm:gap-8 mb-4">
-                        <div className="sticky top-0 pt-4 sm:pt-8 bg-caesar-white z-20">
+                        <div className="sticky top-0 pt-4 sm:pt-8 text-caesar-black bg-caesar-white z-20">
                             <TabsList className="w-full text-base justify-around border-b rounded-none shadow-none">
                                 <TabsTrigger
                                     value="recommended"
-                                    className="font-light text-base data-[state=active]:shadow-none data-[state=active]:font-bold">
+                                    className="font-light text-base data-[state=active]:shadow-none data-[state=active]:font-text">
                                     Recommended
                                 </TabsTrigger>
                                 <TabsTrigger

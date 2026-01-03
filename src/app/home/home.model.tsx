@@ -1,6 +1,5 @@
 import { QueryPostEntries } from '@/services/contentful/contentful-query'
 import {
-    setContentFollowing,
     setContentfulData,
     useContentfulStoreHydrated,
 } from '@/store/contentful.store'
@@ -14,21 +13,20 @@ const isoDateString = currentDate.toISOString()
 type PostData = Pick<ContentfulPostData, 'items'>
 
 export default function HomeModel() {
-    const { updatedAt, data } = useContentfulStoreHydrated()
+    const contentFulStore = useContentfulStoreHydrated()
 
     const { data: postResponseData, ...postResponse } = QueryPostEntries()
 
-    const recommended = data.items
-    const following = data.items.filter((i) => i.follow === true)
+    const recommended = contentFulStore?.data.items
+    const following = recommended.filter((i) => i.isFollow)
 
     const handleContentfulDataStore = () => {
         const content = postResponseData?.data
         const updatedAt = isoDateString
-        const payload = { updatedAt, data: content }
+        const payload = { ...contentFulStore, updatedAt, data: content }
         postResponse.isSuccess && setContentfulData(payload)
         postResponse.isError && toast('Error fetching posts.')
     }
-    const handleContentFollowing = (id = '') => setContentFollowing(id)
 
     useEffect(handleContentfulDataStore, [postResponseData])
 
@@ -37,7 +35,6 @@ export default function HomeModel() {
             recommended,
             following,
         },
-        actions: { handleContentFollowing },
     }
 }
 

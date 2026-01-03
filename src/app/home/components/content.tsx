@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { BookmarkCheck, Dot } from 'lucide-react'
 import { PropsWithChildren } from 'react'
 import { PostDataItem } from '@/store/contentful.store/contentful.type'
+import Link from 'next/link'
+import { useContentfulStoreHydrated } from '@/store/contentful.store'
 
 type Props = PropsWithChildren<{
     data: PostDataItem[]
@@ -97,11 +99,13 @@ export default function Content({ data }: Props) {
                 const description = fields.description
                 const time = fields.body.split(' ').length / 200
                 return (
-                    <div key={sys.id} className="group">
-                        <Content.Header createdAt={sys.createdAt} />
-                        <Content.Body state={{ title, description }} />
-                        <Content.Footer state={{ follow, time }} />
-                    </div>
+                    <Link key={sys.id} href={`/content/${fields.slug}`}>
+                        <div className="group">
+                            <Content.Header createdAt={sys.createdAt} />
+                            <Content.Body state={{ title, description }} />
+                            <Content.Footer state={{ follow, time }} />
+                        </div>
+                    </Link>
                 )
             })}
         </div>

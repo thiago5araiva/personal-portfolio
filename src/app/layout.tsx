@@ -1,7 +1,6 @@
-import { fonts } from '@/app/config/layout.config'
 import { Analytics } from '@vercel/analytics/react'
 
-import '@/app/config/style.config.css'
+import '@/app/global.css'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata } from 'next'
 import { ReactNode } from 'react'
@@ -10,10 +9,18 @@ import Navigation from '@/navigation/sidebar-left'
 
 import routes from '../navigation'
 import Providers from '@/providers'
+import { Roboto } from 'next/font/google'
 
 type Props = Readonly<{
     children: ReactNode
 }>
+
+const roboto = Roboto({
+    subsets: ['latin'],
+    weight: ['300', '400', '500', '700'],
+    variable: '--font-roboto',
+    display: 'swap',
+})
 
 export const metadata: Metadata = {
     title: 'Thiago Saraiva - Developer',
@@ -62,12 +69,12 @@ export default function RootLayout({ children }: Props) {
                 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
                 <title>Thiago Saraiva - Developer</title>
             </head>
-            <body className={`${fonts} font-sans bg-caesar-white`}>
+            <body className={`${roboto.variable} font-sans bg-caesar-white`}>
                 <Providers>
                     <main className="main relative container max-w-screen-2xl mx-auto px-4 sm:px-8">
                         <div className="main__container lg:flex lg:justify-center">
                             <Navigation links={routes} />
-                            <div className="main__content lg:mx-8">
+                            <div className="main__content w-full lg:mx-8">
                                 {children}
                             </div>
                         </div>

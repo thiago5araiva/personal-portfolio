@@ -28,7 +28,7 @@ function NavigationLinks({ data }: { data: Props['links'] }) {
                             key={name}
                             name={icon}
                             size={21}
-                            className="text-caesar-black/70 hover:text-caesar-black transition-colors"
+                            className="text-caesar-black/70 hover:text-caesar-burgundy transition-colors"
                         />
                         <span className="sr-only">{label}</span>
                     </Link>
@@ -53,9 +53,11 @@ export default function SidebarLeft({ links }: Props) {
                     </div>
                     {/* avatar */}
                     <div className="navigation-avatar order-2">
-                        <Avatar className="bg-caesar-black text-caesar-white">
+                        <Avatar className=" text-caesar-black">
                             <AvatarImage src="" alt="user" />
-                            <AvatarFallback className="bg-caesar-black text-caesar-white text-xs">ER</AvatarFallback>
+                            <AvatarFallback className="border border-caesar-black/50 text-caesar-black/50 text-xs">
+                                ER
+                            </AvatarFallback>
                         </Avatar>
                     </div>
                 </div>
