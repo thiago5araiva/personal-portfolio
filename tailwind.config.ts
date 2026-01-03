@@ -11,6 +11,11 @@ const config: Config = {
                 text: ['var(--font-roboto)', 'sans-serif'],
             },
             colors: {
+                // Caesar Palette
+                'caesar-black': '#000000',
+                'caesar-burgundy': '#F5332C',
+                'caesar-white': '#FFFFFF',
+                // Legacy brand colors
                 'brand-primary': '#243447',
                 'brand-secondary': '#141D26',
                 'brand-tertiary': '#C51F5D',
