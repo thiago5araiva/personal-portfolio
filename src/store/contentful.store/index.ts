@@ -1,11 +1,15 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { ContentfulPostData } from '@/store/contentful.store/contentful.type'
-import { useEffect, useState } from 'react'
+import {
+    ContentfulPostData,
+    PostDataItem,
+} from '@/store/contentful.store/contentful.type'
+import { useSyncExternalStore } from 'react'
 
 interface InterfaceContentfulData {
     updatedAt: string
     data: ContentfulPostData
+    following: string[]
     assets?: any[]
 }
 
@@ -19,8 +23,8 @@ const initialState: InterfaceContentfulData = {
         skip: 0,
         limit: 0,
         items: [],
-        following: [],
     },
+    following: [],
     assets: [],
 }
 
@@ -29,43 +33,72 @@ const useContentfulStore = create<TContentfulStore>()(
     persist(() => initialState, { name: 'post-collection' })
 )
 
-// Hook hydration-safe para evitar mismatch entre SSR e cliente
+export function useHydration() {
+    return useSyncExternalStore(
+        (callback) => useContentfulStore.persist.onFinishHydration(callback),
+        () => useContentfulStore.persist.hasHydrated(),
+        () => false // Server-side, assume not hydrated
+    )
+}
+
 export function useContentfulStoreHydrated() {
-    const [hydrated, setHydrated] = useState(false)
+    const isHydrated = useHydration()
     const store = useContentfulStore()
-    useEffect(() => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional: marks store as hydrated after client mount
-        setHydrated(true)
-    }, [])
-    return hydrated ? store : initialState
+    return isHydrated ? store : { ...initialState }
 }
 
 const { setState, getState } = useContentfulStore
 
 /*** contentful-store***/
-
 export const getContentfulStore = () => getState()
-export const resetContentfulStore = () => setState(initialState)
 
-/*** contentful-data***/
-export const setContentfulData = (payload: TContentfulStore) => {
-    setState({ ...payload })
+export const resetContentfulStore = () => setState({ ...initialState })
+
+export const setContentfulData = (payload: InterfaceContentfulData) => {
+    const followed = getState().following
+    const items = payload?.data.items
+
+    const fn = (i: PostDataItem) => followed?.includes(i.sys.id)
+    const itemsMap = items.map((i) => (fn(i) ? { ...i, isFollow: true } : i))
+
+    setState({ ...payload, data: { ...payload?.data, items: itemsMap } })
     return
 }
+
 export const setContentfulAssets = (payload: any[]) => {
     setState({ ...getState(), assets: payload })
     return
 }
 
-export const setContentFollowing = (payload: string) => {
-    const { data } = getState()
-    const recommendedData = [...data?.items]
-    const recommendedIndex = data.items?.findIndex((i) => i.sys.id === payload)
-    const recommendItem = data.items?.[recommendedIndex]
+export const unsetContentFollowing = (id: string) => {
+    const { data, following } = getState()
 
-    const isFollow = !!recommendItem?.follow
-    recommendedData[recommendedIndex] = { ...recommendItem, follow: !isFollow }
-    setState({ ...getState(), data: { ...data, items: recommendedData } })
+    const followingFilter = following.filter((i) => i !== id)
+
+    const recommended = data?.items
+    const recommendedIndex = recommended.findIndex((i) => i.sys.id === id)
+    recommended[recommendedIndex].isFollow = false
+
+    setState({ ...getState(), data: { ...data, items: recommended } })
+    setState({ ...getState(), following: followingFilter })
+
+    return
+}
+
+export const setContentFollowing = (id: string) => {
+    const { data, following } = getState()
+
+    const isFollowed = following.includes(id)
+
+    if (isFollowed) return unsetContentFollowing(id)
+
+    const recommended = data?.items
+    const recommendedIndex = recommended.findIndex((i) => i.sys.id === id)
+    recommended[recommendedIndex].isFollow = true
+
+    setState({ ...getState(), following: [...following, id] })
+    setState({ ...getState(), data: { ...data, items: recommended } })
+
     return
 }
 

@@ -4,7 +4,11 @@ export interface ContentfulPostData {
     skip: number
     limit: number
     items: PostDataItem[]
-    following: string[]
+    includes?: ContentfulIncludes
+}
+
+export interface ContentfulIncludes {
+    Asset?: ContentfulAsset[]
 }
 
 export interface SysRoot {
@@ -12,7 +16,7 @@ export interface SysRoot {
 }
 
 export interface PostDataItem {
-    follow?: boolean
+    isFollow?: boolean
     metadata: Metadata
     sys: SysItem
     fields: Fields
@@ -82,4 +86,45 @@ export interface Fields {
     description: string
     body: string
     slug: string
+}
+
+export interface ContentfulAsset {
+    metadata: Metadata
+    sys: AssetSys
+    fields: AssetFields
+}
+
+export interface AssetSys {
+    space: Space
+    id: string
+    type: string
+    createdAt: string
+    updatedAt: string
+    environment: Environment
+    publishedVersion: number
+    revision: number
+    locale: string
+}
+
+export interface AssetFields {
+    title: string
+    description: string
+    file: AssetFile
+}
+
+export interface AssetFile {
+    url: string
+    details: AssetFileDetails
+    fileName: string
+    contentType: string
+}
+
+export interface AssetFileDetails {
+    size: number
+    image?: AssetImageDimensions
+}
+
+export interface AssetImageDimensions {
+    width: number
+    height: number
 }
