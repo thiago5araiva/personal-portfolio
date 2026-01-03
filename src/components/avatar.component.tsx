@@ -22,7 +22,7 @@ export default function AvatarComponent(props: Props) {
     return (
         <div className={cn('avatar-component', className)}>
             <div className="flex gap-3 items-center">
-                <Avatar className="bg-brand-secondary text-white text-xs w-9 h-9">
+                <Avatar className="bg-caesar-black text-caesar-white text-xs w-9 h-9">
                     <AvatarImage src={profileImageUrl} alt="user" />
                     <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>

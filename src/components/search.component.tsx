@@ -45,8 +45,8 @@ export default function SearchHomeComponent({ className }: Props) {
                         render={({ field }) => (
                             <FormItem className="min-w-64">
                                 <FormControl>
-                                    <div className="flex items-center space-x-2 border rounded-full h-9 focus-visible:ring-0 px-3">
-                                        <Search size={18} />
+                                    <div className="flex items-center space-x-2 border border-caesar-black/20 rounded-full h-9 focus-visible:ring-0 px-3">
+                                        <Search size={18} className="text-caesar-black/50" />
                                         <Input
                                             {...field}
                                             className="border-none p-0 ml-0 h-6 focus-visible:ring-0"

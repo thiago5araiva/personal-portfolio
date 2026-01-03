@@ -15,7 +15,7 @@ function Topic({ children }: TopicType) {
 Topic.Header = function Header({ title }: TopicHeaderType) {
     return (
         <div className="featured__header flex items-center">
-            <Dot className="text-brand-tertiary" />
+            <Dot className="text-caesar-black" />
             <span className="font-bold">{title}</span>
         </div>
     )
@@ -32,14 +32,14 @@ Topic.List = function List({ data }: TopicListType) {
     )
 }
 Topic.ListItem = function ListItem({ value }: TopicListItemType) {
-    return <h3 className="text-base font-light line-clamp-2">{value}</h3>
+    return <h3 className="text-base font-light line-clamp-2 text-caesar-black/70">{value}</h3>
 }
 Topic.Button = function Button({ href, label }: TopicButtonType) {
     return (
         <div className="self-end">
             <Link href={href} className="flex items-center gap-3">
                 <h6>{label}</h6>
-                <MoveRight className="text-brand-tertiary" />
+                <MoveRight className="text-caesar-black" />
             </Link>
         </div>
     )
