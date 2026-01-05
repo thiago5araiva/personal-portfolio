@@ -17,7 +17,9 @@ export default function HomeModel() {
 
     const { data: postResponseData, ...postResponse } = QueryPostEntries()
 
+
     const recommended = contentFulStore?.data.items
+    const includes = contentFulStore?.data.includes
     const following = recommended.filter((i) => i.isFollow)
 
     const handleContentfulDataStore = () => {
@@ -34,6 +36,7 @@ export default function HomeModel() {
         state: {
             recommended,
             following,
+            includes,
         },
     }
 }

@@ -1,5 +1,5 @@
-import { cn } from '../lib/utils'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { cn } from '@/lib/utils'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 type Props = {
     name: string
@@ -26,7 +26,7 @@ export default function AvatarComponent(props: Props) {
                     <AvatarImage src={profileImageUrl} alt="user" />
                     <AvatarFallback>{initials}</AvatarFallback>
                 </Avatar>
-                <h6>{name}</h6>
+                <h6 className={'text-xs'}>{name}</h6>
             </div>
         </div>
     )

@@ -12,13 +12,8 @@ export default function ContentView({ state, actions }: Props) {
     const { post, isLoading, isNotFound } = state
     const { handleBookmark } = actions
 
-    if (isLoading) {
-        return <ContentView.Loading />
-    }
-
-    if (isNotFound || !post) {
-        return <ContentView.NotFound />
-    }
+    if (isLoading) return <ContentView.Loading />
+    if (isNotFound || !post) return <ContentView.NotFound />
 
     const { fields, sys, isFollow } = post
     const readingTime = Math.round(fields.body.split(' ').length / 200)

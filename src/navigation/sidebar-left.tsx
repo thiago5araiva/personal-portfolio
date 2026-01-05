@@ -44,19 +44,26 @@ export default function SidebarLeft({ links }: Props) {
             <nav className="navi__position bg-caesar-white sticky top-0 z-10 right-0 left-0">
                 <div className="nav__container flex lg:flex-col lg:h-screen items-center justify-between py-4 sm:py-9">
                     {/* logo */}
-                    <div className="navigation-logo">
-                        <Image src={Logo} alt="Logo" width={24} height={24} />
-                    </div>
+                    <Link href={'/'}>
+                        <div className="navigation-logo">
+                            <Image
+                                src={Logo}
+                                alt="Logo"
+                                width={24}
+                                height={24}
+                            />
+                        </div>
+                    </Link>
                     {/* links */}
                     <div className="navigation-links order-1 ">
                         <NavigationLinks data={links} />
                     </div>
                     {/* avatar */}
-                    <div className="navigation-avatar order-2">
+                    <div className="navigation-avatar order-2 cursor-pointer">
                         <Avatar className=" text-caesar-black">
                             <AvatarImage src="" alt="user" />
                             <AvatarFallback className="border border-caesar-black/50 text-caesar-black/50 text-xs">
-                                ER
+                                TS
                             </AvatarFallback>
                         </Avatar>
                     </div>

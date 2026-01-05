@@ -1,7 +1,6 @@
 const routes = [
-    { label: 'Home', href: '#', name: 'LampDesk' },
-    { label: 'Bookmarks', href: '#', name: 'Bookmark' },
-    { label: 'Articles', href: '#', name: 'FileText' },
+    { label: 'Home', href: '#', name: 'LampDesk' }, //ideas/references
+    { label: 'TV', href: '#', name: 'Tv' }, //videos
+    { label: 'Articles', href: '#', name: 'FileText' }, //courses
 ]
-
 export default routes

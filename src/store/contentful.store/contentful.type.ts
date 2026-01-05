@@ -86,6 +86,16 @@ export interface Fields {
     description: string
     body: string
     slug: string
+    tag: string
+    image?: AssetLink
+}
+
+export interface AssetLink {
+    sys: {
+        type: 'Link'
+        linkType: 'Asset'
+        id: string
+    }
 }
 
 export interface ContentfulAsset {
@@ -127,4 +137,8 @@ export interface AssetFileDetails {
 export interface AssetImageDimensions {
     width: number
     height: number
+}
+
+export interface GetEntriesOptions {
+    order?: string
 }

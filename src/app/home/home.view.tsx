@@ -14,7 +14,7 @@ type TabValue = 'following' | 'recommended'
 export default function View({ state }: Props) {
     const [activeTab, setActiveTab] = useState<TabValue>('recommended')
 
-    const { recommended, following } = state
+    const { recommended, following, includes } = state
 
     const handleTabs = (value = '') => setActiveTab(value as TabValue)
 
@@ -49,7 +49,7 @@ export default function View({ state }: Props) {
                                 </TabsTrigger>
                             </TabsList>
                         </div>
-                        <Content data={contentType} />
+                        <Content data={contentType} includes={includes} />
                     </Tabs>
                 </div>
                 {/* desktop: topic-component lateral */}
