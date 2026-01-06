@@ -9,6 +9,8 @@ import {
 import { resolveAssetUrl } from '@/services/contentful/contentful-asset-resolver'
 import Link from 'next/link'
 
+const PLACEHOLDER_IMAGE =
+    'https://placehold.co/600x400/e5e5e5/666666.png?text=No+Image'
 type Props = PropsWithChildren<{
     data: PostDataItem[]
     includes?: ContentfulIncludes
@@ -95,9 +97,6 @@ Content.Image = function ContentImage({ src }: { src: string }) {
 }
 
 export default function Content({ data, includes }: Props) {
-    const PLACEHOLDER_IMAGE =
-        'https://placehold.co/600x400/e5e5e5/666666.png?text=No+Image'
-
     return (
         <div className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-6">
             {data.map((item) => {

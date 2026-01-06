@@ -14,7 +14,7 @@ type TabValue = 'following' | 'recommended'
 export default function View({ state }: Props) {
     const [activeTab, setActiveTab] = useState<TabValue>('recommended')
 
-    const { recommended, following, includes } = state
+    const { recommended, following, featured, includes } = state
 
     const handleTabs = (value = '') => setActiveTab(value as TabValue)
 
@@ -55,13 +55,13 @@ export default function View({ state }: Props) {
                 {/* desktop: topic-component lateral */}
                 <div className="home__featured hidden lg:block border-l pl-9 max-w-sm">
                     <div className="sticky top-9">
-                        <Featured />
+                        <Featured data={featured} />
                     </div>
                 </div>
             </div>
             {/* mobile: topic-component no final */}
             <section className="home__featured-mobile lg:hidden my-9  px-2 sm:px-6">
-                <Featured />
+                <Featured data={featured} />
             </section>
         </section>
     )

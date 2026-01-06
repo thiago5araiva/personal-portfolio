@@ -1,30 +1,16 @@
-import axios, {
-    AxiosInstance,
-    AxiosRequestConfig,
-    CreateAxiosDefaults,
-} from 'axios'
-import { IHttpClient } from '../http-client.interface'
+import { GenericHttpClient } from '../generic-http-client'
 import { ContentfulConfig } from './contentful-config'
 
-export class ContentfulHttpClient implements IHttpClient {
-    private axiosInstance: AxiosInstance
+export class ContentfulHttpClient extends GenericHttpClient {
     constructor() {
-        const config: CreateAxiosDefaults = {
+        super({
             baseURL: ContentfulConfig.baseUrl,
-            headers: {
-                'Content-Type': 'application/json',
+            interceptors: {
+                request: async (config) => {
+                    config.headers.Authorization = `Bearer ${ContentfulConfig.token}`
+                    return config
+                },
             },
-        }
-        this.axiosInstance = axios.create(config)
-        this.axiosInstance.interceptors.request.use(async (config) => {
-            config.headers.Authorization = `Bearer ${ContentfulConfig.token}`
-            return config
         })
-    }
-    async get(url: string, config: AxiosRequestConfig<any>) {
-        return await this.axiosInstance.get(url)
-    }
-    async post(url: string, data?: any, config?: any) {
-        return await this.axiosInstance.post(url, data, config)
     }
 }

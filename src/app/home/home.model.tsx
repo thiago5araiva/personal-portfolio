@@ -6,6 +6,7 @@ import {
 import { useEffect } from 'react'
 import { ContentfulPostData } from '@/store/contentful.store/contentful.type'
 import { toast } from 'sonner'
+import { QueryDevToPostEntries } from '@/services/news/dev-to'
 
 const currentDate = new Date()
 const isoDateString = currentDate.toISOString()
@@ -16,11 +17,14 @@ export default function HomeModel() {
     const contentFulStore = useContentfulStoreHydrated()
 
     const { data: postResponseData, ...postResponse } = QueryPostEntries()
-
+    const { data: devToResponse } = QueryDevToPostEntries()
 
     const recommended = contentFulStore?.data.items
     const includes = contentFulStore?.data.includes
     const following = recommended.filter((i) => i.isFollow)
+    const featured = devToResponse?.data.map(
+        (i: { title: string; url: string }) => ({ title: i.title, url: i.url })
+    )
 
     const handleContentfulDataStore = () => {
         const content = postResponseData?.data
@@ -37,6 +41,7 @@ export default function HomeModel() {
             recommended,
             following,
             includes,
+            featured,
         },
     }
 }

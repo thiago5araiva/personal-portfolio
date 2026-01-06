@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 
 type TopicType = { children: ReactNode }
 type TopicHeaderType = { title: string }
-type TopicListType = { data: Array<{ key: string; value: string }> }
+type TopicListType = { data: Array<{ title: string; url: string }> }
 type TopicListItemType = { value: string }
 type TopicButtonType = { href: string; label: string }
 
@@ -21,12 +21,19 @@ Topic.Header = function Header({ title }: TopicHeaderType) {
     )
 }
 Topic.List = function List({ data }: TopicListType) {
+    const uniqContent = data?.filter(
+        (item, idx, self) =>
+            idx === self.findIndex((t) => t.title === item.title)
+    )
+
     return (
         <div className=" featured__list grid gap-6">
-            {data.map(({ key, value }) => (
-                <div className="featured__item" key={key}>
-                    <Topic.ListItem value={value} />
-                </div>
+            {uniqContent?.slice(0, 5).map(({ title, url }) => (
+                <Link href={url} key={title} target={'_blank'}>
+                    <div className="featured__item">
+                        <Topic.ListItem value={title} />
+                    </div>
+                </Link>
             ))}
         </div>
     )
@@ -41,7 +48,10 @@ Topic.ListItem = function ListItem({ value }: TopicListItemType) {
 Topic.Button = function Button({ href, label }: TopicButtonType) {
     return (
         <div className="self-end">
-            <Link href={href} className="flex items-center gap-3">
+            <Link
+                href={href}
+                className="flex items-center gap-3"
+                target={'_blank'}>
                 <h6>{label}</h6>
                 <MoveRight className="text-caesar-burgundy" />
             </Link>

@@ -1,13 +1,14 @@
 import Topic from '@/components/topic.component'
-import { MOCK_TOPIC_ITEMS } from '@/app/home/home.mock'
 
-export default function HomeFeatured() {
+type Props = { data: Array<{ title: string; url: string }> }
+
+export default function HomeFeatured({ data }: Props) {
     return (
         <div className={'featured'}>
             <Topic>
                 <Topic.Header title={'What Read Today'} />
-                <Topic.List data={MOCK_TOPIC_ITEMS} />
-                <Topic.Button href="/" label={'See more'} />
+                <Topic.List data={data} />
+                <Topic.Button href="https://dev.to/" label={'See more'} />
             </Topic>
         </div>
     )
