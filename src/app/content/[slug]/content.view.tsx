@@ -8,6 +8,14 @@ import Link from 'next/link'
 
 type Props = TypeContentModel
 
+const formatPostDate = (dateTime: string) => {
+    return new Date(dateTime).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    })
+}
+
 export default function ContentView({ state, actions }: Props) {
     const { post, isLoading, isNotFound } = state
     const { handleBookmark } = actions
@@ -17,7 +25,6 @@ export default function ContentView({ state, actions }: Props) {
 
     const { fields, sys, isFollow } = post
     const readingTime = Math.round(fields.body.split(' ').length / 200)
-    const isBookmarked = !!post.isFollow
 
     return (
         <article className="content-page max-w-3xl mx-auto py-8">
@@ -41,17 +48,10 @@ export default function ContentView({ state, actions }: Props) {
                 {/* Meta */}
                 <div className="flex items-center justify-between">
                     <div className="flex items-center flex-wrap gap-2 text-sm text-caesar-black/50">
-                        <AvatarComponent name="Amit Das" />
+                        <AvatarComponent name="Thiago Saraiva" />
                         <Dot className="text-caesar-black/30" />
                         <time dateTime={sys.createdAt}>
-                            {new Date(sys.createdAt).toLocaleDateString(
-                                'en-US',
-                                {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric',
-                                }
-                            )}
+                            {formatPostDate(sys.createdAt)}
                         </time>
                         <Dot className="text-caesar-black/30" />
                         <span>{readingTime} min read</span>

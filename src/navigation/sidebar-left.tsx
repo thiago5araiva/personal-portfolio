@@ -28,7 +28,7 @@ function NavigationLinks({ data }: { data: Props['links'] }) {
                             key={name}
                             name={icon}
                             size={21}
-                            className="text-caesar-black/70 hover:text-caesar-burgundy transition-colors"
+                            className="text-white hover:text-caesar-burgundy transition-colors"
                         />
                         <span className="sr-only">{label}</span>
                     </Link>
@@ -55,7 +55,7 @@ export default function SidebarLeft({ links }: Props) {
                         </div>
                     </Link>
                     {/* links */}
-                    <div className="navigation-links order-1 ">
+                    <div className="navigation-links order-1">
                         <NavigationLinks data={links} />
                     </div>
                     {/* avatar */}
