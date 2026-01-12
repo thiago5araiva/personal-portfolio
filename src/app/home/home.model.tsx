@@ -1,26 +1,39 @@
-import { QueryPostEntries } from '@/services/contentful/contentful-query'
+import { AsyncQueryPostEntries } from '@/app/home/home.actions'
 import {
     setContentfulData,
     useContentfulStoreHydrated,
 } from '@/store/contentful.store'
 import { useEffect } from 'react'
-import { ContentfulPostData } from '@/store/contentful.store/contentful.type'
+import {
+    ContentfulPostData,
+    PostDataItem,
+} from '@/store/contentful.store/contentful.type'
 import { toast } from 'sonner'
 
 const currentDate = new Date()
 const isoDateString = currentDate.toISOString()
 
-type PostData = Pick<ContentfulPostData, 'items'>
+function handleFeaturedItems(data: PostDataItem[]) {
+    const filterByTag = data?.filter((i) => i.fields.tag === 'frontend')
+    return filterByTag?.map((i) => ({
+        title: i.fields.title,
+        url: i.fields.slug,
+    }))
+}
+
+function handleFollowingItems(posts: PostDataItem[]) {
+    return posts?.filter((i) => i.isFollow)
+}
 
 export default function HomeModel() {
     const contentFulStore = useContentfulStoreHydrated()
 
-    const { data: postResponseData, ...postResponse } = QueryPostEntries()
+    const { data: postResponseData, ...postResponse } = AsyncQueryPostEntries()
 
     const recommended = postResponseData?.data.items
     const includes = postResponseData?.data.includes
-    const following = contentFulStore?.data.items.filter((i) => i.isFollow)
-    const featured = [] as Array<{ title: string; url: string }>
+    const following = handleFollowingItems(contentFulStore?.data.items)
+    const featured = handleFeaturedItems(recommended)
 
     const handleContentfulDataStore = () => {
         const content = postResponseData?.data

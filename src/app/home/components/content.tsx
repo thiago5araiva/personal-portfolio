@@ -99,7 +99,7 @@ Content.Image = function ContentImage({ src }: { src: string }) {
 export default function Content({ data, includes }: Props) {
     return (
         <div className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-6">
-            {data.map((item) => {
+            {data?.map((item) => {
                 const { sys, fields } = item
                 const { title, description, image, tag } = fields
                 const imageUrl =

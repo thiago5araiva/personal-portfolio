@@ -1,5 +1,5 @@
 import IndexPage from '@/app/home/home.viewmodel'
 
-export default function Page() {
+export default async function Page() {
     return <IndexPage />
 }

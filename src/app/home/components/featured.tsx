@@ -8,7 +8,6 @@ export default function HomeFeatured({ data }: Props) {
             <Topic>
                 <Topic.Header title={'What Read Today'} />
                 <Topic.List data={data} />
-                <Topic.Button href="https://dev.to/" label={'See more'} />
             </Topic>
         </div>
     )

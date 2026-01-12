@@ -28,7 +28,7 @@ Topic.List = function List({ data }: TopicListType) {
 
     return (
         <div className=" featured__list grid gap-6">
-            {uniqContent?.slice(0, 5).map(({ title, url }) => (
+            {uniqContent?.slice(0, 3).map(({ title, url }) => (
                 <Link href={url} key={title} target={'_blank'}>
                     <div className="featured__item">
                         <Topic.ListItem value={title} />

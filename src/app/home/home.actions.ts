@@ -1,15 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { contentfulRepository } from '@/services/contentful/contentful-repository'
 
-export const QueryPostAssetById = (id: string) => {
-    return useQuery({
-        queryKey: ['postAssets', { id }],
-        queryFn: () => contentfulRepository.getPostAssetById(id),
-        enabled: !!id,
-    })
-}
-
-export const QueryPostEntries = () => {
+export const AsyncQueryPostEntries = () => {
     return useQuery({
         queryKey: ['postEntries'],
         queryFn: () => contentfulRepository.getPostEntries(),

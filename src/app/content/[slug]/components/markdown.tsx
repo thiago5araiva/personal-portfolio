@@ -1,6 +1,7 @@
 'use client'
 
 import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
@@ -12,6 +13,7 @@ export default function Markdown({ content }: Props) {
     return (
         <div className="markdown-content">
             <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
                 components={{
                     // Headings
                     h1: ({ children }) => (
@@ -136,6 +138,21 @@ export default function Markdown({ content }: Props) {
                                 {children}
                             </table>
                         </div>
+                    ),
+                    thead: ({ children }) => (
+                        <thead className="bg-caesar-black/5">
+                            {children}
+                        </thead>
+                    ),
+                    tbody: ({ children }) => (
+                        <tbody>
+                            {children}
+                        </tbody>
+                    ),
+                    tr: ({ children }) => (
+                        <tr className="border-b border-caesar-black/20">
+                            {children}
+                        </tr>
                     ),
                     th: ({ children }) => (
                         <th className="border border-caesar-black/20 bg-caesar-black/5 px-4 py-2 text-left font-semibold text-caesar-black">
