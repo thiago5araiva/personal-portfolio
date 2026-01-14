@@ -17,7 +17,7 @@ function handleFeaturedItems(data: PostDataItem[]) {
     const filterByTag = data?.filter((i) => i.fields.tag === 'frontend')
     return filterByTag?.map((i) => ({
         title: i.fields.title,
-        url: i.fields.slug,
+        url: `/content/${i.fields.slug}`,
     }))
 }
 
