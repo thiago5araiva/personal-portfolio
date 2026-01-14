@@ -2,8 +2,21 @@ import Image from 'next/image'
 import { icons } from 'lucide-react'
 import Icon from '@/utils/icons'
 import Logo from '@/assets/images/portfolio-logo.png'
+import ProfileImage from '@/assets/images/me.png'
 import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import ContactHoverCard from '@/components/contact-hover-card'
+
+const CONTACT_INFO = {
+    name: 'Thiago Saraiva',
+    role: 'Software Engineer',
+    profileImage: ProfileImage,
+    contacts: {
+        whatsapp: '+5562993248451',
+        email: 'thiagosaraivacsouza@gmail.com',
+        linkedin: 'https://www.linkedin.com/in/thiago5araiva/',
+    },
+}
 
 type Link = {
     label: string
@@ -59,14 +72,21 @@ export default function SidebarLeft({ links }: Props) {
                         <NavigationLinks data={links} />
                     </div>
                     {/* avatar */}
-                    <div className="navigation-avatar order-2 cursor-pointer">
-                        <Avatar className=" text-caesar-black">
-                            <AvatarImage src="" alt="user" />
-                            <AvatarFallback className="border border-caesar-black/50 text-caesar-black/50 text-xs">
-                                TS
-                            </AvatarFallback>
-                        </Avatar>
-                    </div>
+                    <ContactHoverCard
+                        name={CONTACT_INFO.name}
+                        role={CONTACT_INFO.role}
+                        profileImageUrl={CONTACT_INFO.profileImage.src}
+                        contacts={CONTACT_INFO.contacts}
+                    >
+                        <div className="navigation-avatar order-2 cursor-pointer group">
+                            <Avatar className="text-caesar-black transition-all duration-300 group-hover:ring-2 group-hover:ring-caesar-burgundy/30 group-hover:ring-offset-2">
+                                <AvatarImage src="" alt="user" />
+                                <AvatarFallback className="border border-caesar-black/50 text-caesar-black/50 text-xs group-hover:border-caesar-burgundy group-hover:text-caesar-burgundy transition-colors duration-300">
+                                    TS
+                                </AvatarFallback>
+                            </Avatar>
+                        </div>
+                    </ContactHoverCard>
                 </div>
             </nav>
         </div>
