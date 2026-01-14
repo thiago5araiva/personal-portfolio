@@ -1,8 +1,0 @@
-export { default as Heading } from './typography/heading'
-export { default as Subtitle } from './typography/subtitle'
-export { default as Paragraph } from './typography/paragraph'
-export { default as Carousel } from './infinite-scroll'
-export { default as Navigation } from './navigation'
-export { default as Loading } from './loading'
-export { default as CTA } from './cta'
-export { default as ContentLink } from './content-link'
