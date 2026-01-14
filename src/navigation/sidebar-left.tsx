@@ -12,7 +12,6 @@ const CONTACT_INFO = {
     role: 'Software Engineer',
     profileImage: ProfileImage,
     contacts: {
-        whatsapp: '+5562993248451',
         email: 'thiagosaraivacsouza@gmail.com',
         linkedin: 'https://www.linkedin.com/in/thiago5araiva/',
     },
