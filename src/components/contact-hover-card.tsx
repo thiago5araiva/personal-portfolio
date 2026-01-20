@@ -6,7 +6,8 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from '@/components/ui/hover-card'
-import { MessageCircle, Mail, Linkedin } from 'lucide-react'
+import { MessageCircle, Mail, Linkedin, User } from 'lucide-react'
+import Link from 'next/link'
 
 type ContactInfo = {
     whatsapp?: string
@@ -83,6 +84,56 @@ function ContactLink({
     )
 }
 
+function InternalLink({
+    href,
+    icon: Icon,
+    label,
+    color,
+}: {
+    href: string
+    icon: typeof MessageCircle
+    label: string
+    color: string
+}) {
+    return (
+        <Link
+            href={href}
+            className="group/link flex items-center gap-3 py-2.5 px-3"
+        >
+            <span
+                className={`flex items-center justify-center w-8 h-8 ${color}`}
+            >
+                <Icon size={14} strokeWidth={2} />
+            </span>
+            <span
+                className="text-sm text-caesar-black/70 font-medium tracking-tight"
+            >
+                {label}
+            </span>
+            <span
+                className="ml-auto opacity-0 -translate-x-2 transition-all duration-300
+                           group-hover/link:opacity-100 group-hover/link:translate-x-0"
+            >
+                <svg
+                    width="12"
+                    height="12"
+                    viewBox="0 0 12 12"
+                    fill="none"
+                    className="text-caesar-black/40"
+                >
+                    <path
+                        d="M4 2L8 6L4 10"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
+            </span>
+        </Link>
+    )
+}
+
 export default function ContactHoverCard({
     name,
     role = 'Developer',
@@ -145,6 +196,12 @@ export default function ContactHoverCard({
 
                 {/* Contact links */}
                 <div className="p-3 space-y-0.5">
+                    <InternalLink
+                        href="/about"
+                        icon={User}
+                        label="About"
+                        color="text-caesar-burgundy"
+                    />
                     {whatsappUrl && (
                         <ContactLink
                             href={whatsappUrl}
