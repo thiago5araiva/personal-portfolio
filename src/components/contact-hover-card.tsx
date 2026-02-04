@@ -231,7 +231,7 @@ export default function ContactHoverCard({
                 {/* Footer */}
                 <div className="px-5 py-3 bg-caesar-black/5 border-t border-caesar-black/10">
                     <p className="text-[10px] text-caesar-black/40 font-medium uppercase tracking-widest text-center">
-                        Clique para conectar
+                        Click to connect
                     </p>
                 </div>
             </HoverCardContent>

@@ -38,10 +38,6 @@ next-env.d.ts
 /.vscode
 /.idea
 
-# claude code
-.claude/settings.local.json
-
 pnpm-lock.yaml
 .env
-.claude/settings.local.json
 .idea/material_theme_project_new.xml
