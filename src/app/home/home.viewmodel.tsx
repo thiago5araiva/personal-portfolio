@@ -2,10 +2,12 @@
 
 import View from './home.view'
 import useHomeModel from './home.model'
-import { useQueryClient } from '@tanstack/react-query'
-import { useEffect } from 'react'
 
-export default function IndexPage() {
-    const model = useHomeModel()
+type Props = {
+    initialData: any
+}
+
+export default function IndexPage({ initialData }: Props) {
+    const model = useHomeModel(initialData)
     return <View {...model} />
 }

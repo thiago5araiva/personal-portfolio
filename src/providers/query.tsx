@@ -1,17 +1,16 @@
 'use client'
-import { contentfulRepository } from '@/services/contentful/contentful-repository'
 import {
     QueryClient,
     QueryClientProvider,
     isServer,
 } from '@tanstack/react-query'
-import { ReactNode, useEffect, useState } from 'react'
+import { ReactNode } from 'react'
 
 function makeQueryClient() {
     return new QueryClient({
         defaultOptions: {
             queries: {
-                staleTime: 60 * 1000,
+                staleTime: 5 * 60 * 1000,
             },
         },
     })

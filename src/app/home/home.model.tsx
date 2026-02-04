@@ -25,10 +25,11 @@ function handleFollowingItems(posts: PostDataItem[]) {
     return posts?.filter((i) => i.isFollow)
 }
 
-export default function HomeModel() {
+export default function HomeModel(initialData?: any) {
     const contentFulStore = useContentfulStoreHydrated()
 
-    const { data: postResponseData, ...postResponse } = AsyncQueryPostEntries()
+    const { data: postResponseData, ...postResponse } =
+        AsyncQueryPostEntries(initialData)
 
     const recommended = postResponseData?.data.items
     const includes = postResponseData?.data.includes

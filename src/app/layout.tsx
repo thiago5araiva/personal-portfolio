@@ -2,7 +2,7 @@ import { Analytics } from '@vercel/analytics/react'
 
 import '@/app/global.css'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import { ReactNode } from 'react'
 
 import Navigation from '@/navigation/sidebar-left'
@@ -21,6 +21,11 @@ const roboto = Roboto({
     variable: '--font-roboto',
     display: 'swap',
 })
+
+export const viewport: Viewport = {
+    width: 'device-width',
+    initialScale: 1,
+}
 
 export const metadata: Metadata = {
     title: 'Thiago Saraiva - Developer',
@@ -65,9 +70,9 @@ export default function RootLayout({ children }: Props) {
     return (
         <html lang="en">
             <head>
+                <link rel="preconnect" href="https://images.ctfassets.net" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-                <title>Thiago Saraiva - Developer</title>
             </head>
             <body className={`${roboto.variable} font-sans bg-caesar-white`}>
                 <Providers>

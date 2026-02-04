@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { contentfulRepository } from '@/services/contentful/contentful-repository'
 
-export const AsyncQueryPostEntries = () => {
+export const AsyncQueryPostEntries = (initialData?: any) => {
     return useQuery({
         queryKey: ['postEntries'],
         queryFn: () => contentfulRepository.getPostEntries(),
+        initialData: initialData ? { data: initialData } : undefined,
     })
 }
