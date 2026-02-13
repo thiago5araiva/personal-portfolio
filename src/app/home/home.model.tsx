@@ -5,7 +5,8 @@ import {
 } from '@/store/contentful.store'
 import { useEffect } from 'react'
 import {
-    ContentfulPostData,
+    ContentfulAsset,
+    ContentfulIncludes,
     PostDataItem,
 } from '@/store/contentful.store/contentful.type'
 import { toast } from 'sonner'
@@ -25,23 +26,48 @@ function handleFollowingItems(posts: PostDataItem[]) {
     return posts?.filter((i) => i.isFollow)
 }
 
+function flattenPages(pages: any[]) {
+    const items = pages.flatMap((page) => page?.data?.items ?? [])
+    const assets = pages.flatMap(
+        (page) => page?.data?.includes?.Asset ?? []
+    )
+    const uniqueAssets = assets.reduce<ContentfulAsset[]>((acc, asset) => {
+        if (!acc.some((a) => a.sys.id === asset.sys.id)) acc.push(asset)
+        return acc
+    }, [])
+    const includes: ContentfulIncludes = { Asset: uniqueAssets }
+    return { items, includes }
+}
+
 export default function HomeModel(initialData?: any) {
     const contentFulStore = useContentfulStoreHydrated()
 
-    const { data: postResponseData, ...postResponse } =
-        AsyncQueryPostEntries(initialData)
+    const {
+        data: postResponseData,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        isSuccess,
+        isError,
+    } = AsyncQueryPostEntries(initialData)
 
-    const recommended = postResponseData?.data.items
-    const includes = postResponseData?.data.includes
+    const pages = postResponseData?.pages ?? []
+    const { items: recommended, includes } = flattenPages(pages)
     const following = handleFollowingItems(contentFulStore?.data.items)
     const featured = handleFeaturedItems(recommended)
 
     const handleContentfulDataStore = () => {
-        const content = postResponseData?.data
-        const updatedAt = isoDateString
-        const payload = { ...contentFulStore, updatedAt, data: content }
-        postResponse.isSuccess && setContentfulData(payload)
-        postResponse.isError && toast('Error fetching posts.')
+        if (isSuccess && recommended.length > 0) {
+            const content = {
+                ...pages[0]?.data,
+                items: recommended,
+                includes,
+            }
+            const updatedAt = isoDateString
+            const payload = { ...contentFulStore, updatedAt, data: content }
+            setContentfulData(payload)
+        }
+        if (isError) toast('Error fetching posts.')
     }
 
     useEffect(handleContentfulDataStore, [postResponseData])
@@ -52,6 +78,11 @@ export default function HomeModel(initialData?: any) {
             following,
             includes,
             featured,
+        },
+        infiniteScroll: {
+            fetchNextPage,
+            hasNextPage: hasNextPage ?? false,
+            isFetchingNextPage,
         },
     }
 }

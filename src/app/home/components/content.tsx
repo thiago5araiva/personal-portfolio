@@ -1,7 +1,7 @@
 import AvatarComponent from '@/components/avatar.component'
 import Image from 'next/image'
-import { BookmarkCheck, Dot } from 'lucide-react'
-import { PropsWithChildren } from 'react'
+import { BookmarkCheck, Dot, Loader2 } from 'lucide-react'
+import { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
 import {
     ContentfulIncludes,
     PostDataItem,
@@ -11,9 +11,17 @@ import Link from 'next/link'
 
 const PLACEHOLDER_IMAGE =
     'https://placehold.co/600x400/e5e5e5/666666.png?text=No+Image'
+
+type InfiniteScrollProps = {
+    fetchNextPage: () => void
+    hasNextPage: boolean
+    isFetchingNextPage: boolean
+}
+
 type Props = PropsWithChildren<{
     data: PostDataItem[]
     includes?: ContentfulIncludes
+    infiniteScroll?: InfiniteScrollProps
 }>
 type TypeHeader = { createdAt: string }
 type TypeBody = { state: { title: string; description: string; img: string } }
@@ -96,7 +104,42 @@ Content.Image = function ContentImage({ src }: { src: string }) {
     )
 }
 
-export default function Content({ data, includes }: Props) {
+function LoadingIndicator() {
+    return (
+        <div className="flex items-center justify-center py-8">
+            <Loader2 className="h-6 w-6 animate-spin text-caesar-black/40" />
+        </div>
+    )
+}
+
+export default function Content({ data, includes, infiniteScroll }: Props) {
+    const sentinelRef = useRef<HTMLDivElement>(null)
+
+    const handleIntersect = useCallback(
+        (entries: IntersectionObserverEntry[]) => {
+            const [entry] = entries
+            if (
+                entry.isIntersecting &&
+                infiniteScroll?.hasNextPage &&
+                !infiniteScroll?.isFetchingNextPage
+            ) {
+                infiniteScroll.fetchNextPage()
+            }
+        },
+        [infiniteScroll]
+    )
+
+    useEffect(() => {
+        const sentinel = sentinelRef.current
+        if (!sentinel || !infiniteScroll) return
+
+        const observer = new IntersectionObserver(handleIntersect, {
+            rootMargin: '0px 0px 200px 0px',
+        })
+        observer.observe(sentinel)
+        return () => observer.disconnect()
+    }, [handleIntersect, infiniteScroll])
+
     return (
         <div className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-6">
             {data?.map((item) => {
@@ -118,6 +161,12 @@ export default function Content({ data, includes }: Props) {
                     </Link>
                 )
             })}
+
+            {infiniteScroll?.isFetchingNextPage && <LoadingIndicator />}
+
+            {infiniteScroll && (
+                <div ref={sentinelRef} aria-hidden="true" className="h-1" />
+            )}
         </div>
     )
 }

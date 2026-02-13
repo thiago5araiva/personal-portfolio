@@ -141,4 +141,8 @@ export interface AssetImageDimensions {
 
 export interface GetEntriesOptions {
     order?: string
+    skip?: number
+    limit?: number
 }
+
+export const PAGE_SIZE = 4

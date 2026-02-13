@@ -11,7 +11,7 @@ import { useState } from 'react'
 type Props = TypeHomeModel
 type TabValue = 'following' | 'recommended'
 
-export default function View({ state }: Props) {
+export default function View({ state, infiniteScroll }: Props) {
     const [activeTab, setActiveTab] = useState<TabValue>('recommended')
 
     const { recommended, following, featured, includes } = state
@@ -19,6 +19,9 @@ export default function View({ state }: Props) {
     const handleTabs = (value = '') => setActiveTab(value as TabValue)
 
     const contentType = activeTab === 'recommended' ? recommended : following
+
+    const scrollProps =
+        activeTab === 'recommended' ? infiniteScroll : undefined
 
     return (
         <section className={'home h-full'}>
@@ -49,7 +52,11 @@ export default function View({ state }: Props) {
                                 </TabsTrigger>
                             </TabsList>
                         </div>
-                        <Content data={contentType} includes={includes} />
+                        <Content
+                            data={contentType}
+                            includes={includes}
+                            infiniteScroll={scrollProps}
+                        />
                     </Tabs>
                 </div>
                 {/* desktop: topic-component lateral */}
