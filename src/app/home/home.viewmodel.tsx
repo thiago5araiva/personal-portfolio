@@ -5,9 +5,10 @@ import useHomeModel from './home.model'
 
 type Props = {
     initialData: any
+    allItems: any[]
 }
 
-export default function IndexPage({ initialData }: Props) {
-    const model = useHomeModel(initialData)
+export default function IndexPage({ initialData, allItems }: Props) {
+    const model = useHomeModel(initialData, allItems)
     return <View {...model} />
 }

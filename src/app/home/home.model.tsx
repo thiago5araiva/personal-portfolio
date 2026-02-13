@@ -39,7 +39,7 @@ function flattenPages(pages: any[]) {
     return { items, includes }
 }
 
-export default function HomeModel(initialData?: any) {
+export default function HomeModel(initialData?: any, allItems?: any[]) {
     const contentFulStore = useContentfulStoreHydrated()
 
     const {
@@ -54,7 +54,7 @@ export default function HomeModel(initialData?: any) {
     const pages = postResponseData?.pages ?? []
     const { items: recommended, includes } = flattenPages(pages)
     const following = handleFollowingItems(contentFulStore?.data.items)
-    const featured = handleFeaturedItems(recommended)
+    const featured = handleFeaturedItems(allItems ?? recommended)
 
     const handleContentfulDataStore = () => {
         if (isSuccess && recommended.length > 0) {
