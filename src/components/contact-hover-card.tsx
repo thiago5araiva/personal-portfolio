@@ -6,8 +6,15 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from '@/components/ui/hover-card'
+import {
+    Drawer,
+    DrawerContent,
+    DrawerTrigger,
+    DrawerTitle,
+} from '@/components/ui/drawer'
 import { MessageCircle, Mail, Linkedin, User } from 'lucide-react'
 import Link from 'next/link'
+import { useIsMobile } from '@/hooks/use-is-mobile'
 
 type ContactInfo = {
     whatsapp?: string
@@ -134,6 +141,97 @@ function InternalLink({
     )
 }
 
+function CardContent({
+    name,
+    role,
+    initials,
+    profileImageUrl,
+    whatsappUrl,
+    emailUrl,
+    linkedinUrl,
+}: {
+    name: string
+    role: string
+    initials: string
+    profileImageUrl?: string
+    whatsappUrl: string | null
+    emailUrl: string | null
+    linkedinUrl?: string
+}) {
+    return (
+        <>
+            {/* Profile section */}
+            <div className="pt-5 pb-4 px-5">
+                <div className="flex items-center gap-4">
+                    <div className="relative">
+                        <Avatar className="w-14 h-14 ring-2 ring-caesar-black/10 ring-offset-2 ring-offset-white">
+                            <AvatarImage
+                                src={profileImageUrl}
+                                alt={name}
+                            />
+                            <AvatarFallback className="bg-caesar-black text-white text-sm font-semibold tracking-wide">
+                                {initials}
+                            </AvatarFallback>
+                        </Avatar>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <h3 className="font-semibold text-caesar-black text-base tracking-tight truncate">
+                            {name}
+                        </h3>
+                        <p className="text-caesar-black/50 text-xs font-medium uppercase tracking-widest mt-0.5">
+                            {role}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Divider */}
+            <div className="mx-5 h-px bg-caesar-black/10" />
+
+            {/* Contact links */}
+            <div className="p-3 space-y-0.5">
+                <InternalLink
+                    href="/about"
+                    icon={User}
+                    label="About"
+                    color="text-caesar-burgundy"
+                />
+                {whatsappUrl && (
+                    <ContactLink
+                        href={whatsappUrl}
+                        icon={MessageCircle}
+                        label="WhatsApp"
+                        color="text-caesar-burgundy"
+                    />
+                )}
+                {emailUrl && (
+                    <ContactLink
+                        href={emailUrl}
+                        icon={Mail}
+                        label="Email"
+                        color="text-caesar-burgundy"
+                    />
+                )}
+                {linkedinUrl && (
+                    <ContactLink
+                        href={linkedinUrl}
+                        icon={Linkedin}
+                        label="LinkedIn"
+                        color="text-caesar-burgundy"
+                    />
+                )}
+            </div>
+
+            {/* Footer */}
+            <div className="px-5 py-3 bg-caesar-black/5 border-t border-caesar-black/10">
+                <p className="text-[10px] text-caesar-black/40 font-medium uppercase tracking-widest text-center">
+                    Click to connect
+                </p>
+            </div>
+        </>
+    )
+}
+
 export default function ContactHoverCard({
     name,
     role = 'Developer',
@@ -141,6 +239,7 @@ export default function ContactHoverCard({
     contacts,
     children,
 }: Props) {
+    const isMobile = useIsMobile()
     const initials = getInitials(name)
 
     const whatsappUrl = contacts.whatsapp
@@ -148,6 +247,28 @@ export default function ContactHoverCard({
         : null
     const emailUrl = contacts.email ? `mailto:${contacts.email}` : null
     const linkedinUrl = contacts.linkedin
+
+    const contentProps = {
+        name,
+        role,
+        initials,
+        profileImageUrl,
+        whatsappUrl,
+        emailUrl,
+        linkedinUrl,
+    }
+
+    if (isMobile) {
+        return (
+            <Drawer>
+                <DrawerTrigger asChild>{children}</DrawerTrigger>
+                <DrawerContent className="bg-caesar-white rounded-none border-caesar-black/10">
+                    <DrawerTitle className="sr-only">Contact</DrawerTitle>
+                    <CardContent {...contentProps} />
+                </DrawerContent>
+            </Drawer>
+        )
+    }
 
     return (
         <HoverCard openDelay={200} closeDelay={100}>
@@ -163,77 +284,7 @@ export default function ContactHoverCard({
                            data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
                            data-[side=right]:slide-in-from-left-4"
             >
-                {/* Header */}
-                <div className="relative">
-                    {/* Profile section */}
-                    <div className="pt-5 pb-4 px-5">
-                        <div className="flex items-center gap-4">
-                            <div className="relative">
-                                <Avatar className="w-14 h-14 ring-2 ring-caesar-black/10 ring-offset-2 ring-offset-white">
-                                    <AvatarImage
-                                        src={profileImageUrl}
-                                        alt={name}
-                                    />
-                                    <AvatarFallback className="bg-caesar-black text-white text-sm font-semibold tracking-wide">
-                                        {initials}
-                                    </AvatarFallback>
-                                </Avatar>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                                <h3 className="font-semibold text-caesar-black text-base tracking-tight truncate">
-                                    {name}
-                                </h3>
-                                <p className="text-caesar-black/50 text-xs font-medium uppercase tracking-widest mt-0.5">
-                                    {role}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Divider */}
-                <div className="mx-5 h-px bg-caesar-black/10" />
-
-                {/* Contact links */}
-                <div className="p-3 space-y-0.5">
-                    <InternalLink
-                        href="/about"
-                        icon={User}
-                        label="About"
-                        color="text-caesar-burgundy"
-                    />
-                    {whatsappUrl && (
-                        <ContactLink
-                            href={whatsappUrl}
-                            icon={MessageCircle}
-                            label="WhatsApp"
-                            color="text-caesar-burgundy"
-                        />
-                    )}
-                    {emailUrl && (
-                        <ContactLink
-                            href={emailUrl}
-                            icon={Mail}
-                            label="Email"
-                            color="text-caesar-burgundy"
-                        />
-                    )}
-                    {linkedinUrl && (
-                        <ContactLink
-                            href={linkedinUrl}
-                            icon={Linkedin}
-                            label="LinkedIn"
-                            color="text-caesar-burgundy"
-                        />
-                    )}
-                </div>
-
-                {/* Footer */}
-                <div className="px-5 py-3 bg-caesar-black/5 border-t border-caesar-black/10">
-                    <p className="text-[10px] text-caesar-black/40 font-medium uppercase tracking-widest text-center">
-                        Click to connect
-                    </p>
-                </div>
+                <CardContent {...contentProps} />
             </HoverCardContent>
         </HoverCard>
     )
