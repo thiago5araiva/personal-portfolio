@@ -22,8 +22,11 @@ function handleFeaturedItems(data: PostDataItem[]) {
     }))
 }
 
-function handleFollowingItems(posts: PostDataItem[]) {
-    return posts?.filter((i) => i.isFollow)
+function handleFollowingItems(
+    posts: PostDataItem[],
+    followingIds: string[]
+) {
+    return posts?.filter((i) => i.isFollow || followingIds.includes(i.sys.id))
 }
 
 function flattenPages(pages: any[]) {
@@ -53,7 +56,8 @@ export default function HomeModel(initialData?: any, allItems?: any[]) {
 
     const pages = postResponseData?.pages ?? []
     const { items: recommended, includes } = flattenPages(pages)
-    const following = handleFollowingItems(contentFulStore?.data.items)
+    const followingIds = contentFulStore?.following ?? []
+    const following = handleFollowingItems(recommended, followingIds)
     const featured = handleFeaturedItems(allItems ?? recommended)
 
     const handleContentfulDataStore = () => {

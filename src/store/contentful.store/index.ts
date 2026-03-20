@@ -73,33 +73,32 @@ export const setContentfulAssets = (payload: any[]) => {
 export const unsetContentFollowing = (id: string) => {
     const { data, following } = getState()
 
-    const followingFilter = following.filter((i) => i !== id)
+    const updatedFollowing = following.filter((i) => i !== id)
+    const updatedItems = data.items.map((i) =>
+        i.sys.id === id ? { ...i, isFollow: false } : i
+    )
 
-    const recommended = data?.items
-    const recommendedIndex = recommended.findIndex((i) => i.sys.id === id)
-    recommended[recommendedIndex].isFollow = false
-
-    setState({ ...getState(), data: { ...data, items: recommended } })
-    setState({ ...getState(), following: followingFilter })
-
-    return
+    setState({
+        ...getState(),
+        following: updatedFollowing,
+        data: { ...data, items: updatedItems },
+    })
 }
 
 export const setContentFollowing = (id: string) => {
     const { data, following } = getState()
 
-    const isFollowed = following.includes(id)
+    if (following.includes(id)) return unsetContentFollowing(id)
 
-    if (isFollowed) return unsetContentFollowing(id)
+    const updatedItems = data.items.map((i) =>
+        i.sys.id === id ? { ...i, isFollow: true } : i
+    )
 
-    const recommended = data?.items
-    const recommendedIndex = recommended.findIndex((i) => i.sys.id === id)
-    recommended[recommendedIndex].isFollow = true
-
-    setState({ ...getState(), following: [...following, id] })
-    setState({ ...getState(), data: { ...data, items: recommended } })
-
-    return
+    setState({
+        ...getState(),
+        following: [...following, id],
+        data: { ...data, items: updatedItems },
+    })
 }
 
 export default useContentfulStore
