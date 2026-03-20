@@ -16,6 +16,7 @@ export class ContentfulHttpClient implements IHttpClient {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${this.token}`,
             },
+            next: { revalidate: 60 },
         })
 
         if (!response.ok) {
