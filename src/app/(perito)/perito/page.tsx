@@ -1,43 +1,19 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
 import {
-    Shield,
-    HardDrive,
-    Search,
-    FileText,
-    Scale,
-    BookOpen,
-    Building2,
-    Smartphone,
-    MessageSquare,
-    ShieldAlert,
-    Microscope,
-    ClipboardCheck,
-    Award,
-    ChevronDown,
-    Phone,
-    Mail,
-    Clock,
     ArrowRight,
-    Fingerprint,
     Binary,
+    ChevronDown,
+    Clock,
     Lock,
-    Briefcase,
-    Gavel,
-    Users,
-    Database,
-    Globe,
-    MonitorSmartphone,
-    LinkIcon,
-    GraduationCap,
-    ShieldCheck,
+    Mail,
+    Phone,
     User,
 } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { PAGE_CONSTANTS } from './constants'
 
-/* ─────────────────────────────────────────────
-   Intersection Observer hook for scroll reveals
-   ───────────────────────────────────────────── */
+/* Intersection Observer hook for scroll reveals */
 function useReveal(threshold = 0.15) {
     const ref = useRef<HTMLDivElement>(null)
     const [visible, setVisible] = useState(false)
@@ -52,7 +28,7 @@ function useReveal(threshold = 0.15) {
                     obs.unobserve(el)
                 }
             },
-            { threshold },
+            { threshold }
         )
         obs.observe(el)
         return () => obs.disconnect()
@@ -79,276 +55,28 @@ function RevealSection({
                     ? 'opacity-100 translate-y-0'
                     : 'opacity-0 translate-y-8'
             } ${className}`}
-            style={{ transitionDelay: `${delay}ms` }}
-        >
+            style={{ transitionDelay: `${delay}ms` }}>
             {children}
         </div>
     )
 }
 
-/* ─────────────────────────────────────────────
-   Data
-   ───────────────────────────────────────────── */
-const PILLARS = [
-    {
-        icon: Shield,
-        title: 'Preservação',
-        description:
-            'Garantia de integridade das evidências com cadeia de custódia documentada',
-    },
-    {
-        icon: HardDrive,
-        title: 'Extração',
-        description:
-            'Coleta técnica de dados de dispositivos, sistemas e ambientes digitais',
-    },
-    {
-        icon: Search,
-        title: 'Análise',
-        description:
-            'Exame científico e correlação de evidências com metodologia rastreável',
-    },
-    {
-        icon: FileText,
-        title: 'Laudo Pericial',
-        description:
-            'Documento técnico com conclusões fundamentadas para apresentação em juízo',
-    },
-]
-
-const SERVICES = [
-    {
-        icon: Scale,
-        title: 'Assistência Técnica Judicial',
-        description:
-            'Pareceres técnicos, formulação de quesitos e análise crítica de laudos periciais. Acompanhamento de diligências e suporte técnico às partes no processo.',
-    },
-    {
-        icon: BookOpen,
-        title: 'Perícia Judicial',
-        description:
-            'Análise técnica com base científica para processos cíveis e criminais. Laudos reconhecidos com rigor metodológico e fundamentação técnica.',
-    },
-    {
-        icon: Building2,
-        title: 'Investigação Corporativa',
-        description:
-            'Suporte técnico para incidentes, preservação de evidências e apoio a decisões em contextos corporativos. Compliance, LGPD e resposta a incidentes.',
-    },
-    {
-        icon: Smartphone,
-        title: 'Perícia em Dispositivos Móveis',
-        description:
-            'Extração e análise forense de smartphones e tablets. Recuperação de dados, análise de aplicativos, mensagens e metadados.',
-    },
-    {
-        icon: MessageSquare,
-        title: 'Perícia em Comunicações Digitais',
-        description:
-            'Análise de WhatsApp, emails, redes sociais e plataformas digitais. Verificação de autenticidade e recuperação de conversas.',
-    },
-    {
-        icon: ShieldAlert,
-        title: 'Análise de Fraudes Digitais',
-        description:
-            'Investigação de phishing, ransomware, fraudes bancárias, roubo de dados e crimes cibernéticos.',
-    },
-]
-
-const CREDENTIALS = [
-    {
-        icon: GraduationCap,
-        title: 'Formação Acadêmica',
-        items: [
-            'Cybersecurity — FIAP (2023–2027)',
-            'Engenharia de Software — UniCesumar',
-            'Publicidade — Faculdade Alves Faria',
-        ],
-    },
-    {
-        icon: Fingerprint,
-        title: 'Forense Digital',
-        items: [
-            'Autopsy Forensics, IPED Forensics',
-            'Volatility para Análise de Memória',
-            'Forense em Dispositivos Móveis e OSINT',
-            'Transcrição Forense e Perícias de Áudio',
-        ],
-    },
-    {
-        icon: ShieldCheck,
-        title: 'Cyber Segurança',
-        items: [
-            'Pentest, OWASP Top 10, MITRE ATT&CK',
-            'Threat Intelligence e Resposta a Incidentes',
-            'Ransomware e Segurança Defensiva',
-        ],
-    },
-    {
-        icon: Scale,
-        title: 'Governança & Compliance',
-        items: [
-            'LGPD para Profissionais de Tecnologia',
-            'Direito Digital e Fundamentos de GRC',
-            'Gestão de Riscos e Due Diligence',
-        ],
-    },
-]
-
-const EXPERIENCE_COMPANIES = [
-    'Squarespace',
-    'Pinterest',
-    'Hospital Albert Einstein',
-    'Accenture',
-    'Cheesecake Labs',
-    'BrasilSeg',
-]
-
-const METHODOLOGY = [
-    {
-        step: '01',
-        title: 'Preservação',
-        description:
-            'Isolamento e proteção das evidências digitais com hash de integridade',
-    },
-    {
-        step: '02',
-        title: 'Coleta',
-        description:
-            'Extração técnica seguindo protocolos forenses e cadeia de custódia',
-    },
-    {
-        step: '03',
-        title: 'Análise',
-        description:
-            'Exame científico com ferramentas forenses certificadas',
-    },
-    {
-        step: '04',
-        title: 'Documentação',
-        description:
-            'Elaboração de laudo técnico fundamentado e rastreável',
-    },
-    {
-        step: '05',
-        title: 'Apresentação',
-        description:
-            'Sustentação técnica em audiências e esclarecimento de quesitos',
-    },
-]
-
-const AREAS = [
-    {
-        icon: Gavel,
-        title: 'Cível',
-        items: ['Contratos digitais', 'Propriedade intelectual', 'Documentos eletrônicos'],
-    },
-    {
-        icon: Fingerprint,
-        title: 'Criminal',
-        items: ['Crimes cibernéticos', 'Fraudes digitais', 'Defesa criminal'],
-    },
-    {
-        icon: Briefcase,
-        title: 'Trabalhista',
-        items: ['Evidências digitais', 'Relações de trabalho', 'Provas eletrônicas'],
-    },
-    {
-        icon: Building2,
-        title: 'Corporativo',
-        items: ['Compliance', 'Investigações internas', 'LGPD'],
-    },
-]
-
-const EVIDENCE_TYPES = [
-    { icon: MonitorSmartphone, label: 'Computadores e Servidores' },
-    { icon: Smartphone, label: 'Smartphones e Tablets' },
-    { icon: Mail, label: 'E-mails e Comunicações' },
-    { icon: Users, label: 'Redes Sociais' },
-    { icon: Database, label: 'Banco de Dados e Logs' },
-    { icon: FileText, label: 'Documentos Digitais' },
-    { icon: LinkIcon, label: 'Blockchain e Criptomoedas' },
-]
-
-const TRUST = [
-    {
-        icon: Microscope,
-        title: 'Fundamento Científico',
-        description:
-            'Toda análise respaldada por metodologia científica reconhecida',
-    },
-    {
-        icon: ClipboardCheck,
-        title: 'Rigor Metodológico',
-        description:
-            'Rastreabilidade completa de cada etapa do processo pericial',
-    },
-    {
-        icon: Scale,
-        title: 'Independência Técnica',
-        description:
-            'Conclusões baseadas exclusivamente em evidências e análise objetiva',
-    },
-    {
-        icon: BookOpen,
-        title: 'Clareza Probatória',
-        description:
-            'Laudos em linguagem técnica clara, compreensíveis para operadores do Direito',
-    },
-    {
-        icon: Shield,
-        title: 'Conformidade Legal',
-        description: 'Atuação em conformidade com o CPC, CPP e LGPD',
-    },
-    {
-        icon: Award,
-        title: 'Experiência Comprovada',
-        description:
-            'Atuação consolidada em processos judiciais e investigações corporativas',
-    },
-]
-
-const FAQ = [
-    {
-        question: 'O que é cadeia de custódia digital?',
-        answer: 'A cadeia de custódia é o registro documentado de todas as etapas de manuseio da evidência digital, desde a coleta até a apresentação em juízo. Garante que a prova não foi alterada e mantém sua validade jurídica, conforme previsto no Art. 158-A do CPP.',
-    },
-    {
-        question: 'Qual a diferença entre perito judicial e assistente técnico?',
-        answer: 'O perito judicial é nomeado pelo juiz para produzir o laudo pericial oficial. O assistente técnico é indicado pelas partes para acompanhar a perícia, formular quesitos e produzir parecer técnico divergente, se necessário.',
-    },
-    {
-        question: 'A perícia digital serve como prova em tribunal?',
-        answer: 'Sim. A perícia digital produz provas técnicas com validade jurídica, desde que realizada com metodologia adequada e respeito à cadeia de custódia. O laudo pericial é um dos meios de prova previstos no Código de Processo Civil e no Código de Processo Penal.',
-    },
-    {
-        question: 'Quanto tempo leva uma perícia digital?',
-        answer: 'O prazo varia conforme a complexidade do caso, volume de dados e tipo de dispositivos envolvidos. Casos simples podem ser concluídos em dias, enquanto perícias complexas podem levar semanas. O prazo é sempre estimado previamente.',
-    },
-    {
-        question: 'Que tipos de dispositivos podem ser periciados?',
-        answer: 'Computadores, notebooks, smartphones, tablets, servidores, dispositivos de armazenamento (HD, SSD, pen drives), sistemas em nuvem, emails, redes sociais, bancos de dados e qualquer meio digital que contenha evidências relevantes.',
-    },
-]
-
-/* ─────────────────────────────────────────────
-   Component
-   ───────────────────────────────────────────── */
 export default function PeritoPage() {
     return (
         <div className="scroll-smooth">
-            {/* ═══ HERO ═══ */}
             <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-primary-default">
                 {/* Geometric grid overlay */}
                 <div className="absolute inset-0 opacity-[0.04]">
-                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                        width="100%"
+                        height="100%"
+                        xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <pattern
                                 id="grid"
                                 width="60"
                                 height="60"
-                                patternUnits="userSpaceOnUse"
-                            >
+                                patternUnits="userSpaceOnUse">
                                 <path
                                     d="M 60 0 L 0 0 0 60"
                                     fill="none"
@@ -385,20 +113,17 @@ export default function PeritoPage() {
                             href="https://wa.me/5562993248451"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-8 py-3.5 bg-caesar-burgundy text-white text-sm font-medium tracking-wide rounded-sm hover:bg-caesar-burgundy/90 transition-colors"
-                        >
+                            className="inline-flex items-center gap-2 px-8 py-3.5 bg-caesar-burgundy text-white text-sm font-medium tracking-wide rounded-sm hover:bg-caesar-burgundy/90 transition-colors">
                             Solicitar Consulta Técnica
                             <ArrowRight className="w-4 h-4" />
                         </a>
                         <a
                             href="#servicos"
-                            className="inline-flex items-center gap-2 px-8 py-3.5 border border-white/20 text-white/70 text-sm font-light tracking-wide rounded-sm hover:border-white/40 hover:text-white transition-colors"
-                        >
+                            className="inline-flex items-center gap-2 px-8 py-3.5 border border-white/20 text-white/70 text-sm font-light tracking-wide rounded-sm hover:border-white/40 hover:text-white transition-colors">
                             Conheça os Serviços
                         </a>
                     </div>
                 </div>
-
             </section>
 
             {/* ═══ O QUE É PERÍCIA DIGITAL ═══ */}
@@ -425,7 +150,7 @@ export default function PeritoPage() {
                     </RevealSection>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        {PILLARS.map((pillar, i) => (
+                        {PAGE_CONSTANTS.PILLARS.map((pillar, i) => (
                             <RevealSection key={pillar.title} delay={i * 100}>
                                 <div className="group relative p-6 lg:p-8 bg-white border border-border-primary/40 rounded-sm hover:border-primary-default/30 transition-all duration-300">
                                     <div className="flex items-center justify-center w-12 h-12 mb-5 bg-primary-default/5 rounded-sm">
@@ -451,8 +176,7 @@ export default function PeritoPage() {
             {/* ═══ SERVIÇOS ═══ */}
             <section
                 id="servicos"
-                className="py-20 lg:py-28 bg-white scroll-mt-8"
-            >
+                className="py-20 lg:py-28 bg-white scroll-mt-8">
                 <div className="max-w-6xl mx-auto px-6">
                     <RevealSection>
                         <div className="max-w-3xl mx-auto text-center mb-16">
@@ -471,7 +195,7 @@ export default function PeritoPage() {
                     </RevealSection>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {SERVICES.map((service, i) => (
+                        {PAGE_CONSTANTS.SERVICES.map((service, i) => (
                             <RevealSection key={service.title} delay={i * 80}>
                                 <div className="group h-full p-6 lg:p-8 border border-border-primary/40 rounded-sm hover:border-primary-default/20 hover:shadow-sm transition-all duration-300 bg-background-primary/50">
                                     <div className="flex items-center gap-3 mb-4">
@@ -518,7 +242,8 @@ export default function PeritoPage() {
                                         Thiago Saraiva
                                     </h3>
                                     <p className="text-xs text-font-low tracking-wide">
-                                        Engenheiro de Software &amp; Especialista em Forense Digital
+                                        Engenheiro de Software &amp;
+                                        Especialista em Forense Digital
                                     </p>
                                 </div>
                             </div>
@@ -526,31 +251,34 @@ export default function PeritoPage() {
                             <p className="text-sm text-font-medium font-light leading-relaxed mb-4">
                                 Mais de 9 anos de experiência desenvolvendo
                                 soluções escaláveis e de alta performance para
-                                empresas globais nos setores de tecnologia, saúde
-                                e financeiro — incluindo projetos internacionais
-                                de alto impacto nos Estados Unidos.
+                                empresas globais nos setores de tecnologia,
+                                saúde e financeiro — incluindo projetos
+                                internacionais de alto impacto nos Estados
+                                Unidos.
                             </p>
                             <p className="text-sm text-font-medium font-light leading-relaxed mb-4">
                                 Especialização em Cyber Segurança com foco em{' '}
                                 <span className="font-medium text-font-high">
-                                    Computação Forense, Perícia Digital, Pentest,
-                                    Threat Intelligence e Resposta a Incidentes
+                                    Computação Forense, Perícia Digital,
+                                    Pentest, Threat Intelligence e Resposta a
+                                    Incidentes
                                 </span>
                                 . Formação que combina profundidade técnica em
                                 engenharia de software com rigor metodológico em
                                 análise forense.
                             </p>
                             <p className="text-sm text-font-medium font-light leading-relaxed">
-                                Essa combinação rara permite compreender sistemas
-                                por dentro — não apenas analisar superficialmente
-                                — garantindo análises técnicas mais precisas e
-                                laudos fundamentados com profundidade.
+                                Essa combinação rara permite compreender
+                                sistemas por dentro — não apenas analisar
+                                superficialmente — garantindo análises técnicas
+                                mais precisas e laudos fundamentados com
+                                profundidade.
                             </p>
                         </RevealSection>
 
                         {/* Credentials — right column */}
                         <div className="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {CREDENTIALS.map((cred, i) => (
+                            {PAGE_CONSTANTS.CREDENTIALS.map((cred, i) => (
                                 <RevealSection key={cred.title} delay={i * 100}>
                                     <div className="h-full p-5 bg-background-primary border border-border-primary/40 rounded-sm">
                                         <div className="flex items-center gap-2.5 mb-3">
@@ -563,8 +291,7 @@ export default function PeritoPage() {
                                             {cred.items.map((item) => (
                                                 <li
                                                     key={item}
-                                                    className="text-xs text-font-medium font-light leading-relaxed flex items-start gap-2"
-                                                >
+                                                    className="text-xs text-font-medium font-light leading-relaxed flex items-start gap-2">
                                                     <span className="w-1 h-1 rounded-full bg-primary-default/30 mt-1.5 shrink-0" />
                                                     {item}
                                                 </li>
@@ -583,14 +310,15 @@ export default function PeritoPage() {
                                 Experiência em empresas de referência
                             </p>
                             <div className="flex flex-wrap justify-center gap-3">
-                                {EXPERIENCE_COMPANIES.map((company) => (
-                                    <span
-                                        key={company}
-                                        className="px-4 py-2 text-xs font-medium text-font-medium bg-background-primary border border-border-primary/40 rounded-sm"
-                                    >
-                                        {company}
-                                    </span>
-                                ))}
+                                {PAGE_CONSTANTS.EXPERIENCE_COMPANIES.map(
+                                    (company) => (
+                                        <span
+                                            key={company}
+                                            className="px-4 py-2 text-xs font-medium text-font-medium bg-background-primary border border-border-primary/40 rounded-sm">
+                                            {company}
+                                        </span>
+                                    )
+                                )}
                             </div>
                         </div>
                     </RevealSection>
@@ -601,14 +329,16 @@ export default function PeritoPage() {
             <section className="py-20 lg:py-28 bg-primary-default relative overflow-hidden">
                 {/* Subtle pattern */}
                 <div className="absolute inset-0 opacity-[0.03]">
-                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                        width="100%"
+                        height="100%"
+                        xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <pattern
                                 id="dots"
                                 width="20"
                                 height="20"
-                                patternUnits="userSpaceOnUse"
-                            >
+                                patternUnits="userSpaceOnUse">
                                 <circle cx="1" cy="1" r="0.5" fill="white" />
                             </pattern>
                         </defs>
@@ -639,15 +369,14 @@ export default function PeritoPage() {
                         <div className="absolute left-[23px] lg:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
 
                         <div className="space-y-8 lg:space-y-12">
-                            {METHODOLOGY.map((step, i) => (
+                            {PAGE_CONSTANTS.METHODOLOGY.map((step, i) => (
                                 <RevealSection key={step.step} delay={i * 120}>
                                     <div
                                         className={`relative flex items-start gap-6 lg:gap-12 ${
                                             i % 2 === 0
                                                 ? 'lg:flex-row'
                                                 : 'lg:flex-row-reverse'
-                                        }`}
-                                    >
+                                        }`}>
                                         {/* Content — mobile: always right; desktop: alternates */}
                                         <div className="lg:hidden flex-1 pl-6">
                                             <div className="text-xs font-bold text-caesar-burgundy tracking-[0.2em] mb-1">
@@ -667,8 +396,7 @@ export default function PeritoPage() {
                                                 i % 2 === 0
                                                     ? 'text-right pr-12'
                                                     : 'text-left pl-12'
-                                            }`}
-                                        >
+                                            }`}>
                                             <div className="text-xs font-bold text-caesar-burgundy tracking-[0.2em] mb-1">
                                                 ETAPA {step.step}
                                             </div>
@@ -712,7 +440,7 @@ export default function PeritoPage() {
                     </RevealSection>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-                        {AREAS.map((area, i) => (
+                        {PAGE_CONSTANTS.AREAS.map((area, i) => (
                             <RevealSection key={area.title} delay={i * 100}>
                                 <div className="p-6 bg-white border border-border-primary/40 rounded-sm">
                                     <div className="flex items-center gap-3 mb-4">
@@ -725,8 +453,7 @@ export default function PeritoPage() {
                                         {area.items.map((item) => (
                                             <li
                                                 key={item}
-                                                className="text-sm text-font-medium font-light flex items-start gap-2"
-                                            >
+                                                className="text-sm text-font-medium font-light flex items-start gap-2">
                                                 <span className="w-1 h-1 rounded-full bg-caesar-burgundy mt-2 shrink-0" />
                                                 {item}
                                             </li>
@@ -744,11 +471,10 @@ export default function PeritoPage() {
                                 Tipos de Evidência
                             </p>
                             <div className="flex flex-wrap justify-center gap-3">
-                                {EVIDENCE_TYPES.map((type) => (
+                                {PAGE_CONSTANTS.EVIDENCE_TYPES.map((type) => (
                                     <div
                                         key={type.label}
-                                        className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border-primary/40 rounded-sm text-xs text-font-medium font-light"
-                                    >
+                                        className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border-primary/40 rounded-sm text-xs text-font-medium font-light">
                                         <type.icon className="w-3.5 h-3.5 text-primary-default/60" />
                                         {type.label}
                                     </div>
@@ -774,7 +500,7 @@ export default function PeritoPage() {
                     </RevealSection>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {TRUST.map((item, i) => (
+                        {PAGE_CONSTANTS.TRUST.map((item, i) => (
                             <RevealSection key={item.title} delay={i * 80}>
                                 <div className="flex gap-4 p-6 rounded-sm hover:bg-background-primary/80 transition-colors">
                                     <div className="flex items-center justify-center w-10 h-10 shrink-0 bg-primary-default/5 rounded-sm">
@@ -810,7 +536,7 @@ export default function PeritoPage() {
                     </RevealSection>
 
                     <div className="space-y-3">
-                        {FAQ.map((item, i) => (
+                        {PAGE_CONSTANTS.FAQ.map((item, i) => (
                             <RevealSection key={i} delay={i * 60}>
                                 <details className="group bg-white border border-border-primary/40 rounded-sm overflow-hidden [&_summary::-webkit-details-marker]:hidden">
                                     <summary className="flex items-center justify-between cursor-pointer p-5 lg:p-6 select-none">
@@ -834,17 +560,18 @@ export default function PeritoPage() {
             {/* ═══ CONTATO / CTA ═══ */}
             <section
                 id="contato"
-                className="py-20 lg:py-28 bg-primary-default relative scroll-mt-8"
-            >
+                className="py-20 lg:py-28 bg-primary-default relative scroll-mt-8">
                 <div className="absolute inset-0 opacity-[0.03]">
-                    <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <svg
+                        width="100%"
+                        height="100%"
+                        xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <pattern
                                 id="grid2"
                                 width="40"
                                 height="40"
-                                patternUnits="userSpaceOnUse"
-                            >
+                                patternUnits="userSpaceOnUse">
                                 <path
                                     d="M 40 0 L 0 0 0 40"
                                     fill="none"
@@ -873,14 +600,20 @@ export default function PeritoPage() {
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-12">
                             <div className="flex items-center gap-3 text-white/60">
                                 <Phone className="w-4 h-4" />
-                                <a href="https://wa.me/5562993248451" target="_blank" rel="noopener noreferrer" className="text-sm font-light hover:text-white transition-colors">
+                                <a
+                                    href="https://wa.me/5562993248451"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-sm font-light hover:text-white transition-colors">
                                     +55 62 99324-8451
                                 </a>
                             </div>
                             <div className="hidden sm:block w-px h-4 bg-white/20" />
                             <div className="flex items-center gap-3 text-white/60">
                                 <Mail className="w-4 h-4" />
-                                <a href="mailto:perito@thiagosaraiva.dev" className="text-sm font-light hover:text-white transition-colors">
+                                <a
+                                    href="mailto:perito@thiagosaraiva.dev"
+                                    className="text-sm font-light hover:text-white transition-colors">
                                     perito@thiagosaraiva.dev
                                 </a>
                             </div>
@@ -899,8 +632,7 @@ export default function PeritoPage() {
                             href="https://wa.me/5562993248451"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 px-10 py-4 bg-caesar-burgundy text-white font-medium tracking-wide rounded-sm hover:bg-caesar-burgundy/90 transition-colors text-sm"
-                        >
+                            className="inline-flex items-center gap-2 px-10 py-4 bg-caesar-burgundy text-white font-medium tracking-wide rounded-sm hover:bg-caesar-burgundy/90 transition-colors text-sm">
                             Falar com o Perito
                             <ArrowRight className="w-4 h-4" />
                         </a>
