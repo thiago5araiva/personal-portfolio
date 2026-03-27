@@ -912,7 +912,7 @@ export default function PeritoPage() {
             <footer className="py-8 bg-primary-default border-t border-white/5">
                 <div className="max-w-6xl mx-auto px-6 text-center">
                     <p className="text-xs text-white/30 font-light tracking-wide">
-                        Perito Judicial em Informática — Perícia Digital Forense
+                        Perito Judicial em Tecnologia — Perícia Digital Forense
                     </p>
                 </div>
             </footer>

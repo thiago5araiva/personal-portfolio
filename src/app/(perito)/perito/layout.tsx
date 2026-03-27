@@ -6,7 +6,7 @@ type Props = Readonly<{
 }>
 
 export const metadata: Metadata = {
-    title: 'Perito Judicial em Informática — Perícia Digital Forense',
+    title: 'Perito Judicial em Tecnologia — Perícia Digital Forense',
     description:
         'Análise técnica com fundamento científico, rigor metodológico e credibilidade probatória. Perícia judicial, assistência técnica e investigação corporativa em evidências digitais.',
     metadataBase: new URL('https://perito.thiagosaraiva.dev'),
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
         'perito judicial',
         'perito digital',
         'perícia digital forense',
-        'perícia em informática',
+        'perícia em tecnologia',
         'assistente técnico judicial',
         'laudo pericial',
         'evidências digitais',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     ],
     authors: [{ name: 'Thiago Saraiva' }],
     openGraph: {
-        title: 'Perito Judicial em Informática — Perícia Digital Forense',
+        title: 'Perito Judicial em Tecnologia — Perícia Digital Forense',
         description:
             'Análise técnica com fundamento científico, rigor metodológico e credibilidade probatória para decisões judiciais seguras.',
         url: 'https://perito.thiagosaraiva.dev',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
                 url: '/og-image.jpg',
                 width: 1200,
                 height: 630,
-                alt: 'Perito Judicial em Informática — Perícia Digital Forense',
+                alt: 'Perito Judicial em Tecnologia — Perícia Digital Forense',
             },
         ],
         locale: 'pt_BR',
@@ -46,7 +46,7 @@ export const metadata: Metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Perito Judicial em Informática',
+        title: 'Perito Judicial em Tecnologia',
         description:
             'Análise técnica com fundamento científico e credibilidade probatória para decisões judiciais seguras.',
         images: ['/og-image.jpg'],
