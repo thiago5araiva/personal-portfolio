@@ -5,9 +5,6 @@ import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata, Viewport } from 'next'
 import { ReactNode } from 'react'
 
-import Navigation from '@/navigation/sidebar-left'
-
-import routes from '../navigation'
 import Providers from '@/providers'
 import { Roboto } from 'next/font/google'
 
@@ -77,12 +74,7 @@ export default function RootLayout({ children }: Props) {
             <body className={`${roboto.variable} font-sans bg-caesar-white`}>
                 <Providers>
                     <main className="main relative container max-w-screen-2xl mx-auto px-4 sm:px-8">
-                        <div className="main__container lg:flex lg:justify-center">
-                            <Navigation links={routes} />
-                            <div className="main__content w-full lg:mx-8">
-                                {children}
-                            </div>
-                        </div>
+                        {children}
                     </main>
                 </Providers>
                 <Analytics />

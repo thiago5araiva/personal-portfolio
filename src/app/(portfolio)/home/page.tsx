@@ -1,4 +1,4 @@
-import IndexPage from '@/app/home/home.viewmodel'
+import IndexPage from '@/app/(portfolio)/home/home.viewmodel'
 import { contentfulRepository } from '@/services/contentful/contentful-repository'
 import { PAGE_SIZE } from '@/store/contentful.store/contentful.type'
 

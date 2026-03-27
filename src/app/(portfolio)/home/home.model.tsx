@@ -1,4 +1,4 @@
-import { AsyncQueryPostEntries } from '@/app/home/home.actions'
+import { AsyncQueryPostEntries } from '@/app/(portfolio)/home/home.actions'
 import {
     setContentfulData,
     useContentfulStoreHydrated,

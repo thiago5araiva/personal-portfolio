@@ -1,10 +1,10 @@
 'use client'
 
-import { TypeHomeModel } from '@/app/home/home.model'
+import { TypeHomeModel } from '@/app/(portfolio)/home/home.model'
 
-import Featured from '@/app/home/components/featured'
+import Featured from '@/app/(portfolio)/home/components/featured'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import Content from '@/app/home/components/content'
+import Content from '@/app/(portfolio)/home/components/content'
 import { Badge } from '@/components/ui/badge'
 import { useState } from 'react'
 
