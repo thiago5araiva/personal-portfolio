@@ -1,5 +1,5 @@
-import Home from '@/app/(portfolio)/home/page'
+import HomePage from '@/app/(portfolio)/home/page'
 
 export default async function Page() {
-    return <Home />
+    return <HomePage />
 }

@@ -14,10 +14,9 @@ const PLACEHOLDER_IMAGE =
 
 type InfiniteScrollProps = {
     fetchNextPage: () => void
-    hasNextPage: boolean
     isFetchingNextPage: boolean
+    hasNextPage: boolean
 }
-
 type Props = PropsWithChildren<{
     data: PostDataItem[]
     includes?: ContentfulIncludes
@@ -114,7 +113,6 @@ function LoadingIndicator() {
 
 export default function Content({ data, includes, infiniteScroll }: Props) {
     const sentinelRef = useRef<HTMLDivElement>(null)
-
     const handleIntersect = useCallback(
         (entries: IntersectionObserverEntry[]) => {
             const [entry] = entries
@@ -132,7 +130,6 @@ export default function Content({ data, includes, infiniteScroll }: Props) {
     useEffect(() => {
         const sentinel = sentinelRef.current
         if (!sentinel || !infiniteScroll) return
-
         const observer = new IntersectionObserver(handleIntersect, {
             rootMargin: '0px 0px 200px 0px',
         })
@@ -163,7 +160,6 @@ export default function Content({ data, includes, infiniteScroll }: Props) {
             })}
 
             {infiniteScroll?.isFetchingNextPage && <LoadingIndicator />}
-
             {infiniteScroll && (
                 <div ref={sentinelRef} aria-hidden="true" className="h-1" />
             )}

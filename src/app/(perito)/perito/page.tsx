@@ -1,67 +1,11 @@
 'use client'
 
-import {
-    ArrowRight,
-    Binary,
-    ChevronDown,
-    Clock,
-    Lock,
-    Mail,
-    Phone,
-    User,
-} from 'lucide-react'
-import { useEffect, useRef, useState } from 'react'
+import RevealSection from '@/components/revel-section'
+import * as Icon from 'lucide-react'
 import { PAGE_CONSTANTS } from './constants'
 
-/* Intersection Observer hook for scroll reveals */
-function useReveal(threshold = 0.15) {
-    const ref = useRef<HTMLDivElement>(null)
-    const [visible, setVisible] = useState(false)
-
-    useEffect(() => {
-        const el = ref.current
-        if (!el) return
-        const obs = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setVisible(true)
-                    obs.unobserve(el)
-                }
-            },
-            { threshold }
-        )
-        obs.observe(el)
-        return () => obs.disconnect()
-    }, [threshold])
-
-    return { ref, visible }
-}
-
-function RevealSection({
-    children,
-    className = '',
-    delay = 0,
-}: {
-    children: React.ReactNode
-    className?: string
-    delay?: number
-}) {
-    const { ref, visible } = useReveal()
-    return (
-        <div
-            ref={ref}
-            className={`transition-all duration-700 ease-out ${
-                visible
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-8'
-            } ${className}`}
-            style={{ transitionDelay: `${delay}ms` }}>
-            {children}
-        </div>
-    )
-}
-
 export default function PeritoPage() {
+    const { Binary, ArrowRight, User, Mail, Phone, Clock } = Icon
     return (
         <div className="scroll-smooth">
             <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-primary-default">
@@ -125,8 +69,6 @@ export default function PeritoPage() {
                     </div>
                 </div>
             </section>
-
-            {/* ═══ O QUE É PERÍCIA DIGITAL ═══ */}
             <section className="py-20 lg:py-28 bg-background-primary">
                 <div className="max-w-6xl mx-auto px-6">
                     <RevealSection>
@@ -172,8 +114,6 @@ export default function PeritoPage() {
                     </div>
                 </div>
             </section>
-
-            {/* ═══ SERVIÇOS ═══ */}
             <section
                 id="servicos"
                 className="py-20 lg:py-28 bg-white scroll-mt-8">
@@ -215,8 +155,6 @@ export default function PeritoPage() {
                     </div>
                 </div>
             </section>
-
-            {/* ═══ SOBRE O PERITO ═══ */}
             <section className="py-20 lg:py-28 bg-white">
                 <div className="max-w-6xl mx-auto px-6">
                     <RevealSection>
@@ -231,7 +169,6 @@ export default function PeritoPage() {
                     </RevealSection>
 
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 mb-12">
-                        {/* Bio — left column */}
                         <RevealSection className="lg:col-span-2">
                             <div className="flex items-center gap-4 mb-6">
                                 <div className="flex items-center justify-center w-14 h-14 bg-primary-default rounded-sm">
@@ -324,8 +261,6 @@ export default function PeritoPage() {
                     </RevealSection>
                 </div>
             </section>
-
-            {/* ═══ METODOLOGIA ═══ */}
             <section className="py-20 lg:py-28 bg-primary-default relative overflow-hidden">
                 {/* Subtle pattern */}
                 <div className="absolute inset-0 opacity-[0.03]">
@@ -365,9 +300,7 @@ export default function PeritoPage() {
 
                     {/* Timeline */}
                     <div className="relative">
-                        {/* Vertical line */}
                         <div className="absolute left-[23px] lg:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
-
                         <div className="space-y-8 lg:space-y-12">
                             {PAGE_CONSTANTS.METHODOLOGY.map((step, i) => (
                                 <RevealSection key={step.step} delay={i * 120}>
@@ -389,8 +322,6 @@ export default function PeritoPage() {
                                                 {step.description}
                                             </p>
                                         </div>
-
-                                        {/* Desktop layout */}
                                         <div
                                             className={`hidden lg:block flex-1 ${
                                                 i % 2 === 0
@@ -424,8 +355,6 @@ export default function PeritoPage() {
                     </div>
                 </div>
             </section>
-
-            {/* ═══ ÁREAS DE ATUAÇÃO ═══ */}
             <section className="py-20 lg:py-28 bg-background-primary">
                 <div className="max-w-6xl mx-auto px-6">
                     <RevealSection>
@@ -463,8 +392,6 @@ export default function PeritoPage() {
                             </RevealSection>
                         ))}
                     </div>
-
-                    {/* Evidence types */}
                     <RevealSection delay={200}>
                         <div className="pt-8 border-t border-border-primary/40">
                             <p className="text-xs tracking-[0.2em] uppercase text-font-low font-medium text-center mb-6">
@@ -484,8 +411,6 @@ export default function PeritoPage() {
                     </RevealSection>
                 </div>
             </section>
-
-            {/* ═══ POR QUE CONFIAR ═══ */}
             <section className="py-20 lg:py-28 bg-white">
                 <div className="max-w-6xl mx-auto px-6">
                     <RevealSection>
@@ -498,7 +423,6 @@ export default function PeritoPage() {
                             </h2>
                         </div>
                     </RevealSection>
-
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {PAGE_CONSTANTS.TRUST.map((item, i) => (
                             <RevealSection key={item.title} delay={i * 80}>
@@ -520,8 +444,6 @@ export default function PeritoPage() {
                     </div>
                 </div>
             </section>
-
-            {/* ═══ FAQ ═══ */}
             <section className="py-20 lg:py-28 bg-background-primary">
                 <div className="max-w-3xl mx-auto px-6">
                     <RevealSection>
@@ -543,7 +465,7 @@ export default function PeritoPage() {
                                         <span className="text-sm font-medium text-font-high pr-4">
                                             {item.question}
                                         </span>
-                                        <ChevronDown className="w-4 h-4 text-font-low shrink-0 transition-transform duration-200 group-open:rotate-180" />
+                                        <Icon.ChevronDown className="w-4 h-4 text-font-low shrink-0 transition-transform duration-200 group-open:rotate-180" />
                                     </summary>
                                     <div className="px-5 lg:px-6 pb-5 lg:pb-6 -mt-1">
                                         <p className="text-sm text-font-medium font-light leading-relaxed border-t border-border-primary/20 pt-4">
@@ -556,8 +478,6 @@ export default function PeritoPage() {
                     </div>
                 </div>
             </section>
-
-            {/* ═══ CONTATO / CTA ═══ */}
             <section
                 id="contato"
                 className="py-20 lg:py-28 bg-primary-default relative scroll-mt-8">
@@ -586,7 +506,7 @@ export default function PeritoPage() {
 
                 <div className="relative z-10 max-w-3xl mx-auto px-6 text-center">
                     <RevealSection>
-                        <Lock className="w-6 h-6 text-white/30 mx-auto mb-6" />
+                        <Icon.Lock className="w-6 h-6 text-white/30 mx-auto mb-6" />
                         <h2 className="text-3xl lg:text-4xl font-bold text-white tracking-tight mb-4">
                             Solicite uma Consulta Técnica
                         </h2>
@@ -639,8 +559,6 @@ export default function PeritoPage() {
                     </RevealSection>
                 </div>
             </section>
-
-            {/* ═══ FOOTER ═══ */}
             <footer className="py-8 bg-primary-default border-t border-white/5">
                 <div className="max-w-6xl mx-auto px-6 text-center">
                     <p className="text-xs text-white/30 font-light tracking-wide">

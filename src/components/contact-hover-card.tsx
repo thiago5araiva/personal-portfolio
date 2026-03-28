@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/drawer'
 import { MessageCircle, Mail, Linkedin, User } from 'lucide-react'
 import Link from 'next/link'
-import { useIsMobile } from '@/hooks/use-is-mobile'
+import { useIsMobile } from '@/hooks/useIsMobile'
 
 type ContactInfo = {
     whatsapp?: string
@@ -55,29 +55,23 @@ function ContactLink({
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="group/link flex items-center gap-3 py-2.5 px-3"
-        >
+            className="group/link flex items-center gap-3 py-2.5 px-3">
             <span
-                className={`flex items-center justify-center w-8 h-8 ${color}`}
-            >
+                className={`flex items-center justify-center w-8 h-8 ${color}`}>
                 <Icon size={14} strokeWidth={2} />
             </span>
-            <span
-                className="text-sm text-caesar-black/70 font-medium tracking-tight"
-            >
+            <span className="text-sm text-caesar-black/70 font-medium tracking-tight">
                 {label}
             </span>
             <span
                 className="ml-auto opacity-0 -translate-x-2 transition-all duration-300
-                           group-hover/link:opacity-100 group-hover/link:translate-x-0"
-            >
+                           group-hover/link:opacity-100 group-hover/link:translate-x-0">
                 <svg
                     width="12"
                     height="12"
                     viewBox="0 0 12 12"
                     fill="none"
-                    className="text-caesar-black/40"
-                >
+                    className="text-caesar-black/40">
                     <path
                         d="M4 2L8 6L4 10"
                         stroke="currentColor"
@@ -105,29 +99,23 @@ function InternalLink({
     return (
         <Link
             href={href}
-            className="group/link flex items-center gap-3 py-2.5 px-3"
-        >
+            className="group/link flex items-center gap-3 py-2.5 px-3">
             <span
-                className={`flex items-center justify-center w-8 h-8 ${color}`}
-            >
+                className={`flex items-center justify-center w-8 h-8 ${color}`}>
                 <Icon size={14} strokeWidth={2} />
             </span>
-            <span
-                className="text-sm text-caesar-black/70 font-medium tracking-tight"
-            >
+            <span className="text-sm text-caesar-black/70 font-medium tracking-tight">
                 {label}
             </span>
             <span
                 className="ml-auto opacity-0 -translate-x-2 transition-all duration-300
-                           group-hover/link:opacity-100 group-hover/link:translate-x-0"
-            >
+                           group-hover/link:opacity-100 group-hover/link:translate-x-0">
                 <svg
                     width="12"
                     height="12"
                     viewBox="0 0 12 12"
                     fill="none"
-                    className="text-caesar-black/40"
-                >
+                    className="text-caesar-black/40">
                     <path
                         d="M4 2L8 6L4 10"
                         stroke="currentColor"
@@ -165,10 +153,7 @@ function CardContent({
                 <div className="flex items-center gap-4">
                     <div className="relative">
                         <Avatar className="w-14 h-14 ring-2 ring-caesar-black/10 ring-offset-2 ring-offset-white">
-                            <AvatarImage
-                                src={profileImageUrl}
-                                alt={name}
-                            />
+                            <AvatarImage src={profileImageUrl} alt={name} />
                             <AvatarFallback className="bg-caesar-black text-white text-sm font-semibold tracking-wide">
                                 {initials}
                             </AvatarFallback>
@@ -282,8 +267,7 @@ export default function ContactHoverCard({
                            data-[state=open]:animate-in data-[state=closed]:animate-out
                            data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0
                            data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95
-                           data-[side=right]:slide-in-from-left-4"
-            >
+                           data-[side=right]:slide-in-from-left-4">
                 <CardContent {...contentProps} />
             </HoverCardContent>
         </HoverCard>

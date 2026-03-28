@@ -22,18 +22,13 @@ function handleFeaturedItems(data: PostDataItem[]) {
     }))
 }
 
-function handleFollowingItems(
-    posts: PostDataItem[],
-    followingIds: string[]
-) {
+function handleFollowingItems(posts: PostDataItem[], followingIds: string[]) {
     return posts?.filter((i) => i.isFollow || followingIds.includes(i.sys.id))
 }
 
 function flattenPages(pages: any[]) {
     const items = pages.flatMap((page) => page?.data?.items ?? [])
-    const assets = pages.flatMap(
-        (page) => page?.data?.includes?.Asset ?? []
-    )
+    const assets = pages.flatMap((page) => page?.data?.includes?.Asset ?? [])
     const uniqueAssets = assets.reduce<ContentfulAsset[]>((acc, asset) => {
         if (!acc.some((a) => a.sys.id === asset.sys.id)) acc.push(asset)
         return acc
@@ -45,14 +40,8 @@ function flattenPages(pages: any[]) {
 export default function HomeModel(initialData?: any, allItems?: any[]) {
     const contentFulStore = useContentfulStoreHydrated()
 
-    const {
-        data: postResponseData,
-        fetchNextPage,
-        hasNextPage,
-        isFetchingNextPage,
-        isSuccess,
-        isError,
-    } = AsyncQueryPostEntries(initialData)
+    const { data: postResponseData, ...entriesQuery } =
+        AsyncQueryPostEntries(initialData)
 
     const pages = postResponseData?.pages ?? []
     const { items: recommended, includes } = flattenPages(pages)
@@ -61,7 +50,8 @@ export default function HomeModel(initialData?: any, allItems?: any[]) {
     const featured = handleFeaturedItems(allItems ?? recommended)
 
     const handleContentfulDataStore = () => {
-        if (isSuccess && recommended.length > 0) {
+        if (entriesQuery.isError) toast('Error fetching posts.')
+        if (entriesQuery.isSuccess && recommended.length > 0) {
             const content = {
                 ...pages[0]?.data,
                 items: recommended,
@@ -71,7 +61,6 @@ export default function HomeModel(initialData?: any, allItems?: any[]) {
             const payload = { ...contentFulStore, updatedAt, data: content }
             setContentfulData(payload)
         }
-        if (isError) toast('Error fetching posts.')
     }
 
     useEffect(handleContentfulDataStore, [postResponseData])
@@ -84,9 +73,9 @@ export default function HomeModel(initialData?: any, allItems?: any[]) {
             featured,
         },
         infiniteScroll: {
-            fetchNextPage,
-            hasNextPage: hasNextPage ?? false,
-            isFetchingNextPage,
+            fetchNextPage: entriesQuery.fetchNextPage,
+            hasNextPage: entriesQuery.hasNextPage ?? false,
+            isFetchingNextPage: entriesQuery.isFetchingNextPage,
         },
     }
 }
