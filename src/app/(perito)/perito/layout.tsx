@@ -1,4 +1,6 @@
+import { Analytics } from '@vercel/analytics/react'
 import { Metadata } from 'next'
+import Script from 'next/script'
 import { ReactNode } from 'react'
 
 type Props = Readonly<{
@@ -55,8 +57,22 @@ export const metadata: Metadata = {
 
 export default function PeritoLayout({ children }: Props) {
     return (
-        <div className="w-[100vw] relative left-[calc(-50vw+50%)] overflow-x-hidden">
-            {children}
-        </div>
+        <main id="perito-layout">
+            <Script
+                src="https://www.googletagmanager.com/gtag/js?id=AW-16550274592"
+                strategy="afterInteractive"
+            />
+            <Script id="gtag-init" strategy="afterInteractive">
+                {`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', 'AW-16550274592');
+                `}
+            </Script>
+            <div className="w-[100vw] relative left-[calc(-50vw+50%)] overflow-x-hidden">
+                {children}
+            </div>
+        </main>
     )
 }
