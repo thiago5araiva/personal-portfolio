@@ -70,6 +70,15 @@ export default function PeritoLayout({ children }: Props) {
                     gtag('config', 'AW-16550274592');
                 `}
             </Script>
+            <Script id="gtag-conversion" strategy="afterInteractive">
+                {`
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-16550274592/WI1-CM201ZIcEKDM5NM9',
+                        'value': 1.0,
+                        'currency': 'BRL'
+                    });
+                `}
+            </Script>
             <div className="w-[100vw] relative left-[calc(-50vw+50%)] overflow-x-hidden">
                 {children}
             </div>
