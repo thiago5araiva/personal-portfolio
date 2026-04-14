@@ -1,6 +1,6 @@
 import ContentViewModel from './content.viewmodel'
 import { contentfulRepository } from '@/services/contentful/contentful-repository'
-import { PostDataItem } from '@/store/contentful.store/contentful.type'
+import { PostDataItem } from '@/services/contentful/contentful.type'
 
 type Props = {
     params: Promise<{ slug: string }>

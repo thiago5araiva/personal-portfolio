@@ -1,7 +1,7 @@
 import {
     AssetLink,
     ContentfulIncludes,
-} from '@/store/contentful.store/contentful.type'
+} from '@/services/contentful/contentful.type'
 
 /**
  * Resolve um AssetLink para sua URL completa
