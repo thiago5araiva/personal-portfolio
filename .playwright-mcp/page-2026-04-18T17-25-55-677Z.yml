@@ -1,0 +1,14 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation [ref=e4]:
+      - link "Home" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "Logo" [ref=e6]
+      - link "Blog" [ref=e7] [cursor=pointer]:
+        - /url: /blog
+    - generic [ref=e9]:
+      - heading "Blog" [level=1] [ref=e10]
+      - paragraph [ref=e11]: Em breve.
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e17] [cursor=pointer]:
+    - img [ref=e18]

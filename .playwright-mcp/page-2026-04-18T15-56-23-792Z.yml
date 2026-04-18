@@ -1,0 +1,480 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - navigation [ref=e5]:
+        - generic [ref=e6]:
+          - link "Logo" [ref=e7] [cursor=pointer]:
+            - /url: /
+            - img "Logo" [ref=e9]
+          - navigation [ref=e11]:
+            - link "Home" [ref=e12] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e13]
+              - generic [ref=e18]: Home
+            - link "TV" [ref=e19] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e20]
+              - generic [ref=e23]: TV
+            - link "Articles" [ref=e24] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e25]
+              - generic [ref=e28]: Articles
+          - generic [ref=e29] [cursor=pointer]: TS
+      - generic [ref=e32]:
+        - generic [ref=e34]:
+          - tablist [ref=e36]:
+            - tab "Recommended" [selected] [ref=e37] [cursor=pointer]
+            - tab "Following 0" [disabled]:
+              - generic:
+                - generic: Following
+                - generic: "0"
+          - generic [ref=e38]:
+            - 'link "TS Thiago Saraiva 2 days ago Idempotency: The Technique That Separates Amateur Systems from Production-Grade Ones Understand why idempotency is essential for distributed systems and learn how to implement idempotent operations with practical examples in Node.js and SQL. placeholder architecture 9 min read" [ref=e39] [cursor=pointer]':
+              - /url: /content/idempotency-the-technique-for-production-systems
+              - generic [ref=e40]:
+                - generic [ref=e41]:
+                  - generic [ref=e43]:
+                    - generic [ref=e45]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e46]
+                  - img [ref=e47]
+                  - generic [ref=e49]: 2 days ago
+                - generic [ref=e50]:
+                  - generic [ref=e51]:
+                    - 'heading "Idempotency: The Technique That Separates Amateur Systems from Production-Grade Ones" [level=3] [ref=e52]'
+                    - paragraph [ref=e53]: Understand why idempotency is essential for distributed systems and learn how to implement idempotent operations with practical examples in Node.js and SQL.
+                  - img "placeholder" [ref=e55]
+                - generic [ref=e57]:
+                  - generic [ref=e58]: architecture
+                  - img [ref=e59]
+                  - generic [ref=e61]: 9 min read
+            - 'link "TS Thiago Saraiva 28 days ago Data Normalization on the Frontend: Why Your State Management Will Thank You Duplicated data in state causes bugs and slowness. Learn how to normalize data like a relational database and simplify updates, caching, and real-time sync. placeholder javascript 4 min read" [ref=e62] [cursor=pointer]':
+              - /url: /content/data-normalization-frontend-state-management
+              - generic [ref=e63]:
+                - generic [ref=e64]:
+                  - generic [ref=e66]:
+                    - generic [ref=e68]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e69]
+                  - img [ref=e70]
+                  - generic [ref=e72]: 28 days ago
+                - generic [ref=e73]:
+                  - generic [ref=e74]:
+                    - 'heading "Data Normalization on the Frontend: Why Your State Management Will Thank You" [level=3] [ref=e75]'
+                    - paragraph [ref=e76]: Duplicated data in state causes bugs and slowness. Learn how to normalize data like a relational database and simplify updates, caching, and real-time sync.
+                  - img "placeholder" [ref=e78]
+                - generic [ref=e80]:
+                  - generic [ref=e81]: javascript
+                  - img [ref=e82]
+                  - generic [ref=e84]: 4 min read
+            - 'link "TS Thiago Saraiva 28 days ago Polling and Long Polling: when WebSocket is overkill Understand Short Polling and Long Polling, how to implement each from backend to frontend, and when they''re the best choice over WebSocket. placeholder networking 24 min read" [ref=e85] [cursor=pointer]':
+              - /url: /content/polling-long-polling-when-websocket-is-overkill
+              - generic [ref=e86]:
+                - generic [ref=e87]:
+                  - generic [ref=e89]:
+                    - generic [ref=e91]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e92]
+                  - img [ref=e93]
+                  - generic [ref=e95]: 28 days ago
+                - generic [ref=e96]:
+                  - generic [ref=e97]:
+                    - 'heading "Polling and Long Polling: when WebSocket is overkill" [level=3] [ref=e98]'
+                    - paragraph [ref=e99]: Understand Short Polling and Long Polling, how to implement each from backend to frontend, and when they're the best choice over WebSocket.
+                  - img "placeholder" [ref=e101]
+                - generic [ref=e103]:
+                  - generic [ref=e104]: networking
+                  - img [ref=e105]
+                  - generic [ref=e107]: 24 min read
+            - 'link "TS Thiago Saraiva 57 days ago WebSockets in practice: from handshake to production deploy Complete guide to WebSockets: how they work, implementation with Socket.IO and ws, scaling with Redis, and when to actually use them. placeholder networking 38 min read" [ref=e108] [cursor=pointer]':
+              - /url: /content/websockets-in-practice-handshake-to-production
+              - generic [ref=e109]:
+                - generic [ref=e110]:
+                  - generic [ref=e112]:
+                    - generic [ref=e114]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e115]
+                  - img [ref=e116]
+                  - generic [ref=e118]: 57 days ago
+                - generic [ref=e119]:
+                  - generic [ref=e120]:
+                    - 'heading "WebSockets in practice: from handshake to production deploy" [level=3] [ref=e121]'
+                    - paragraph [ref=e122]: "Complete guide to WebSockets: how they work, implementation with Socket.IO and ws, scaling with Redis, and when to actually use them."
+                  - img "placeholder" [ref=e124]
+                - generic [ref=e126]:
+                  - generic [ref=e127]: networking
+                  - img [ref=e128]
+                  - generic [ref=e130]: 38 min read
+            - 'link "TS Thiago Saraiva 59 days ago Database normalization: how far to go (and when to stop) Understand normal forms (1NF through 5NF), why to normalize, when to denormalize, and how to make practical decisions about database schema design. placeholder database 44 min read" [ref=e131] [cursor=pointer]':
+              - /url: /content/database-normalization-how-far-to-go-when-to-stop
+              - generic [ref=e132]:
+                - generic [ref=e133]:
+                  - generic [ref=e135]:
+                    - generic [ref=e137]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e138]
+                  - img [ref=e139]
+                  - generic [ref=e141]: 59 days ago
+                - generic [ref=e142]:
+                  - generic [ref=e143]:
+                    - 'heading "Database normalization: how far to go (and when to stop)" [level=3] [ref=e144]'
+                    - paragraph [ref=e145]: Understand normal forms (1NF through 5NF), why to normalize, when to denormalize, and how to make practical decisions about database schema design.
+                  - img "placeholder" [ref=e147]
+                - generic [ref=e149]:
+                  - generic [ref=e150]: database
+                  - img [ref=e151]
+                  - generic [ref=e153]: 44 min read
+            - 'link "TS Thiago Saraiva 60 days ago Rate Limiting: How to protect your API without losing your mind Rate limiting algorithms (Token Bucket, Sliding Window), implementations with Redis, Express and Nginx, and how to handle 429s on the frontend. placeholder security 25 min read" [ref=e154] [cursor=pointer]':
+              - /url: /content/rate-limiting-protect-your-api-without-losing-your-mind
+              - generic [ref=e155]:
+                - generic [ref=e156]:
+                  - generic [ref=e158]:
+                    - generic [ref=e160]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e161]
+                  - img [ref=e162]
+                  - generic [ref=e164]: 60 days ago
+                - generic [ref=e165]:
+                  - generic [ref=e166]:
+                    - 'heading "Rate Limiting: How to protect your API without losing your mind" [level=3] [ref=e167]'
+                    - paragraph [ref=e168]: Rate limiting algorithms (Token Bucket, Sliding Window), implementations with Redis, Express and Nginx, and how to handle 429s on the frontend.
+                  - img "placeholder" [ref=e170]
+                - generic [ref=e172]:
+                  - generic [ref=e173]: security
+                  - img [ref=e174]
+                  - generic [ref=e176]: 25 min read
+            - 'link "TS Thiago Saraiva 60 days ago Redis: Way more than just a cache Redis beyond the basics: data structures, pub/sub, rate limiting, queues, sessions, leaderboards and how to use it in production. placeholder database 2 min read" [ref=e177] [cursor=pointer]':
+              - /url: /content/redis-way-more-than-just-a-cache
+              - generic [ref=e178]:
+                - generic [ref=e179]:
+                  - generic [ref=e181]:
+                    - generic [ref=e183]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e184]
+                  - img [ref=e185]
+                  - generic [ref=e187]: 60 days ago
+                - generic [ref=e188]:
+                  - generic [ref=e189]:
+                    - 'heading "Redis: Way more than just a cache" [level=3] [ref=e190]'
+                    - paragraph [ref=e191]: "Redis beyond the basics: data structures, pub/sub, rate limiting, queues, sessions, leaderboards and how to use it in production."
+                  - img "placeholder" [ref=e193]
+                - generic [ref=e195]:
+                  - generic [ref=e196]: database
+                  - img [ref=e197]
+                  - generic [ref=e199]: 2 min read
+            - link "TS Thiago Saraiva 90 days ago Why Your First Design System Will Fail (And That's Okay) Your first Design System will fail—and that's okay. Learn why perfection is impossible, how to iterate healthily, and why continuous improvement beats upfront planning. placeholder performance 4 min read" [ref=e200] [cursor=pointer]:
+              - /url: /content/the-art-of-iteration
+              - generic [ref=e201]:
+                - generic [ref=e202]:
+                  - generic [ref=e204]:
+                    - generic [ref=e206]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e207]
+                  - img [ref=e208]
+                  - generic [ref=e210]: 90 days ago
+                - generic [ref=e211]:
+                  - generic [ref=e212]:
+                    - heading "Why Your First Design System Will Fail (And That's Okay)" [level=3] [ref=e213]
+                    - paragraph [ref=e214]: Your first Design System will fail—and that's okay. Learn why perfection is impossible, how to iterate healthily, and why continuous improvement beats upfront planning.
+                  - img "placeholder" [ref=e216]
+                - generic [ref=e218]:
+                  - generic [ref=e219]: performance
+                  - img [ref=e220]
+                  - generic [ref=e222]: 4 min read
+            - 'link "TS Thiago Saraiva 92 days ago Atomic Design in Practice: From Atoms to Pages Build interfaces like chemists build molecules. Learn Brad Frost''s 5-level methodology—atoms, molecules, organisms, templates, pages—with practical React examples. placeholder frontend 7 min read" [ref=e223] [cursor=pointer]':
+              - /url: /content/atomic-design-in-practice-from-atoms-to-pages
+              - generic [ref=e224]:
+                - generic [ref=e225]:
+                  - generic [ref=e227]:
+                    - generic [ref=e229]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e230]
+                  - img [ref=e231]
+                  - generic [ref=e233]: 92 days ago
+                - generic [ref=e234]:
+                  - generic [ref=e235]:
+                    - 'heading "Atomic Design in Practice: From Atoms to Pages" [level=3] [ref=e236]'
+                    - paragraph [ref=e237]: Build interfaces like chemists build molecules. Learn Brad Frost's 5-level methodology—atoms, molecules, organisms, templates, pages—with practical React examples.
+                  - img "placeholder" [ref=e239]
+                - generic [ref=e241]:
+                  - generic [ref=e242]: frontend
+                  - img [ref=e243]
+                  - generic [ref=e245]: 7 min read
+            - 'link "TS Thiago Saraiva 93 days ago Pixel Perfect Forever: Visual Regression Testing Catch unintended CSS changes before production. Automate visual comparisons with Playwright, Chromatic, or BackstopJS and build confidence to refactor without fear. placeholder testing 6 min read" [ref=e246] [cursor=pointer]':
+              - /url: /content/visual-regression-testing
+              - generic [ref=e247]:
+                - generic [ref=e248]:
+                  - generic [ref=e250]:
+                    - generic [ref=e252]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e253]
+                  - img [ref=e254]
+                  - generic [ref=e256]: 93 days ago
+                - generic [ref=e257]:
+                  - generic [ref=e258]:
+                    - 'heading "Pixel Perfect Forever: Visual Regression Testing" [level=3] [ref=e259]'
+                    - paragraph [ref=e260]: Catch unintended CSS changes before production. Automate visual comparisons with Playwright, Chromatic, or BackstopJS and build confidence to refactor without fear.
+                  - img "placeholder" [ref=e262]
+                - generic [ref=e264]:
+                  - generic [ref=e265]: testing
+                  - img [ref=e266]
+                  - generic [ref=e268]: 6 min read
+            - 'link "TS Thiago Saraiva 94 days ago Performance Budget: The Financial Discipline of Frontend Performance Budget: Set page weight and timing limits like a financial budget. Learn to measure with Lighthouse, automate checks in CI/CD, and make conscious decisions about every KB you add. placeholder performance 5 min read" [ref=e269] [cursor=pointer]':
+              - /url: /content/performance-budget-of-frontend
+              - generic [ref=e270]:
+                - generic [ref=e271]:
+                  - generic [ref=e273]:
+                    - generic [ref=e275]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e276]
+                  - img [ref=e277]
+                  - generic [ref=e279]: 94 days ago
+                - generic [ref=e280]:
+                  - generic [ref=e281]:
+                    - 'heading "Performance Budget: The Financial Discipline of Frontend" [level=3] [ref=e282]'
+                    - paragraph [ref=e283]: "Performance Budget: Set page weight and timing limits like a financial budget. Learn to measure with Lighthouse, automate checks in CI/CD, and make conscious decisions about every KB you add."
+                  - img "placeholder" [ref=e285]
+                - generic [ref=e287]:
+                  - generic [ref=e288]: performance
+                  - img [ref=e289]
+                  - generic [ref=e291]: 5 min read
+            - 'link "TS Thiago Saraiva 95 days ago Goodbye Waterfall: The Workflow That Puts Frontend at the Center Learn why waterfall fails for frontend teams and how a parallel workflow with browser prototyping, CI/CD automation, and cross-discipline collaboration delivers faster, more predictable results. placeholder Portfolio 4 min read" [ref=e292] [cursor=pointer]':
+              - /url: /content/goodbye-waterfall-the-workflow-that-puts-frontend-at-the-center
+              - generic [ref=e293]:
+                - generic [ref=e294]:
+                  - generic [ref=e296]:
+                    - generic [ref=e298]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e299]
+                  - img [ref=e300]
+                  - generic [ref=e302]: 95 days ago
+                - generic [ref=e303]:
+                  - generic [ref=e304]:
+                    - 'heading "Goodbye Waterfall: The Workflow That Puts Frontend at the Center" [level=3] [ref=e305]'
+                    - paragraph [ref=e306]: Learn why waterfall fails for frontend teams and how a parallel workflow with browser prototyping, CI/CD automation, and cross-discipline collaboration delivers faster, more predictable results.
+                  - img "placeholder" [ref=e308]
+                - generic [ref=e310]:
+                  - generic [ref=e311]: Portfolio
+                  - img [ref=e312]
+                  - generic [ref=e314]: 4 min read
+            - 'link "TS Thiago Saraiva 96 days ago How Red Hat Refactored Their Design System Without Stopping the Site It was an ordinary afternoon when someone asked a seemingly simple question: \"How modular is our design? We''d like to share small parts of the theme with other company sites.” The honest answer? Nervous laughter. placeholder case-study 4 min read" [ref=e315] [cursor=pointer]':
+              - /url: /content/case-red-hat
+              - generic [ref=e316]:
+                - generic [ref=e317]:
+                  - generic [ref=e319]:
+                    - generic [ref=e321]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e322]
+                  - img [ref=e323]
+                  - generic [ref=e325]: 96 days ago
+                - generic [ref=e326]:
+                  - generic [ref=e327]:
+                    - heading "How Red Hat Refactored Their Design System Without Stopping the Site" [level=3] [ref=e328]
+                    - paragraph [ref=e329]: "It was an ordinary afternoon when someone asked a seemingly simple question: \"How modular is our design? We'd like to share small parts of the theme with other company sites.” The honest answer? Nervous laughter."
+                  - img "placeholder" [ref=e331]
+                - generic [ref=e333]:
+                  - generic [ref=e334]: case-study
+                  - img [ref=e335]
+                  - generic [ref=e337]: 4 min read
+            - 'link "TS Thiago Saraiva 97 days ago Do You Really Need a JavaScript Framework? When a new project starts, the first question is usually: \"React or Vue? Next or Nuxt? What about Svelte?”. Rarely does anyone ask: \"Do we need a framework?”. placeholder javascript 4 min read" [ref=e338] [cursor=pointer]':
+              - /url: /content/do-you-really-need-a-javascript-framework
+              - generic [ref=e339]:
+                - generic [ref=e340]:
+                  - generic [ref=e342]:
+                    - generic [ref=e344]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e345]
+                  - img [ref=e346]
+                  - generic [ref=e348]: 97 days ago
+                - generic [ref=e349]:
+                  - generic [ref=e350]:
+                    - heading "Do You Really Need a JavaScript Framework?" [level=3] [ref=e351]
+                    - paragraph [ref=e352]: "When a new project starts, the first question is usually: \"React or Vue? Next or Nuxt? What about Svelte?”. Rarely does anyone ask: \"Do we need a framework?”."
+                  - img "placeholder" [ref=e354]
+                - generic [ref=e356]:
+                  - generic [ref=e357]: javascript
+                  - img [ref=e358]
+                  - generic [ref=e360]: 4 min read
+            - 'link "TS Thiago Saraiva 97 days ago Specificity Wars: Why Your CSS Becomes a Mess and How to Fix It CSS stands for \"Cascading Style Sheets\". The word \"cascading\" is beautiful, but hides a trap: styles overlap in not-always-obvious ways. placeholder frontend 4 min read" [ref=e361] [cursor=pointer]':
+              - /url: /content/specificity-wars-why-your-css-becomes-a-mess-and-how-to-fix-it
+              - generic [ref=e362]:
+                - generic [ref=e363]:
+                  - generic [ref=e365]:
+                    - generic [ref=e367]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e368]
+                  - img [ref=e369]
+                  - generic [ref=e371]: 97 days ago
+                - generic [ref=e372]:
+                  - generic [ref=e373]:
+                    - 'heading "Specificity Wars: Why Your CSS Becomes a Mess and How to Fix It" [level=3] [ref=e374]'
+                    - paragraph [ref=e375]: "CSS stands for \"Cascading Style Sheets\". The word \"cascading\" is beautiful, but hides a trap: styles overlap in not-always-obvious ways."
+                  - img "placeholder" [ref=e377]
+                - generic [ref=e379]:
+                  - generic [ref=e380]: frontend
+                  - img [ref=e381]
+                  - generic [ref=e383]: 4 min read
+            - 'link "TS Thiago Saraiva 98 days ago Style Guide-Driven Development: Documentation That Lives in the Code Stop writing documentation that lies. Build living style guides with Storybook where docs update automatically with code. Includes setup, MDX, addons, and CI deployment. placeholder frontend 7 min read" [ref=e384] [cursor=pointer]':
+              - /url: /content/style-guide-driven-development
+              - generic [ref=e385]:
+                - generic [ref=e386]:
+                  - generic [ref=e388]:
+                    - generic [ref=e390]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e391]
+                  - img [ref=e392]
+                  - generic [ref=e394]: 98 days ago
+                - generic [ref=e395]:
+                  - generic [ref=e396]:
+                    - 'heading "Style Guide-Driven Development: Documentation That Lives in the Code" [level=3] [ref=e397]'
+                    - paragraph [ref=e398]: Stop writing documentation that lies. Build living style guides with Storybook where docs update automatically with code. Includes setup, MDX, addons, and CI deployment.
+                  - img "placeholder" [ref=e400]
+                - generic [ref=e402]:
+                  - generic [ref=e403]: frontend
+                  - img [ref=e404]
+                  - generic [ref=e406]: 7 min read
+            - 'link "TS Thiago Saraiva 98 days ago Unit Testing in Frontend: The \"Do One Thing Well\" Mantra Write testable frontend code by breaking functions into small, single-purpose units. Learn TDD, modern tools like Vitest, realistic coverage targets, and how to test React/Vue components. placeholder testing 5 min read" [ref=e407] [cursor=pointer]':
+              - /url: /content/unit-testing-in-frontend-the-do-one-thing-well-mantra
+              - generic [ref=e408]:
+                - generic [ref=e409]:
+                  - generic [ref=e411]:
+                    - generic [ref=e413]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e414]
+                  - img [ref=e415]
+                  - generic [ref=e417]: 98 days ago
+                - generic [ref=e418]:
+                  - generic [ref=e419]:
+                    - 'heading "Unit Testing in Frontend: The \"Do One Thing Well\" Mantra" [level=3] [ref=e420]'
+                    - paragraph [ref=e421]: Write testable frontend code by breaking functions into small, single-purpose units. Learn TDD, modern tools like Vitest, realistic coverage targets, and how to test React/Vue components.
+                  - img "placeholder" [ref=e423]
+                - generic [ref=e425]:
+                  - generic [ref=e426]: testing
+                  - img [ref=e427]
+                  - generic [ref=e429]: 5 min read
+            - 'link "TS Thiago Saraiva 99 days ago From \"Div Soup\" to Modular Markup: The Evolution of HTML In the old web publishing world, it was common for the frontend team to have **zero control** over markup. HTML was generated by the CMS, by backend developers who had already moved on to other tasks. placeholder frontend 5 min read" [ref=e430] [cursor=pointer]':
+              - /url: /content/from-div-soup-to-modular-markup-the-evolution-of-html
+              - generic [ref=e431]:
+                - generic [ref=e432]:
+                  - generic [ref=e434]:
+                    - generic [ref=e436]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e437]
+                  - img [ref=e438]
+                  - generic [ref=e440]: 99 days ago
+                - generic [ref=e441]:
+                  - generic [ref=e442]:
+                    - 'heading "From \"Div Soup\" to Modular Markup: The Evolution of HTML" [level=3] [ref=e443]'
+                    - paragraph [ref=e444]: In the old web publishing world, it was common for the frontend team to have **zero control** over markup. HTML was generated by the CMS, by backend developers who had already moved on to other tasks.
+                  - img "placeholder" [ref=e446]
+                - generic [ref=e448]:
+                  - generic [ref=e449]: frontend
+                  - img [ref=e450]
+                  - generic [ref=e452]: 5 min read
+            - link "TS Thiago Saraiva 100 days ago The 4 Pillars That Support a Scalable Design System Every building needs a solid foundation, four walls, and a roof. Without these elements, it's not a building — it's a pile of materials waiting to collapse. placeholder architecture 4 min read" [ref=e453] [cursor=pointer]:
+              - /url: /content/the-4-pillars-that-support-a-scalable-design-system
+              - generic [ref=e454]:
+                - generic [ref=e455]:
+                  - generic [ref=e457]:
+                    - generic [ref=e459]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e460]
+                  - img [ref=e461]
+                  - generic [ref=e463]: 100 days ago
+                - generic [ref=e464]:
+                  - generic [ref=e465]:
+                    - heading "The 4 Pillars That Support a Scalable Design System" [level=3] [ref=e466]
+                    - paragraph [ref=e467]: Every building needs a solid foundation, four walls, and a roof. Without these elements, it's not a building — it's a pile of materials waiting to collapse.
+                  - img "placeholder" [ref=e469]
+                - generic [ref=e471]:
+                  - generic [ref=e472]: architecture
+                  - img [ref=e473]
+                  - generic [ref=e475]: 4 min read
+            - link "TS Thiago Saraiva 101 days ago What Does a Frontend Architect Do? Beyond Writing Code Have you ever wondered what separates a senior frontend developer from a Frontend Architect? The answer might seem obvious at first — more experience, more responsibilities — but the reality is far more interesting. placeholder career 3 min read" [ref=e476] [cursor=pointer]:
+              - /url: /content/what-does-a-frontend-architect-do-beyond-writing-code
+              - generic [ref=e477]:
+                - generic [ref=e478]:
+                  - generic [ref=e480]:
+                    - generic [ref=e482]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e483]
+                  - img [ref=e484]
+                  - generic [ref=e486]: 101 days ago
+                - generic [ref=e487]:
+                  - generic [ref=e488]:
+                    - heading "What Does a Frontend Architect Do? Beyond Writing Code" [level=3] [ref=e489]
+                    - paragraph [ref=e490]: Have you ever wondered what separates a senior frontend developer from a Frontend Architect? The answer might seem obvious at first — more experience, more responsibilities — but the reality is far more interesting.
+                  - img "placeholder" [ref=e492]
+                - generic [ref=e494]:
+                  - generic [ref=e495]: career
+                  - img [ref=e496]
+                  - generic [ref=e498]: 3 min read
+            - 'link "TS Thiago Saraiva 128 days ago Living with JSX JSX is quite straightforward: It will take 1 minute to know about this is an awesome alternative to templates. placeholder react 4 min read" [ref=e499] [cursor=pointer]':
+              - /url: /content/living-with-jsx
+              - generic [ref=e500]:
+                - generic [ref=e501]:
+                  - generic [ref=e503]:
+                    - generic [ref=e505]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e506]
+                  - img [ref=e507]
+                  - generic [ref=e509]: 128 days ago
+                - generic [ref=e510]:
+                  - generic [ref=e511]:
+                    - heading "Living with JSX" [level=3] [ref=e512]
+                    - paragraph [ref=e513]: "JSX is quite straightforward: It will take 1 minute to know about this is an awesome alternative to templates."
+                  - img "placeholder" [ref=e515]
+                - generic [ref=e517]:
+                  - generic [ref=e518]: react
+                  - img [ref=e519]
+                  - generic [ref=e521]: 4 min read
+            - link "TS Thiago Saraiva 128 days ago Get window size in pure CSS We all know that CSS it has become even harder nowadays. You wouldn't believe it, but CSS can define properties, do the math, and even directly get the window size! placeholder css 1 min read" [ref=e522] [cursor=pointer]:
+              - /url: /content/get-window-size-in-pure-css
+              - generic [ref=e523]:
+                - generic [ref=e524]:
+                  - generic [ref=e526]:
+                    - generic [ref=e528]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e529]
+                  - img [ref=e530]
+                  - generic [ref=e532]: 128 days ago
+                - generic [ref=e533]:
+                  - generic [ref=e534]:
+                    - heading "Get window size in pure CSS" [level=3] [ref=e535]
+                    - paragraph [ref=e536]: We all know that CSS it has become even harder nowadays. You wouldn't believe it, but CSS can define properties, do the math, and even directly get the window size!
+                  - img "placeholder" [ref=e538]
+                - generic [ref=e540]:
+                  - generic [ref=e541]: css
+                  - img [ref=e542]
+                  - generic [ref=e544]: 1 min read
+            - link "TS Thiago Saraiva 128 days ago Web server from scratch with NodeJS Streams In this post, I want to go back to the basics and build a simple web server from scratch with NodeJS. In doing so, we will review the structure of HTTP requests and responses and get an introduction to Node's Stream API placeholder scratch 14 min read" [ref=e545] [cursor=pointer]:
+              - /url: /content/web-server-from-scratch
+              - generic [ref=e546]:
+                - generic [ref=e547]:
+                  - generic [ref=e549]:
+                    - generic [ref=e551]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e552]
+                  - img [ref=e553]
+                  - generic [ref=e555]: 128 days ago
+                - generic [ref=e556]:
+                  - generic [ref=e557]:
+                    - heading "Web server from scratch with NodeJS Streams" [level=3] [ref=e558]
+                    - paragraph [ref=e559]: In this post, I want to go back to the basics and build a simple web server from scratch with NodeJS. In doing so, we will review the structure of HTTP requests and responses and get an introduction to Node's Stream API
+                  - img "placeholder" [ref=e561]
+                - generic [ref=e563]:
+                  - generic [ref=e564]: scratch
+                  - img [ref=e565]
+                  - generic [ref=e567]: 14 min read
+            - link "TS Thiago Saraiva 128 days ago Building a vector space indexing engine I've always wanted to code a search engine from scratch and discovered that it's pretty simple. Here is an example indexer I coded using Python. The first thing we need to do is have a way to take the documents we want to search on. placeholder hands-on 11 min read" [ref=e568] [cursor=pointer]:
+              - /url: /content/building-space-indexing-engine
+              - generic [ref=e569]:
+                - generic [ref=e570]:
+                  - generic [ref=e572]:
+                    - generic [ref=e574]: TS
+                    - heading "Thiago Saraiva" [level=6] [ref=e575]
+                  - img [ref=e576]
+                  - generic [ref=e578]: 128 days ago
+                - generic [ref=e579]:
+                  - generic [ref=e580]:
+                    - heading "Building a vector space indexing engine" [level=3] [ref=e581]
+                    - paragraph [ref=e582]: I've always wanted to code a search engine from scratch and discovered that it's pretty simple. Here is an example indexer I coded using Python. The first thing we need to do is have a way to take the documents we want to search on.
+                  - img "placeholder" [ref=e584]
+                - generic [ref=e586]:
+                  - generic [ref=e587]: hands-on
+                  - img [ref=e588]
+                  - generic [ref=e590]: 11 min read
+        - generic [ref=e594]:
+          - generic [ref=e595]:
+            - img [ref=e596]
+            - generic [ref=e598]: What Read Today
+          - generic [ref=e599]:
+            - 'link "Atomic Design in Practice: From Atoms to Pages" [ref=e600] [cursor=pointer]':
+              - /url: /content/atomic-design-in-practice-from-atoms-to-pages
+              - 'heading "Atomic Design in Practice: From Atoms to Pages" [level=3] [ref=e602]'
+            - 'link "Specificity Wars: Why Your CSS Becomes a Mess and How to Fix It" [ref=e603] [cursor=pointer]':
+              - /url: /content/specificity-wars-why-your-css-becomes-a-mess-and-how-to-fix-it
+              - 'heading "Specificity Wars: Why Your CSS Becomes a Mess and How to Fix It" [level=3] [ref=e605]'
+            - 'link "Style Guide-Driven Development: Documentation That Lives in the Code" [ref=e606] [cursor=pointer]':
+              - /url: /content/style-guide-driven-development
+              - 'heading "Style Guide-Driven Development: Documentation That Lives in the Code" [level=3] [ref=e608]'
+  - region "Notifications alt+T"
+  - button "Open Next.js Dev Tools" [ref=e614] [cursor=pointer]:
+    - img [ref=e615]
