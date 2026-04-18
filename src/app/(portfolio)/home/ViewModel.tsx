@@ -2,10 +2,10 @@
 
 import View from './View'
 import useHomeModel from './Model'
-import type { HomePageData } from './home.server'
+import type { PageData } from './Server'
 
 type Props = {
-	initialData: HomePageData
+	initialData: PageData
 }
 
 export default function IndexPage({ initialData }: Props) {

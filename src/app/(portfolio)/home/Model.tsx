@@ -1,14 +1,14 @@
 import { setContentfulData, useContentfulStoreHydrated } from '@/store/contentful.store'
 import { useEffect, useState } from 'react'
 import { ContentfulIncludes, PostDataItem } from '@/services/contentful/contentful.type'
-import type { HomePageData } from './home.server'
+import type { PageData } from './Server'
 
 function handleFollowingItems(posts: PostDataItem[], followingIds: string[]) {
 	return posts?.filter((i) => i.isFollow || followingIds.includes(i.sys.id))
 }
 type TabValueProps = 'following' | 'recommended'
 
-export default function Model(initialData?: HomePageData) {
+export default function Model(initialData?: PageData) {
 	const [activeContentTab, setActiveContentTab] = useState<TabValueProps>('recommended')
 	const contentFulStore = useContentfulStoreHydrated()
 
@@ -18,6 +18,7 @@ export default function Model(initialData?: HomePageData) {
 	const followingIds = contentFulStore?.following ?? []
 	const following = handleFollowingItems(recommended, followingIds)
 	const featured = initialData?.featured ?? []
+	const renderedAt = initialData?.renderedAt ?? ''
 
 	const handleContentfulDataStore = () => {
 		if (!initialPayload?.items?.length) return
@@ -28,7 +29,6 @@ export default function Model(initialData?: HomePageData) {
 		})
 	}
 
-	/* tabs */
 	const handleContentTab = (value = '') => setActiveContentTab(value as TabValueProps)
 	const contentTabType = activeContentTab === 'recommended' ? recommended : following
 
@@ -42,6 +42,7 @@ export default function Model(initialData?: HomePageData) {
 			includes,
 			activeContentTab,
 			contentTabType,
+			renderedAt,
 		},
 		action: { handleContentTab },
 	}

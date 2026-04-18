@@ -34,7 +34,7 @@ export default function View({ state, action }: Props) {
 								</TabsTrigger>
 							</TabsList>
 						</div>
-						<Content data={state.contentTabType} includes={state.includes} />
+						<Content data={state.contentTabType} includes={state.includes} renderedAt={state.renderedAt} />
 					</Tabs>
 				</div>
 				{/* desktop: topic-component lateral */}

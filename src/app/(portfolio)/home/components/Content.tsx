@@ -11,16 +11,17 @@ const PLACEHOLDER_IMAGE = 'https://placehold.co/600x400/e5e5e5/666666.png?text=N
 type Props = PropsWithChildren<{
     data: PostDataItem[]
     includes?: ContentfulIncludes
+    renderedAt: string
 }>
-type TypeHeader = { createdAt: string }
+type TypeHeader = { createdAt: string; renderedAt: string }
 type TypeBody = { state: { title: string; description: string; img: string } }
 type TypeFooter = {
     state: { follow?: boolean; time: number; tag?: string | null }
 }
 
-Content.Header = function ContentHeader({ createdAt }: TypeHeader) {
+Content.Header = function ContentHeader({ createdAt, renderedAt }: TypeHeader) {
     const date = new Date(createdAt)
-    const today = new Date()
+    const today = new Date(renderedAt)
     const dateDiff = Number(today) - Number(date)
     const pastDays = Math.abs(Math.floor(dateDiff / (1000 * 60 * 60 * 24)))
     return (
@@ -83,7 +84,7 @@ Content.Image = function ContentImage({ src }: { src: string }) {
     )
 }
 
-export default function Content({ data, includes }: Props) {
+export default function Content({ data, includes, renderedAt }: Props) {
     return (
         <div className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-6">
             {data?.map((item) => {
@@ -95,7 +96,7 @@ export default function Content({ data, includes }: Props) {
                 return (
                     <Link key={sys.id} href={`/content/${fields.slug}`}>
                         <div className="group">
-                            <Content.Header createdAt={sys.createdAt} />
+                            <Content.Header createdAt={sys.createdAt} renderedAt={renderedAt} />
                             <Content.Body state={{ title, description, img: imageUrl }} />
                             <Content.Footer state={{ time, tag }} />
                         </div>
