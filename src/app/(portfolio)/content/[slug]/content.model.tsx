@@ -1,10 +1,11 @@
 'use client'
 
+import { useEffect } from 'react'
 import {
     setContentFollowing,
     useContentfulStoreHydrated,
 } from '@/store/contentful.store'
-import { PostDataItem } from '@/store/contentful.store/contentful.type'
+import { PostDataItem } from '@/services/contentful/contentful.type'
 
 type UseContentModelProps = {
     slug: string
@@ -26,6 +27,11 @@ export default function useContentModel({
     const isNotFound = !isLoading && !post
 
     const handleBookmark = (id = '') => setContentFollowing(id)
+
+    useEffect(() => {
+        if (!slug) return
+        fetch(`/api/views/${slug}`, { method: 'POST', keepalive: true }).catch(() => {})
+    }, [slug])
 
     return {
         state: {

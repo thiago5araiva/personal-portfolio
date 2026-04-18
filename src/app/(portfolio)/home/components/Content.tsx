@@ -1,36 +1,27 @@
 import AvatarComponent from '@/components/avatar.component'
 import Image from 'next/image'
-import { BookmarkCheck, Dot, Loader2 } from 'lucide-react'
-import { PropsWithChildren, useCallback, useEffect, useRef } from 'react'
-import {
-    ContentfulIncludes,
-    PostDataItem,
-} from '@/store/contentful.store/contentful.type'
+import { BookmarkCheck, Dot } from 'lucide-react'
+import { PropsWithChildren } from 'react'
+import { ContentfulIncludes, PostDataItem } from '@/services/contentful/contentful.type'
 import { resolveAssetUrl } from '@/services/contentful/contentful-asset-resolver'
 import Link from 'next/link'
 
-const PLACEHOLDER_IMAGE =
-    'https://placehold.co/600x400/e5e5e5/666666.png?text=No+Image'
+const PLACEHOLDER_IMAGE = 'https://placehold.co/600x400/e5e5e5/666666.png?text=No+Image'
 
-type InfiniteScrollProps = {
-    fetchNextPage: () => void
-    isFetchingNextPage: boolean
-    hasNextPage: boolean
-}
 type Props = PropsWithChildren<{
     data: PostDataItem[]
     includes?: ContentfulIncludes
-    infiniteScroll?: InfiniteScrollProps
+    renderedAt: string
 }>
-type TypeHeader = { createdAt: string }
+type TypeHeader = { createdAt: string; renderedAt: string }
 type TypeBody = { state: { title: string; description: string; img: string } }
 type TypeFooter = {
     state: { follow?: boolean; time: number; tag?: string | null }
 }
 
-Content.Header = function ContentHeader({ createdAt }: TypeHeader) {
+Content.Header = function ContentHeader({ createdAt, renderedAt }: TypeHeader) {
     const date = new Date(createdAt)
-    const today = new Date()
+    const today = new Date(renderedAt)
     const dateDiff = Number(today) - Number(date)
     const pastDays = Math.abs(Math.floor(dateDiff / (1000 * 60 * 60 * 24)))
     return (
@@ -65,11 +56,7 @@ Content.Footer = function ContentFooter(props: TypeFooter) {
                 <Dot className="hidden sm:block text-caesar-black/30" />
                 <span className="text-caesar-black/50 text-sm">{`${Math.round(state.time)} min read`}</span>
             </div>
-            <div className="shrink-0 ml-2">
-                {state.follow && (
-                    <BookmarkCheck className="text-caesar-black" />
-                )}
-            </div>
+            <div className="shrink-0 ml-2">{state.follow && <BookmarkCheck className="text-caesar-black" />}</div>
         </div>
     )
 }
@@ -77,16 +64,10 @@ Content.Divider = function ContentDivider() {
     return <div className="border my-8 bg-caesar-black/10" />
 }
 Content.Title = function ContentTitle({ value }: { value: string }) {
-    return (
-        <h3 className="text-xl sm:text-2xl mb-3 lg:mb-3 text-caesar-black">
-            {value}
-        </h3>
-    )
+    return <h3 className="text-xl sm:text-2xl mb-3 lg:mb-3 text-caesar-black">{value}</h3>
 }
 Content.Description = function ContentText({ value }: { value: string }) {
-    return (
-        <p className="mb-0 lg:mb-0 font-light text-caesar-black/70">{value}</p>
-    )
+    return <p className="mb-0 lg:mb-0 font-light text-caesar-black/70">{value}</p>
 }
 Content.Image = function ContentImage({ src }: { src: string }) {
     return (
@@ -103,66 +84,25 @@ Content.Image = function ContentImage({ src }: { src: string }) {
     )
 }
 
-function LoadingIndicator() {
-    return (
-        <div className="flex items-center justify-center py-8">
-            <Loader2 className="h-6 w-6 animate-spin text-caesar-black/40" />
-        </div>
-    )
-}
-
-export default function Content({ data, includes, infiniteScroll }: Props) {
-    const sentinelRef = useRef<HTMLDivElement>(null)
-    const handleIntersect = useCallback(
-        (entries: IntersectionObserverEntry[]) => {
-            const [entry] = entries
-            if (
-                entry.isIntersecting &&
-                infiniteScroll?.hasNextPage &&
-                !infiniteScroll?.isFetchingNextPage
-            ) {
-                infiniteScroll.fetchNextPage()
-            }
-        },
-        [infiniteScroll]
-    )
-
-    useEffect(() => {
-        const sentinel = sentinelRef.current
-        if (!sentinel || !infiniteScroll) return
-        const observer = new IntersectionObserver(handleIntersect, {
-            rootMargin: '0px 0px 200px 0px',
-        })
-        observer.observe(sentinel)
-        return () => observer.disconnect()
-    }, [handleIntersect, infiniteScroll])
-
+export default function Content({ data, includes, renderedAt }: Props) {
     return (
         <div className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-6">
             {data?.map((item) => {
                 const { sys, fields } = item
                 const { title, description, image, tag } = fields
-                const imageUrl =
-                    resolveAssetUrl(image, includes) ?? PLACEHOLDER_IMAGE
+                const imageUrl = resolveAssetUrl(image, includes) ?? PLACEHOLDER_IMAGE
                 const time = fields.body.split(' ').length / 200
 
                 return (
                     <Link key={sys.id} href={`/content/${fields.slug}`}>
                         <div className="group">
-                            <Content.Header createdAt={sys.createdAt} />
-                            <Content.Body
-                                state={{ title, description, img: imageUrl }}
-                            />
+                            <Content.Header createdAt={sys.createdAt} renderedAt={renderedAt} />
+                            <Content.Body state={{ title, description, img: imageUrl }} />
                             <Content.Footer state={{ time, tag }} />
                         </div>
                     </Link>
                 )
             })}
-
-            {infiniteScroll?.isFetchingNextPage && <LoadingIndicator />}
-            {infiniteScroll && (
-                <div ref={sentinelRef} aria-hidden="true" className="h-1" />
-            )}
         </div>
     )
 }

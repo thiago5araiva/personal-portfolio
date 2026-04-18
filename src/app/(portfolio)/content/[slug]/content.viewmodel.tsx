@@ -2,7 +2,7 @@
 
 import ContentView from './content.view'
 import useContentModel from './content.model'
-import { PostDataItem } from '@/store/contentful.store/contentful.type'
+import { PostDataItem } from '@/services/contentful/contentful.type'
 
 type Props = {
     slug: string

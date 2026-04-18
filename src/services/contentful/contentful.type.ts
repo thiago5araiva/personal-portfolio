@@ -139,10 +139,4 @@ export interface AssetImageDimensions {
     height: number
 }
 
-export interface GetEntriesOptions {
-    order?: string
-    skip?: number
-    limit?: number
-}
-
-export const PAGE_SIZE = 4
+export type ContentfulEntriesResponse = { data: ContentfulPostData }

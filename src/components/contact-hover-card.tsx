@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
     HoverCard,
@@ -207,12 +208,6 @@ function CardContent({
                 )}
             </div>
 
-            {/* Footer */}
-            <div className="px-5 py-3 bg-caesar-black/5 border-t border-caesar-black/10">
-                <p className="text-[10px] text-caesar-black/40 font-medium uppercase tracking-widest text-center">
-                    Click to connect
-                </p>
-            </div>
         </>
     )
 }
@@ -226,6 +221,11 @@ export default function ContactHoverCard({
 }: Props) {
     const isMobile = useIsMobile()
     const initials = getInitials(name)
+
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => setMounted(true), [])
+
+    if (!mounted) return <>{children}</>
 
     const whatsappUrl = contacts.whatsapp
         ? `https://wa.me/${contacts.whatsapp.replace(/\D/g, '')}`

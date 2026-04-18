@@ -4,7 +4,7 @@ import Icon from '@/utils/icons'
 import Logo from '@/assets/images/portfolio-logo.png'
 import ProfileImage from '@/assets/images/me.png'
 import Link from 'next/link'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import ContactHoverCard from '@/components/contact-hover-card'
 
 const CONTACT_INFO = {
@@ -79,7 +79,6 @@ export default function SidebarLeft({ links }: Props) {
                     >
                         <div className="navigation-avatar order-2 cursor-pointer group">
                             <Avatar className="text-caesar-black transition-all duration-300 group-hover:ring-2 group-hover:ring-caesar-burgundy/30 group-hover:ring-offset-2">
-                                <AvatarImage src="" alt="user" />
                                 <AvatarFallback className="border border-caesar-black/50 text-caesar-black/50 text-xs group-hover:border-caesar-burgundy group-hover:text-caesar-burgundy transition-colors duration-300">
                                     TS
                                 </AvatarFallback>
