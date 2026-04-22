@@ -65,7 +65,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Props) {
     return (
-        <html lang="en">
+        <html lang="en" className="overflow-x-hidden scroll-smooth">
             <head>
                 <link rel="preconnect" href="https://images.ctfassets.net" />
                 <link rel="manifest" href="/manifest.json" />

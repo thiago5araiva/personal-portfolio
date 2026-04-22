@@ -21,7 +21,6 @@ export default function PeritoPage() {
 						<rect width="100%" height="100%" fill="url(#grid)" />
 					</svg>
 				</div>
-
 				<div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
 					{/* Badge */}
 					<div className="inline-flex items-center gap-2 px-4 py-2 mb-8 border border-white/10 rounded-full text-white/50 text-xs tracking-[0.2em] uppercase font-light">
