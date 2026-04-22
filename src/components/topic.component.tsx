@@ -4,7 +4,9 @@ import { ReactNode } from 'react'
 
 type TopicType = { children: ReactNode }
 type TopicHeaderType = { title: string }
-type TopicListType = { data: Array<{ title: string; url: string }> }
+type TopicListType = {
+    data: Array<{ title: string; url: string; count?: number }>
+}
 type TopicListItemType = { value: string }
 type TopicButtonType = { href: string; label: string }
 
@@ -28,7 +30,7 @@ Topic.List = function List({ data }: TopicListType) {
 
     return (
         <div className=" featured__list grid gap-6">
-            {uniqContent?.slice(0, 3).map(({ title, url }) => (
+            {uniqContent?.map(({ title, url }) => (
                 <Link href={url} key={title}>
                     <div className="featured__item">
                         <Topic.ListItem value={title} />

@@ -1,6 +1,6 @@
 import Topic from '@/components/topic.component'
 
-type Props = { data: Array<{ title: string; url: string }> }
+type Props = { data: Array<{ title: string; url: string; count?: number }> }
 
 export default function HomeFeatured({ data }: Props) {
     return (
