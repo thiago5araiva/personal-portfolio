@@ -5,11 +5,21 @@ import * as Icon from 'lucide-react'
 import { PAGE_CONSTANTS } from './constants'
 import Image from 'next/image'
 import ImagePeritoProfile from '@/assets/images/me-perito.png'
+import { MoveRight } from 'lucide-react'
+import Link from 'next/link'
 export default function PeritoPage() {
 	const { Binary, ArrowRight, User, Mail, Phone, Clock } = Icon
 	return (
 		<div className="scroll-smooth">
 			<section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-primary-default">
+				<div className="absolute top-0 right-0 px-12 mt-6 z-50">
+					<Link href={'/blog'}>
+						<div className="flex gap-6">
+							<MoveRight className="text-white" />
+							<h3 className="text-white">Blog</h3>
+						</div>
+					</Link>
+				</div>
 				{/* Geometric grid overlay */}
 				<div className="absolute inset-0 opacity-[0.04]">
 					<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
