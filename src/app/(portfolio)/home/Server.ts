@@ -34,12 +34,10 @@ const toFeatured = (ranked: RankedItem[]): FeaturedItem[] => {
 const resolveFeatured = (items: PostDataItem[], topSlugs: TopSlugEntry[]): FeaturedItem[] => {
 	if (!items.length) return []
 
-	const topPosts: RankedItem[] = topSlugs
-		.map((entry) => {
-			const item = items.find((i) => i.fields.slug === entry.slug)
-			return item ? { item, count: entry.count } : null
-		})
-		.filter((v): v is RankedItem => Boolean(v))
+	const topPosts: RankedItem[] = topSlugs.flatMap((entry) => {
+		const item = items.find((i) => i.fields.slug === entry.slug)
+		return item ? [{ item, count: entry.count }] : []
+	})
 
 	if (topPosts.length >= FEATURED_LIMIT) {
 		return toFeatured(topPosts.slice(0, FEATURED_LIMIT))
