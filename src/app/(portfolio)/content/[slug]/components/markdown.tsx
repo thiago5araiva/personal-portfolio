@@ -59,6 +59,11 @@ function normalizeContentfulUrl(url: string | undefined): string {
 }
 
 export default function Markdown({ content }: Props) {
+    // Pre-find the raw src of the first image in the markdown body so we can
+    // mark it as the LCP candidate. Stateless and immune to strict-mode
+    // double-invocation, unlike a render-scope counter.
+    const firstImageSrc = content.match(/!\[[^\]]*\]\(([^)\s]+)/)?.[1]
+
     return (
         <div className="markdown-content text-caesar-black/80">
             <ReactMarkdown
@@ -173,6 +178,7 @@ export default function Markdown({ content }: Props) {
                     ),
 
                     img: ({ src, alt }) => {
+                        const isLcpCandidate = !!src && src === firstImageSrc
                         const normalizedSrc = normalizeContentfulUrl(src)
                         const improvedAlt =
                             alt?.startsWith('cover-') || alt?.startsWith('conver-')
@@ -191,6 +197,8 @@ export default function Markdown({ content }: Props) {
                                     height={450}
                                     className="w-full h-auto object-cover"
                                     sizes="(max-width: 800px) 100vw, 800px"
+                                    priority={isLcpCandidate}
+                                    fetchPriority={isLcpCandidate ? 'high' : 'auto'}
                                 />
                                 {improvedAlt && improvedAlt !== 'Article image' && (
                                     <span className="block mt-3 font-mono text-[0.75rem] uppercase tracking-meta text-caesar-black/45">
