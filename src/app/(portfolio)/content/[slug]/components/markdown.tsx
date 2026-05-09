@@ -30,9 +30,7 @@ function LazyCodeBlock({
     }, [])
 
     if (!SyntaxHighlighter || !style) {
-        return (
-            <div className="bg-caesar-black/5 rounded-lg my-4 h-32 animate-pulse" />
-        )
+        return <div className="bg-caesar-black/5 my-6 h-32 animate-pulse" />
     }
 
     return (
@@ -40,7 +38,7 @@ function LazyCodeBlock({
             style={style}
             language={language}
             PreTag="div"
-            className="rounded-lg my-4 text-sm"
+            className="my-6 text-[0.875rem] font-mono"
             showLineNumbers={showLineNumbers}
             wrapLongLines={false}>
             {children}
@@ -52,10 +50,6 @@ type Props = {
     content: string
 }
 
-/**
- * Normalizes Contentful asset URLs by adding the https protocol
- * when the URL uses protocol-relative format (starts with //)
- */
 function normalizeContentfulUrl(url: string | undefined): string {
     if (!url) return ''
     if (url.startsWith('//')) {
@@ -65,104 +59,86 @@ function normalizeContentfulUrl(url: string | undefined): string {
 }
 
 export default function Markdown({ content }: Props) {
-
     return (
-        <div className="markdown-content">
+        <div className="markdown-content text-caesar-black/80">
             <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 components={{
-                    // Headings
                     h1: ({ children }) => (
-                        <h1 className="text-3xl sm:text-4xl font-bold text-caesar-black mt-8 mb-4">
+                        <h1 className="font-display font-medium tracking-editorial leading-[1.1] text-caesar-black text-[clamp(1.875rem,2.5vw+0.5rem,2.5rem)] mt-12 mb-5">
                             {children}
                         </h1>
                     ),
                     h2: ({ children }) => (
-                        <h2 className="text-2xl sm:text-3xl font-bold text-caesar-black mt-6 mb-3">
+                        <h2 className="font-display font-medium tracking-editorial leading-[1.15] text-caesar-black text-[clamp(1.5rem,1.5vw+0.75rem,2rem)] mt-12 mb-4">
                             {children}
                         </h2>
                     ),
                     h3: ({ children }) => (
-                        <h3 className="text-xl sm:text-2xl font-semibold text-caesar-black mt-5 mb-2">
+                        <h3 className="font-display font-medium leading-snug text-caesar-black text-[clamp(1.25rem,0.75vw+0.9rem,1.5rem)] mt-10 mb-3">
                             {children}
                         </h3>
                     ),
                     h4: ({ children }) => (
-                        <h4 className="text-lg sm:text-xl font-semibold text-caesar-black mt-4 mb-2">
+                        <h4 className="font-sans font-semibold leading-snug text-caesar-black text-[1.0625rem] mt-8 mb-2 uppercase tracking-[0.05em]">
                             {children}
                         </h4>
                     ),
 
-                    // Paragraphs
                     p: ({ children }) => (
-                        <p className="text-caesar-black/80 leading-relaxed mb-4">
+                        <p className="font-sans text-[var(--type-body)] leading-[1.7] text-caesar-black/80 my-5">
                             {children}
                         </p>
                     ),
 
-                    // Links
                     a: ({ href, children }) => (
                         <a
                             href={href}
-                            className="text-caesar-black underline underline-offset-2 hover:text-caesar-black/70 transition-colors"
+                            className="text-caesar-black underline decoration-caesar-burgundy/60 decoration-1 underline-offset-4 hover:decoration-caesar-burgundy hover:text-caesar-burgundy transition-colors duration-300 ease-out-quart"
                             target="_blank"
                             rel="noopener noreferrer">
                             {children}
                         </a>
                     ),
 
-                    // Lists
                     ul: ({ children }) => (
-                        <ul className="list-disc list-inside mb-4 space-y-1 text-caesar-black/80">
+                        <ul className="my-5 ml-1 space-y-2 font-sans text-[var(--type-body)] leading-[1.7] text-caesar-black/80 [&_>_li]:relative [&_>_li]:pl-6 [&_>_li]:before:content-['—'] [&_>_li]:before:absolute [&_>_li]:before:left-0 [&_>_li]:before:text-caesar-black/40 [&_>_li]:before:font-mono">
                             {children}
                         </ul>
                     ),
                     ol: ({ children }) => (
-                        <ol className="list-decimal list-inside mb-4 space-y-1 text-caesar-black/80">
+                        <ol className="my-5 ml-1 space-y-2 font-sans text-[var(--type-body)] leading-[1.7] text-caesar-black/80 list-decimal list-inside marker:text-caesar-black/40 marker:font-mono marker:text-[0.875rem]">
                             {children}
                         </ol>
                     ),
-                    li: ({ children }) => <li className="ml-2">{children}</li>,
+                    li: ({ children }) => <li>{children}</li>,
 
-                    // Blockquote
                     blockquote: ({ children }) => (
-                        <blockquote className="border-l-4 border-caesar-black/30 pl-4 italic text-caesar-black/70 my-4">
+                        <blockquote className="my-8 pl-6 font-display italic text-caesar-black/85 text-[clamp(1.125rem,0.5vw+1rem,1.375rem)] leading-snug">
                             {children}
                         </blockquote>
                     ),
 
-                    // Code blocks and inline code
-                    code: ({ className, children, node, ...props }) => {
+                    code: ({ className, children, ...props }) => {
                         const match = /language-(\w+)/.exec(className || '')
                         const codeContent = String(children).replace(/\n$/, '')
-
-                        // Detect if this is a code block (has language OR has multiple lines)
                         const hasMultipleLines = codeContent.includes('\n')
                         const isCodeBlock = match || hasMultipleLines
 
-                        // Inline code (single line without language)
                         if (!isCodeBlock) {
                             return (
                                 <code
-                                    className="bg-caesar-black/10 text-caesar-black px-1.5 py-0.5 rounded text-sm font-mono"
+                                    className="bg-caesar-black/[0.06] text-caesar-black px-1.5 py-0.5 rounded-sm text-[0.875em] font-mono"
                                     {...props}>
                                     {children}
                                 </code>
                             )
                         }
 
-                        // Code block with syntax highlighting (has language specified)
                         if (match) {
                             const language = match[1]
-                            const noLineNumbersLanguages = [
-                                'markdown',
-                                'md',
-                                'text',
-                                'txt',
-                                'plain',
-                            ]
-                            const shouldShowLineNumbers =
-                                !noLineNumbersLanguages.includes(language.toLowerCase())
+                            const noLineNumbersLanguages = ['markdown', 'md', 'text', 'txt', 'plain']
+                            const shouldShowLineNumbers = !noLineNumbersLanguages.includes(language.toLowerCase())
 
                             return (
                                 <LazyCodeBlock
@@ -173,40 +149,31 @@ export default function Markdown({ content }: Props) {
                             )
                         }
 
-                        // Code block without language (ASCII diagrams, plain text blocks)
                         return (
-                            <pre className="bg-caesar-black/5 border border-caesar-black/10 rounded-lg p-4 my-4 overflow-x-auto">
-                                <code className="text-sm font-mono text-caesar-black/80 whitespace-pre">
+                            <pre className="bg-caesar-black/[0.04] border border-caesar-black/10 p-4 my-6 overflow-x-auto">
+                                <code className="text-[0.875rem] font-mono text-caesar-black/80 whitespace-pre">
                                     {codeContent}
                                 </code>
                             </pre>
                         )
                     },
 
-                    // Pre (wrapper for code blocks) - pass through to let code handle it
                     pre: ({ children }) => <>{children}</>,
 
-                    // Horizontal rule
-                    hr: () => <hr className="border-caesar-black/20 my-8" />,
+                    hr: () => (
+                        <hr className="border-0 my-12 flex items-center justify-center text-caesar-black/30 before:content-['§§§'] before:font-mono before:text-[0.75rem] before:tracking-[0.6em]" />
+                    ),
 
-                    // Strong/Bold
                     strong: ({ children }) => (
-                        <strong className="font-semibold text-caesar-black">
-                            {children}
-                        </strong>
+                        <strong className="font-medium text-caesar-black">{children}</strong>
                     ),
 
-                    // Emphasis/Italic
                     em: ({ children }) => (
-                        <em className="italic text-caesar-black/90">
-                            {children}
-                        </em>
+                        <em className="italic text-caesar-black/90">{children}</em>
                     ),
 
-                    // Images - normalize Contentful URLs and use Next.js Image
                     img: ({ src, alt }) => {
                         const normalizedSrc = normalizeContentfulUrl(src)
-                        // Generate a more descriptive alt text from the filename if alt is a cover-* pattern
                         const improvedAlt =
                             alt?.startsWith('cover-') || alt?.startsWith('conver-')
                                 ? alt
@@ -216,51 +183,45 @@ export default function Markdown({ content }: Props) {
                                 : alt || 'Article image'
 
                         return (
-                            <span className="block relative w-full my-6">
+                            <span className="block relative w-full my-8">
                                 <Image
                                     src={normalizedSrc}
                                     alt={improvedAlt}
                                     width={800}
                                     height={450}
-                                    className="rounded-lg w-full h-auto object-cover"
+                                    className="w-full h-auto object-cover"
                                     sizes="(max-width: 800px) 100vw, 800px"
                                 />
+                                {improvedAlt && improvedAlt !== 'Article image' && (
+                                    <span className="block mt-3 font-mono text-[0.75rem] uppercase tracking-meta text-caesar-black/45">
+                                        {improvedAlt}
+                                    </span>
+                                )}
                             </span>
                         )
                     },
 
-                    // Tables
                     table: ({ children }) => (
-                        <div className="overflow-x-auto my-4">
-                            <table className="min-w-full border-collapse border border-caesar-black/20">
+                        <div className="overflow-x-auto my-6">
+                            <table className="min-w-full border-collapse text-[0.9375rem] font-sans">
                                 {children}
                             </table>
                         </div>
                     ),
                     thead: ({ children }) => (
-                        <thead className="bg-caesar-black/5">
-                            {children}
-                        </thead>
+                        <thead className="border-b-2 border-caesar-black/30">{children}</thead>
                     ),
-                    tbody: ({ children }) => (
-                        <tbody>
-                            {children}
-                        </tbody>
-                    ),
+                    tbody: ({ children }) => <tbody>{children}</tbody>,
                     tr: ({ children }) => (
-                        <tr className="border-b border-caesar-black/20">
-                            {children}
-                        </tr>
+                        <tr className="border-b border-caesar-black/15">{children}</tr>
                     ),
                     th: ({ children }) => (
-                        <th className="border border-caesar-black/20 bg-caesar-black/5 px-4 py-2 text-left font-semibold text-caesar-black">
+                        <th className="px-3 py-2 text-left font-mono text-[0.6875rem] uppercase tracking-meta text-caesar-black/55">
                             {children}
                         </th>
                     ),
                     td: ({ children }) => (
-                        <td className="border border-caesar-black/20 px-4 py-2 text-caesar-black/80">
-                            {children}
-                        </td>
+                        <td className="px-3 py-3 text-caesar-black/80 align-top">{children}</td>
                     ),
                 }}>
                 {content}
