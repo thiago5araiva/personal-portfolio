@@ -6,16 +6,27 @@ import { Metadata, Viewport } from 'next'
 import { ReactNode } from 'react'
 
 import Providers from '@/providers'
-import { Roboto } from 'next/font/google'
+import { Bricolage_Grotesque, Geist, JetBrains_Mono } from 'next/font/google'
 
 type Props = Readonly<{
     children: ReactNode
 }>
 
-const roboto = Roboto({
+const display = Bricolage_Grotesque({
     subsets: ['latin'],
-    weight: ['300', '400', '500', '700'],
-    variable: '--font-roboto',
+    variable: '--font-display',
+    display: 'swap',
+})
+
+const sans = Geist({
+    subsets: ['latin'],
+    variable: '--font-sans',
+    display: 'swap',
+})
+
+const mono = JetBrains_Mono({
+    subsets: ['latin'],
+    variable: '--font-mono',
     display: 'swap',
 })
 
@@ -71,7 +82,7 @@ export default function RootLayout({ children }: Props) {
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
             </head>
-            <body className={`${roboto.variable} font-sans bg-caesar-white`}>
+            <body className={`${display.variable} ${sans.variable} ${mono.variable} font-sans bg-caesar-white text-caesar-black antialiased`}>
                 <Providers>
                     <main className="main relative container max-w-screen-2xl mx-auto px-4 sm:px-8">
                         {children}

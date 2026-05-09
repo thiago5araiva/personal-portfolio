@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --type-display: clamp(2.75rem, 5vw + 1rem, 5.5rem);
+    --type-h2: clamp(1.75rem, 2.5vw + 0.75rem, 3rem);
+    --type-h3: clamp(1.25rem, 1vw + 1rem, 1.625rem);
+    --type-body: clamp(1rem, 0.25vw + 0.95rem, 1.125rem);
+    --type-meta: 0.8125rem;
+
+    --space-section: clamp(4rem, 8vw, 7rem);
+    --space-block: clamp(1.5rem, 3vw, 2.5rem);
+    --space-tight: clamp(0.75rem, 1vw, 1rem);
+
+    --measure-lede: 60ch;
+    --measure-body: 70ch;
+}
+
+@layer base {
+    body {
+        font-feature-settings: 'ss01', 'cv11';
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+    }
+
+    ::selection {
+        background: #f5332c;
+        color: #fbfaf6;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
+}
