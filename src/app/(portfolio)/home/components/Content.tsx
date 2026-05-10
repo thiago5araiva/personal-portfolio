@@ -1,105 +1,68 @@
-import AvatarComponent from '@/components/avatar.component'
-import Image from 'next/image'
-import { BookmarkCheck, Dot } from 'lucide-react'
-import { PropsWithChildren } from 'react'
-import { ContentfulIncludes, PostDataItem } from '@/services/contentful/contentful.type'
-import { resolveAssetUrl } from '@/services/contentful/contentful-asset-resolver'
 import Link from 'next/link'
+import { ContentfulIncludes, PostDataItem } from '@/services/contentful/contentful.type'
 
-const PLACEHOLDER_IMAGE = 'https://placehold.co/600x400/e5e5e5/666666.png?text=No+Image'
-
-type Props = PropsWithChildren<{
+type Props = {
     data: PostDataItem[]
     includes?: ContentfulIncludes
     renderedAt: string
-}>
-type TypeHeader = { createdAt: string; renderedAt: string }
-type TypeBody = { state: { title: string; description: string; img: string } }
-type TypeFooter = {
-    state: { follow?: boolean; time: number; tag?: string | null }
+    total: number
 }
 
-Content.Header = function ContentHeader({ createdAt, renderedAt }: TypeHeader) {
-    const date = new Date(createdAt)
-    const today = new Date(renderedAt)
-    const dateDiff = Number(today) - Number(date)
-    const pastDays = Math.abs(Math.floor(dateDiff / (1000 * 60 * 60 * 24)))
-    return (
-        <div className="content__header flex items-center mb-4 lg:mb-3">
-            <AvatarComponent name={'Thiago Saraiva'} />
-            <Dot className="text-caesar-black/30" />
-            <span className="text-caesar-black/50 text-sm">{`${pastDays} days ago`}</span>
-        </div>
-    )
-}
-Content.Body = function ContentBody({ state }: TypeBody) {
-    const { title, description, img } = state
-    return (
-        <div className="flex flex-col-reverse lg:flex-row gap-4 lg:gap-8">
-            <div className="flex-1">
-                <Content.Title value={title} />
-                <Content.Description value={description} />
-            </div>
-            <Content.Image src={img} />
-        </div>
-    )
-}
-Content.Footer = function ContentFooter(props: TypeFooter) {
-    const { state } = props
-    const tagName = state.tag ?? 'Portfolio'
-    return (
-        <div className="flex items-center justify-between text-sm mt-4 lg:mt-3 border-b border-caesar-black/20 group-hover:border-caesar-black transition-colors pb-8">
-            <div className="flex items-center gap-1 sm:gap-3 flex-wrap">
-                <div className="flex items-center bg-caesar-black/10 text-caesar-black/70 rounded-full py-1 px-2 sm:px-3 text-xs">
-                    {tagName}
-                </div>
-                <Dot className="hidden sm:block text-caesar-black/30" />
-                <span className="text-caesar-black/50 text-sm">{`${Math.round(state.time)} min read`}</span>
-            </div>
-            <div className="shrink-0 ml-2">{state.follow && <BookmarkCheck className="text-caesar-black" />}</div>
-        </div>
-    )
-}
-Content.Divider = function ContentDivider() {
-    return <div className="border my-8 bg-caesar-black/10" />
-}
-Content.Title = function ContentTitle({ value }: { value: string }) {
-    return <h3 className="text-xl sm:text-2xl mb-3 lg:mb-3 text-caesar-black">{value}</h3>
-}
-Content.Description = function ContentText({ value }: { value: string }) {
-    return <p className="mb-0 lg:mb-0 font-light text-caesar-black/70">{value}</p>
-}
-Content.Image = function ContentImage({ src }: { src: string }) {
-    return (
-        <div className="item__image relative w-full h-[180px] lg:h-[120px] lg:w-[180px] lg:min-w-[180px] bg-caesar-black/5 overflow-hidden rounded-lg">
-            <Image
-                draggable={false}
-                src={src}
-                fill
-                sizes="(max-width: 1024px) 100vw, 180px"
-                alt="placeholder"
-                className="object-cover"
-            />
-        </div>
-    )
-}
+const formatIssue = (n: number) => String(n).padStart(3, '0')
 
-export default function Content({ data, includes, renderedAt }: Props) {
+const formatDate = (iso: string) =>
+    new Date(iso)
+        .toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' })
+        .toUpperCase()
+
+const readTime = (body: string) => Math.max(1, Math.round(body.split(' ').length / 200))
+
+export default function Content({ data, total }: Props) {
+    if (!data?.length) return null
+
     return (
-        <div className="flex flex-col gap-6 sm:gap-8 px-2 sm:px-6">
-            {data?.map((item) => {
+        <div className="home__list">
+            {data.map((item, idx) => {
                 const { sys, fields } = item
-                const { title, description, image, tag } = fields
-                const imageUrl = resolveAssetUrl(image, includes) ?? PLACEHOLDER_IMAGE
-                const time = fields.body.split(' ').length / 200
+                const { title, description, tag, slug, body } = fields
+                const issueNumber = total - idx
+                const time = readTime(body)
+                const tagName = (tag ?? 'portfolio').toUpperCase()
 
                 return (
-                    <Link key={sys.id} href={`/content/${fields.slug}`}>
-                        <div className="group">
-                            <Content.Header createdAt={sys.createdAt} renderedAt={renderedAt} />
-                            <Content.Body state={{ title, description, img: imageUrl }} />
-                            <Content.Footer state={{ time, tag }} />
-                        </div>
+                    <Link
+                        key={sys.id}
+                        href={`/content/${slug}`}
+                        className="group block py-[clamp(3rem,6vw,5.5rem)] border-b border-caesar-black/15 first:border-t-0">
+                        <article className="grid grid-cols-12 gap-x-4">
+                            <div className="col-span-6 md:col-span-2 font-mono text-[0.8125rem] uppercase tracking-meta text-caesar-burgundy">
+                                №&nbsp;{formatIssue(issueNumber)}
+                            </div>
+                            <div className="col-span-6 md:col-span-10 md:text-right font-mono text-[0.8125rem] uppercase tracking-meta text-caesar-black/55">
+                                {formatDate(sys.createdAt)}
+                            </div>
+
+                            <h2 className="col-span-12 md:col-start-2 md:col-span-9 mt-[clamp(1.5rem,3vw,2.25rem)] font-display font-medium tracking-editorial leading-[1.05] text-caesar-black text-[var(--type-h2)] transition-colors duration-500 ease-out-quart group-hover:text-caesar-burgundy">
+                                {title}
+                            </h2>
+
+                            <p className="col-span-12 md:col-start-3 md:col-span-7 mt-[clamp(0.75rem,1vw,1.25rem)] font-sans text-[var(--type-body)] leading-relaxed text-caesar-black/70 max-w-[var(--measure-lede)]">
+                                {description}
+                            </p>
+
+                            <div className="col-span-12 md:col-start-1 md:col-span-7 mt-[clamp(1.5rem,2.5vw,2.5rem)] flex items-center gap-3 font-mono text-[0.75rem] uppercase tracking-meta text-caesar-black/55">
+                                <span>
+                                    {tagName} · {time} MIN
+                                </span>
+                                <span
+                                    className="inline-block h-px w-8 bg-caesar-black/30 transition-all duration-500 ease-out-quart group-hover:w-16 group-hover:bg-caesar-burgundy"
+                                    aria-hidden
+                                />
+                                <span className="transition-colors duration-500 ease-out-quart group-hover:text-caesar-burgundy">
+                                    READ →
+                                </span>
+                            </div>
+                        </article>
                     </Link>
                 )
             })}

@@ -6,15 +6,18 @@ const config: Config = {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['var(--font-roboto)', 'sans-serif'],
-                title: ['var(--font-roboto)', 'sans-serif'],
-                text: ['var(--font-roboto)', 'sans-serif'],
+                sans: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                display: ['var(--font-display)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+                title: ['var(--font-display)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+                text: ['var(--font-sans)', 'ui-sans-serif', 'system-ui', 'sans-serif'],
             },
             colors: {
-                // Caesar Palette
-                'caesar-black': '#000000',
+                // Caesar palette: tinted neutrals, never pure #000 / #fff.
+                'caesar-black': '#14100e',
                 'caesar-burgundy': '#F5332C',
-                'caesar-white': '#FFFFFF',
+                'caesar-white': '#fbfaf6',
+                'instrument-cyan': '#3d8595',
                 // Legacy brand colors
                 'brand-primary': '#243447',
                 'brand-secondary': '#141D26',
@@ -37,6 +40,15 @@ const config: Config = {
                 'font-low': '#475756',
                 'base-black': '#000000',
                 'base-white': '#FFFFFF',
+            },
+            letterSpacing: {
+                tightest: '-0.03em',
+                editorial: '-0.022em',
+                meta: '0.22em',
+            },
+            transitionTimingFunction: {
+                'out-quart': 'cubic-bezier(0.22, 1, 0.36, 1)',
+                'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

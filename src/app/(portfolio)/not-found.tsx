@@ -1,33 +1,38 @@
-import { Button } from '@/components/ui/button'
-import { MoveLeft, MoveRight } from 'lucide-react'
 import Link from 'next/link'
 
 export default function NotFoundPage() {
     return (
-        <section className="not-found">
-            <div className="flex flex-col items-center my-36">
-                <div className="max-w-[480px]	 mb-10">
-                    <h1 className="text-3xl text-font-high font-semibold text-center mb-6 sm:text-6xl">
-                        Oops ~ Contents Ran Away
+        <section className="not-found pt-[clamp(4rem,10vw,10rem)] pb-[clamp(4rem,8vw,8rem)]">
+            <div className="grid grid-cols-12 gap-x-4">
+                <p className="col-span-12 md:col-span-2 font-mono text-[0.75rem] uppercase tracking-meta text-caesar-burgundy mb-4 md:mb-0">
+                    №&nbsp;404
+                </p>
+
+                <div className="col-span-12 md:col-span-9 md:col-start-3">
+                    <h1 className="font-display font-medium tracking-editorial leading-[1.05] text-caesar-black text-[var(--type-display)] mb-[clamp(1.5rem,3vw,2.5rem)]">
+                        Contents
+                        <br />
+                        ran away.
                     </h1>
-                    <p className="text-lg text-font-high text-center sm:text-xl">
-                        Don’t panic! I can help you to ...
+
+                    <p className="font-sans text-[clamp(1.0625rem,0.5vw+1rem,1.375rem)] leading-relaxed text-caesar-black/70 max-w-[50ch] mb-[clamp(2.5rem,5vw,4rem)]">
+                        The page you are looking for doesn&apos;t exist, or it moved without leaving a forwarding address. No need to panic.
                     </p>
-                </div>
-                <div className="grid gap-4">
-                    <div>
-                        <Link href={'/'}>
-                            <Button className="w-[260px] bg-primary-default text-base-white rounded-full">
-                                <MoveLeft className="mr-3" />
-                                Find Your Way Home
-                            </Button>
+
+                    <div className="flex flex-col sm:flex-row gap-6 sm:gap-10">
+                        <Link
+                            href="/"
+                            className="group inline-flex items-center gap-3 font-mono text-[0.8125rem] uppercase tracking-meta text-caesar-black hover:text-caesar-burgundy transition-colors duration-300 ease-out-quart">
+                            <span aria-hidden className="inline-block h-px w-4 bg-caesar-black/40 transition-all duration-500 ease-out-quart group-hover:w-10 group-hover:bg-caesar-burgundy" />
+                            Back to the index
                         </Link>
-                    </div>
-                    <div>
-                        <Button className="w-[260px]  border border-primary-default black rounded-full">
-                            Contact Me
-                            <MoveRight className="ml-3" />
-                        </Button>
+
+                        <Link
+                            href="/about"
+                            className="group inline-flex items-center gap-3 font-mono text-[0.8125rem] uppercase tracking-meta text-caesar-black/70 hover:text-caesar-burgundy transition-colors duration-300 ease-out-quart">
+                            <span aria-hidden className="inline-block h-px w-4 bg-caesar-black/40 transition-all duration-500 ease-out-quart group-hover:w-10 group-hover:bg-caesar-burgundy" />
+                            About the author
+                        </Link>
                     </div>
                 </div>
             </div>
