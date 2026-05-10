@@ -17,6 +17,7 @@ const config: Config = {
                 'caesar-black': '#14100e',
                 'caesar-burgundy': '#F5332C',
                 'caesar-white': '#fbfaf6',
+                'instrument-cyan': '#3d8595',
                 // Legacy brand colors
                 'brand-primary': '#243447',
                 'brand-secondary': '#141D26',

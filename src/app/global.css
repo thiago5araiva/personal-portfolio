@@ -29,6 +29,17 @@
         color: #fbfaf6;
     }
 
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        scrollbar-width: none;
+    }
+
+    html:has(#perito-layout) {
+        scroll-behavior: smooth;
+    }
+
     @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
