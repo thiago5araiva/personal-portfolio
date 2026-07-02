@@ -4,11 +4,11 @@ import { ContentfulHttpClient } from '@/services/contentful/contentful-http-clie
 import type { ContentfulEntriesResponse } from '@/services/contentful/contentful.type'
 
 export class ContentfulRepository {
-    constructor(private httpClient: IHttpClient) {}
-    async getPostEntries(): Promise<ContentfulEntriesResponse> {
-        const url = `/spaces/${ContentfulConfig.space}/environments/master/entries?include=1&order=-sys.createdAt`
-        return await this.httpClient.get(url)
-    }
+	constructor(private httpClient: IHttpClient) {}
+	async getPostEntries(): Promise<ContentfulEntriesResponse> {
+		const url = `/spaces/${ContentfulConfig.space}/environments/master/entries?order=-sys.createdAt`
+		return await this.httpClient.get(url)
+	}
 }
 
 const httpClient = new ContentfulHttpClient()

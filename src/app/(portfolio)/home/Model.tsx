@@ -1,6 +1,6 @@
 import { setContentfulData, useContentfulStoreHydrated } from '@/store/contentful.store'
 import { useEffect } from 'react'
-import { ContentfulIncludes, PostDataItem } from '@/services/contentful/contentful.type'
+import { PostDataItem } from '@/services/contentful/contentful.type'
 import type { PageData } from './Server'
 
 export default function Model(initialData?: PageData) {
@@ -8,7 +8,6 @@ export default function Model(initialData?: PageData) {
 
 	const initialPayload = initialData?.entries.data
 	const recommended: PostDataItem[] = initialPayload?.items ?? contentFulStore?.data.items ?? []
-	const includes: ContentfulIncludes = initialPayload?.includes ?? contentFulStore?.data.includes ?? { Asset: [] }
 	const featured = initialData?.featured ?? []
 	const renderedAt = initialData?.renderedAt ?? ''
 
@@ -27,7 +26,6 @@ export default function Model(initialData?: PageData) {
 		state: {
 			recommended,
 			featured,
-			includes,
 			renderedAt,
 		},
 	}
