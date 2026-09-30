@@ -1,13 +1,10 @@
 import 'server-only'
-import { unstable_cache } from 'next/cache'
 import { contentfulRepository } from '@/services/contentful/contentful-repository'
-import { viewsRepository } from '@/services/views/views-repository'
 import type { ContentfulEntriesResponse, PostDataItem } from '@/services/contentful/contentful.type'
-import type { TopSlugEntry } from '@/services/views/views.type'
 
 const FEATURED_LIMIT = 6
 
-export type FeaturedItem = { title: string; url: string; count?: number }
+export type FeaturedItem = { title: string; url: string }
 
 export type PageData = {
 	entries: ContentfulEntriesResponse
@@ -15,49 +12,19 @@ export type PageData = {
 	renderedAt: string
 }
 
-type RankedItem = { item: PostDataItem; count?: number }
-
-const getTopSlugsCached = unstable_cache(
-	() => viewsRepository.getTopSlugs(FEATURED_LIMIT),
-	['views:top-slugs', String(FEATURED_LIMIT)],
-	{ revalidate: 60, tags: ['views:ranking'] }
-)
-
-const toFeatured = (ranked: RankedItem[]): FeaturedItem[] => {
-	return ranked.map(({ item, count }) => ({
+const toFeatured = (items: PostDataItem[]): FeaturedItem[] => {
+	return items.map((item) => ({
 		title: item.fields.title,
 		url: `/content/${item.fields.slug}`,
-		count,
 	}))
 }
 
-const resolveFeatured = (items: PostDataItem[], topSlugs: TopSlugEntry[]): FeaturedItem[] => {
-	if (!items.length) return []
-
-	const topPosts: RankedItem[] = topSlugs.flatMap((entry) => {
-		const item = items.find((i) => i.fields.slug === entry.slug)
-		return item ? [{ item, count: entry.count }] : []
-	})
-
-	if (topPosts.length >= FEATURED_LIMIT) {
-		return toFeatured(topPosts.slice(0, FEATURED_LIMIT))
-	}
-
-	const usedIds = new Set(topPosts.map(({ item }) => item.sys.id))
-	const fallback: RankedItem[] = items
-		.filter((i) => !usedIds.has(i.sys.id) && i.fields.tag === 'frontend')
-		.map((item) => ({ item, count: undefined }))
-
-	return toFeatured([...topPosts, ...fallback].slice(0, FEATURED_LIMIT))
-}
-
 export async function getHomePageData(): Promise<PageData> {
-	const [entries, topSlugs] = await Promise.all([
-		contentfulRepository.getPostEntries(),
-		getTopSlugsCached().catch(() => [] as TopSlugEntry[]),
-	])
+	const entries = await contentfulRepository.getPostEntries()
 
-	const featured = resolveFeatured(entries.data.items, topSlugs)
+	const featured = toFeatured(
+		entries.data.items.filter((i) => i.fields.tag === 'frontend').slice(0, FEATURED_LIMIT)
+	)
 
 	return { entries, featured, renderedAt: new Date().toISOString() }
 }

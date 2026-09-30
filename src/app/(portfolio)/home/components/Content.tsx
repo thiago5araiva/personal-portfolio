@@ -3,7 +3,6 @@ import { PostDataItem } from '@/services/contentful/contentful.type'
 
 type Props = {
 	data: PostDataItem[]
-	renderedAt: string
 	total: number
 }
 

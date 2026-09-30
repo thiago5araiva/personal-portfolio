@@ -1,8 +1,5 @@
-import { TypeAbout } from './about.types'
 import Image from 'next/image'
 import me from '@/assets/images/photo-me.webp'
-
-type Props = TypeAbout
 
 type Stat = { value: string; label: string }
 type Chapter = { number: string; topic: string; title: string; body: string }
@@ -93,7 +90,7 @@ function MetaLabel({ children, accent = false }: { children: React.ReactNode; ac
     )
 }
 
-export default function AboutView(_props: Props) {
+export default function AboutView() {
     return (
         <section className="about">
             <header className="about__header pt-[clamp(3rem,6vw,7rem)] pb-[clamp(3rem,6vw,6rem)] border-b border-caesar-black/15">

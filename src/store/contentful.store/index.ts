@@ -81,5 +81,3 @@ export const setContentFollowing = (id: string) => {
 		data: { ...data, items: updatedItems },
 	})
 }
-
-export default useContentfulStore

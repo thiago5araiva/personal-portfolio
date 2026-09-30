@@ -1,7 +1,6 @@
 export const PRACTICE = {
     practitioner: 'Thiago Saraiva',
     role: 'Prática Pericial',
-    year: '2026',
     thesis_pt: 'Engenharia forense aplicada a',
     thesis_pt_emphasis: 'evidências digitais.',
     thesis_secondary:

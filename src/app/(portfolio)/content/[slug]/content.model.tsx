@@ -1,6 +1,5 @@
 'use client'
 
-import { useEffect } from 'react'
 import {
     setContentFollowing,
     useContentfulStoreHydrated,
@@ -27,11 +26,6 @@ export default function useContentModel({
     const isNotFound = !isLoading && !post
 
     const handleBookmark = (id = '') => setContentFollowing(id)
-
-    useEffect(() => {
-        if (!slug) return
-        fetch(`/api/views/${slug}`, { method: 'POST', keepalive: true }).catch(() => {})
-    }, [slug])
 
     return {
         state: {
