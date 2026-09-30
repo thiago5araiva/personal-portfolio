@@ -11,7 +11,6 @@ export interface SysRoot {
 }
 
 export interface PostDataItem {
-	isFollow?: boolean
 	metadata: Metadata
 	sys: SysItem
 	fields: Fields

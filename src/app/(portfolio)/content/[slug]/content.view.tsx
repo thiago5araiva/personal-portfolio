@@ -2,7 +2,7 @@
 
 import { TypeContentModel } from './content.model'
 import Markdown from './components/markdown'
-import { ArrowLeft, Bookmark, BookmarkCheck } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 
 type Props = TypeContentModel
@@ -13,14 +13,13 @@ const formatPostDate = (dateTime: string) => {
         .toUpperCase()
 }
 
-export default function ContentView({ state, actions }: Props) {
+export default function ContentView({ state }: Props) {
     const { post, isLoading, isNotFound } = state
-    const { handleBookmark } = actions
 
     if (isLoading) return <ContentView.Loading />
     if (isNotFound || !post) return <ContentView.NotFound />
 
-    const { fields, sys, isFollow } = post
+    const { fields, sys } = post
     const readingTime = Math.max(1, Math.round(fields.body.split(' ').length / 200))
     const tagName = (fields.tag ?? 'portfolio').toUpperCase()
 
@@ -53,12 +52,6 @@ export default function ContentView({ state, actions }: Props) {
                         <span aria-hidden className="inline-block h-px w-6 bg-caesar-black/30" />
                         <span>{readingTime} MIN</span>
                     </div>
-                    <button
-                        onClick={() => handleBookmark(sys.id)}
-                        aria-label={isFollow ? 'Remove bookmark' : 'Bookmark this article'}
-                        className="text-caesar-black/55 hover:text-caesar-burgundy transition-colors duration-300 ease-out-quart">
-                        {isFollow ? <BookmarkCheck size={18} strokeWidth={1.5} /> : <Bookmark size={18} strokeWidth={1.5} />}
-                    </button>
                 </div>
             </header>
 

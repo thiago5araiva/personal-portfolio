@@ -1,9 +1,6 @@
 'use client'
 
-import {
-    setContentFollowing,
-    useContentfulStoreHydrated,
-} from '@/store/contentful.store'
+import { useContentfulStoreHydrated } from '@/store/contentful.store'
 import { PostDataItem } from '@/services/contentful/contentful.type'
 
 type UseContentModelProps = {
@@ -25,16 +22,11 @@ export default function useContentModel({
     const isLoading = !post
     const isNotFound = !isLoading && !post
 
-    const handleBookmark = (id = '') => setContentFollowing(id)
-
     return {
         state: {
             post,
             isLoading,
             isNotFound,
-        },
-        actions: {
-            handleBookmark,
         },
     }
 }
