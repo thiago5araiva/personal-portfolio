@@ -4,6 +4,9 @@ import { ReactNode } from 'react'
 
 import Providers from '@/providers'
 import { Bricolage_Grotesque, Geist, JetBrains_Mono } from 'next/font/google'
+import Script from 'next/script'
+
+const CLOUDFLARE_ANALYTICS_TOKEN = 'e852f9d96025423f8886998a98b8b1ca'
 
 type Props = Readonly<{
     children: ReactNode
@@ -85,6 +88,11 @@ export default function RootLayout({ children }: Props) {
                         {children}
                     </main>
                 </Providers>
+                <Script
+                    src="https://static.cloudflareinsights.com/beacon.min.js"
+                    data-cf-beacon={JSON.stringify({ token: CLOUDFLARE_ANALYTICS_TOKEN })}
+                    strategy="afterInteractive"
+                />
             </body>
         </html>
     )
