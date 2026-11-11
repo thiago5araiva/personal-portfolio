@@ -1,7 +1,4 @@
-import { Analytics } from '@vercel/analytics/react'
-
 import '@/app/global.css'
-import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Metadata, Viewport } from 'next'
 import { ReactNode } from 'react'
 
@@ -88,8 +85,6 @@ export default function RootLayout({ children }: Props) {
                         {children}
                     </main>
                 </Providers>
-                <Analytics />
-                <SpeedInsights />
             </body>
         </html>
     )
