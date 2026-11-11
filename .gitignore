@@ -38,7 +38,6 @@ next-env.d.ts
 /.vscode
 /.idea
 
-pnpm-lock.yaml
 .env
 .idea/material_theme_project_new.xml
 

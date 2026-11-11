@@ -1,6 +1,7 @@
 import nextPlugin from 'eslint-config-next'
 
 const eslintConfig = [
+    { ignores: ['.open-next/**', '.wrangler/**'] },
     ...nextPlugin,
     {
         rules: {
