@@ -41,7 +41,7 @@ export default function FooterComponent() {
                         Colophon
                     </p>
                     <p className="font-sans text-[0.9375rem] leading-relaxed text-caesar-black/70 max-w-[36ch]">
-                        Set in Bricolage Grotesque, Geist and JetBrains Mono. Hand-built with Next.js, hosted on Vercel.
+                        Set in Bricolage Grotesque, Geist and JetBrains Mono. Hand-built with Next.js, hosted on Cloudflare.
                     </p>
                 </div>
 
