@@ -1,11 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { isMainProductionHost, isPeritoHost, PERITO_SITE_URL } from '@/services/site/site-host'
 
 export function proxy(request: NextRequest) {
-    const hostname = request.headers.get('host') || ''
+    const host = request.headers.get('host')
+    const { pathname, search } = request.nextUrl
+
+    if (isMainProductionHost(host) && (pathname === '/perito' || pathname.startsWith('/perito/'))) {
+        const target = pathname.slice('/perito'.length) || '/'
+        return NextResponse.redirect(`${PERITO_SITE_URL}${target}${search}`, 301)
+    }
+
+    if (!isPeritoHost(host)) return NextResponse.next()
+
     const url = request.nextUrl.clone()
-    const subdomain = hostname.startsWith('perito.')
-    if (!subdomain) return NextResponse.next()
-    url.pathname = `/perito${url.pathname}`
+    url.pathname = `/perito${pathname}`
     return NextResponse.rewrite(url)
 }
 

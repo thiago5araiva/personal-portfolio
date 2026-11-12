@@ -10,7 +10,6 @@ Package manager is **pnpm** (`packageManager: pnpm@10.33.2`); there is no `packa
 pnpm dev              # next dev --turbopack
 pnpm build            # next build (also runs the TypeScript check)
 pnpm lint             # eslint .
-pnpm sitemap          # next-sitemap; run after a build
 pnpm exec tsc --noEmit  # standalone typecheck (no `typecheck` script exists)
 ```
 
@@ -49,7 +48,7 @@ Global CSS is `src/app/global.css`; `components.json` incorrectly points at `glo
 
 `contentful-config.ts` reads `NEXT_PUBLIC_CONTENTFUL_*`. Env lives in `.env` / `.env*.local` (gitignored). Remote image hosts are allow-listed in `next.config.js` (`images.ctfassets.net`, `placehold.co`) — add new hosts there.
 
-`next-sitemap.config.js` `siteUrl` is `https://thiagosaraiva.com`, while `metadataBase` is `https://thiagosaraiva.dev`; be intentional if touching canonical URLs.
+`robots.txt` and `sitemap.xml` are host-aware metadata routes (`src/app/robots.ts`, `src/app/sitemap.ts`): `perito.*` gets its own; everything else points at `https://thiagosaraiva.dev`. `src/proxy.tsx` rewrites `perito.*` to `/perito` and 301-redirects `thiagosaraiva.dev/perito/*` to the subdomain.
 
 ## Workflow
 

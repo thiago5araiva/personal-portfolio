@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     description:
         'Perícia digital forense com cobertura em todo território nacional. Análise técnica em dispositivos móveis, sistemas, comunicações, criptoativos e blockchain — laudo pericial com fundamento científico e cadeia de custódia rastreável para perícia judicial, assistência técnica e investigação corporativa.',
     metadataBase: new URL('https://perito.thiagosaraiva.dev'),
+    alternates: {
+        canonical: '/',
+    },
     keywords: [
         'perito judicial',
         'perito digital',

@@ -45,7 +45,3 @@ next-env.d.ts
 .open-next
 .wrangler
 .dev.vars
-
-# next-sitemap
-/public/sitemap*.xml
-/public/robots.txt
